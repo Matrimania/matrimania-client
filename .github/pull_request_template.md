@@ -9,10 +9,7 @@
 - [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
 
 
-## Where should the reviewer start? 
-
-
-## How should this be manually tested? 
+## Description of changes?
 
 
 ## Any background context you want to provide? 
