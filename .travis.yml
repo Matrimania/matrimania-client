@@ -1,5 +1,12 @@
 language: node_js
 node_js:
-  - "node"
+- node
 notifications:
   email: false
+deploy:
+  provider: heroku
+  api_key:
+    secure: ABmJdKzi6mdW54wK18n8Z4qMD6dKYLLCykO9ouuHoZK/g2DpNdQb92UI2U4Y1qb2fjeMVj1nCtsNvFBEEqrZAY2uJKyGGHBfUdZlnqwqPNnmD8O2ciTFvZDqWrc0xwjpFg0Kky6acwY/SNx7zsqUAcgebhGAU1+yhDgwk9vhVZMZN2tpuArxyGhe5/DB+mwI90o0R47YWFXglF/HZNO571VYzk/tO+gA+bGQH8l5EeKoskJZMavkZBRqWqf3kMfJE7ijvgWde4WTPdHFxB6UdbZXO+FkBQo82mDzY7u/CU+3iZxJMGTfMagL2FD1oFk973+DequQPp537G0neC2th+q3+hfvoroZphbCAPPEPCk86h9NSi7vhpVHQio33tlj8MLDjMPuh9Jnft3ZRtwXZWwt8HvMMxwFxbM/CmsXURRjgT/bPV5EijuAQkrFd/4xnszYgLDQh5qVggO2Z0CTX5OKmOKcANaDL4Uwqmoq9cV05Kfd7wqK1p/5styIpTRprmUZ5pO/WahR0P87/nzaismXwONdax+HkExQEb26gbIeARJeg0+esYaJ8ASCKGMcBR9/xb4FgZOTtYIzJWCR2p0pdvJGM8Yf0OcLH88QO0ASyQtjxXvtW0LZ+rYjpnYQLD2j5aE9xNvPmyhbSZF+qjk01zAxYmSKbXnN81yq83A=
+    app: matrimania-client
+    skip_cleanup: true
+    
