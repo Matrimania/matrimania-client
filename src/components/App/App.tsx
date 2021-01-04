@@ -1,6 +1,6 @@
 import './App.css';
 import logo from '../../assets/FinalMatrimaniaLogo.png'
-import {Router, Switch, NavLink} from 'react-router-dom'
+import {Route, Switch, NavLink} from 'react-router-dom'
 
 function App() {
   return (
@@ -8,6 +8,20 @@ function App() {
       <header className="headerWrap">
         <img src={logo} className="logo" alt="Matrimania Logo"/>
       </header>
+      <Switch>
+        <Route path='/vender-dashboard'>
+          <VenderDashboard />
+        </Route>
+        <Route path='/:weddingId'>
+          <WeddingDetails />
+        </Route>
+        <Route path='/:weddingId/photo-list'>
+          <WeddingPhotoList />
+        </Route>
+        <Route exact path='/'>
+          <LandingPage />
+        </Route>
+      </Switch>
       <section>Filter By:
         <select>
           <option value="0">All</option>
