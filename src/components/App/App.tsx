@@ -19,7 +19,7 @@ function App() {
         <Route path='/vender-dashboard'>
           <VenderDashboard />
         </Route>
-								<Route path='/:weddingId/photo-list'>
+				<Route path='/:weddingId/photo-list'>
           <WeddingPhotoList />
         </Route>
         <Route path='/:weddingId'>
