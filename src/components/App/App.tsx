@@ -1,6 +1,13 @@
 import './App.css';
 import logo from '../../assets/FinalMatrimaniaLogo.png'
 import {Route, Switch, NavLink} from 'react-router-dom'
+// Components
+import VenderDashboard from '../VenderDashboard/VenderDashboard'
+import WeddingDetails from '../WeddingDetails/WeddingDetails'
+import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList'
+import LandingPage from '../LandingPage/LandingPage'
+
+
 
 function App() {
   return (
@@ -12,27 +19,16 @@ function App() {
         <Route path='/vender-dashboard'>
           <VenderDashboard />
         </Route>
+								<Route path='/:weddingId/photo-list'>
+          <WeddingPhotoList />
+        </Route>
         <Route path='/:weddingId'>
           <WeddingDetails />
-        </Route>
-        <Route path='/:weddingId/photo-list'>
-          <WeddingPhotoList />
         </Route>
         <Route exact path='/'>
           <LandingPage />
         </Route>
       </Switch>
-      <section>Filter By:
-        <select>
-          <option value="0">All</option>
-          <option value="1">Upcoming</option>
-          <option value="2">Past</option>
-          <option value="3">Today</option>
-        </select>
-      </section>
-      <section className="weddingCardWrap">
-      </section>
-      <button className="addWeddingButton">+</button>
     </div>
   );
 }
