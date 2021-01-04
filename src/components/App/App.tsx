@@ -1,5 +1,6 @@
 import './App.css';
 import logo from '../../assets/FinalMatrimaniaLogo.png'
+import {Router, Switch, NavLink} from 'react-router-dom'
 
 function App() {
   return (
