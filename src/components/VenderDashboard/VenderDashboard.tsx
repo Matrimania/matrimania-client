@@ -8,6 +8,7 @@ function VenderDashboard() {
     return (
       <WeddingCard
         key={wedding.weddingId}
+        weddingId={wedding.weddingId}
         name={wedding.name}
         image={wedding.image}
         date={wedding.date}

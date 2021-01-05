@@ -30,7 +30,7 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 				<p className="status">Status: {familyPhotoList.length > 0 ? "Pending" : "Received"}</p>
 			</div>
 			<section className="weddingImage">
-				<img>{image}</img>
+				<img src={image} />
 			</section>			
 	<button className="button">{photoList.length > 0 ? 'View Photo List' : 'Request Photo List'}</button>
 		</section>
