@@ -1,9 +1,19 @@
 import './VenderDashboard.css';
 import WeddingCard from '../WeddingCard/WeddingCard'
-
+import {individualWedding, weddings} from '../../weddingData'
 
 
 function VenderDashboard() {
+  const weddingCards = weddings.map((wedding, index) => {
+    return (
+      <WeddingCard
+        key={wedding.weddingId}
+        name={wedding.name}
+        image={wedding.image}
+        date={wedding.date}
+      />
+    )
+  })
     return (
         <section className="dashboardWrapper">
           <section>Filter By:
@@ -15,6 +25,7 @@ function VenderDashboard() {
             </select>
           </section>
           <section className="weddingCardWrap">
+            {weddingCards}
           </section>
           <button className="addWeddingButton">+</button>
         </section>
