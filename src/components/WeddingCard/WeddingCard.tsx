@@ -14,9 +14,11 @@ const WeddingCard: React.FC<Wedding> = ({
   date}) => {
     return (
         <article className="cardWrapper">
-            <h1>{name} Wedding</h1>
-            <h2>{date}</h2>
-            <img src={image}/>
+            <h1 className="weddingTitle">{name} Wedding</h1>
+            <h2 className="weddingDate">{date}</h2>
+            <section className="couplePhotoWrap">
+              <img className="couplePhoto" src={image}/>
+            </section>
         </article>
     )
 }
