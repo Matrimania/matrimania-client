@@ -1,11 +1,23 @@
 import './WeddingCard.css';
+import React from 'react';
 
+type Wedding = {
+  key: number;
+  name: string;
+  image: string;
+  date: string;
+}
 
-function WeddingCard() {
+const WeddingCard: React.FC<Wedding> = ({
+  name,
+  image,
+  date}) => {
     return (
-        <section className="cardWrapper">
-            <div>WeddingCard</div>
-        </section>
+        <article className="cardWrapper">
+            <h1>{name} Wedding</h1>
+            <h2>{date}</h2>
+            <img src={image}/>
+        </article>
     )
 }
 export default WeddingCard;
