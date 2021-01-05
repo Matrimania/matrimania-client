@@ -27,7 +27,7 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 				<h1>{name} Wedding</h1>
 				<h2>{date}</h2>
 				<p className="email">Email: {email}</p>
-				<p className="status">Status: {familyPhotoList.length > 0 ? "Pending" : "Received"}</p>
+				<p className="status">Status: {familyPhotoList.length === 0 ? "Pending" : "Received"}</p>
 			</div>
 			<section className="weddingImage">
 				<img src={image} />

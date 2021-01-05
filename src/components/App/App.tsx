@@ -26,13 +26,13 @@ const App = () => {
           render={({ match }) => {
             const { weddingId } = match.params
             return <WeddingDetails 
-            weddingId={individualWedding.weddingId}
-            name={individualWedding.name}
-            image={individualWedding.image}
-            date={individualWedding.date}
-            email={individualWedding.email}
-            familyPhotoList={individualWedding.familyPhotoList}
-            photoList={individualWedding.photoList} />
+              weddingId={individualWedding.weddingId}
+              name={individualWedding.name}
+              image={individualWedding.image}
+              date={individualWedding.date}
+              email={individualWedding.email}
+              familyPhotoList={individualWedding.familyPhotoList}
+              photoList={individualWedding.photoList} />
           }} />
         <Route exact path='/'>
           <LandingPage />
