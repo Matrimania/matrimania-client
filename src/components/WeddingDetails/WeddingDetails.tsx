@@ -31,8 +31,11 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 			</div>
 			<section className="weddingImage">
 				<img src={image} />
-			</section>			
-	<button className="button">{photoList.length > 0 ? 'View Photo List' : 'Request Photo List'}</button>
+			</section>	
+			<div className="button" id="addWeddingButton">
+				<div id="translate"></div>
+				<a>{photoList.length > 0 ? 'View Photo List' : 'Request Photo List'}</a>
+			</div>		
 		</section>
 	)
 }
