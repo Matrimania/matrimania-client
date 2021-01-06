@@ -30,6 +30,7 @@ const WeddingPhotoList: React.FC<PhotoListData> = ({
 					{displayPhotoList}
 				</div>
 			</section>
+			<button>Back</button>
 		</section>
 	)
 }
