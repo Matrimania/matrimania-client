@@ -23,20 +23,6 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 	photoList
 }) => {
 
-	// const function that coniditionally renders either the request photo list or view photolist page
-	// based upon the data for the photolist 
-	// if photolist => render viewPhotoList component or whatever we call it 
-	// if no photolist => render request component 
-	// change of state 
-	
-	// const displayPhotoList = () => {
-	// 	if (photoList.length > 0) {
-	// 		return <WeddingPhotoList />
-	// 	} else {
-	
-	// 	}
-	// }
-
 	return (
 		<section className="detailsWrapper">
 			<div className="detailsHeader">
@@ -53,8 +39,7 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 				{photoList.length > 0 ? 
 					<Link to={`/${weddingId}/photo-list`}>View Photo List</Link> :
 					<Link to="/:weddingId/create-guest-list">Create Guest List</Link>
-				}
-				{/* <a>{photoList.length > 0 ? 'View Photo List' : 'Create Photo List'}</a> */}
+					}
 			</div>		
 		</section>
 	)
