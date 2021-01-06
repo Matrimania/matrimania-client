@@ -19,9 +19,13 @@ const App = () => {
         <Route path='/vender-dashboard'>
           <VenderDashboard />
         </Route>
-        <Route path='/:weddingId/photo-list'>
-          <WeddingPhotoList />
-        </Route>
+        <Route exact path='/:weddingId/photo-list' 
+          render={({ match }) => {
+            const { weddingId } = match.params
+            return <WeddingPhotoList
+              weddingId={individualWedding.weddingId}
+              photoList={individualWedding.photoList} />
+          }} />
         <Route exact path='/wedding/:weddingId'
           render={({ match }) => {
             const { weddingId } = match.params
