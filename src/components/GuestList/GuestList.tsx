@@ -54,7 +54,12 @@ const GuestList: React.FC = () => {
         </button>
       </form>
       <section className="guestCards">
-        {guests.length > 0 && guests.map(guest => guest.guestName)}
+        {guests.length > 0 && guests.map(guest => (<Guest
+          guestName={guest.guestName}
+          id={guest.id}
+          phoneNumber={guest.phoneNumber}
+          key={guest.id}>
+        </Guest>))}
       </section>  
     </> 
 	)
