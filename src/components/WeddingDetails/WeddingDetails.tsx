@@ -1,4 +1,5 @@
 import './WeddingDetails.css';
+import React, { useState } from 'react'; 
 import { individualWedding } from '../../weddingData'
 import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList';
 import {Link} from 'react-router-dom'
@@ -24,6 +25,22 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 	photoList
 }) => {
 
+		const [detailsView, setDetailsView] = useState(true)
+		const [photoListView, setPhotoListView] = useState(false)
+		const [guestListView, setGuestListView] = useState(false)
+
+		const determineCurrentState = (e: React.MouseEvent<HTMLAnchorElement>) => {
+			setDetailsView(false)
+			let buttonTarget: HTMLElement | null = document.getElementById("photoListButton")
+			if (buttonTarget !== null) {
+				console.log(buttonTarget.innerHTML)
+					buttonTarget.innerHTML === 'View Photo List' && setPhotoListView(true) 
+			} else {
+				console.log('dammit')
+			}
+			
+		}
+
 	return (
 		<section className="detailsWrapper">
 			<div className="detailsHeader">
@@ -34,12 +51,18 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 				<StyledButton>
 					<div id="translate"></div>
 					{photoList.length > 0 ?
-						<Link className="link" to={`/${weddingId}/photo-list`}>View Photo List</Link> :
+						<a className="link" id="photoListButton" onClick={(e) => determineCurrentState(e)}>View Photo List</a> :
 						<Link className="link" to="/:weddingId/create-guest-list">Create Guest List</Link>
 					}
 				</StyledButton>
 			</div>
 			<section className="detailImageWrap">
+				{photoListView && 
+					<WeddingPhotoList 
+					name={individualWedding.name}
+					weddingId={individualWedding.weddingId}
+					photoList={individualWedding.photoList} /> 
+				}
 				<img className="detailImage" src={image} />
 			</section>
 		</section>
