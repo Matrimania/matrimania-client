@@ -5,7 +5,7 @@ const GuestListForm: React.FC = () => {
   const [guestName, setGuestName] = useState('')
   const [phoneNumber, setPhoneNumber] = useState(0)
 
-  const submitGuest = event => {
+  const submitGuest = (event: React.FormEvent) => {
     event.preventDefault();
     const newGuest = {
       id: Date.now(),
