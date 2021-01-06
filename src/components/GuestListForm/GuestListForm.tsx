@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 const GuestListForm: React.FC = () => {
   
+  const [guestName, setGuestName] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState(0)
 	return (
 
     <form className="formWrapper">
@@ -19,10 +21,10 @@ const GuestListForm: React.FC = () => {
         placeholder='Phone Number'
         name='phoneNumber'
         value={phoneNumber}
-        onChange={event => setPhoneNumber(event.target.value)}
+        onChange={event => setPhoneNumber(parseInt(event.target.value))}
       />
 
-      <button onClick={event => submitIdea(event)}> SUBMIT
+      <button onClick={event => console.log(event)}> SUBMIT
       </button>
     </form>
 	)
