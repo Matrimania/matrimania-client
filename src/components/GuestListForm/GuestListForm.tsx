@@ -5,7 +5,16 @@ const GuestListForm: React.FC = () => {
   const [guestName, setGuestName] = useState('')
   const [phoneNumber, setPhoneNumber] = useState(0)
 
-
+  const submitGuest = event => {
+    event.preventDefault();
+    const newGuest = {
+      id: Date.now(),
+      guestName,
+      phoneNumber
+    }
+    console.log(newGuest)
+    clearInputs();
+  }
 
   const clearInputs = () => {
     setGuestName('')
@@ -32,7 +41,7 @@ const GuestListForm: React.FC = () => {
         onChange={event => setPhoneNumber(parseInt(event.target.value))}
       />
 
-      <button onClick={event => console.log(event)}> SUBMIT
+      <button onClick={event => submitGuest(event)}> SUBMIT
       </button>
     </form>
 	)
