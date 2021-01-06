@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import Guest from '../Guest/Guest';
 
 type NewGuest = {
   id: number,
