@@ -35,7 +35,7 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 					<div id="translate"></div>
 					{photoList.length > 0 ?
 						<Link className="link" to={`/${weddingId}/photo-list`}>View Photo List</Link> :
-						<Link className="link" to="/:weddingId/create-guest-list">Create Guest List</Link>
+						<Link className="link" to="/create-guest-list">Create Guest List</Link>
 					}
 				</StyledButton>
 			</div>

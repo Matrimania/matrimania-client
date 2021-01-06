@@ -8,6 +8,7 @@ import VenderDashboard from '../VenderDashboard/VenderDashboard'
 import WeddingDetails from '../WeddingDetails/WeddingDetails'
 import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList'
 import LandingPage from '../LandingPage/LandingPage'
+import GuestListForm from '../GuestList/GuestList'
 
 const App = () => {
   return (
@@ -41,6 +42,9 @@ const App = () => {
           }} />
         <Route exact path='/'>
           <LandingPage />
+        </Route>
+        <Route path='/create-guest-list'>
+          <GuestListForm />
         </Route>
       </Switch>
     </div>
