@@ -1,5 +1,5 @@
 import './WeddingDetails.css';
-import React, { useState } from 'react'; 
+import React, { useState } from 'react';
 import { individualWedding } from '../../weddingData'
 import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList';
 import {Link} from 'react-router-dom'
@@ -27,18 +27,31 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 
 		const [detailsView, setDetailsView] = useState(true)
 		const [photoListView, setPhotoListView] = useState(false)
-		const [guestListView, setGuestListView] = useState(false)
+		const [requestListView, setRequestListView] = useState(false)
+		const [editListView, setEditListView] = useState(false)
 
-		const determineCurrentState = (e: React.MouseEvent<HTMLAnchorElement>) => {
-			setDetailsView(false)
-			let buttonTarget: HTMLElement | null = document.getElementById("photoListButton")
-			if (buttonTarget !== null) {
-				console.log(buttonTarget.innerHTML)
-					buttonTarget.innerHTML === 'View Photo List' && setPhotoListView(true) 
+		const determineCurrentState = (e: React.MouseEvent<HTMLAnchorElement>, view: string) => {
+			if (view === "photoView") {
+				setDetailsView(false)
+				setPhotoListView(true)
+				setRequestListView(false)
+				setEditListView(false)
+			} else if (view === "requestListButton") {
+				setDetailsView(false)
+				setPhotoListView(false)
+				setRequestListView(true)
+				setEditListView(false)
+			} else if (view === "editListView") {
+				setDetailsView(false)
+				setPhotoListView(false)
+				setRequestListView(false)
+				setEditListView(true)
 			} else {
-				console.log('dammit')
+				setDetailsView(true)
+				setPhotoListView(false)
+				setRequestListView(false)
+				setEditListView(false)
 			}
-			
 		}
 
 	return (
@@ -51,17 +64,25 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 				<StyledButton>
 					<div id="translate"></div>
 					{photoList.length > 0 ?
-						<a className="link" id="photoListButton" onClick={(e) => determineCurrentState(e)}>View Photo List</a> :
-						<Link className="link" to="/:weddingId/create-guest-list">Create Guest List</Link>
+						<a className="link" id="photoListButton" onClick={(e) => determineCurrentState(e, "photoView")}>View Photo List</a> :
+						<a className="link" id="requestListButton" onClick={(e) => determineCurrentState(e, "requestListView")}>Request Photo List</a>
 					}
 				</StyledButton>
+				<StyledButton>
+					<div id="translate"></div>
+					{photoList.length > 0 ?
+						<a className="link" id="editListButton" onClick={(e) => determineCurrentState(e, "editListView")}>Edit Photo List</a> :
+						<a className="link" id="addListButton" onClick={(e) => determineCurrentState(e, "editListView")}>Add Photo List</a>
+					}
+				</StyledButton>
+
 			</div>
 			<section className="detailImageWrap">
-				{photoListView && 
-					<WeddingPhotoList 
+				{photoListView &&
+					<WeddingPhotoList
 					name={individualWedding.name}
 					weddingId={individualWedding.weddingId}
-					photoList={individualWedding.photoList} /> 
+					photoList={individualWedding.photoList} />
 				}
 				<img className="detailImage" src={image} />
 			</section>
