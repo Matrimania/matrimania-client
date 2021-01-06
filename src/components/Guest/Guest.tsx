@@ -4,7 +4,7 @@ type Props = {
   id: number;
   guestName: string;
   phoneNumber: number;
-  deleteGuest(): void
+  deleteGuest(id: number): void
 }
 const Guest: React.FC<Props> = ({
   guestName,
@@ -17,7 +17,7 @@ const Guest: React.FC<Props> = ({
       <h1>{guestName}</h1>
       <h2>{phoneNumber}</h2>
       <button
-        onClick={() => deleteGuest()}>
+        onClick={() => deleteGuest(id)}>
         Delete 🗑
       </button>
     </article>

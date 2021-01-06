@@ -20,7 +20,6 @@ const GuestList: React.FC = () => {
       guestName,
       phoneNumber
     }
-    console.log(newGuest)
     setGuests([...guests, newGuest])
     // should be a POST request + adding card to UI
     clearInputs();
@@ -31,8 +30,9 @@ const GuestList: React.FC = () => {
     setPhoneNumber(0)
   }
 
-  const deleteGuest = () => {
-    console.log('delete')
+  const deleteGuest = (id: number) => {
+    const filteredGuestList = guests.filter(guest => guest.id !== id)
+    setGuests (filteredGuestList)
   }
 
 	return (
