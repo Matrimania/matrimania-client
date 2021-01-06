@@ -38,7 +38,7 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 				<div id="translate"></div>
 				{photoList.length > 0 ? 
 					<Link to={`/${weddingId}/photo-list`}>View Photo List</Link> :
-					<Link to="/:weddingId/create-guest-list">Create Guest List</Link>
+					<Link to="/create-guest-list">Create Guest List</Link>
 					}
 			</div>		
 		</section>
@@ -46,4 +46,7 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 }
 export default WeddingDetails;
 
-
+//interpolate weddingId into create-guest-list
+// create guest list
+// create photo list
+// routes for forms in App
