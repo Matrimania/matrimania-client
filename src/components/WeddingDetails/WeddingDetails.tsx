@@ -36,7 +36,7 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 			</section>	
 			<div className="button" id="addWeddingButton">
 				<div id="translate"></div>
-				{photoList.length > 0 ? 
+				{photoList.length < 0 ? 
 					<Link to={`/${weddingId}/photo-list`}>View Photo List</Link> :
 					<Link to="/create-guest-list">Create Guest List</Link>
 					}
@@ -50,3 +50,4 @@ export default WeddingDetails;
 // create guest list
 // create photo list
 // routes for forms in App
+//** NOTE button ternary flipped - should be `>` */
