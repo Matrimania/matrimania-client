@@ -24,7 +24,7 @@ function VenderDashboard() {
           </div>
             <section className="filterWrap">
             <label className="label">Filter By :</label>
-            <select className="button">
+            <select className="dropdown">
                 <option value="0">All</option>
                 <option value="1">Upcoming</option>
                 <option value="2">Past</option>
