@@ -51,3 +51,5 @@ export default WeddingDetails;
 // create photo list
 // routes for forms in App
 //** NOTE button ternary flipped - should be `>` */
+
+// add error handling - name has to be X characters, phone number must be x digits
