@@ -11,10 +11,10 @@ const Guest: React.FC<NewGuest> = ({
   phoneNumber
 }) => {
   return (
-    <>
-    {guestName}
-    {phoneNumber}
-    </>
+    <article className="guestCard">
+      <h1>{guestName}</h1>
+      <h2>{phoneNumber}</h2>
+    </article>
   )
 }
 
