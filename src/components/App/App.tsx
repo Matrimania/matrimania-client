@@ -8,7 +8,7 @@ import VenderDashboard from '../VenderDashboard/VenderDashboard'
 import WeddingDetails from '../WeddingDetails/WeddingDetails'
 import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList'
 import LandingPage from '../LandingPage/LandingPage'
-import GuestListForm from '../GuestListForm/GuestListForm'
+import GuestListForm from '../GuestList/GuestList'
 
 const App = () => {
   return (
