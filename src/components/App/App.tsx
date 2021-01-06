@@ -41,6 +41,9 @@ const App = () => {
         <Route exact path='/'>
           <LandingPage />
         </Route>
+        <Route path='/create-guest-list'>
+          <GuestListForm />
+        </Route>
       </Switch>
     </div>
   );
