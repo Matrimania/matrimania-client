@@ -4,6 +4,14 @@ const GuestListForm: React.FC = () => {
   
   const [guestName, setGuestName] = useState('')
   const [phoneNumber, setPhoneNumber] = useState(0)
+
+
+
+  const clearInputs = () => {
+    setGuestName('')
+    setPhoneNumber(0)
+  }
+
 	return (
 
     <form className="formWrapper">
