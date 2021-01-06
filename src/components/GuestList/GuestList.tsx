@@ -54,8 +54,8 @@ const GuestList: React.FC = () => {
         </button>
       </form>
       <section className="guestCards">
-
-      </section>
+        {guests.length > 0 && guests.map(guest => guest.guestName)}
+      </section>  
     </> 
 	)
 }
