@@ -1,18 +1,35 @@
 import './WeddingPhotoList.css';
 
-type PhotoList = {
+type PhotoListData = {
+	name: string;
 	weddingId: number;
 	photoList: {photoId: number, guests: string[], description: string}[]
 }
 
-const WeddingPhotoList: React.FC<PhotoList> = ({
+const WeddingPhotoList: React.FC<PhotoListData> = ({
+	name,
 	weddingId,
 	photoList
 }) => {
 
+	const displayPhotoList = photoList.map(photo => {
+		  return <div className="photoListDetails">
+								<p className="photoNumber">{photo.photoId}</p>
+								<p className="photoGuest">{photo.guests}</p>
+								<p className="photoDescription">{photo.description}</p>
+						</div>	
+		})
+
+
 	return (
 		<section className="detailsWrapper">
-				<div>WeddingPhotoList</div>
+			<div>WeddingPhotoList</div>
+			<section className="photoListWrapper">
+				<h1>{name} Wedding</h1>
+				<div className="photoListWrapper">
+					{displayPhotoList}
+				</div>
+			</section>
 		</section>
 	)
 }

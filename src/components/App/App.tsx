@@ -23,6 +23,7 @@ const App = () => {
           render={({ match }) => {
             const { weddingId } = match.params
             return <WeddingPhotoList
+              name={individualWedding.name}
               weddingId={individualWedding.weddingId}
               photoList={individualWedding.photoList} />
           }} />
