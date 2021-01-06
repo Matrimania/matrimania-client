@@ -1,0 +1,33 @@
+.detailsWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 87vh;
+}
+.detailsHeader {
+  text-align: center;
+  width: 50%;
+}
+.weddingDetails {
+  color: #221e22;
+  opacity: 80%;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  font-size: 1em;
+  padding-bottom: 2%;
+}
+.detailImageWrap {
+  display: grid;
+  border-left: 3px solid #A8826F;
+  align-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.detailImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  opacity: 70%;
+}
