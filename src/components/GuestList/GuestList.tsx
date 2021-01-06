@@ -6,6 +6,7 @@ type NewGuest = {
   guestName: string,
   phoneNumber: number
 }
+
 const GuestList: React.FC = () => {
   
   const [guestName, setGuestName] = useState('')
@@ -28,6 +29,10 @@ const GuestList: React.FC = () => {
   const clearInputs = () => {
     setGuestName('')
     setPhoneNumber(0)
+  }
+
+  const deleteGuest = () => {
+    console.log('delete')
   }
 
 	return (
@@ -58,7 +63,8 @@ const GuestList: React.FC = () => {
           guestName={guest.guestName}
           id={guest.id}
           phoneNumber={guest.phoneNumber}
-          key={guest.id}>
+          key={guest.id}
+          deleteGuest={deleteGuest}>
         </Guest>))}
       </section>  
     </> 

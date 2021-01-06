@@ -1,19 +1,25 @@
 import React from 'react';
 
-type NewGuest = {
-  id: number,
-  guestName: string,
-  phoneNumber: number
+type Props = {
+  id: number;
+  guestName: string;
+  phoneNumber: number;
+  deleteGuest(): void
 }
-const Guest: React.FC<NewGuest> = ({
+const Guest: React.FC<Props> = ({
   guestName,
   id,
-  phoneNumber
+  phoneNumber,
+  deleteGuest
 }) => {
   return (
     <article className="guestCard">
       <h1>{guestName}</h1>
       <h2>{phoneNumber}</h2>
+      <button
+        onClick={() => deleteGuest()}>
+        Delete 🗑
+      </button>
     </article>
   )
 }
