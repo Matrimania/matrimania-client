@@ -1,25 +1,27 @@
 import './WeddingCard.css';
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 type Wedding = {
-  key: number;
+  weddingId: number;
   name: string;
   image: string;
   date: string;
 }
 
 const WeddingCard: React.FC<Wedding> = ({
+  weddingId,
   name,
   image,
   date}) => {
     return (
-        <article className="cardWrapper">
+        <Link to={`/wedding/${weddingId}`} className="cardWrapper">
             <h1 className="weddingTitle">{name} Wedding</h1>
             <h2 className="weddingDate">{date}</h2>
             <section className="couplePhotoWrap">
               <img className="couplePhoto" src={image}/>
             </section>
-        </article>
+        </Link>
     )
 }
 export default WeddingCard;
