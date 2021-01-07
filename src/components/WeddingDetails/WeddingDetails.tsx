@@ -36,7 +36,7 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 				setPhotoListView(true)
 				setRequestListView(false)
 				setEditListView(false)
-			} else if (view === "requestListButton") {
+			} else if (view === "requestListView") {
 				setDetailsView(false)
 				setPhotoListView(false)
 				setRequestListView(true)
