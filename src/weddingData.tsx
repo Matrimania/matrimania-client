@@ -44,20 +44,22 @@ export const individualWedding = {
   image: "https://i.guim.co.uk/img/media/21cf752c2469739f05db401e36e3c08fbfcb7c52/0_271_4000_2399/master/4000.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=7de9aa5231613602e57c86eb98a5ddb1",
   date: "01/29/2021",
   email: "ghost@yahoo.com",
-  familyPhotoList: [
-    {name: "Bob", photos: [1, 2, 3, 4, 6], phone: 5555551234},
-    {name: "Mary", photos: [1, 2, 3, 4, 5, 6], phone: 5555554321},
-    {name: "Sue", photos: [1, 5, 6], phone: 5555550987},
-    {name: "John", photos: [3, 4, 5, 6], phone: 5555557890},
-    {name: "Jim", photos: [2, 5, 6], phone: 5555554567},
-    {name: "Gary", photos: [2, 5, 6], phone: 5555557654}
-  ],
-  photoList: [
-    {photoId: 1, guests: ["Bob", "Sue", "Mary"], description: "college buddies"},
-    {photoId: 2, guests: ["Gary", "Jim", "Mary", "Bob"], description: "The Out-laws"},
-    {photoId: 3, guests: ["John", "Bob", "Mary"], description: "The In-laws"},
-    {photoId: 4, guests: ["John", "Eric", "Brigette", "Bob"], description: "trouble"},
-    {photoId: 5, guests: ["Sue", "Gary", "John", "Jim", "Mary"], description: "old babysitters"},
-    {photoId: 6, guests: ["Bob", "Mary", "Sue", "John", "Jim", "Gary"], description: "this one's for mom"}
-  ]
+  familyPhotoList: [],
+  // [
+  //   {name: "Bob", photos: [1, 2, 3, 4, 6], phone: 5555551234},
+  //   {name: "Mary", photos: [1, 2, 3, 4, 5, 6], phone: 5555554321},
+  //   {name: "Sue", photos: [1, 5, 6], phone: 5555550987},
+  //   {name: "John", photos: [3, 4, 5, 6], phone: 5555557890},
+  //   {name: "Jim", photos: [2, 5, 6], phone: 5555554567},
+  //   {name: "Gary", photos: [2, 5, 6], phone: 5555557654}
+  // ],
+  photoList: []
+  // [
+  //   {photoId: 1, guests: ["Bob", "Sue", "Mary"], description: "college buddies"},
+  //   {photoId: 2, guests: ["Gary", "Jim", "Mary", "Bob"], description: "The Out-laws"},
+  //   {photoId: 3, guests: ["John", "Bob", "Mary"], description: "The In-laws"},
+  //   {photoId: 4, guests: ["John", "Eric", "Brigette", "Bob"], description: "trouble"},
+  //   {photoId: 5, guests: ["Sue", "Gary", "John", "Jim", "Mary"], description: "old babysitters"},
+  //   {photoId: 6, guests: ["Bob", "Mary", "Sue", "John", "Jim", "Gary"], description: "this one's for mom"}
+  // ]
 }
