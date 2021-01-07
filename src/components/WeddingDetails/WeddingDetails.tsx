@@ -29,7 +29,6 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 
 		const [detailsView, setDetailsView] = useState(true)
 		const [photoListView, setPhotoListView] = useState(false)
-		const [requestListView, setRequestListView] = useState(false)
 		const [editListView, setEditListView] = useState(false)
 		const emailBody = `Dear ${name},
 			it is time to fill out your family photo list! Please follow the link provided to complete the missing photo information. Feel free to reach out if you have any questions.
@@ -39,22 +38,14 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 			if (view === "photoView") {
 				setDetailsView(false)
 				setPhotoListView(true)
-				setRequestListView(false)
-				setEditListView(false)
-			} else if (view === "requestListView") {
-				setDetailsView(false)
-				setPhotoListView(false)
-				setRequestListView(true)
 				setEditListView(false)
 			} else if (view === "editListView") {
 				setDetailsView(false)
 				setPhotoListView(false)
-				setRequestListView(false)
 				setEditListView(true)
 			} else {
 				setDetailsView(true)
 				setPhotoListView(false)
-				setRequestListView(false)
 				setEditListView(false)
 			}
 		}
@@ -64,8 +55,6 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 					return (
 						<GuestList />
 					)
-			} else if (requestListView) {
-					return <div>Request List View</div>
 			} else {
 					return <img className="detailImage" src={image} />
 			}
