@@ -50,10 +50,21 @@ const GuestList: React.FC = () => {
     return value
   }
 
-  const validatePhone = (p) => {
+  const validatePhone = (p: string) => {
     let phoneRE = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
     let digits = p.replace(/\D/g, "");
     return phoneRE.test(digits)
+  }
+
+  const onKeyUp = (event) => {
+    let input = event.target;
+    let formatted = formatPhoneText(input.value)
+    let isError = (validatePhone(formatted) || formatted.length === 0)
+    let color = (isError) ? "gray" : "red";
+    let borderWidth = (isError) ? "1px" : "3px";
+    input.style.borderColor = color;
+    input.style.borderWidth = borderWidth;
+    input.value = formatted;
   }
   
 >>>>>>> 542d4a89... Create validatePhone function
