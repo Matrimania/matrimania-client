@@ -91,6 +91,7 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 						<a className="link" id="addListButton" onClick={(e) => determineCurrentState(e, "editListView")}>Add Photo List</a>
 					}
 				</StyledButton>
+
 			</div>
 			{photoList.length > 0 &&
 				 <div>
