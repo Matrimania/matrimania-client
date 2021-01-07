@@ -31,6 +31,7 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 		const [photoListView, setPhotoListView] = useState(false)
 		const [requestListView, setRequestListView] = useState(false)
 		const [editListView, setEditListView] = useState(false)
+		const emailBody = 'here is an email'
 
 		const determineCurrentState = (e: React.MouseEvent<HTMLAnchorElement>, view: string) => {
 			if (view === "photoView") {
@@ -89,7 +90,7 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 					{photoList.length === 0 &&
 					<StyledButton>
 						<div id="translate"></div>
-								<a className="link" id="requestListButton" onClick={(e) => determineCurrentState(e, "requestListView")}>Request Photo List</a>
+								<a className="link" id="requestListButton" href={`mailto:ericberglund117@gmail.com?subject=Family Photo List&body=${emailBody}`}>Request Photo List</a>
 						</StyledButton>
 					}
 				<StyledButton>
