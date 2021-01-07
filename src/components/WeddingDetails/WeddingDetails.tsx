@@ -61,13 +61,6 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 					return (
 						<GuestList />
 					)
-			} else if (photoListView) {
-					return (
-						<WeddingPhotoList
-						name={individualWedding.name}
-						weddingId={individualWedding.weddingId}
-						photoList={individualWedding.photoList} />
-					)
 			} else if (requestListView) {
 					return <div>Request List View</div>
 			} else {
@@ -93,22 +86,28 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 				<h2 className="weddingDate">{date}</h2>
 				<p className="weddingDetails">Email: {email}</p>
 				<p className="weddingDetails">Status: {familyPhotoList.length === 0 ? "Pending" : "Received"}</p>
-				<StyledButton>
-					<div id="translate"></div>
-					{photoList.length > 0 ?
-						<a className="link" id="photoListButton" onClick={(e) => determineCurrentState(e, "photoView")}>View Photo List</a> :
-						<a className="link" id="requestListButton" onClick={(e) => determineCurrentState(e, "requestListView")}>Request Photo List</a>
+					{photoList.length === 0 &&
+					<StyledButton>
+						<div id="translate"></div>
+								<a className="link" id="requestListButton" onClick={(e) => determineCurrentState(e, "requestListView")}>Request Photo List</a>
+						</StyledButton>
 					}
-				</StyledButton>
 				<StyledButton>
 					<div id="translate"></div>
 					{photoList.length > 0 ?
-						<a className="link" id="editListButton" onClick={(e) => determineCurrentState(e, "editListView")}>Edit Photo List</a> :
+						<a className="link" id="editListButton" onClick={(e) => determineCurrentState(e, "editListView")}>Edit Photo Details</a> :
 						<a className="link" id="addListButton" onClick={(e) => determineCurrentState(e, "editListView")}>Add Photo List</a>
 					}
 				</StyledButton>
-
 			</div>
+			{photoList.length > 0 &&
+				 <div>
+							<WeddingPhotoList
+							name={individualWedding.name}
+							weddingId={individualWedding.weddingId}
+							photoList={individualWedding.photoList} />
+						</div>
+				}
 			<section className="detailImageWrap">
 				{displayCurrentView()}
 			</section>
