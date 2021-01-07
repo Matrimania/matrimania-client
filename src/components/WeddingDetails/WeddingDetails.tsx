@@ -4,6 +4,8 @@ import { individualWedding } from '../../weddingData'
 import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList';
 import {Link} from 'react-router-dom'
 import { StyledButton } from '../App/styledComponents.styles'
+import GuestList from '../GuestList/GuestList'
+import Guest from '../Guest/Guest';
 
 type IndividualWedding = {
 	weddingId: number;
@@ -56,7 +58,9 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 
 		const displayCurrentView = () => {
 			if (editListView) {
-					return <div>Edit List View</div>
+					return (
+						<GuestList />
+					)
 			} else if (photoListView) {
 					return (
 						<WeddingPhotoList
@@ -75,7 +79,7 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 		// new component for request photolist- will be form 
 				//email the client- *mailTo or PHP 
 		//weddingPhotoList component if photoListView is true
-		//editList component if editListView is true
+		//editList component if editListView === GuestList component is true
 
 		// add third button - message guests
 			// conditional render if current date is === wedding date
