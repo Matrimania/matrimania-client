@@ -54,6 +54,34 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 			}
 		}
 
+		const displayCurrentView = () => {
+			if (editListView) {
+					return <div>Edit List View</div>
+			} else if (photoListView) {
+					return (
+						<WeddingPhotoList
+						name={individualWedding.name}
+						weddingId={individualWedding.weddingId}
+						photoList={individualWedding.photoList} />
+					)
+			} else if (requestListView) {
+					return <div>Request List View</div>
+			} else {
+					return <img className="detailImage" src={image} />
+			}
+		}
+
+		//function for each view state
+		// new component for request photolist- will be form 
+				//email the client- *mailTo or PHP 
+		//weddingPhotoList component if photoListView is true
+		//editList component if editListView is true
+
+		// add third button - message guests
+			// conditional render if current date is === wedding date
+			// will send messages to people in photos
+			// possibly with 2 clicks - one will change innerText - second will send text
+
 	return (
 		<section className="detailsWrapper">
 			<div className="detailsHeader">
@@ -78,13 +106,7 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 
 			</div>
 			<section className="detailImageWrap">
-				{photoListView &&
-					<WeddingPhotoList
-					name={individualWedding.name}
-					weddingId={individualWedding.weddingId}
-					photoList={individualWedding.photoList} />
-				}
-				<img className="detailImage" src={image} />
+				{displayCurrentView()}
 			</section>
 		</section>
 	)
