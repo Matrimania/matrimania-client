@@ -31,7 +31,9 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 		const [photoListView, setPhotoListView] = useState(false)
 		const [requestListView, setRequestListView] = useState(false)
 		const [editListView, setEditListView] = useState(false)
-		const emailBody = 'here is an email'
+		const emailBody = `Dear ${name},
+			it is time to fill out your family photo list! Please follow the link provided to complete the missing photo information. Feel free to reach out if you have any questions.
+			LINK: https://matrimania-client.herokuapp.com/wedding/${weddingId}`
 
 		const determineCurrentState = (e: React.MouseEvent<HTMLAnchorElement>, view: string) => {
 			if (view === "photoView") {
