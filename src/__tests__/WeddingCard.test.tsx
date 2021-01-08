@@ -19,6 +19,7 @@ describe('WeddingCard', () => {
     );
     expect(screen.getByText("Jim & Pam Wedding")).toBeInTheDocument();
     expect(screen.getByText("10/08/2009")).toBeInTheDocument();
+    expect(screen.getByAltText("Photo of couple: Jim & Pam")).toBeInTheDocument();
   });
 
 });
