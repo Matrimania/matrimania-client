@@ -10,8 +10,10 @@ describe('App', () => {
       <MemoryRouter>
         <App />
       </MemoryRouter>
-    )
-    screen.debug()
-    expect(true).toEqual(true)
-  })
-})
+    );
+    
+    const appLogo = screen.getByAltText("Matrimania Logo");
+
+    expect(appLogo).toBeInTheDocument();
+  });
+});
