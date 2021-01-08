@@ -52,28 +52,35 @@ const GuestList: React.FC = () => {
           value={guestName}
           onChange={event => setGuestName(event.target.value)}
         />
-
         <input
-          type='text'
+          type='tel'
           placeholder='Phone Number'
           name='phoneNumber'
-          value={phoneNumber}
+          maxLength={10}
+          value={phoneNumber !== 0 ? phoneNumber : ''}
           onChange={event => setPhoneNumber(parseInt(event.target.value))}
         />
-
-        <button onClick={event => submitGuest(event)}> SUBMIT
-        </button>
+        <StyledButton onClick={event => submitGuest(event)}>
+          <div id="translate"></div>
+            <a className="link" id="addListButton">Add To Guest List</a>
+        </StyledButton>
       </form>
-      <section className="guestCards">
-        {guests.length > 0 && guests.map(guest => (<Guest
+      <section className="guestListWrap">
+        <h2 className="weddingTitle" style={{fontSize: '1.75em', paddingLeft: '3%', paddingBottom: '2%', width:'40%', textAlign: 'center', opacity: '80%'}}>- Your Guest List -</h2>
+        <section className="guestCards">
+          {guests.length === 0 &&
+            <h2 className="weddingDate" style={{fontSize: '1vw', padding: '2% 10%', textAlign: 'left'}}>You have no guests in your photo list yet!<br></br><br></br>Guests will show up here as you add them to your list.</h2>
+          }
+          {guests.length > 0 && guests.map(guest => (<Guest
           guestName={guest.guestName}
           id={guest.id}
           phoneNumber={guest.phoneNumber}
           key={guest.id}
           deleteGuest={deleteGuest}>
-        </Guest>))}
-      </section>  
-    </> 
+          </Guest>))}
+        </section>
+      </section>
+    </>
 	)
 }
 
