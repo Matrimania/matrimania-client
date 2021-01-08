@@ -1,0 +1,50 @@
+input {
+  outline: none;
+  margin-top: 0.8em;
+  margin-bottom: .25em;
+  font-size: 1.5em;
+  padding: 1%;
+  border: none;
+  background-color: transparent;
+  color: #A8826F;
+  border-bottom: 2px solid #A8826F;
+  border-left: 2px solid #A8826F;
+  width: 40%;
+}
+input:focus {
+  outline: none;
+  border: 2px solid #A8826F;
+}
+
+.formWrapper {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.guestListWrap {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.guestCards {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  height: 75%;
+  margin: 1%;
+  border-radius: 30px;
+  box-shadow: 1px 1px 20px #A8826F;
+  font-size: 12px;
+  overflow: scroll;
+  align-items: center;
+  padding: 10px;
+}
+.instructionWrap {
+  display: flex;
+  width: 90%;
+  flex-direction: column;
+}
