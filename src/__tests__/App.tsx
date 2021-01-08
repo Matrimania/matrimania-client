@@ -11,9 +11,17 @@ describe('App', () => {
         <App />
       </MemoryRouter>
     );
-    
-    const appLogo = screen.getByAltText("Matrimania Logo");
 
+    const appLogo = screen.getByAltText("Matrimania Logo");
+    // should also render a wedding card
     expect(appLogo).toBeInTheDocument();
+  });
+
+  it('routes a user to the vendor dashboard', () => {
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    ); 
   });
 });
