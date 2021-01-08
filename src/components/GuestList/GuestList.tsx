@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import Guest from '../Guest/Guest';
+import './GuestList.css'
+import { StyledButton } from '../App/styledComponents.styles'
+
 
 type NewGuest = {
   id: number,
