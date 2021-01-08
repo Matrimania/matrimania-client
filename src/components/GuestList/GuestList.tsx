@@ -9,7 +9,7 @@ import { StyledButton, StyledCard } from '../App/styledComponents.styles'
 type NewGuest = {
   id: number,
   guestName: string,
-  phoneNumber: any;
+  phoneNumber: string;
 }
 
 const GuestList: React.FC = () => {
@@ -150,7 +150,7 @@ const GuestList: React.FC = () => {
           placeholder='Phone Number (XXX-XXX-XXXX)'
 >>>>>>> 170ecbde... Add dashes to phoneNumber input. bug missing last two numbers
           name='phoneNumber'
-          maxLength={10}
+          maxLength={12}
           value={phoneNumber}
           onChange={event => formatPhoneText(event.target.value)}
         />
