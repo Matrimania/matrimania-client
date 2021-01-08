@@ -1,4 +1,5 @@
 import React from 'react';
+import './Guest.css'
 
 type Props = {
   id: number;
