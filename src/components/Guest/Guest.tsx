@@ -4,7 +4,7 @@ import './Guest.css'
 type Props = {
   id: number;
   guestName: string;
-  phoneNumber: number;
+  phoneNumber: string;
   deleteGuest(id: number): void
 }
 const Guest: React.FC<Props> = ({

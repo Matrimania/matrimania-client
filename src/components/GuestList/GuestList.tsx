@@ -57,6 +57,16 @@ const GuestList: React.FC = () => {
   //   onKeyUp()
   // }
 
+  const checkNumber = (value: string) => {
+    value = value.trim().replaceAll( "-", "")
+    var reg = /^\d+$/;
+    if (reg.test(value)) {
+      formatPhoneText(value)
+    } else {
+      console.log('error')
+    }
+  } 
+
   const formatPhoneText = (value: string) => {
     value = value.trim().replaceAll( "-", "");
     if (value.length > 3 && value.length <= 6) {
@@ -67,8 +77,6 @@ const GuestList: React.FC = () => {
     setPhoneNumber(value)
   }
 
-  //   return value
-  // }
 
 <<<<<<< HEAD
   const onKeyUp = (event) => {
@@ -87,6 +95,7 @@ const GuestList: React.FC = () => {
   // const validatePhone = (p: string) => {
   //   let phoneRE = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
   //   let digits = p.replace(/\D/g, "");
+  //   console.log(phoneRE.test(digits))
   //   return phoneRE.test(digits)
   // }
 >>>>>>> 170ecbde... Add dashes to phoneNumber input. bug missing last two numbers
@@ -152,7 +161,7 @@ const GuestList: React.FC = () => {
           name='phoneNumber'
           maxLength={12}
           value={phoneNumber}
-          onChange={event => formatPhoneText(event.target.value)}
+          onChange={event => checkNumber(event.target.value)}
         />
         <StyledButton>
           <div id="translate"></div>
