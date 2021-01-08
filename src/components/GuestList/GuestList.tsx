@@ -11,7 +11,7 @@ type NewGuest = {
 }
 
 const GuestList: React.FC = () => {
-  
+
   const [guestName, setGuestName] = useState('')
   const [phoneNumber, setPhoneNumber] = useState(0)
   const [guests, setGuests] = useState<NewGuest[]>([])
@@ -41,7 +41,10 @@ const GuestList: React.FC = () => {
 	return (
     <>
       <form className="formWrapper">
-      <h1>Add Guest</h1>
+        <article className="instructionWrap">
+          <h1 className="weddingTitle"style={{fontSize: '3vw'}}>Let's start with your guest list</h1>
+          <h2 className="weddingDate" style={{fontSize: '1.5vw', padding: '2% 10%', textAlign: 'left'}}>For each person included in your family photos, please include: <br></br><br></br>1. Their first and last name<br></br>2. A mobile phone number that accepts text messages<br></br> <br></br>Don't forget yourselves!</h2>
+        </article>
         <input
           type='text'
           placeholder='Guest Name'
