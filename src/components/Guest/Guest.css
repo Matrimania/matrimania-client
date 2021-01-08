@@ -1,0 +1,41 @@
+.guestCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 75%;
+  margin-bottom: 1%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  border-bottom: 1px solid #A8826F;
+}
+.guestInfo {
+  color: #221e22;
+  opacity: 80%;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  font-size: 1.25em;
+  padding-right: 2%;
+}
+.deleteButton {
+  font-family: 'Roboto', sans-serif;
+  display: inline-flex;
+  height: 25px;
+  width: 25px;
+  background-color: #A8826F;
+  color: #f5f5f5;
+  font-size: 1em;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  border: none;
+}
+.deleteButton:hover {
+  background-color: #f5f5f5;
+  color: #A8826F;
+  border: 2px solid #A8826F;
+}
+.deleteButton:focus {
+  outline: none;
+}
