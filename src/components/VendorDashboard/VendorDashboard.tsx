@@ -1,9 +1,8 @@
-import './VenderDashboard.css';
+import './VendorDashboard.css';
 import WeddingCard from '../WeddingCard/WeddingCard'
 import {individualWedding, weddings} from '../../weddingData'
 
-
-function VenderDashboard() {
+function VendorDashboard() {
   const weddingCards = weddings.map((wedding, index) => {
     return (
       <WeddingCard
@@ -38,4 +37,4 @@ function VenderDashboard() {
         </section>
     )
 }
-export default VenderDashboard;
+export default VendorDashboard;

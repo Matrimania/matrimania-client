@@ -4,7 +4,7 @@ import logo from '../../assets/FinalMatrimaniaLogo.png'
 import {Route, Switch, NavLink} from 'react-router-dom'
 import { weddings, individualWedding } from '../../weddingData'
 // Components
-import VenderDashboard from '../VenderDashboard/VenderDashboard'
+import VendorDashboard from '../VendorDashboard/VendorDashboard'
 import WeddingDetails from '../WeddingDetails/WeddingDetails'
 import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList'
 import LandingPage from '../LandingPage/LandingPage'
@@ -17,8 +17,8 @@ const App = () => {
         <img src={logo} className="logo" alt="Matrimania Logo"/>
       </header>
       <Switch>
-        <Route path='/vender-dashboard'>
-          <VenderDashboard />
+        <Route path='/vendor-dashboard'>
+          <VendorDashboard />
         </Route>
         <Route exact path='/:weddingId/photo-list' 
           render={({ match }) => {
