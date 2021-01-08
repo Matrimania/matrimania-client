@@ -71,7 +71,6 @@ const GuestList: React.FC = () => {
   } 
 
   const formatPhoneText = (value: string) => {
-    value = value.trim().replaceAll( "-", "");
     if (value.length > 3 && value.length <= 6) {
       value = value.slice(0,3) + "-" + value.slice(3);
     } else if(value.length > 6) {
