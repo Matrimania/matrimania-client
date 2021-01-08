@@ -11,7 +11,7 @@ describe('Guest', () => {
         id={1}
         key={1}
         guestName={"Bob Loblaw"}
-        phwoneNumber={1234567890}
+        phoneNumber={1234567890}
       />
     );
     expect(screen.getByText("Bob Loblaw")).toBeInTheDocument();
