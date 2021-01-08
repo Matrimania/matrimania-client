@@ -15,11 +15,12 @@ const Guest: React.FC<Props> = ({
 }) => {
   return (
     <article className="guestCard">
-      <h1>{guestName}</h1>
-      <h2>{phoneNumber}</h2>
+      <h1 className="guestInfo">{guestName}</h1>
+      <h2 className="guestInfo">{phoneNumber}</h2>
       <button
+        className="deleteButton"
         onClick={() => deleteGuest(id)}>
-        Delete 🗑
+        X
       </button>
     </article>
   )
