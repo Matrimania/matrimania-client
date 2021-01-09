@@ -24,6 +24,8 @@ const GuestList: React.FC = () => {
   const [guestName, setGuestName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [guests, setGuests] = useState<NewGuest[]>([]);
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   // let filter: any = [];
   // const keypadZero: number = 48;
@@ -56,8 +58,11 @@ const GuestList: React.FC = () => {
     var reg = /^\d+$/;
     if (reg.test(value)) {
       formatPhoneText(value)
+      setIsError(false)
+      setErrorMessage('')
     } else {
-      console.log('type error')
+      setIsError(true)
+      setErrorMessage('Phone number only accepts numerical values')
       //error handling. have specific error message
       // alert? (not favorite idea)
       // have div pop up?
@@ -70,10 +75,10 @@ const GuestList: React.FC = () => {
       value = value.slice(0,3) + "-" + value.slice(3);
     } else if(value.length > 6) {
       value = value.slice(0,3) + "-" + value.slice(3,6) + "-" + value.slice(6);
-    } else if(value.length === 0) {
-      console.log('need full number')
-    } 
+    }
     setPhoneNumber(value)
+    setIsError(false)
+    setErrorMessage('')
   }
 
   // const onKeyUp = (event) => {
@@ -119,8 +124,17 @@ const GuestList: React.FC = () => {
     if (guestName !== "" && phoneNumber.length === 12) {
       setGuests([...guests, newGuest])
       clearInputs();
-    } else {
-      phoneNumber.length !== 12 ? console.log('need full number') : console.log('need name')
+      setIsError(false)
+      setErrorMessage('')
+    } else if(guestName === "" && phoneNumber.length !== 12){
+      setIsError(true)
+      setErrorMessage('Need to have a complete name and phone number')
+    } else if(guestName === "" ) {
+      setIsError(true)
+      setErrorMessage('Need to have a complete name')
+    } else if(phoneNumber.length !== 12) {
+      setIsError(true)
+      setErrorMessage('Need to have a complete phone number')
     }
     // should be a POST request + adding card to UI
   }
@@ -161,6 +175,7 @@ const GuestList: React.FC = () => {
           <div id="translate"></div>
           <a className="link" id="addListButton" onClick={event => submitGuest(event)}>Add To Guest List</a>
         </StyledButton>
+        {isError && errorMessage}
       </form>
       <h2 className="weddingName" style={{fontSize: '1.75em', paddingLeft: '3%', paddingBottom: '2%', width: '40%', textAlign: 'center', opacity: '80%'}}>- Your Guest List -</h2>
       <section className="guestCards">
