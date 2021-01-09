@@ -66,8 +66,12 @@ const GuestList: React.FC = () => {
     if (reg.test(value)) {
       formatPhoneText(value)
     } else {
-      console.log('error')
+      console.log('type error')
+      //error handling. have specific error message
+      // alert? (not favorite idea)
+      // have div pop up?
     }
+    //error handling/bug with input leaving first digit when user uses backspace to correct phone number
   } 
 
   const formatPhoneText = (value: string) => {
@@ -75,6 +79,8 @@ const GuestList: React.FC = () => {
       value = value.slice(0,3) + "-" + value.slice(3);
     } else if(value.length > 6) {
       value = value.slice(0,3) + "-" + value.slice(3,6) + "-" + value.slice(6);
+    } else if(value.length === 0) {
+      console.log('need number')
     }
     setPhoneNumber(value)
   }
@@ -119,16 +125,19 @@ const GuestList: React.FC = () => {
 =======
 >>>>>>> f0b0b63b... Clean up unwanted comments
   const submitGuest = (event: React.FormEvent) => {
-    console.log(phoneNumber)
     event.preventDefault();
     const newGuest: NewGuest = {
       id: Date.now(),
       guestName,
       phoneNumber
     }
-    setGuests([...guests, newGuest])
+    if (guestName !== "" && phoneNumber !== "") {
+      setGuests([...guests, newGuest])
+      clearInputs();
+    } else {
+      console.log('need input')
+    }
     // should be a POST request + adding card to UI
-    clearInputs();
   }
 
   const clearInputs = () => {
