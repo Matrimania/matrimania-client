@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { StyledButton } from '../App/styledComponents.styles';
 import Guest from '../Guest/Guest';
 import './GuestList.css'
 import empty from '../../assets/emptyGuestList.png'
@@ -61,17 +62,14 @@ const GuestList: React.FC = () => {
           value={phoneNumber !== 0 ? phoneNumber : ''}
           onChange={event => setPhoneNumber(parseInt(event.target.value))}
         />
-        <StyledButton onClick={event => submitGuest(event)}>
+        <StyledButton>
           <div id="translate"></div>
-            <a className="link" id="addListButton">Add To Guest List</a>
+          <a className="link" id="addListButton" onClick={event => submitGuest(event)}>Add To Guest List</a>
         </StyledButton>
       </form>
-      <section className="guestListWrap">
-        <StyledCard contents={guests.length === 0 ? "empty" : "list"}>
-          {guests.length === 0 &&
-            <img className="emptyList" src={empty} alt="your guest list is empty"/>
-          }
-          {guests.length > 0 && guests.map(guest => (<Guest
+      <h2 className="weddingName" style={{fontSize: '1.75em', paddingLeft: '3%', paddingBottom: '2%', width: '40%', textAlign: 'center', opacity: '80%'}}>- Your Guest List -</h2>
+      <section className="guestCards">
+        {guests.length > 0 && guests.map(guest => (<Guest
           guestName={guest.guestName}
           id={guest.id}
           phoneNumber={guest.phoneNumber}
