@@ -1,0 +1,49 @@
+input {
+  outline: none;
+  margin-top: 0.8em;
+  margin-bottom: .25em;
+  font-size: 1.5em;
+  padding: 1%;
+  border: none;
+  background-color: transparent;
+  color: #A8826F;
+  border-bottom: 2px solid #A8826F;
+  border-left: 2px solid #A8826F;
+  width: 40%;
+}
+input:focus {
+  outline: none;
+  border: 2px solid #A8826F;
+}
+
+.formWrapper {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-right: 3px solid #A8826F;
+}
+.guestListWrap {
+  background-color: rgba(168, 130, 111, .2);
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#guestListTitle {
+  background-color: #A8826F;
+  width: 110%;
+  display: flex;
+  flex-direction: column-reverse;
+}
+.emptyList{
+  width: 90%;
+  padding-bottom: 25px;
+}
+.instructionWrap {
+  display: flex;
+  width: 90%;
+  flex-direction: column;
+}

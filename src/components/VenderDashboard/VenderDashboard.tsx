@@ -1,6 +1,7 @@
 import './VenderDashboard.css';
 import WeddingCard from '../WeddingCard/WeddingCard'
 import {individualWedding, weddings} from '../../weddingData'
+import { StyledButton } from '../App/styledComponents.styles'
 
 
 function VenderDashboard() {
@@ -18,10 +19,10 @@ function VenderDashboard() {
     return (
         <section className="dashboardWrapper">
           <section className="optionsWrap">
-          <div className="button" id="addWeddingButton">
+          <StyledButton>
             <div id="translate"></div>
-            <a>Add A Wedding</a>
-          </div>
+            <a className="link">Add A Wedding</a>
+          </StyledButton>
             <section className="filterWrap">
             <label className="label">Filter By :</label>
             <select className="dropdown">

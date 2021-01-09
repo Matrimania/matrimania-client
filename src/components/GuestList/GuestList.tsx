@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import Guest from '../Guest/Guest';
+import './GuestList.css'
+import empty from '../../assets/emptyGuestList.png'
+import { StyledButton, StyledCard } from '../App/styledComponents.styles'
+
 
 type NewGuest = {
   id: number,
@@ -8,7 +12,7 @@ type NewGuest = {
 }
 
 const GuestList: React.FC = () => {
-  
+
   const [guestName, setGuestName] = useState('')
   const [phoneNumber, setPhoneNumber] = useState(0)
   const [guests, setGuests] = useState<NewGuest[]>([])
@@ -38,7 +42,10 @@ const GuestList: React.FC = () => {
 	return (
     <>
       <form className="formWrapper">
-      <h1>Add Guest</h1>
+        <article className="instructionWrap">
+          <h1 className="weddingTitle"style={{fontSize: '3vw'}}>Let's start with your guest list</h1>
+          <h2 className="weddingDate" style={{fontSize: '1.5vw', padding: '2% 10%', textAlign: 'left'}}>For each person included in your family photos, please include: <br></br><br></br>1. Their first and last name<br></br>2. A mobile phone number that accepts text messages<br></br> <br></br>Don't forget yourselves!</h2>
+        </article>
         <input
           type='text'
           placeholder='Guest Name'
@@ -46,28 +53,34 @@ const GuestList: React.FC = () => {
           value={guestName}
           onChange={event => setGuestName(event.target.value)}
         />
-
         <input
-          type='text'
+          type='tel'
           placeholder='Phone Number'
           name='phoneNumber'
-          value={phoneNumber}
+          maxLength={10}
+          value={phoneNumber !== 0 ? phoneNumber : ''}
           onChange={event => setPhoneNumber(parseInt(event.target.value))}
         />
-
-        <button onClick={event => submitGuest(event)}> SUBMIT
-        </button>
+        <StyledButton onClick={event => submitGuest(event)}>
+          <div id="translate"></div>
+            <a className="link" id="addListButton">Add To Guest List</a>
+        </StyledButton>
       </form>
-      <section className="guestCards">
-        {guests.length > 0 && guests.map(guest => (<Guest
+      <section className="guestListWrap">
+        <StyledCard contents={guests.length === 0 ? "empty" : "list"}>
+          {guests.length === 0 &&
+            <img className="emptyList" src={empty} alt="your guest list is empty"/>
+          }
+          {guests.length > 0 && guests.map(guest => (<Guest
           guestName={guest.guestName}
           id={guest.id}
           phoneNumber={guest.phoneNumber}
           key={guest.id}
           deleteGuest={deleteGuest}>
-        </Guest>))}
-      </section>  
-    </> 
+          </Guest>))}
+        </StyledCard>
+      </section>
+    </>
 	)
 }
 

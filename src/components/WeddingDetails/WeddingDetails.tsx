@@ -56,43 +56,37 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 						<GuestList />
 					)
 			} else {
-					return <img className="detailImage" src={image} />
+					return (
+					<section className="detailImageWrap">
+						<img className="detailImage" src={image} />
+					</section>
+				)
 			}
 		}
 
-		//function for each view state
-		// new component for request photolist- will be form 
-				//email the client- *mailTo or PHP 
-		//weddingPhotoList component if photoListView is true
-		//editList component if editListView === GuestList component is true
-
-		// add third button - message guests
-			// conditional render if current date is === wedding date
-			// will send messages to people in photos
-			// possibly with 2 clicks - one will change innerText - second will send text
-
 	return (
 		<section className="detailsWrapper">
-			<div className="detailsHeader">
+			{detailsView &&
+				<div className="detailsHeader">
 				<h1 className="weddingTitle">{name} Wedding</h1>
 				<h2 className="weddingDate">{date}</h2>
 				<p className="weddingDetails">Email: {email}</p>
 				<p className="weddingDetails">Status: {familyPhotoList.length === 0 ? "Pending" : "Received"}</p>
-					{photoList.length === 0 &&
+				{photoList.length === 0 &&
 					<StyledButton>
-						<div id="translate"></div>
-								<a className="link" id="requestListButton" href={`mailto:ericberglund117@gmail.com?subject=Family Photo List&body=${emailBody}`}>Request Photo List</a>
-						</StyledButton>
-					}
-				<StyledButton>
 					<div id="translate"></div>
-					{photoList.length > 0 ?
-						<a className="link" id="editListButton" onClick={(e) => determineCurrentState(e, "editListView")}>Edit Photo Details</a> :
-						<a className="link" id="addListButton" onClick={(e) => determineCurrentState(e, "editListView")}>Add Photo List</a>
-					}
+					<a className="link" id="requestListButton" href={`mailto:ericberglund117@gmail.com?subject=Family Photo List&body=${emailBody}`}>Request Photo List</a>
+					</StyledButton>
+				}
+				<StyledButton>
+				<div id="translate"></div>
+				{photoList.length > 0 ?
+					<a className="link" id="editListButton" onClick={(e) => determineCurrentState(e, "editListView")}>Edit Photo Details</a> :
+					<a className="link" id="addListButton" onClick={(e) => determineCurrentState(e, "editListView")}>Add Photo List</a>
+				}
 				</StyledButton>
-
-			</div>
+				</div>
+			}
 			{photoList.length > 0 &&
 				 <div>
 							<WeddingPhotoList
@@ -101,7 +95,7 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 							photoList={individualWedding.photoList} />
 						</div>
 				}
-			<section className="detailImageWrap">
+			<section className="detailFormWrap">
 				{displayCurrentView()}
 			</section>
 		</section>
