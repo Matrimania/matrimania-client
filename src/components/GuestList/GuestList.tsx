@@ -14,9 +14,49 @@ type NewGuest = {
 
 const GuestList: React.FC = () => {
 
+<<<<<<< HEAD
   const [guestName, setGuestName] = useState('')
   const [phoneNumber, setPhoneNumber] = useState(0)
   const [guests, setGuests] = useState<NewGuest[]>([])
+=======
+  const organizePhoneInput = () => {
+    for(let i = 0; i <= 9; i++) {
+      filter.push(i + keypadZero)
+      filter.push(i + numpadZero)
+    }
+
+    filter.push(8); 
+    filter.push(9);
+    filter.push(46);
+    filter.push(37);
+    filter.push(39);
+  }
+
+  const onKeyDown = (event) => {
+    if(filter.indexOf(event.keyCode) < 0) {
+      event.preventDefault()
+      return false
+    }
+  }
+
+  const formatPhoneText = (value: string) => {
+    value = this.replaceAll(value.trim(), "-", "");
+    if (value.length > 3 && value.length <= 6) {
+      value = value.slice(0,3) + "-" + value.slice(3);
+    } else if(value.length > 6) {
+      value = value.slice(0,3) + "-" + value.slice(3,6) + "-" + value.slice(6);
+    }
+
+    return value
+  }
+
+  const validatePhone = (p) => {
+    let phoneRE = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
+    let digits = p.replace(/\D/g, "");
+    return phoneRE.test(digits)
+  }
+  
+>>>>>>> 542d4a89... Create validatePhone function
 
   const submitGuest = (event: React.FormEvent) => {
     event.preventDefault();
