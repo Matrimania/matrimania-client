@@ -53,8 +53,8 @@ const GuestList: React.FC = () => {
   //   onKeyUp()
   // }
 
-  const checkNumber = (value: string) => {
-    value = value.trim().replaceAll( "-", "")
+  const checkNumber = (event: any) => {
+    let value = event.trim().replaceAll( "-", "")
     var reg = /^\d+$/;
     if (reg.test(value)) {
       formatPhoneText(value)
@@ -63,18 +63,21 @@ const GuestList: React.FC = () => {
     } else {
       setIsError(true)
       setErrorMessage('Phone number only accepts numerical values')
-      //error handling. have specific error message
-      // alert? (not favorite idea)
-      // have div pop up?
     }
-    //error handling/bug with input leaving first digit when user uses backspace to correct phone number
+    //bug with input leaving first digit when user uses backspace to correct phone number
   } 
 
-  const formatPhoneText = (value: string) => {
+  const formatPhoneText = (event: any) => {
+    let value = event
+    console.log(value)
+    let key = event.which || event.keyCode || event.charCode
     if (value.length > 3 && value.length <= 6) {
       value = value.slice(0,3) + "-" + value.slice(3);
     } else if(value.length > 6) {
       value = value.slice(0,3) + "-" + value.slice(3,6) + "-" + value.slice(6);
+    } else if(value.length === 1) {
+      console.log('one')
+      setPhoneNumber('')
     }
     setPhoneNumber(value)
     setIsError(false)
@@ -174,6 +177,10 @@ const GuestList: React.FC = () => {
         <StyledButton>
           <div id="translate"></div>
           <a className="link" id="addListButton" onClick={event => submitGuest(event)}>Add To Guest List</a>
+        </StyledButton>
+        <StyledButton>
+          <div id="translate"></div>
+          <a className="link" id="clearFormButton" onClick={event => clearInputs()}>Clear Guest and Phone Number</a>
         </StyledButton>
         {isError && errorMessage}
       </form>
