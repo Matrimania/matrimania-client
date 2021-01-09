@@ -30,6 +30,7 @@ const GuestList: React.FC = () => {
   const [guestName, setGuestName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [guests, setGuests] = useState<NewGuest[]>([]);
+<<<<<<< HEAD
   let filter: any = [];
   const keypadZero: number = 48;
   const numpadZero: number = 96;
@@ -56,6 +57,8 @@ const GuestList: React.FC = () => {
   //   }
   //   onKeyUp()
   // }
+=======
+>>>>>>> f0b0b63b... Clean up unwanted comments
 
   const checkNumber = (value: string) => {
     value = value.trim().replaceAll( "-", "")
@@ -77,6 +80,7 @@ const GuestList: React.FC = () => {
     setPhoneNumber(value)
   }
 
+<<<<<<< HEAD
 
 <<<<<<< HEAD
   const onKeyUp = (event) => {
@@ -113,6 +117,8 @@ const GuestList: React.FC = () => {
   // }
 
   
+=======
+>>>>>>> f0b0b63b... Clean up unwanted comments
   const submitGuest = (event: React.FormEvent) => {
     console.log(phoneNumber)
     event.preventDefault();
