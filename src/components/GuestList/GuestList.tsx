@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Guest from '../Guest/Guest';
 import './GuestList.css'
-import { StyledButton } from '../App/styledComponents.styles'
+import empty from '../../assets/emptyGuestList.png'
+import { StyledButton, StyledCard } from '../App/styledComponents.styles'
 
 
 type NewGuest = {
@@ -66,10 +67,9 @@ const GuestList: React.FC = () => {
         </StyledButton>
       </form>
       <section className="guestListWrap">
-        <h2 className="weddingTitle" style={{fontSize: '1.75em', paddingLeft: '3%', paddingBottom: '2%', width:'40%', textAlign: 'center', opacity: '80%'}}>- Your Guest List -</h2>
-        <section className="guestCards">
+        <StyledCard contents={guests.length === 0 ? "empty" : "list"}>
           {guests.length === 0 &&
-            <h2 className="weddingDate" style={{fontSize: '1vw', padding: '2% 10%', textAlign: 'left'}}>You have no guests in your photo list yet!<br></br><br></br>Guests will show up here as you add them to your list.</h2>
+            <img className="emptyList" src={empty} alt="your guest list is empty"/>
           }
           {guests.length > 0 && guests.map(guest => (<Guest
           guestName={guest.guestName}
@@ -78,7 +78,7 @@ const GuestList: React.FC = () => {
           key={guest.id}
           deleteGuest={deleteGuest}>
           </Guest>))}
-        </section>
+        </StyledCard>
       </section>
     </>
 	)
