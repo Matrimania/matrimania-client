@@ -1,7 +1,8 @@
-import './VenderDashboard.css';
+import { Link } from 'react-router-dom'
 import WeddingCard from '../WeddingCard/WeddingCard'
 import {individualWedding, weddings} from '../../weddingData'
 import { StyledButton } from '../App/styledComponents.styles'
+import './VenderDashboard.css';
 
 
 function VenderDashboard() {
@@ -21,7 +22,7 @@ function VenderDashboard() {
           <section className="optionsWrap">
           <StyledButton>
             <div id="translate"></div>
-            <a className="link">Add A Wedding</a>
+            <Link to={`/add-wedding`} className="link">Add A Wedding</Link>
           </StyledButton>
             <section className="filterWrap">
             <label className="label">Filter By :</label>
