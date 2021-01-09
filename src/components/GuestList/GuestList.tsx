@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { StyledButton } from '../App/styledComponents.styles';
 import Guest from '../Guest/Guest';
 import './GuestList.css'
 import empty from '../../assets/emptyGuestList.png'
@@ -13,34 +12,28 @@ type NewGuest = {
 }
 
 const GuestList: React.FC = () => {
-<<<<<<< HEAD
+ 
 
-<<<<<<< HEAD
-  const [guestName, setGuestName] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState(0)
-  const [guests, setGuests] = useState<NewGuest[]>([])
-=======
-  const organizePhoneInput = () => {
-    for(let i = 0; i <= 9; i++) {
-      filter.push(i + keypadZero)
-      filter.push(i + numpadZero)
-    }
-=======
+  // const organizePhoneInput = () => {
+  //   for(let i = 0; i <= 9; i++) {
+  //     filter.push(i + keypadZero)
+  //     filter.push(i + numpadZero)
+  //   }
+
   
   const [guestName, setGuestName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [guests, setGuests] = useState<NewGuest[]>([]);
-<<<<<<< HEAD
-  let filter: any = [];
-  const keypadZero: number = 48;
-  const numpadZero: number = 96;
+
+  // let filter: any = [];
+  // const keypadZero: number = 48;
+  // const numpadZero: number = 96;
 
   // const organizePhoneInput = (event: any) => {
   //   for(let i = 0; i <= 9; i++) {
   //     filter.push(i + keypadZero)
   //     filter.push(i + numpadZero)
   //   }
->>>>>>> 170ecbde... Add dashes to phoneNumber input. bug missing last two numbers
 
   //   filter.push(8); 
   //   filter.push(9);
@@ -57,8 +50,6 @@ const GuestList: React.FC = () => {
   //   }
   //   onKeyUp()
   // }
-=======
->>>>>>> f0b0b63b... Clean up unwanted comments
 
   const checkNumber = (value: string) => {
     value = value.trim().replaceAll( "-", "")
@@ -80,34 +71,30 @@ const GuestList: React.FC = () => {
     } else if(value.length > 6) {
       value = value.slice(0,3) + "-" + value.slice(3,6) + "-" + value.slice(6);
     } else if(value.length === 0) {
-      console.log('need number')
-    }
+      console.log('need full number')
+    } 
     setPhoneNumber(value)
   }
 
-<<<<<<< HEAD
-
-<<<<<<< HEAD
-  const onKeyUp = (event) => {
-    let input = event.target;
-    let formatted = formatPhoneText(input.value)
-    let isError = (validatePhone(formatted) || formatted.length === 0)
-    let color = (isError) ? "gray" : "red";
-    let borderWidth = (isError) ? "1px" : "3px";
-    input.style.borderColor = color;
-    input.style.borderWidth = borderWidth;
-    input.value = formatted;
-  }
+  // const onKeyUp = (event) => {
+  //   let input = event.target;
+  //   let formatted = formatPhoneText(input.value)
+  //   let isError = (validatePhone(formatted) || formatted.length === 0)
+  //   let color = (isError) ? "gray" : "red";
+  //   let borderWidth = (isError) ? "1px" : "3px";
+  //   input.style.borderColor = color;
+  //   input.style.borderWidth = borderWidth;
+  //   input.value = formatted;
+  // }
   
->>>>>>> 542d4a89... Create validatePhone function
-=======
+
   // const validatePhone = (p: string) => {
   //   let phoneRE = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
   //   let digits = p.replace(/\D/g, "");
   //   console.log(phoneRE.test(digits))
   //   return phoneRE.test(digits)
   // }
->>>>>>> 170ecbde... Add dashes to phoneNumber input. bug missing last two numbers
+
 
   // const onKeyUp = () => {
   //   console.log("up")
@@ -122,8 +109,6 @@ const GuestList: React.FC = () => {
   // }
 
   
-=======
->>>>>>> f0b0b63b... Clean up unwanted comments
   const submitGuest = (event: React.FormEvent) => {
     event.preventDefault();
     const newGuest: NewGuest = {
@@ -131,11 +116,11 @@ const GuestList: React.FC = () => {
       guestName,
       phoneNumber
     }
-    if (guestName !== "" && phoneNumber !== "") {
+    if (guestName !== "" && phoneNumber.length === 12) {
       setGuests([...guests, newGuest])
       clearInputs();
     } else {
-      console.log('need input')
+      phoneNumber.length !== 12 ? console.log('need full number') : console.log('need name')
     }
     // should be a POST request + adding card to UI
   }
@@ -165,17 +150,8 @@ const GuestList: React.FC = () => {
           onChange={event => setGuestName(event.target.value)}
         />
         <input
-<<<<<<< HEAD
-          type='tel'
-          placeholder='Phone Number'
-=======
           type='text'
-<<<<<<< HEAD
           placeholder='Phone Number (XXX-XXX-XXXX)'
->>>>>>> 170ecbde... Add dashes to phoneNumber input. bug missing last two numbers
-=======
-          placeholder='Phone Number XXX-XXX-XXXX'
->>>>>>> 603f1687... Code cleanup
           name='phoneNumber'
           maxLength={12}
           value={phoneNumber}
@@ -195,7 +171,6 @@ const GuestList: React.FC = () => {
           key={guest.id}
           deleteGuest={deleteGuest}>
           </Guest>))}
-        </StyledCard>
       </section>
     </>
 	)
