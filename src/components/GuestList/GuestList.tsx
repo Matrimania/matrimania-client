@@ -162,8 +162,12 @@ const GuestList: React.FC = () => {
           placeholder='Phone Number'
 =======
           type='text'
+<<<<<<< HEAD
           placeholder='Phone Number (XXX-XXX-XXXX)'
 >>>>>>> 170ecbde... Add dashes to phoneNumber input. bug missing last two numbers
+=======
+          placeholder='Phone Number XXX-XXX-XXXX'
+>>>>>>> 603f1687... Code cleanup
           name='phoneNumber'
           maxLength={12}
           value={phoneNumber}
