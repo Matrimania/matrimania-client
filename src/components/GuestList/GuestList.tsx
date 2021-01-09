@@ -13,45 +13,11 @@ type NewGuest = {
 
 const GuestList: React.FC = () => {
  
-
-  // const organizePhoneInput = () => {
-  //   for(let i = 0; i <= 9; i++) {
-  //     filter.push(i + keypadZero)
-  //     filter.push(i + numpadZero)
-  //   }
-
-  
   const [guestName, setGuestName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [guests, setGuests] = useState<NewGuest[]>([]);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-
-  // let filter: any = [];
-  // const keypadZero: number = 48;
-  // const numpadZero: number = 96;
-
-  // const organizePhoneInput = (event: any) => {
-  //   for(let i = 0; i <= 9; i++) {
-  //     filter.push(i + keypadZero)
-  //     filter.push(i + numpadZero)
-  //   }
-
-  //   filter.push(8); 
-  //   filter.push(9);
-  //   filter.push(46);
-  //   filter.push(37);
-  //   filter.push(39);
-  //   onKeyDown(event)
-  // }
-
-  // const onKeyDown = (event: any) => {
-  //   console.log('down')
-  //   if(filter.indexOf(event.keyCode) < 0) {
-  //     return false
-  //   }
-  //   onKeyUp()
-  // }
 
   const checkNumber = (event: any) => {
     let value = event.trim().replaceAll( "-", "")
@@ -64,59 +30,19 @@ const GuestList: React.FC = () => {
       setIsError(true)
       setErrorMessage('Phone number only accepts numerical values')
     }
-    //bug with input leaving first digit when user uses backspace to correct phone number
   } 
 
-  const formatPhoneText = (event: any) => {
-    let value = event
-    console.log(value)
-    let key = event.which || event.keyCode || event.charCode
+  const formatPhoneText = (value: string) => {
     if (value.length > 3 && value.length <= 6) {
       value = value.slice(0,3) + "-" + value.slice(3);
     } else if(value.length > 6) {
       value = value.slice(0,3) + "-" + value.slice(3,6) + "-" + value.slice(6);
-    } else if(value.length === 1) {
-      console.log('one')
-      setPhoneNumber('')
     }
     setPhoneNumber(value)
     setIsError(false)
     setErrorMessage('')
   }
 
-  // const onKeyUp = (event) => {
-  //   let input = event.target;
-  //   let formatted = formatPhoneText(input.value)
-  //   let isError = (validatePhone(formatted) || formatted.length === 0)
-  //   let color = (isError) ? "gray" : "red";
-  //   let borderWidth = (isError) ? "1px" : "3px";
-  //   input.style.borderColor = color;
-  //   input.style.borderWidth = borderWidth;
-  //   input.value = formatted;
-  // }
-  
-
-  // const validatePhone = (p: string) => {
-  //   let phoneRE = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
-  //   let digits = p.replace(/\D/g, "");
-  //   console.log(phoneRE.test(digits))
-  //   return phoneRE.test(digits)
-  // }
-
-
-  // const onKeyUp = () => {
-  //   console.log("up")
-  //   let input = phoneNumber.toString();
-  //   let formatted = formatPhoneText(input)
-  //   let isError = (validatePhone(formatted) || formatted.length === 0)
-  //   let color = (isError) ? "gray" : "red";
-  //   let borderWidth = (isError) ? "1px" : "3px";
-  //   input.style.borderColor = color;
-  //   input.style.borderWidth = borderWidth;
-  //   setPhoneNumber(formatted);
-  // }
-
-  
   const submitGuest = (event: React.FormEvent) => {
     event.preventDefault();
     const newGuest: NewGuest = {
