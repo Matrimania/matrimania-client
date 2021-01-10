@@ -1,7 +1,7 @@
 import './App.css';
 import React, {useState, useEffect} from 'react'
 import logo from '../../assets/FinalMatrimaniaLogo.png'
-import {Route, Switch, NavLink} from 'react-router-dom'
+import {Route, Switch, NavLink, Link} from 'react-router-dom'
 import { weddings, individualWedding } from '../../weddingData'
 // Components
 import VendorDashboard from '../VendorDashboard/VendorDashboard'
@@ -15,7 +15,9 @@ const App = () => {
   return (
     <div className="appWrap">
       <header className="headerWrap">
-        <img src={logo} className="logo" alt="Matrimania Logo"/>
+        <Link to={`/vender-dashboard`}>
+          <img src={logo} className="logo" alt="Matrimania Logo"/>
+        </Link>
       </header>
       <Switch>
         <Route path='/vendor-dashboard'>
