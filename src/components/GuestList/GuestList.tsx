@@ -8,14 +8,40 @@ import { StyledButton, StyledCard } from '../App/styledComponents.styles'
 type NewGuest = {
   id: number,
   guestName: string,
-  phoneNumber: number
+  phoneNumber: string;
 }
 
 const GuestList: React.FC = () => {
+ 
+  const [guestName, setGuestName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [guests, setGuests] = useState<NewGuest[]>([]);
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const [guestName, setGuestName] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState(0)
-  const [guests, setGuests] = useState<NewGuest[]>([])
+  const checkNumber = (event: any) => {
+    let value = event.trim().replaceAll( "-", "")
+    var reg = /^\d+$/;
+    if (reg.test(value)) {
+      formatPhoneText(value)
+      setIsError(false)
+      setErrorMessage('')
+    } else {
+      setIsError(true)
+      setErrorMessage('Phone number only accepts numerical values')
+    }
+  } 
+
+  const formatPhoneText = (value: string) => {
+    if (value.length > 3 && value.length <= 6) {
+      value = value.slice(0,3) + "-" + value.slice(3);
+    } else if(value.length > 6) {
+      value = value.slice(0,3) + "-" + value.slice(3,6) + "-" + value.slice(6);
+    }
+    setPhoneNumber(value)
+    setIsError(false)
+    setErrorMessage('')
+  }
 
   const submitGuest = (event: React.FormEvent) => {
     event.preventDefault();
@@ -24,14 +50,27 @@ const GuestList: React.FC = () => {
       guestName,
       phoneNumber
     }
-    setGuests([...guests, newGuest])
+    if (guestName !== "" && phoneNumber.length === 12) {
+      setGuests([...guests, newGuest])
+      clearInputs();
+      setIsError(false)
+      setErrorMessage('')
+    } else if(guestName === "" && phoneNumber.length !== 12){
+      setIsError(true)
+      setErrorMessage('Need to have a complete name and phone number')
+    } else if(guestName === "" ) {
+      setIsError(true)
+      setErrorMessage('Need to have a complete name')
+    } else if(phoneNumber.length !== 12) {
+      setIsError(true)
+      setErrorMessage('Need to have a complete phone number')
+    }
     // should be a POST request + adding card to UI
-    clearInputs();
   }
 
   const clearInputs = () => {
     setGuestName('')
-    setPhoneNumber(0)
+    setPhoneNumber('')
   }
 
   const deleteGuest = (id: number) => {
@@ -54,31 +93,32 @@ const GuestList: React.FC = () => {
           onChange={event => setGuestName(event.target.value)}
         />
         <input
-          type='tel'
-          placeholder='Phone Number'
+          type='text'
+          placeholder='Phone Number (XXX-XXX-XXXX)'
           name='phoneNumber'
-          maxLength={10}
-          value={phoneNumber !== 0 ? phoneNumber : ''}
-          onChange={event => setPhoneNumber(parseInt(event.target.value))}
+          maxLength={12}
+          value={phoneNumber}
+          onChange={event => checkNumber(event.target.value)}
         />
-        <StyledButton onClick={event => submitGuest(event)}>
+        <StyledButton>
           <div id="translate"></div>
-            <a className="link" id="addListButton">Add To Guest List</a>
+          <a className="link" id="addListButton" onClick={event => submitGuest(event)}>Add To Guest List</a>
         </StyledButton>
+        <StyledButton>
+          <div id="translate"></div>
+          <a className="link" id="clearFormButton" onClick={event => clearInputs()}>Clear Guest and Phone Number</a>
+        </StyledButton>
+        {isError && errorMessage}
       </form>
-      <section className="guestListWrap">
-        <StyledCard contents={guests.length === 0 ? "empty" : "list"}>
-          {guests.length === 0 &&
-            <img className="emptyList" src={empty} alt="your guest list is empty"/>
-          }
-          {guests.length > 0 && guests.map(guest => (<Guest
+      <h2 className="weddingName" style={{fontSize: '1.75em', paddingLeft: '3%', paddingBottom: '2%', width: '40%', textAlign: 'center', opacity: '80%'}}>- Your Guest List -</h2>
+      <section className="guestCards">
+        {guests.length > 0 && guests.map(guest => (<Guest
           guestName={guest.guestName}
           id={guest.id}
           phoneNumber={guest.phoneNumber}
           key={guest.id}
           deleteGuest={deleteGuest}>
           </Guest>))}
-        </StyledCard>
       </section>
     </>
 	)
