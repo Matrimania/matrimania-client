@@ -1,9 +1,10 @@
 import React from 'react';
+import './Guest.css'
 
 type Props = {
   id: number;
   guestName: string;
-  phoneNumber: number;
+  phoneNumber: string;
   deleteGuest(id: number): void
 }
 const Guest: React.FC<Props> = ({
@@ -14,11 +15,12 @@ const Guest: React.FC<Props> = ({
 }) => {
   return (
     <article className="guestCard">
-      <h1>{guestName}</h1>
-      <h2>{phoneNumber}</h2>
+      <h1 className="guestInfo">{guestName}</h1>
+      <h2 className="guestInfo">{phoneNumber}</h2>
       <button
+        className="deleteButton"
         onClick={() => deleteGuest(id)}>
-        Delete 🗑
+        X
       </button>
     </article>
   )

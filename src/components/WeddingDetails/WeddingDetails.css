@@ -25,6 +25,12 @@
   height: 100%;
   overflow: hidden;
 }
+.detailFormWrap {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+}
 .detailImage {
   width: 100%;
   height: auto;

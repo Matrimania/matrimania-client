@@ -1,26 +1,29 @@
 import './VendorDashboard.css';
 import WeddingCard from '../WeddingCard/WeddingCard'
-import {individualWedding, weddings} from '../../weddingData'
+import { getWeddings } from '../../apiCalls'
+import { StyledButton } from '../App/styledComponents.styles'
+import './VenderDashboard.css';
+
 
 function VendorDashboard() {
   const weddingCards = weddings.map((wedding, index) => {
     return (
       <WeddingCard
-        key={wedding.weddingId}
-        weddingId={wedding.weddingId}
-        name={wedding.name}
-        image={wedding.image}
-        date={wedding.date}
+        key={singleWedding.id}
+        id={singleWedding.id}
+        name={singleWedding.name}
+        image={singleWedding.image}
+        date={singleWedding.date}
       />
     )
   })
     return (
         <section className="dashboardWrapper">
           <section className="optionsWrap">
-          <div className="button" id="addWeddingButton">
+          <StyledButton>
             <div id="translate"></div>
-            <a>Add A Wedding</a>
-          </div>
+            <Link to={`/add-wedding`} className="link">Add A Wedding</Link>
+          </StyledButton>
             <section className="filterWrap">
             <label className="label">Filter By :</label>
             <select className="dropdown">

@@ -9,6 +9,7 @@ import WeddingDetails from '../WeddingDetails/WeddingDetails'
 import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList'
 import LandingPage from '../LandingPage/LandingPage'
 import GuestListForm from '../GuestList/GuestList'
+import AddWeddingForm from '../AddWeddingForm/AddWeddingForm'
 
 const App = () => {
   return (
@@ -20,7 +21,7 @@ const App = () => {
         <Route path='/vendor-dashboard'>
           <VendorDashboard />
         </Route>
-        <Route exact path='/:weddingId/photo-list' 
+        <Route exact path='/:weddingId/photo-list'
           render={({ match }) => {
             const { weddingId } = match.params
             return <WeddingPhotoList
@@ -31,7 +32,7 @@ const App = () => {
         <Route exact path='/wedding/:weddingId'
           render={({ match }) => {
             const { weddingId } = match.params
-            return <WeddingDetails 
+            return <WeddingDetails
               weddingId={individualWedding.weddingId}
               name={individualWedding.name}
               image={individualWedding.image}
@@ -40,32 +41,14 @@ const App = () => {
               familyPhotoList={individualWedding.familyPhotoList}
               photoList={individualWedding.photoList} />
           }} />
+        <Route path='/add-wedding'>
+          <AddWeddingForm />
+        </Route>
         <Route exact path='/'>
           <LandingPage />
-        </Route>
-        <Route path='/create-guest-list'>
-          <GuestListForm />
         </Route>
       </Switch>
     </div>
   );
 }
 export default App;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
