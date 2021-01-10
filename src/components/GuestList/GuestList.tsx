@@ -94,21 +94,20 @@ const GuestList: React.FC = () => {
         />
         <input
           type='text'
-          placeholder='Phone Number (XXX-XXX-XXXX)'
+          placeholder='Phone (XXX-XXX-XXXX)'
           name='phoneNumber'
           maxLength={12}
           value={phoneNumber}
           onChange={event => checkNumber(event.target.value)}
         />
+        <div className="inputWrap">
+          <a className="clearButton" onClick={event => clearInputs()}>Clear</a>
+        </div>
+        {isError && errorMessage}
         <StyledButton>
           <div id="translate"></div>
           <a className="link" id="addListButton" onClick={event => submitGuest(event)}>Add To Guest List</a>
         </StyledButton>
-        <StyledButton>
-          <div id="translate"></div>
-          <a className="link" id="clearFormButton" onClick={event => clearInputs()}>Clear Guest and Phone Number</a>
-        </StyledButton>
-        {isError && errorMessage}
       </form>
       <section className="guestListWrap">
         <StyledCard contents={guests.length === 0 ? "empty" : "list"}>
