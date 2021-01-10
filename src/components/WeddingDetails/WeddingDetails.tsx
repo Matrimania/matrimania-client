@@ -1,6 +1,7 @@
 import './WeddingDetails.css';
-import React, { useState } from 'react';
-import { individualWedding } from '../../weddingData'
+import React, { useState, useEffect } from 'react';
+import { individualWedding } from '../../weddingData';
+import { getWeddingGuests } from '../../apiCalls';
 import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList';
 import { Link } from 'react-router-dom'
 import { StyledButton } from '../App/styledComponents.styles'
@@ -27,50 +28,62 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 	photoList
 }) => {
 
-		const [detailsView, setDetailsView] = useState(true)
-		const [photoListView, setPhotoListView] = useState(false)
-		const [editListView, setEditListView] = useState(false)
-		const emailBody = `Dear ${name},
-			it is time to fill out your family photo list! Please follow the link provided to complete the missing photo information. Feel free to reach out if you have any questions.
-			LINK: https://matrimania-client.herokuapp.com/wedding/${weddingId}`
+	const [detailsView, setDetailsView] = useState(true)
+	const [photoListView, setPhotoListView] = useState(false)
+	const [editListView, setEditListView] = useState(false)
+	const [guestsTEMP, setGuestsTEMP] = useState([])
 
-		const determineCurrentState = (view: string) => {
-			if (view === "photoListView") {
-				setDetailsView(false)
-				setPhotoListView(true)
-				setEditListView(false)
-			} else if (view === "editListView") {
-				setDetailsView(false)
-				setPhotoListView(false)
-				setEditListView(true)
-			} else {
-				setDetailsView(true)
-				setPhotoListView(false)
-				setEditListView(false)
-			}
+	// probably should be GET for individualWedding and not just guests when BE is ready with that?
+	useEffect(() => {
+		const individualWeddingGuests = async () => {
+			const result = await getWeddingGuests()
+			console.log(result)
+			// sort for only this specific wedding by ID
+			setGuestsTEMP(result)
 		}
+		individualWeddingGuests()
+	}, [])
+	const emailBody = `Dear ${name},
+		it is time to fill out your family photo list! Please follow the link provided to complete the missing photo information. Feel free to reach out if you have any questions.
+		LINK: https://matrimania-client.herokuapp.com/wedding/${weddingId}`
 
-		const displayCurrentView = () => {
-			if (editListView) {
-					return (
-						<GuestList
-							changeView={determineCurrentState}
-						/>
-					)
-			} else if (photoListView) {
-				return(
-					<PhotoListForm
+	const determineCurrentState = (view: string) => {
+		if (view === "photoListView") {
+			setDetailsView(false)
+			setPhotoListView(true)
+			setEditListView(false)
+		} else if (view === "editListView") {
+			setDetailsView(false)
+			setPhotoListView(false)
+			setEditListView(true)
+		} else {
+			setDetailsView(true)
+			setPhotoListView(false)
+			setEditListView(false)
+		}
+	}
+
+	const displayCurrentView = () => {
+		if (editListView) {
+				return (
+					<GuestList
 						changeView={determineCurrentState}
 					/>
 				)
-			} else {
-					return (
-					<section className="detailImageWrap">
-						<img className="detailImage" src={image} />
-					</section>
-				)
-			}
+		} else if (photoListView) {
+			return(
+				<PhotoListForm
+					changeView={determineCurrentState}
+				/>
+			)
+		} else {
+				return (
+				<section className="detailImageWrap">
+					<img className="detailImage" src={image} />
+				</section>
+			)
 		}
+	}
 
 	return (
 		<section className="detailsWrapper">
