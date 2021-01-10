@@ -10,12 +10,16 @@ type NewPhoto = {
 }
 
 type WeddingData = {
-	changeView: any;
+	guests: any;
 }
 
-const PhotoListForm: React.FC<WeddingData> = ({changeView}) => {
+const PhotoListForm: React.FC<WeddingData> = ({guests}) => {
   const [description, setDescription] = useState('');
   const [guestsInPhoto, setGuestsInPhoto] = useState([]);
+
+  const guestInputs = () => {
+    return (<>Test</>)
+  }
 
   return (
     <article>
@@ -31,6 +35,7 @@ const PhotoListForm: React.FC<WeddingData> = ({changeView}) => {
           value={description}
           onChange={event => setDescription(event.target.value)}
         />
+        {guestInputs}
         
 
       </form>
