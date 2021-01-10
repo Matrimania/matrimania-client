@@ -1,5 +1,5 @@
 import Guest from '../Guest/Guest';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Photo from '../Photo/Photo';
 
 
@@ -18,18 +18,33 @@ const PhotoListForm: React.FC<WeddingData> = ({guests}) => {
   const [description, setDescription] = useState('');
   const [guestsInPhoto, setGuestsInPhoto] = useState([]);
 
+  useEffect(() => {
+    const allGuests = guests.map((guest: any) => {
+        return {...guest, isChecked: false}
+      })
+      console.log(allGuests)
+      setGuestsInPhoto(allGuests)
+  }, [guests])
+
   const guestInputs = () => {
-    console.log(guests)
-    if (guests.length >= 1) {
-      return guests.map((guest: any, i: number) => (
+    if (guestsInPhoto.length >= 1) {
+      return guestsInPhoto.map((guest: any, i: number) => (
         <div key={guest.name}>
           <label>{guest.name}</label>
           <input type="checkbox" name={`guest ${i+1}`} value={guest.name} />
         </div>
         )
       )
-    }
-    
+    }   
+  }
+
+  // const allGuests = guests.map((guest: any) => {
+  //   return {...guest, isChecked: false}
+  // })
+  // setGuestsInPhoto(allGuests)
+
+  const submitPhoto = () => {
+
   }
 
   return (
