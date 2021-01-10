@@ -5,12 +5,13 @@ import { getWeddings } from '../../apiCalls'
 import { Link } from 'react-router-dom';
 import { StyledButton } from '../App/styledComponents.styles'
 import './VendorDashboard.css';
+import dayjs from 'dayjs';
 
 type Wedding = {
   id: number;
   name: string;
   email: string;
-  date: string;
+  date: any;
   image: string;
 }
 
@@ -20,8 +21,13 @@ function VendorDashboard() {
   useEffect(() => {
   const allWeddings = async () => {
     const result = await getWeddings()
-    console.log(result)
-    setWeddings(result)
+    if(result.length) {
+      result.forEach((wed: any) => {
+        wed.date = new Date(wed.date)
+      })
+    }
+    const sortedResult = result.sort((a: any, b: any) => a.date - b.date)
+    setWeddings(sortedResult)
   }
   allWeddings()
 }, [])
