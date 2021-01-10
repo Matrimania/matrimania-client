@@ -111,19 +111,19 @@ const GuestList: React.FC<WeddingData> = ({
           <a className="clearButton" onClick={event => clearInputs()}>Clear</a>
         </div>
         {isError && errorMessage}
-        <section className="buttonWrapper">
-        <BackButton onClick={() => changeView('detailsView')}>
-          <div id="arrow">{"<<"}</div>
-          <a className="link">{"< Back"}</a>
-        </BackButton>
         <StyledButton onClick={event => submitGuest(event)}>
           <div id="translate"></div>
           <a className="link" id="addListButton">Add To Guest List</a>
         </StyledButton>
-        <BackButton onClick={() => changeView('detailsView')}>
-        <div id="arrow">{">>"}</div>
-        <a className="link">{"DONE >"}</a>
-        </BackButton>
+        <section className="buttonWrapper">
+          <BackButton onClick={() => changeView('detailsView')}>
+          <div id="arrow">{"<<"}</div>
+          <a className="link">{"< Back"}</a>
+          </BackButton>
+          <BackButton onClick={() => changeView('detailsView')}>
+          <div id="arrow">{">>"}</div>
+          <a className="link">{"DONE >"}</a>
+          </BackButton>
         </section>
         </section>
       </form>
