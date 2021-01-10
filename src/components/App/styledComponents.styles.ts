@@ -4,6 +4,7 @@ type StyledCardProps = {
   contents: string
 }
 
+
 export const StyledCard = styled.section<StyledCardProps>`
   transition: all .3s ease-Out;
   background-color: #ffffff;
@@ -119,5 +120,56 @@ export const StyledButton = styled.div`
     background: #6f896d;
     position: absolute;
     transition: all .3s ease-Out;
+  }
+`
+export const BackButton = styled.div`
+  background-color: #6f896d;
+  font-family: 'Roboto', sans-serif;
+  display: inline-flex;
+  height: 25px;
+  width: 60px;
+  margin: 10px;
+  border: 2px solid #6f896d;
+  color: #f5f5f5;
+  text-transform: uppercase;
+  font-size: .8em;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  .link {
+    font-weight: 500;
+    color: #f5f5f5;
+    position: relative;
+    transition: all .35s ease-Out;
+    text-decoration: none;
+    left: 0;
+  }
+  &:hover #arrow {
+    left: 0;
+  }
+  &:hover .link {
+    left: 150px;
+  }
+  #arrow {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 800;
+    color: #6f896d;
+    width: 100%;
+    height: 100%;
+    font-size: 2em;
+    background: #f5f5f5;
+    left: -200px;
+    position: absolute;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .35s ease-Out;
+    bottom: 0;
   }
 `
