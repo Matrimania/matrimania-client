@@ -1,4 +1,6 @@
 import './WeddingPhotoList.css';
+import { StyledCard } from '../App/styledComponents.styles'
+
 
 type PhotoListData = {
 	name: string;
@@ -22,15 +24,14 @@ const WeddingPhotoList: React.FC<PhotoListData> = ({
 
 
 	return (
-		<section className="detailsWrapper">
-			<div>WeddingPhotoList</div>
-			<section className="photoListWrapper">
+		<section className="weddingPhotoListWrapper">
+			<StyledCard contents="list" className="photoListWrapper">
+			<div className="photoListHeader">WeddingPhotoList</div>
 				<h1>{name} Wedding</h1>
 				<div className="photoListWrapper">
 					{displayPhotoList}
 				</div>
-			</section>
-			<button>Back</button>
+			</StyledCard>
 		</section>
 	)
 }
