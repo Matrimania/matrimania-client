@@ -86,7 +86,7 @@ export const StyledButton = styled.div`
   height: 40px;
   width: 150px;
   border: 2px solid #6f896d;
-  margin: 20px 20px 20px 20px;
+  margin: 10px;
   color: #6f896d;
   text-transform: uppercase;
   font-size: .8em;
