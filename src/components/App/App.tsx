@@ -15,7 +15,7 @@ const App = () => {
   return (
     <div className="appWrap">
       <header className="headerWrap">
-        <Link to={`/vender-dashboard`}>
+        <Link to={`/vendor-dashboard`}>
           <img src={logo} className="logo" alt="Matrimania Logo"/>
         </Link>
       </header>
