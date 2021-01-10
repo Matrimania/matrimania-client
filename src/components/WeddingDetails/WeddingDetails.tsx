@@ -53,7 +53,9 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 		const displayCurrentView = () => {
 			if (editListView) {
 					return (
-						<GuestList />
+						<GuestList
+							changeView={determineCurrentState}
+						/>
 					)
 			} else {
 					return (
@@ -79,20 +81,17 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 					</StyledButton>
 				}
 				<StyledButton onClick={() => determineCurrentState("editListView")}>
-				<div id="translate"></div>
-				{photoList.length > 0 ?
-					<a className="link" id="editListButton">Edit Photo Details</a> :
-					<a className="link" id="addListButton">Add Photo List</a>
-				}
+					<div id="translate"></div>
+					{photoList.length > 0 ?
+						<a className="link" id="editListButton">Edit Photo Details</a> :
+						<a className="link" id="addListButton">Add Photo List</a>
+					}
 				</StyledButton>
 				{photoList.length > 0 &&
-					<div>
-						<WeddingPhotoList
-							name={individualWedding.name}
-							weddingId={individualWedding.weddingId}
-							photoList={individualWedding.photoList} />
-					</div>
-				}
+					<WeddingPhotoList
+						name={individualWedding.name}
+						weddingId={individualWedding.weddingId}
+						photoList={individualWedding.photoList} /> }
 				</div>
 			}
 			<section className="detailFormWrap">
