@@ -21,10 +21,10 @@ const PhotoListForm: React.FC<WeddingData> = ({guests}) => {
   const guestInputs = () => {
     console.log(guests)
     if (guests.length >= 1) {
-      return guests.map((guest: any) => (
+      return guests.map((guest: any, i: number) => (
         <div key={guest.name}>
           <label>{guest.name}</label>
-          <input type="checkbox" name={guest.name} />
+          <input type="checkbox" name={`guest ${i+1}`} value={guest.name} />
         </div>
         )
       )
