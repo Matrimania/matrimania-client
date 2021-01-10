@@ -31,6 +31,7 @@ const PhotoListForm: React.FC<WeddingData> = ({changeView}) => {
           value={description}
           onChange={event => setDescription(event.target.value)}
         />
+        
 
       </form>
     </ article>
