@@ -13,13 +13,12 @@ type WeddingData = {
 	changeView: any;
 }
 
-const GuestList: React.FC<WeddingData> = ({
-	changeView
-}) => {
+const PhotoListForm: React.FC<WeddingData> = ({changeView}) => {
   return (
     <>
+    PhotoListForm
     </>
 	)
 }
 
-export default GuestList;
+export default PhotoListForm;

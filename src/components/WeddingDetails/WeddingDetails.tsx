@@ -5,7 +5,7 @@ import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList';
 import { Link } from 'react-router-dom'
 import { StyledButton } from '../App/styledComponents.styles'
 import GuestList from '../GuestList/GuestList'
-import Guest from '../Guest/Guest';
+import PhotoListForm from '../PhotoListForm/PhotoListForm';
 
 type IndividualWedding = {
 	weddingId: number;
@@ -35,7 +35,7 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 			LINK: https://matrimania-client.herokuapp.com/wedding/${weddingId}`
 
 		const determineCurrentState = (view: string) => {
-			if (view === "photoView") {
+			if (view === "photoListView") {
 				setDetailsView(false)
 				setPhotoListView(true)
 				setEditListView(false)
@@ -57,6 +57,12 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 							changeView={determineCurrentState}
 						/>
 					)
+			} else if (photoListView) {
+				return(
+					<PhotoListForm
+						changeView={determineCurrentState}
+					/>
+				)
 			} else {
 					return (
 					<section className="detailImageWrap">

@@ -11,6 +11,7 @@ import LandingPage from '../LandingPage/LandingPage'
 import GuestListForm from '../GuestList/GuestList'
 import AddWeddingForm from '../AddWeddingForm/AddWeddingForm'
 
+
 const App = () => {
   return (
     <div className="appWrap">
