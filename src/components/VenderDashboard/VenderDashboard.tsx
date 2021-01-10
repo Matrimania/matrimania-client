@@ -1,19 +1,39 @@
 import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
 import WeddingCard from '../WeddingCard/WeddingCard'
-import {individualWedding, weddings} from '../../weddingData'
+import { getWeddings } from '../../apiCalls'
 import { StyledButton } from '../App/styledComponents.styles'
 import './VenderDashboard.css';
 
 
+type Wedding = {
+  id: number;
+  name: string;
+  email: string;
+  date: string;
+  image: string;
+}
+
 function VenderDashboard() {
-  const weddingCards = weddings.map((wedding, index) => {
+  const [weddings, setWeddings] = useState<Wedding[]>([])
+
+  useEffect(() => {
+    const allWeddings = async () => {
+      const result = await getWeddings()
+      console.log(result)
+      setWeddings(result)
+    }
+    allWeddings()
+  }, [])
+
+  const weddingCards = weddings.map((singleWedding, index) => {
     return (
       <WeddingCard
-        key={wedding.weddingId}
-        weddingId={wedding.weddingId}
-        name={wedding.name}
-        image={wedding.image}
-        date={wedding.date}
+        key={singleWedding.id}
+        id={singleWedding.id}
+        name={singleWedding.name}
+        image={singleWedding.image}
+        date={singleWedding.date}
       />
     )
   })
