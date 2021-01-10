@@ -12,7 +12,7 @@ type NewGuest = {
 }
 
 const GuestList: React.FC = () => {
- 
+
   const [guestName, setGuestName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [guests, setGuests] = useState<NewGuest[]>([]);
@@ -30,7 +30,7 @@ const GuestList: React.FC = () => {
       setIsError(true)
       setErrorMessage('Phone number only accepts numerical values')
     }
-  } 
+  }
 
   const formatPhoneText = (value: string) => {
     if (value.length > 3 && value.length <= 6) {
@@ -110,15 +110,18 @@ const GuestList: React.FC = () => {
         </StyledButton>
         {isError && errorMessage}
       </form>
-      <h2 className="weddingName" style={{fontSize: '1.75em', paddingLeft: '3%', paddingBottom: '2%', width: '40%', textAlign: 'center', opacity: '80%'}}>- Your Guest List -</h2>
-      <section className="guestCards">
-        {guests.length > 0 && guests.map(guest => (<Guest
-          guestName={guest.guestName}
-          id={guest.id}
-          phoneNumber={guest.phoneNumber}
-          key={guest.id}
-          deleteGuest={deleteGuest}>
-          </Guest>))}
+      <section className="guestListWrap">
+        <StyledCard contents={guests.length === 0 ? "empty" : "list"}>
+          { guests.length === 0 &&
+            <img className="emptyList" src={empty} alt="your guest list is empty"/> }
+          { guests.length > 0 && guests.map(guest => (<Guest
+            guestName={guest.guestName}
+            id={guest.id}
+            phoneNumber={guest.phoneNumber}
+            key={guest.id}
+            deleteGuest={deleteGuest}>
+            </Guest>)) }
+        </StyledCard>
       </section>
     </>
 	)
