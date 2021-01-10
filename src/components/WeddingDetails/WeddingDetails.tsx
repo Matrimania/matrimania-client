@@ -2,7 +2,7 @@ import './WeddingDetails.css';
 import React, { useState } from 'react';
 import { individualWedding } from '../../weddingData'
 import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { StyledButton } from '../App/styledComponents.styles'
 import GuestList from '../GuestList/GuestList'
 import Guest from '../Guest/Guest';
@@ -75,7 +75,7 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 				{photoList.length === 0 &&
 					<StyledButton>
 					<div id="translate"></div>
-					<a className="link" id="requestListButton" href={`mailto:ericberglund117@gmail.com?subject=Family Photo List&body=${emailBody}`}>Request Photo List</a>
+					<a className="link" id="requestListButton" href={`mailto:${email}?subject=Family Photo List&body=${emailBody}`}>Request Photo List</a>
 					</StyledButton>
 				}
 				<StyledButton>
@@ -85,16 +85,16 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 					<a className="link" id="addListButton" onClick={(e) => determineCurrentState(e, "editListView")}>Add Photo List</a>
 				}
 				</StyledButton>
-				</div>
-			}
-			{photoList.length > 0 &&
-				 <div>
-							<WeddingPhotoList
+				{photoList.length > 0 &&
+					<div>
+						<WeddingPhotoList
 							name={individualWedding.name}
 							weddingId={individualWedding.weddingId}
 							photoList={individualWedding.photoList} />
-						</div>
+					</div>
 				}
+				</div>
+			}
 			<section className="detailFormWrap">
 				{displayCurrentView()}
 			</section>
