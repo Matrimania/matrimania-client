@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './AddWeddingForm.css'
 import empty from '../../assets/emptyGuestList.png'
+import { postAWedding } from '../../apiCalls'
 import { StyledButton } from '../App/styledComponents.styles'
 
 
@@ -28,7 +29,7 @@ const AddWeddingForm: React.FC = () => {
       date,
       image
     }
-
+    postAWedding(newWedding);
     // should be a POST request + adding card to UI
     clearInputs();
   }
@@ -42,7 +43,7 @@ const AddWeddingForm: React.FC = () => {
 
 	return (
     <>
-      <form className="formWrapper">
+      <form className="weddingFormWrapper">
         <article className="instructionWrap">
           <h1 className="weddingTitle"style={{fontSize: '3vw'}}>Enter The Wedding Details</h1>
         </article>
@@ -64,7 +65,7 @@ const AddWeddingForm: React.FC = () => {
         />
         <label htmlFor="weddingDate"></label>
         <input
-          type='text'
+          type='date'
           placeholder='Wedding Date'
           name='weddingDate'
           value={date}
