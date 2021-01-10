@@ -22,6 +22,8 @@ const AddWeddingForm: React.FC = () => {
 
   const submitWedding = (event: React.FormEvent) => {
     event.preventDefault();
+    console.log(date);
+
     const newWedding: NewWedding = {
       id: Date.now(),
       name,
@@ -33,6 +35,12 @@ const AddWeddingForm: React.FC = () => {
     // should be a POST request + adding card to UI
     clearInputs();
   }
+
+  const capitalize = (s: string) => {
+    if (typeof s !== 'string') return ''
+    const capitalized = s.charAt(0).toUpperCase() + s.slice(1)
+    setName(capitalized)
+    }
 
   const clearInputs = () => {
     setName('')
@@ -53,7 +61,7 @@ const AddWeddingForm: React.FC = () => {
             placeholder='Last Name'
             name='lastName'
             value={name}
-            onChange={event => setName(event.target.value)}
+            onChange={event => capitalize(event.target.value)}
           />
         <label htmlFor="emailAddress"></label>
         <input
