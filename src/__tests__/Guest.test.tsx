@@ -16,7 +16,7 @@ describe('Guest', () => {
     );
     expect(screen.getByText("Bob Loblaw")).toBeInTheDocument();
     expect(screen.getByText("1234567890")).toBeInTheDocument();
-    expect(screen.getByRole("button",{name:"Delete 🗑"})).toBeInTheDocument();
+    expect(screen.getByRole("button",{name:"X"})).toBeInTheDocument();
   });
 
 });
