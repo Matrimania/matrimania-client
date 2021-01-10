@@ -1,3 +1,4 @@
+import Guest from '../Guest/Guest';
 import React, { useState } from 'react';
 import Photo from '../Photo/Photo';
 
@@ -18,7 +19,17 @@ const PhotoListForm: React.FC<WeddingData> = ({guests}) => {
   const [guestsInPhoto, setGuestsInPhoto] = useState([]);
 
   const guestInputs = () => {
-    return (<>Test</>)
+    console.log(guests)
+    if (guests.length >= 1) {
+      return guests.map((guest: any) => (
+        <div key={guest.name}>
+          <label>{guest.name}</label>
+          <input type="checkbox" name={guest.name} />
+        </div>
+        )
+      )
+    }
+    
   }
 
   return (
@@ -35,7 +46,7 @@ const PhotoListForm: React.FC<WeddingData> = ({guests}) => {
           value={description}
           onChange={event => setDescription(event.target.value)}
         />
-        {guestInputs}
+        {guestInputs()}
         
 
       </form>
