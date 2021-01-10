@@ -22,7 +22,6 @@ const PhotoListForm: React.FC<WeddingData> = ({guests}) => {
     const allGuests = guests.map((guest: any) => {
         return {...guest, isChecked: false}
       })
-      console.log(allGuests)
       setGuestsInPhoto(allGuests)
   }, [guests])
 
@@ -31,13 +30,22 @@ const PhotoListForm: React.FC<WeddingData> = ({guests}) => {
       return guestsInPhoto.map((guest: any, i: number) => (
         <div key={guest.name}>
           <label>{guest.name}</label>
-          <input type="checkbox" name={`guest ${i+1}`} value={guest.name} />
+          <input 
+            type="checkbox" 
+            name={`guest ${i+1}`} 
+            value={guest.name} 
+            // checked={guest.isChecked}
+            // onChange={toggleCheckmark}
+          />
         </div>
         )
       )
     }   
   }
 
+  const toggleCheckmark = () => {
+
+  }
   // const allGuests = guests.map((guest: any) => {
   //   return {...guest, isChecked: false}
   // })

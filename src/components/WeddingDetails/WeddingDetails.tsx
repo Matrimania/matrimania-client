@@ -34,15 +34,15 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 	const [guestsTEMP, setGuestsTEMP] = useState([])
 
 	// probably should be GET for individualWedding and not just guests when BE is ready with that?
-	useEffect(() => {
-		const individualWeddingGuests = async () => {
-			const result = await getWeddingGuests()
-			console.log(result)
-			// sort for only this specific wedding by ID
-			setGuestsTEMP(result)
-		}
-		individualWeddingGuests()
-	}, [])
+	// useEffect(() => {
+	// 	const individualWeddingGuests = async () => {
+	// 		const result = await getWeddingGuests()
+	// 		console.log(result)
+	// 		// sort for only this specific wedding by ID
+	// 		setGuestsTEMP(result)
+	// 	}
+	// 	individualWeddingGuests()
+	// }, [])
 	const emailBody = `Dear ${name},
 		it is time to fill out your family photo list! Please follow the link provided to complete the missing photo information. Feel free to reach out if you have any questions.
 		LINK: https://matrimania-client.herokuapp.com/wedding/${weddingId}`
