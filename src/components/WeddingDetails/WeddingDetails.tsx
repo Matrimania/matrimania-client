@@ -100,6 +100,9 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 						photoList={individualWedding.photoList} /> }
 				</div>
 			}
+			<PhotoListForm 
+						changeView={determineCurrentState}
+					/>
 			<section className="detailFormWrap">
 				{displayCurrentView()}
 			</section>
