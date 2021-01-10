@@ -5,20 +5,20 @@ import { StyledCard } from '../App/styledComponents.styles'
 
 
 type Wedding = {
-  weddingId: number;
+  id: number;
   name: string;
   image: string;
   date: string;
 }
 
 const WeddingCard: React.FC<Wedding> = ({
-  weddingId,
+  id,
   name,
   image,
   date}) => {
     return (
       <StyledCard contents="wedding">
-        <Link to={`/wedding/${weddingId}`}>
+        <Link to={`/wedding/${id}`}>
             <h1 className="weddingTitle">{name} Wedding</h1>
             <h2 className="weddingDate">{date}</h2>
             <section className="couplePhotoWrap">

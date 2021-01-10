@@ -17,7 +17,7 @@ const WeddingPhotoList: React.FC<PhotoListData> = ({
 								<p className="photoNumber">Photo: {photo.photoId}</p>
 								<p className="photoGuest">Guests: {photo.guests}</p>
 								<p className="photoDescription">Description: {photo.description}</p>
-						</div>	
+						</div>
 		})
 
 
