@@ -28,7 +28,7 @@ const GuestList: React.FC = () => {
       setErrorMessage('')
     } else {
       setIsError(true)
-      setErrorMessage('Phone number only accepts numerical values')
+      setErrorMessage('Phone Number only accepts numerical values')
     }
   }
 
@@ -57,13 +57,13 @@ const GuestList: React.FC = () => {
       setErrorMessage('')
     } else if(guestName === "" && phoneNumber.length !== 12){
       setIsError(true)
-      setErrorMessage('Need to have a complete name and phone number')
+      setErrorMessage('Name and Phone Number Required')
     } else if(guestName === "" ) {
       setIsError(true)
-      setErrorMessage('Need to have a complete name')
+      setErrorMessage('Name Required')
     } else if(phoneNumber.length !== 12) {
       setIsError(true)
-      setErrorMessage('Need to have a complete phone number')
+      setErrorMessage('Phone Number Required')
     }
     // should be a POST request + adding card to UI
   }
