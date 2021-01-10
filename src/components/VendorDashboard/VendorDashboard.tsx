@@ -1,32 +1,12 @@
-import { Link } from 'react-router-dom'
-import React, { useEffect, useState } from 'react';
+import './VendorDashboard.css';
 import WeddingCard from '../WeddingCard/WeddingCard'
 import { getWeddings } from '../../apiCalls'
 import { StyledButton } from '../App/styledComponents.styles'
 import './VenderDashboard.css';
 
 
-type Wedding = {
-  id: number;
-  name: string;
-  email: string;
-  date: string;
-  image: string;
-}
-
-function VenderDashboard() {
-  const [weddings, setWeddings] = useState<Wedding[]>([])
-
-  useEffect(() => {
-    const allWeddings = async () => {
-      const result = await getWeddings()
-      console.log(result)
-      setWeddings(result)
-    }
-    allWeddings()
-  }, [])
-
-  const weddingCards = weddings.map((singleWedding, index) => {
+function VendorDashboard() {
+  const weddingCards = weddings.map((wedding, index) => {
     return (
       <WeddingCard
         key={singleWedding.id}
@@ -60,4 +40,4 @@ function VenderDashboard() {
         </section>
     )
 }
-export default VenderDashboard;
+export default VendorDashboard;

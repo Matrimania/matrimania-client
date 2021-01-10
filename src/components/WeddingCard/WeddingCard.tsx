@@ -22,7 +22,7 @@ const WeddingCard: React.FC<Wedding> = ({
             <h1 className="weddingTitle">{name} Wedding</h1>
             <h2 className="weddingDate">{date}</h2>
             <section className="couplePhotoWrap">
-              <img className="couplePhoto" src={image}/>
+              <img className="couplePhoto" src={image} alt={`Photo of couple: ${name}`}/>
             </section>
         </Link>
       </StyledCard>
