@@ -34,7 +34,7 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 			it is time to fill out your family photo list! Please follow the link provided to complete the missing photo information. Feel free to reach out if you have any questions.
 			LINK: https://matrimania-client.herokuapp.com/wedding/${weddingId}`
 
-		const determineCurrentState = (e: React.MouseEvent<HTMLAnchorElement>, view: string) => {
+		const determineCurrentState = (view: string) => {
 			if (view === "photoView") {
 				setDetailsView(false)
 				setPhotoListView(true)
@@ -74,15 +74,15 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 				<p className="weddingDetails">Status: {familyPhotoList.length === 0 ? "Pending" : "Received"}</p>
 				{photoList.length === 0 &&
 					<StyledButton>
-					<div id="translate"></div>
-					<a className="link" id="requestListButton" href={`mailto:${email}?subject=Family Photo List&body=${emailBody}`}>Request Photo List</a>
+						<div id="translate"></div>
+						<a className="link" id="requestListButton" href={`mailto:${email}?subject=Family Photo List&body=${emailBody}`}>Request Photo List</a>
 					</StyledButton>
 				}
-				<StyledButton>
+				<StyledButton onClick={() => determineCurrentState("editListView")}>
 				<div id="translate"></div>
 				{photoList.length > 0 ?
-					<a className="link" id="editListButton" onClick={(e) => determineCurrentState(e, "editListView")}>Edit Photo Details</a> :
-					<a className="link" id="addListButton" onClick={(e) => determineCurrentState(e, "editListView")}>Add Photo List</a>
+					<a className="link" id="editListButton">Edit Photo Details</a> :
+					<a className="link" id="addListButton">Add Photo List</a>
 				}
 				</StyledButton>
 				{photoList.length > 0 &&
