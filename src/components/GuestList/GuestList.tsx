@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Guest from '../Guest/Guest';
 import './GuestList.css'
 import empty from '../../assets/emptyGuestList.png'
-import { StyledButton, StyledCard } from '../App/styledComponents.styles'
+import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles'
 
 
 type NewGuest = {
@@ -11,7 +11,13 @@ type NewGuest = {
   phoneNumber: string;
 }
 
-const GuestList: React.FC = () => {
+type WeddingData = {
+	changeView: any;
+}
+
+const GuestList: React.FC<WeddingData> = ({
+	changeView
+}) => {
 
   const [guestName, setGuestName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -85,6 +91,7 @@ const GuestList: React.FC = () => {
           <h1 className="weddingTitle"style={{fontSize: '3vw'}}>Let's start with your guest list</h1>
           <h2 className="weddingDate" style={{fontSize: '1.5vw', padding: '2% 10%', textAlign: 'left'}}>For each person included in your family photos, please include: <br></br><br></br>1. Their first and last name<br></br>2. A mobile phone number that accepts text messages<br></br> <br></br>Don't forget yourselves!</h2>
         </article>
+        <section className="guestFormWrap">
         <input
           type='text'
           placeholder='Guest Name'
@@ -104,10 +111,21 @@ const GuestList: React.FC = () => {
           <a className="clearButton" onClick={event => clearInputs()}>Clear</a>
         </div>
         {isError && errorMessage}
-        <StyledButton>
+        <section className="buttonWrapper">
+        <BackButton onClick={() => changeView('detailsView')}>
+          <div id="arrow">{"<<"}</div>
+          <a className="link">{"< Back"}</a>
+        </BackButton>
+        <StyledButton onClick={event => submitGuest(event)}>
           <div id="translate"></div>
-          <a className="link" id="addListButton" onClick={event => submitGuest(event)}>Add To Guest List</a>
+          <a className="link" id="addListButton">Add To Guest List</a>
         </StyledButton>
+        <BackButton onClick={() => changeView('detailsView')}>
+        <div id="arrow">{">>"}</div>
+        <a className="link">{"DONE >"}</a>
+        </BackButton>
+        </section>
+        </section>
       </form>
       <section className="guestListWrap">
         <StyledCard contents={guests.length === 0 ? "empty" : "list"}>
