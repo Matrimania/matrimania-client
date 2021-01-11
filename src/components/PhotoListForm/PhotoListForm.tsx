@@ -5,12 +5,12 @@ import empty from '../../assets/emptyGuestList.png';
 import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles'
 import '../GuestList/GuestList.css';
 
-type NewPhoto = {
-  id: number;
-  photoNumber: number;
-  guests: any;
-  description: string;
-}
+// type NewPhoto = {
+//   id: number;
+//   photoNumber: number;
+//   guests: any;
+//   description: string;
+// }
 
 type WeddingData = {
   guests: any;
@@ -37,6 +37,11 @@ const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
       return guest
     })
     setGuestsOptions(toggledList)
+  }
+
+  const uncheckAll = () => {
+    // remove from DOM
+      // does this remove from state auto or need to add a line for that?
   }
 
   const submitPhoto = (event: React.FormEvent) => {
@@ -89,21 +94,20 @@ const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
           </section>
         </section>
       </form>  
-        <section className="guestListWrap">
-          <StyledCard contents={photoData.length === 0 ? "empty" : "list"}>
-            { photoData.length === 0 &&
-              <img className="emptyList" src={empty} alt="your photo list is empty"/> }
-            {photoData.length > 0 && photoData.map(item => (
-              <Photo
-                id={item.id}
-                photoNumber={item.photoNumber}
-                guests={item.guests}
-                description={item.description}
-              />
-            ))}
-          </StyledCard>
-          
-        </section>
+      <section className="guestListWrap">
+        <StyledCard contents={photoData.length === 0 ? "empty" : "list"}>
+          { photoData.length === 0 &&
+            <img className="emptyList" src={empty} alt="your photo list is empty"/> }
+          {photoData.length > 0 && photoData.map(item => (
+            <Photo
+              id={item.id}
+              photoNumber={item.photoNumber}
+              guests={item.guests}
+              description={item.description}
+            />
+          ))}
+        </StyledCard>  
+      </section>
     </>
 	)
 }
