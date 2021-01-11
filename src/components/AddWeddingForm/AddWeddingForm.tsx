@@ -22,8 +22,6 @@ const AddWeddingForm: React.FC = () => {
 
   const submitWedding = (event: React.FormEvent) => {
     event.preventDefault();
-    console.log(date);
-
     const newWedding: NewWedding = {
       id: Date.now(),
       name,
