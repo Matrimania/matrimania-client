@@ -59,6 +59,9 @@ const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
           <h1 className="weddingTitle"style={{fontSize: '3vw'}}>Let's start with your photo list</h1>
           <h2 className="weddingDate" style={{fontSize: '1.5vw', padding: '2% 10%', textAlign: 'left'}}>To add a photo: <br></br><br></br>1. Add a description (optional) <br></br>2. Pick guests to include in the photo<br></br>3. Click Submit button <br></br>Tip: Don't forget to include yourselves!</h2>
         </article>
+        <section className="guestFormWrap">
+
+        </section>
         <input
           type='text'
           placeholder='Description'
@@ -76,11 +79,6 @@ const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
           )
           })
         }
-        {/* <button
-          onClick={event => submitPhoto(event)}
-        >
-          Submit
-        </button> */}
         <StyledButton onClick={event => submitPhoto(event)}>
           <div id="translate"></div>
           <a className="link" id="addListButton">Submit Photo</a>
