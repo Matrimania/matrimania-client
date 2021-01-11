@@ -27,7 +27,7 @@ const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
         return {...guest, isChecked: false}
       })
       setGuestsOptions(allGuests)
-  }, [guests])
+  }, [guests, photoData])
 
   const toggleCheckMark = (guestName: string) => {
     let toggledList = guestsOptions.map(guest => {
@@ -39,15 +39,9 @@ const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
     setGuestsOptions(toggledList)
   }
 
-  const uncheckAll = () => {
-    // remove from DOM
-      // does this remove from state auto or need to add a line for that?
-  }
-
   const submitPhoto = (event: React.FormEvent) => {
     event.preventDefault()
     const guestList = guestsOptions.filter((guest: any) => guest.isChecked)
-    console.log(guestList)
     const newPhotoData = {
       id: photoData.length + 1,
       photoNumber: photoData.length + 1,
