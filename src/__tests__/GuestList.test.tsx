@@ -23,6 +23,10 @@ describe("GuestList",() => {
 		expect(guestListInstructions).toBeInTheDocument();
 		expect(screen.getByPlaceholderText('Guest Name')).toBeInTheDocument();
 		expect(screen.getByPlaceholderText('Phone (XXX-XXX-XXXX)')).toBeInTheDocument();
+		expect(screen.getByText('Clear')).toBeInTheDocument();
+		expect(screen.getByText('Add To Guest List')).toBeInTheDocument();
+		expect(screen.getByText('< Back')).toBeInTheDocument();
+		expect(screen.getByText('DONE >')).toBeInTheDocument();
 	});
 })
 
