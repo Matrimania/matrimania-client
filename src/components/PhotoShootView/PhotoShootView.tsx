@@ -2,9 +2,23 @@ import React, { useState } from 'react';
 import './PhotoShootView.css'
 import { StyledButton } from '../App/styledComponents.styles'
 
+type PhotoShootData = {
+	name: string;
+	weddingId: number;
+	photoList: {photoId: number, guests: string[], description: string}[];
+  guests: any;
+  changeView: any;
+}
 
 
-const PhotoShootView: React.FC = () => {
+
+const PhotoShootView: React.FC<PhotoShootData> = ({
+  name,
+  weddingId,
+  photoList,
+  guests,
+  changeView
+}) => {
 
   const [location, setLocation] = useState('')
   const [time, setTime] = useState('')
