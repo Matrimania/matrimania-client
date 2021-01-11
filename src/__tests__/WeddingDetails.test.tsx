@@ -43,11 +43,20 @@ describe('WeddingDetails', () => {
         image={individualWedding.image}
         date={individualWedding.date}
         email={individualWedding.email}
-        familyPhotoList={individualWedding.familyPhotoList}
+        familyPhotoList={[]}
         photoList={[]}
         />
     </MemoryRouter>
     );
+    
+  expect(detailsView).toEqual(false)
+  expect(requestPhotoView).toEqual(true)
+  expect(screen.getByText('Johanessburg Wedding')).toBeInTheDocument();
+  expect(screen.getByText('01/29/2021')).toBeInTheDocument()
+  expect(screen.getByText('Email: ghost@yahoo.com')).toBeInTheDocument()
+  expect(screen.getByText('Status: Pending')).toBeInTheDocument()
+  expect(screen.getByText("Request Photo List")).toBeInTheDocument()
+  expect(screen.getByText("Add Photo List")).toBeInTheDocument()
   });
 
 });
