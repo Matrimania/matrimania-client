@@ -4,7 +4,6 @@ import WeddingCard from '../WeddingCard/WeddingCard'
 import { getWeddings } from '../../apiCalls'
 import { Link } from 'react-router-dom';
 import { StyledButton } from '../App/styledComponents.styles'
-import './VendorDashboard.css';
 import dayjs from 'dayjs';
 
 type Wedding = {
@@ -61,8 +60,13 @@ function VendorDashboard() {
         }
         break;
       case 3:
-        const currentWeddings = weddings.filter((a: any) => a.date == Date.now())
-        if(currentWeddings.length) {
+        const currentWeddings = weddings.filter((a: any) => {
+          const wedDate = dayjs(a.date).format("MM/DD/YYYY")
+          if(wedDate === dayjs().format("MM/DD/YYYY")) {
+            return a
+          }
+        })
+        if(currentWeddings.length > 0) {
           sortedFilter = currentWeddings.sort((a: any, b: any) => a.date - b.date)
           setWeddingFilter(sortedFilter)
         } else {
