@@ -23,12 +23,15 @@ function VendorDashboard() {
   useEffect(() => {
     const allWeddings = async () => {
       const result = await getWeddings()
-      if(result.length) {
+      if(result.length > 0) {
         result.forEach((wed: any) => {
           wed.date = new Date(wed.date)
         })
         let sortedResult = result.sort((a: any, b: any) => a.date - b.date)
         setWeddings(sortedResult)
+      } else {
+        setError(true)
+        setErrorMessage(result)
       }
     }
     allWeddings()

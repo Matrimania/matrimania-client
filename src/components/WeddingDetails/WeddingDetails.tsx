@@ -33,7 +33,7 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 }) => {
 
 	const [detailsView, setDetailsView] = useState(true)
-	const [photoListView, setPhotoListView] = useState(false)
+	const [photoShootView, setPhotoShootView] = useState(false)
 	const [editGuestListView, setGuestListView] = useState(false)
 	const [editPhotoListView, setEditPhotoListView] = useState(false)
 	const [guestsTEMP, setGuestsTEMP] = useState([])
@@ -53,24 +53,24 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 		LINK: https://matrimania-client.herokuapp.com/wedding/${weddingId}`
 
 	const determineCurrentState = (view: string) => {
-		if (view === "photoListView") {
+		if (view === "photoShootView") {
 			setDetailsView(false)
-			setPhotoListView(true)
+			setPhotoShootView(true)
 			setGuestListView(false)
 			setEditPhotoListView(false)
 		} else if (view === "editGuestListView") {
 			setDetailsView(false)
-			setPhotoListView(false)
+			setPhotoShootView(false)
 			setGuestListView(true)
 			setEditPhotoListView(false)
 		} else if (view === "editPhotoListView") {
 			setDetailsView(false)
-			setPhotoListView(false)
+			setPhotoShootView(false)
 			setGuestListView(false)
 			setEditPhotoListView(true)
 		} else {
 			setDetailsView(true)
-			setPhotoListView(false)
+			setPhotoShootView(false)
 			setGuestListView(false)
 			setEditPhotoListView(false)
 		}
@@ -99,12 +99,12 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 						changeView={determineCurrentState}
 					/>
 				)
-		} else if(photoShootView) {
+		} else if (photoShootView) {
 				return (
 					<PhotoShootView />
 				)
 		} else if (editPhotoListView) {
-			return(
+			return (
 				<PhotoListForm
 					guests={familyPhotoList}
 					changeView={determineCurrentState}
