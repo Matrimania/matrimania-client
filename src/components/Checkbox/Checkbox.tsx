@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 type Props = {
   name: string;
@@ -14,8 +14,8 @@ const CheckBox: React.FC<Props> = (props) => {
         type="checkbox" 
         // name={`props ${i+1}`} 
         value={props.name} 
-        checked={props.isChecked}
-        onChange={props.toggleCheckMark}
+        // checked={props.isChecked}
+        onChange={() => props.toggleCheckMark(props.name)}
       />
   </div>
   )

@@ -26,8 +26,13 @@ const PhotoListForm: React.FC<WeddingData> = ({guests}) => {
       setGuestsInPhoto(allGuests)
   }, [guests])
 
-  const toggleCheckMark = () => {
-    console.log('toggle')
+  const toggleCheckMark = (guestName: string) => {
+    let target = guestsInPhoto.find(guest => {
+      console.log(guest)
+      // return guest.name === guestName
+    })
+    // console.log(target)
+    // if clicked - changed checked
     
   }
   // const allGuests = guests.map((guest: any) => {

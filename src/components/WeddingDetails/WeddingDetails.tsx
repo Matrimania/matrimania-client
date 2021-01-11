@@ -30,7 +30,8 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 
 	const [detailsView, setDetailsView] = useState(true)
 	const [photoListView, setPhotoListView] = useState(false)
-	const [editListView, setEditListView] = useState(false)
+	const [editGuestListView, setGuestListView] = useState(false)
+	const [editPhotoListView, setEditPhotoListView] = useState(false)
 	const [guestsTEMP, setGuestsTEMP] = useState([])
 
 	// probably should be GET for individualWedding and not just guests when BE is ready with that?
@@ -51,20 +52,20 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 		if (view === "photoListView") {
 			setDetailsView(false)
 			setPhotoListView(true)
-			setEditListView(false)
-		} else if (view === "editListView") {
+			setGuestListView(false)
+		} else if (view === "editGuestListView") {
 			setDetailsView(false)
 			setPhotoListView(false)
-			setEditListView(true)
+			setGuestListView(true)
 		} else {
 			setDetailsView(true)
 			setPhotoListView(false)
-			setEditListView(false)
+			setGuestListView(false)
 		}
 	}
 
 	const displayCurrentView = () => {
-		if (editListView) {
+		if (editGuestListView) {
 				return (
 					<GuestList
 						changeView={determineCurrentState}
@@ -97,7 +98,7 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 						<a className="link" id="requestListButton" href={`mailto:${email}?subject=Family Photo List&body=${emailBody}`}>Request Photo List</a>
 					</StyledButton>
 				}
-				<StyledButton onClick={() => determineCurrentState("editListView")}>
+				<StyledButton onClick={() => determineCurrentState("editGuestListView")}>
 					<div id="translate"></div>
 					{photoList.length > 0 ?
 						<a className="link" id="editListButton">Edit Photo Details</a> :
