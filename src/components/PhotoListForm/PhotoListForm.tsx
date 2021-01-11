@@ -60,39 +60,38 @@ const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
           <h2 className="weddingDate" style={{fontSize: '1.5vw', padding: '2% 10%', textAlign: 'left'}}>To add a photo: <br></br><br></br>1. Add a description (optional) <br></br>2. Pick guests to include in the photo<br></br>3. Click Submit button <br></br>Tip: Don't forget to include yourselves!</h2>
         </article>
         <section className="guestFormWrap">
-
+          <input
+            type='text'
+            placeholder='Description'
+            name='description'
+            value={description}
+            onChange={event => setDescription(event.target.value)}
+          />
+          {guestsOptions.map((guest: any, i: number) => {
+            return (
+              <Checkbox
+                key={i +1}
+                toggleCheckMark={toggleCheckMark}
+                {...guest}
+              />
+            )
+            })
+          }
+          <StyledButton onClick={event => submitPhoto(event)}>
+            <div id="translate"></div>
+            <a className="link" id="addListButton">Submit Photo</a>
+          </StyledButton>
+          <section className="buttonWrapper">
+            <BackButton onClick={() => changeView('editGuestListView')}>
+            <div id="arrow">{"<<"}</div>
+            <a className="link">{"< Back"}</a>
+            </BackButton>
+          </section>
         </section>
-        <input
-          type='text'
-          placeholder='Description'
-          name='description'
-          value={description}
-          onChange={event => setDescription(event.target.value)}
-        />
-        {guestsOptions.map((guest: any, i: number) => {
-          return (
-            <Checkbox
-              key={i +1}
-              toggleCheckMark={toggleCheckMark}
-              {...guest}
-            />
-          )
-          })
-        }
-        <StyledButton onClick={event => submitPhoto(event)}>
-          <div id="translate"></div>
-          <a className="link" id="addListButton">Submit Photo</a>
-        </StyledButton>
-        <section className="buttonWrapper">
-          <BackButton onClick={() => changeView('editGuestListView')}>
-          <div id="arrow">{"<<"}</div>
-          <a className="link">{"< Back"}</a>
-          </BackButton>
-        </section>
+        
         <section className="photoCards">
           Your Photos
           {photoData.length > 0 && photoData.map(item => (
-            // console.log(item)
             <Photo
               id={item.id}
               photoNumber={item.photoNumber}
