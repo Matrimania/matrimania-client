@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import './Checkbox.css';
 
 type Props = {
   name: string;
@@ -6,13 +7,12 @@ type Props = {
   toggleCheckMark: any;
 }
 
-const CheckBox: React.FC<Props> = (props) => {
+const Checkbox: React.FC<Props> = (props) => {
   return (
-    <div>
+    <div className="checkbox">
       <label>{props.name}</label>
       <input 
         type="checkbox" 
-        // value={props.name} 
         name={props.name}
         checked={props.isChecked}
         onChange={() => props.toggleCheckMark(props.name)}
@@ -22,4 +22,4 @@ const CheckBox: React.FC<Props> = (props) => {
 }
 
 
-export default CheckBox
+export default Checkbox
