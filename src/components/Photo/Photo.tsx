@@ -13,7 +13,7 @@ const Photo: React.FC<Props> = ({
   description,
 }) => {
   return (
-    <article className="photoCard">
+    < article className="photoCard">
       <h1 className="photoInfo">Photo {photoNumber}</h1>
       <h2 className="photoInfo">Guests:</h2>
       <p>

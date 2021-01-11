@@ -56,7 +56,6 @@ const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
       setPhotoData([...photoData, newPhotoData])
       setDescription('')
     } else {
-      console.log('err')
       setIsError(true)
       setErrorMessage('Please select at least one guest for the photo')
     }
@@ -109,6 +108,7 @@ const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
             <img className="emptyList" src={empty} alt="your photo list is empty"/> }
           {photoData.length > 0 && photoData.map(item => (
             <Photo
+              key={item.id}
               id={item.id}
               photoNumber={item.photoNumber}
               guests={item.guests}
