@@ -7,8 +7,6 @@ import WeddingDetails from '../components/WeddingDetails/WeddingDetails';
 describe('WeddingDetails', () => {
   it('renders default WeddingDetails elements', () => {
     const detailsView = true;
-    const photoListView = false;
-    const editListView = false;
 
     render(
       <MemoryRouter>
@@ -31,6 +29,25 @@ describe('WeddingDetails', () => {
     expect(screen.getByText('Status: Received')).toBeInTheDocument()
     expect(screen.getByText("Edit Photo Details")).toBeInTheDocument()
     expect(screen.getByAltText("detailImage")).toBeInTheDocument()
+  });
+
+  it('should render requestPhotoList view if no photos exist for this wedding', () => {
+    const detailsView = false; 
+    const requestPhotoView = true;
+
+    render(
+      <MemoryRouter>
+        <WeddingDetails
+        weddingId={individualWedding.weddingId}
+        name={individualWedding.name}
+        image={individualWedding.image}
+        date={individualWedding.date}
+        email={individualWedding.email}
+        familyPhotoList={individualWedding.familyPhotoList}
+        photoList={[]}
+        />
+    </MemoryRouter>
+    );
   });
 
 });
