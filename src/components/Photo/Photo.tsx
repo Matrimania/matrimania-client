@@ -3,7 +3,7 @@ import React from 'react';
 type Props = {
   id: number;
   photoNumber: number;
-  guests: string[];
+  guests: any;
   description: string;
 }
 const Photo: React.FC<Props> = ({
@@ -15,7 +15,7 @@ const Photo: React.FC<Props> = ({
   return (
     <article className="photoCard">
       <h1 className="photoInfo">Photo {photoNumber}</h1>
-      <h2 className="photoInfo">Guests: {guests}</h2>
+      <h2 className="photoInfo">Guests: {guests.length > 0 && guests.map((guest: any) => guest.name)}</h2>
       <p className="photoInfo">Description: {description}</p>
     </article>
   )

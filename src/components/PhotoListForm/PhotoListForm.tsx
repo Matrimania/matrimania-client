@@ -6,8 +6,8 @@ import Checkbox from '../Checkbox/Checkbox';
 
 type NewPhoto = {
   id: number;
-  photoNumber: string;
-  guests: string[];
+  photoNumber: number;
+  guests: any;
   description: string;
 }
 
@@ -18,38 +18,37 @@ type WeddingData = {
 
 const PhotoListForm: React.FC<WeddingData> = ({guests}) => {
   const [description, setDescription] = useState('');
-  const [guestsInPhoto, setGuestsInPhoto] = useState<any[]>([]);
+  const [guestsOptions, setGuestsOptions] = useState<any[]>([]);
+  const [photoData, setPhotoData] = useState<any[]>([])
 
   useEffect(() => {
     const allGuests = guests.map((guest: any) => {
         return {...guest, isChecked: false}
       })
-      setGuestsInPhoto(allGuests)
+      setGuestsOptions(allGuests)
   }, [guests])
 
   const toggleCheckMark = (guestName: string) => {
-    let toggledList = guestsInPhoto.map(guest => {
+    let toggledList = guestsOptions.map(guest => {
       if (guest.name === guestName) {
         guest.isChecked = !guest.isChecked;
       }
       return guest
     })
-    setGuestsInPhoto(toggledList)
-
-    // if (target) {
-    //   setGuestsInPhoto([...guestsInPhoto, ])
-    // }
-    // guest.isChecked = !guest.isChecked
-    // if clicked - changed checked
-    
+    setGuestsOptions(toggledList)
   }
-  // const allGuests = guests.map((guest: any) => {
-  //   return {...guest, isChecked: false}
-  // })
-  // setGuestsInPhoto(allGuests)
 
-  const submitPhoto = () => {
-
+  const submitPhoto = (event: React.FormEvent) => {
+    event.preventDefault()
+    const guestList = guestsOptions.filter((guest: any) => guest.isChecked)
+    console.log(guestList)
+    const newPhotoData = {
+      id: photoData.length + 1,
+      photoNumber: photoData.length + 1,
+      guests: guestList,
+      description: description
+    }
+    setPhotoData([...photoData, newPhotoData])
   }
 
   return (
@@ -66,7 +65,7 @@ const PhotoListForm: React.FC<WeddingData> = ({guests}) => {
           value={description}
           onChange={event => setDescription(event.target.value)}
         />
-        {guestsInPhoto.map((guest: any, i: number) => {
+        {guestsOptions.map((guest: any, i: number) => {
           return (
             <Checkbox
               key={i +1}
@@ -76,8 +75,24 @@ const PhotoListForm: React.FC<WeddingData> = ({guests}) => {
           )
           })
         }
+        <button
+          onClick={event => submitPhoto(event)}
+        >
+          Submit
+        </button>
+        <section className="photoCards">
+          Your Photos
+          {photoData.length > 0 && photoData.map(item => (
+            // console.log(item)
+            <Photo
+              id={item.id}
+              photoNumber={item.photoNumber}
+              guests={item.guests}
+              description={item.description}
+            />
+          ))}
+        </section>
         
-
       </form>
     </ article>
 	)

@@ -116,6 +116,10 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 						<a className="link" id="addListButton">Add Photo List</a>
 					}
 				</StyledButton>
+				<PhotoListForm 
+					guests={familyPhotoList}
+					changeView={determineCurrentState}
+				/>
 				{photoList.length > 0 &&
 					<WeddingPhotoList
 						name={individualWedding.name}
@@ -123,10 +127,6 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 						photoList={individualWedding.photoList} /> }
 				</div>
 			}
-			<PhotoListForm 
-					guests={familyPhotoList}
-					changeView={determineCurrentState}
-				/>
 			<section className="detailFormWrap">
 				{displayCurrentView()}
 			</section>
