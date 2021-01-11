@@ -1,9 +1,9 @@
-import Guest from '../Guest/Guest';
-import '../GuestList/GuestList.css';
 import React, { useState, useEffect } from 'react';
 import Photo from '../Photo/Photo';
 import Checkbox from '../Checkbox/Checkbox';
+import empty from '../../assets/emptyGuestList.png';
 import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles'
+import '../GuestList/GuestList.css';
 
 type NewPhoto = {
   id: number;
@@ -88,20 +88,22 @@ const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
             </BackButton>
           </section>
         </section>
-        
-        <section className="photoCards">
-          Your Photos
-          {photoData.length > 0 && photoData.map(item => (
-            <Photo
-              id={item.id}
-              photoNumber={item.photoNumber}
-              guests={item.guests}
-              description={item.description}
-            />
-          ))}
+      </form>  
+        <section className="guestListWrap">
+          <StyledCard contents={photoData.length === 0 ? "empty" : "list"}>
+            { photoData.length === 0 &&
+              <img className="emptyList" src={empty} alt="your guest list is empty"/> }
+            {photoData.length > 0 && photoData.map(item => (
+              <Photo
+                id={item.id}
+                photoNumber={item.photoNumber}
+                guests={item.guests}
+                description={item.description}
+              />
+            ))}
+          </StyledCard>
+          
         </section>
-        
-      </form>
     </ article>
 	)
 }
