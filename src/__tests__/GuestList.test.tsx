@@ -39,13 +39,14 @@ describe("GuestList",() => {
 			</MemoryRouter>
 		);
 		
-		const form = screen.getByTestId('formWrapper');
 		const guest = 'Melvin Lamprust'
 		const number = '123-456-7890'
 		const guestNameInput = screen.getByPlaceholderText('Guest Name');
 		const guestPhoneInput = screen.getByPlaceholderText('Phone (XXX-XXX-XXXX)')
 		userEvent.type(guestNameInput, guest)
 		// userEvent.type(guestPhoneInput, number)
+		expect(guestNameInput).toBeInTheDocument();
+		expect(guestPhoneInput).toBeInTheDocument();
 		expect(guestNameInput).toHaveValue('Melvin Lamprust')
 		// userEvent.type(guestPhoneInput, '34')
 		// // expect(mockCheckNumber).toHaveBeenCalled()
