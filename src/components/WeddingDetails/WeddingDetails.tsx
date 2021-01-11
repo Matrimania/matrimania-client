@@ -104,7 +104,7 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 =======
 						return (
 						<section className="detailImageWrap">
-								<img className="detailImage" src={image} />
+								<img className="detailImage" alt="detailImage" src={image} />
 						</section>
 				)
 >>>>>>> 7cdb0f40... Pass image test on WeddingDetails.test
