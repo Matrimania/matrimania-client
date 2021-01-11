@@ -16,5 +16,6 @@ describe('Checkbox', () => {
 
 		const checkbox = screen.getByRole('checkbox')
 		expect(checkbox).toBeInTheDocument();
+		expect(screen.getByText('Mayer Hawthorne')).toBeInTheDocument();
 	});
 });
