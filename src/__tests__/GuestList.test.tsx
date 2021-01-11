@@ -3,3 +3,20 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { individualWedding } from '../weddingData'
 import GuestList from '../components/GuestList/GuestList';
+
+describe("GuestList",() => {
+	it('should render a guestlist page', () => {
+		render(
+			<MemoryRouter>
+				<GuestList 
+					changeView
+					/>
+			</MemoryRouter>
+		)
+
+		const guestListTitle = screen.getByText(`Let's start with your guest list`);
+		const guestListInstructions = screen.getByRole('heading', {  name: `For each person included in your family photos, please include: 1. Their first and last name 2. A mobile phone number that accepts text messages Don't forget yourselves!`})
+		expect(guestListTitle).toBeInTheDocument();
+		expect(guestListInstructions).toBeInTheDocument();
+	})
+})
