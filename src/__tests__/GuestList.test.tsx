@@ -52,7 +52,27 @@ describe("GuestList",() => {
 		expect(guestPhoneInput).toHaveValue('')
 		// expect(mockCheckNumber).toHaveBeenCalled()
 		// expect(guestPhoneInput).toHaveFormValues('34')
-	})
+	});
+
+	it('should render an error message if a user does not fill out the form completely', () => {
+		render(
+			<MemoryRouter>
+				<GuestList 
+					changeView
+					/>
+			</MemoryRouter>
+		);
+		const guestNameInput = screen.getByPlaceholderText('Guest Name');
+		const guestPhoneInput = screen.getByPlaceholderText('Phone (XXX-XXX-XXXX)')
+
+		expect(guestNameInput).toBeInTheDocument();
+		expect(guestPhoneInput).toBeInTheDocument();
+		userEvent.type(guestNameInput, '')
+		userEvent.type(guestPhoneInput, '')
+		expect(guestNameInput).toHaveValue('')
+		expect(guestPhoneInput).toHaveValue('')
+
+	});
 
 })
 
