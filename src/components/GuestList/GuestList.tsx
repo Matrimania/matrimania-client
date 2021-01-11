@@ -122,7 +122,7 @@ const GuestList: React.FC<WeddingData> = ({
           </BackButton>
           <BackButton onClick={() => changeView('editPhotoListView')}>
           <div id="arrow">{">>"}</div>
-          <a className="link">{"DONE >"}</a>
+          <a className="link">{"Add Photos >"}</a>
           </BackButton>
         </section>
         </section>
