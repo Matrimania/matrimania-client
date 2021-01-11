@@ -53,7 +53,7 @@ const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
   }
 
   return (
-    <article>
+    <>
       <form className="formWrapper">
         <article className="instructionWrap">
           <h1 className="weddingTitle"style={{fontSize: '3vw'}}>Let's start with your photo list</h1>
@@ -104,7 +104,7 @@ const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
           </StyledCard>
           
         </section>
-    </ article>
+    </>
 	)
 }
 
