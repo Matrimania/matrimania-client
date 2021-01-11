@@ -99,6 +99,10 @@ const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
             <div id="arrow">{"<<"}</div>
             <a className="link">{"< Back"}</a>
             </BackButton>
+            <BackButton onClick={() => changeView('detailsView')}>
+            <div id="arrow">{">>"}</div>
+            <a className="link">{"Done >"}</a>
+            </BackButton>
           </section>
         </section>
       </form>  
