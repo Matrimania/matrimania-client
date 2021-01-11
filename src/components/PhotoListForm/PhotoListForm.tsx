@@ -49,6 +49,7 @@ const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
       description: description
     }
     setPhotoData([...photoData, newPhotoData])
+    setDescription('')
   }
 
   return (
