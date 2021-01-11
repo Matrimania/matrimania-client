@@ -101,7 +101,13 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 				)
 		} else if (photoShootView) {
 				return (
-					<PhotoShootView />
+					<PhotoShootView
+						name={individualWedding.name}
+						weddingId={individualWedding.weddingId}
+						photoList={individualWedding.photoList}
+						guests={familyPhotoList}
+						changeView={determineCurrentState}
+					/>
 				)
 		} else if (editPhotoListView) {
 			return (
@@ -148,7 +154,7 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 					changeView={determineCurrentState}
 				/>
 				{weddingDate === dayjs().format("MM/DD/YYYY") &&
-					<StyledButton onClick={() => determineCurrentState("photoView")}>
+					<StyledButton onClick={() => determineCurrentState("photoShootView")}>
 						<div id="translate"></div>
 						<a className="link">Start Photo Session</a>
 					</StyledButton>
