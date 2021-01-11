@@ -26,26 +26,9 @@ const PhotoListForm: React.FC<WeddingData> = ({guests}) => {
       setGuestsInPhoto(allGuests)
   }, [guests])
 
-  const guestInputs = () => {
-    if (guestsInPhoto.length >= 1) {
-      return guestsInPhoto.map((guest: any, i: number) => (
-        <div key={guest.name}>
-          <label>{guest.name}</label>
-          <input 
-            type="checkbox" 
-            name={`guest ${i+1}`} 
-            value={guest.name} 
-            // checked={guest.isChecked}
-            // onChange={toggleCheckmark}
-          />
-        </div>
-        )
-      )
-    }   
-  }
-
-  const toggleCheckmark = () => {
-
+  const toggleCheckMark = () => {
+    console.log('toggle')
+    
   }
   // const allGuests = guests.map((guest: any) => {
   //   return {...guest, isChecked: false}
@@ -70,7 +53,16 @@ const PhotoListForm: React.FC<WeddingData> = ({guests}) => {
           value={description}
           onChange={event => setDescription(event.target.value)}
         />
-        {guestInputs()}
+        {guestsInPhoto.map((guest: any, i: number) => {
+          return (
+            <Checkbox
+              key={i +1}
+              toggleCheckMark={toggleCheckMark}
+              {...guest}
+            />
+          )
+          })
+        }
         
 
       </form>
