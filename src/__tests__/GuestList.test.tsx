@@ -102,8 +102,6 @@ describe("GuestList",() => {
 		expect(screen.getByText(errorMessage)).toBeInTheDocument()
 	});
 
+	// need to figure out how to type phone number
+	// then can test if only phone number input is complete-name error message
 })
-
-// test display is correct
-// test format phone number function 
-// userEvent.type 
