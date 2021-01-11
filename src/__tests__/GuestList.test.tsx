@@ -78,6 +78,30 @@ describe("GuestList",() => {
 		expect(screen.getByText(errorMessage)).toBeInTheDocument()
 	});
 
+	it('should render a phone number error message if a user does not fill out the phone number input on the form', () => {
+		render(
+			<MemoryRouter>
+				<GuestList 
+					changeView
+					/>
+			</MemoryRouter>
+		);
+		const guestNameInput = screen.getByPlaceholderText('Guest Name');
+		const guestPhoneInput = screen.getByPlaceholderText('Phone (XXX-XXX-XXXX)')
+		const submitButton = screen.getByText('Add To Guest List')
+		const errorMessage = 'Phone Number Required'
+
+		expect(submitButton).toBeInTheDocument();
+		expect(guestNameInput).toBeInTheDocument();
+		expect(guestPhoneInput).toBeInTheDocument();
+		userEvent.type(guestNameInput, 'Jackles Monsoon')
+		userEvent.type(guestPhoneInput, '')
+		expect(guestNameInput).toHaveValue('Jackles Monsoon')
+		expect(guestPhoneInput).toHaveValue('')
+		userEvent.click(submitButton)
+		expect(screen.getByText(errorMessage)).toBeInTheDocument()
+	});
+
 })
 
 // test display is correct
