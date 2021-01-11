@@ -31,3 +31,17 @@ export const postAWedding = (wedding: any) => {
     alert('Could not add wedding')
   })
 }
+
+export const getWeddingGuests = () => {
+  return fetch('http://localhost:8000/api/v1/weddings/guests')
+  .then(response => {
+    if(response.ok) {
+      return response.json()
+    } else {
+      throw Error
+    }
+  })
+  .catch(error => {
+    return "No guests found"
+  })
+}

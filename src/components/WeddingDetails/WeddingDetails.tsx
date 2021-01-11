@@ -1,11 +1,12 @@
 import './WeddingDetails.css';
-import React, { useState } from 'react';
-import { individualWedding } from '../../weddingData'
+import React, { useState, useEffect } from 'react';
+import { individualWedding } from '../../weddingData';
+import { getWeddingGuests } from '../../apiCalls';
 import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList';
 import { Link } from 'react-router-dom'
 import { StyledButton } from '../App/styledComponents.styles'
 import GuestList from '../GuestList/GuestList'
-import Guest from '../Guest/Guest';
+import PhotoListForm from '../PhotoListForm/PhotoListForm';
 
 type IndividualWedding = {
 	weddingId: number;
@@ -27,44 +28,72 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 	photoList
 }) => {
 
-		const [detailsView, setDetailsView] = useState(true)
-		const [photoListView, setPhotoListView] = useState(false)
-		const [editListView, setEditListView] = useState(false)
-		const emailBody = `Dear ${name},
-			it is time to fill out your family photo list! Please follow the link provided to complete the missing photo information. Feel free to reach out if you have any questions.
-			LINK: https://matrimania-client.herokuapp.com/wedding/${weddingId}`
+	const [detailsView, setDetailsView] = useState(true)
+	const [photoListView, setPhotoListView] = useState(false)
+	const [editGuestListView, setGuestListView] = useState(false)
+	const [editPhotoListView, setEditPhotoListView] = useState(false)
+	const [guestsTEMP, setGuestsTEMP] = useState([])
 
-		const determineCurrentState = (view: string) => {
-			if (view === "photoView") {
-				setDetailsView(false)
-				setPhotoListView(true)
-				setEditListView(false)
-			} else if (view === "editListView") {
-				setDetailsView(false)
-				setPhotoListView(false)
-				setEditListView(true)
-			} else {
-				setDetailsView(true)
-				setPhotoListView(false)
-				setEditListView(false)
-			}
+	// probably should be GET for individualWedding and not just guests when BE is ready with that?
+	// useEffect(() => {
+	// 	const individualWeddingGuests = async () => {
+	// 		const result = await getWeddingGuests()
+	// 		console.log(result)
+	// 		// sort for only this specific wedding by ID
+	// 		setGuestsTEMP(result)
+	// 	}
+	// 	individualWeddingGuests()
+	// }, [])
+	const emailBody = `Dear ${name},
+		it is time to fill out your family photo list! Please follow the link provided to complete the missing photo information. Feel free to reach out if you have any questions.
+		LINK: https://matrimania-client.herokuapp.com/wedding/${weddingId}`
+
+	const determineCurrentState = (view: string) => {
+		if (view === "photoListView") {
+			setDetailsView(false)
+			setPhotoListView(true)
+			setGuestListView(false)
+			setEditPhotoListView(false)
+		} else if (view === "editGuestListView") {
+			setDetailsView(false)
+			setPhotoListView(false)
+			setGuestListView(true)
+			setEditPhotoListView(false)
+		} else if (view === "editPhotoListView") {
+			setDetailsView(false)
+			setPhotoListView(false)
+			setGuestListView(false)
+			setEditPhotoListView(true)
+		} else {
+			setDetailsView(true)
+			setPhotoListView(false)
+			setGuestListView(false)
+			setEditPhotoListView(false)
 		}
+	}
 
-		const displayCurrentView = () => {
-			if (editListView) {
-					return (
-						<GuestList
-							changeView={determineCurrentState}
-						/>
-					)
-			} else {
-					return (
-					<section className="detailImageWrap">
-						<img className="detailImage" src={image} />
-					</section>
+	const displayCurrentView = () => {
+		if (editGuestListView) {
+				return (
+					<GuestList
+						changeView={determineCurrentState}
+					/>
 				)
-			}
+		} else if (editPhotoListView) {
+			return(
+				<PhotoListForm 
+					guests={familyPhotoList}
+					changeView={determineCurrentState}
+				/>
+			)
+		} else {
+				return (
+				<section className="detailImageWrap">
+					<img className="detailImage" src={image} />
+				</section>
+			)
 		}
+	}
 
 	return (
 		<section className="detailsWrapper">
@@ -80,13 +109,17 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 						<a className="link" id="requestListButton" href={`mailto:${email}?subject=Family Photo List&body=${emailBody}`}>Request Photo List</a>
 					</StyledButton>
 				}
-				<StyledButton onClick={() => determineCurrentState("editListView")}>
+				<StyledButton onClick={() => determineCurrentState("editGuestListView")}>
 					<div id="translate"></div>
 					{photoList.length > 0 ?
 						<a className="link" id="editListButton">Edit Photo Details</a> :
 						<a className="link" id="addListButton">Add Photo List</a>
 					}
 				</StyledButton>
+				<PhotoListForm 
+					guests={familyPhotoList}
+					changeView={determineCurrentState}
+				/>
 				{photoList.length > 0 &&
 					<WeddingPhotoList
 						name={individualWedding.name}

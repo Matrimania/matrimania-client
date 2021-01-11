@@ -15,12 +15,14 @@ const WeddingPhotoList: React.FC<PhotoListData> = ({
 }) => {
 
 	const displayPhotoList = photoList.map(photo => {
-		  return <div className="photoListDetails">
-								<p className="photoNumber">Photo: {photo.photoId}</p>
-								<p className="photoGuest">Guests: {photo.guests}</p>
-								<p className="photoDescription">Description: {photo.description}</p>
-						</div>
-		})
+		return (
+			<div className="photoListDetails">
+				<p className="photoNumber">Photo: {photo.photoId}</p>
+				<p className="photoGuest">Guests: {photo.guests}</p>
+				<p className="photoDescription">Description: {photo.description}</p>
+		</div>
+		)
+	})
 
 
 	return (
