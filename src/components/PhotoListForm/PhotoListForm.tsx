@@ -2,7 +2,7 @@ import Guest from '../Guest/Guest';
 import React, { useState, useEffect } from 'react';
 import Photo from '../Photo/Photo';
 import Checkbox from '../Checkbox/Checkbox';
-
+import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles'
 
 type NewPhoto = {
   id: number;
@@ -16,7 +16,7 @@ type WeddingData = {
   changeView: any;
 }
 
-const PhotoListForm: React.FC<WeddingData> = ({guests}) => {
+const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
   const [description, setDescription] = useState('');
   const [guestsOptions, setGuestsOptions] = useState<any[]>([]);
   const [photoData, setPhotoData] = useState<any[]>([])
@@ -80,6 +80,12 @@ const PhotoListForm: React.FC<WeddingData> = ({guests}) => {
         >
           Submit
         </button>
+        <section className="buttonWrapper">
+          <BackButton onClick={() => changeView('editGuestListView')}>
+          <div id="arrow">{"<<"}</div>
+          <a className="link">{"< Back"}</a>
+          </BackButton>
+        </section>
         <section className="photoCards">
           Your Photos
           {photoData.length > 0 && photoData.map(item => (

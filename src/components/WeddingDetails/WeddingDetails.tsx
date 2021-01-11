@@ -116,10 +116,10 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 						<a className="link" id="addListButton">Add Photo List</a>
 					}
 				</StyledButton>
-				<PhotoListForm 
+				{/* <PhotoListForm 
 					guests={familyPhotoList}
 					changeView={determineCurrentState}
-				/>
+				/> */}
 				{photoList.length > 0 &&
 					<WeddingPhotoList
 						name={individualWedding.name}
