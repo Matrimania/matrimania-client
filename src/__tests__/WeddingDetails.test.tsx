@@ -57,6 +57,7 @@ describe('WeddingDetails', () => {
   expect(screen.getByText('Status: Pending')).toBeInTheDocument()
   expect(screen.getByText("Request Photo List")).toBeInTheDocument()
   expect(screen.getByText("Add Photo List")).toBeInTheDocument()
+  expect(screen.getByAltText("detailImage")).toBeInTheDocument()
   });
 
 });
