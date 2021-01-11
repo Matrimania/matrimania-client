@@ -1,4 +1,5 @@
 import Guest from '../Guest/Guest';
+import '../GuestList/GuestList.css';
 import React, { useState, useEffect } from 'react';
 import Photo from '../Photo/Photo';
 import Checkbox from '../Checkbox/Checkbox';
@@ -75,11 +76,15 @@ const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
           )
           })
         }
-        <button
+        {/* <button
           onClick={event => submitPhoto(event)}
         >
           Submit
-        </button>
+        </button> */}
+        <StyledButton onClick={event => submitPhoto(event)}>
+          <div id="translate"></div>
+          <a className="link" id="addListButton">Submit Photo</a>
+        </StyledButton>
         <section className="buttonWrapper">
           <BackButton onClick={() => changeView('editGuestListView')}>
           <div id="arrow">{"<<"}</div>
