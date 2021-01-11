@@ -64,14 +64,18 @@ describe("GuestList",() => {
 		);
 		const guestNameInput = screen.getByPlaceholderText('Guest Name');
 		const guestPhoneInput = screen.getByPlaceholderText('Phone (XXX-XXX-XXXX)')
+		const submitButton = screen.getByText('Add To Guest List')
+		const errorMessage = 'Name and Phone Number Required'
 
+		expect(submitButton).toBeInTheDocument();
 		expect(guestNameInput).toBeInTheDocument();
 		expect(guestPhoneInput).toBeInTheDocument();
 		userEvent.type(guestNameInput, '')
 		userEvent.type(guestPhoneInput, '')
 		expect(guestNameInput).toHaveValue('')
 		expect(guestPhoneInput).toHaveValue('')
-
+		userEvent.click(submitButton)
+		expect(screen.getByText(errorMessage)).toBeInTheDocument()
 	});
 
 })
