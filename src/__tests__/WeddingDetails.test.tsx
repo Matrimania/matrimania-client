@@ -7,8 +7,8 @@ import WeddingDetails from '../components/WeddingDetails/WeddingDetails';
 describe('WeddingDetails', () => {
   it('renders default WeddingDetails elements', () => {
     render(
-    <MemoryRouter>
-      <WeddingDetails
+      <MemoryRouter>
+        <WeddingDetails
         weddingId={individualWedding.weddingId}
         name={individualWedding.name}
         image={individualWedding.image}
@@ -19,6 +19,7 @@ describe('WeddingDetails', () => {
         />
     </MemoryRouter>
     );
+    expect(screen.getByText('Johanessburg Wedding')).toBeInTheDocument();
     
   });
 
