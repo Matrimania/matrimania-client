@@ -20,7 +20,9 @@ type WeddingData = {
 const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
   const [description, setDescription] = useState('');
   const [guestsOptions, setGuestsOptions] = useState<any[]>([]);
-  const [photoData, setPhotoData] = useState<any[]>([])
+  const [photoData, setPhotoData] = useState<any[]>([]);
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     const allGuests = guests.map((guest: any) => {
