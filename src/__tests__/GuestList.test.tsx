@@ -19,6 +19,7 @@ describe("GuestList",() => {
 
 		const guestListTitle = screen.getByText(`Let's start with your guest list`);
 		const guestListInstructions = screen.getByRole('heading', {  name: `For each person included in your family photos, please include: 1. Their first and last name 2. A mobile phone number that accepts text messages Don't forget yourselves!`})
+
 		expect(guestListTitle).toBeInTheDocument();
 		expect(guestListInstructions).toBeInTheDocument();
 		expect(screen.getByPlaceholderText('Guest Name')).toBeInTheDocument();
@@ -43,13 +44,13 @@ describe("GuestList",() => {
 		const number = '123-456-7890'
 		const guestNameInput = screen.getByPlaceholderText('Guest Name');
 		const guestPhoneInput = screen.getByPlaceholderText('Phone (XXX-XXX-XXXX)')
-		userEvent.type(guestNameInput, guest)
-		// userEvent.type(guestPhoneInput, number)
+
 		expect(guestNameInput).toBeInTheDocument();
 		expect(guestPhoneInput).toBeInTheDocument();
+		userEvent.type(guestNameInput, guest)
 		expect(guestNameInput).toHaveValue('Melvin Lamprust')
-		// userEvent.type(guestPhoneInput, '34')
-		// // expect(mockCheckNumber).toHaveBeenCalled()
+		expect(guestPhoneInput).toHaveValue('')
+		// expect(mockCheckNumber).toHaveBeenCalled()
 		// expect(guestPhoneInput).toHaveFormValues('34')
 	})
 
