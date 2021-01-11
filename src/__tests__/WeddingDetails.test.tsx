@@ -27,6 +27,7 @@ describe('WeddingDetails', () => {
     expect(detailsView).toEqual(true)
     expect(screen.getByText('Johanessburg Wedding')).toBeInTheDocument();
     expect(screen.getByText('01/29/2021')).toBeInTheDocument()
+    expect(screen.getByText('Email: ghost@yahoo.com')).toBeInTheDocument()
   });
 
 });
