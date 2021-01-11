@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { individualWedding } from '../weddingData'
