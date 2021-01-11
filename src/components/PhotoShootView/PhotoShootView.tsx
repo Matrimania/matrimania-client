@@ -26,11 +26,7 @@ const PhotoShootView: React.FC = () => {
       <article className="instructionWrap">
         <h1 className="weddingTitle" style={{fontSize: '3vw'}}>Ready, Set, Click.</h1>
         <h2 className="weddingDate" style={{fontSize: '1.5vw', padding: '2% 10%'}}>Clicking the <span style={{color: '#6f896d', fontWeight: 'bold'}}>{` 'Notify Guests'`}</span> button below will:</h2>
-<<<<<<< HEAD
         <h2 className="weddingDate" style={{width: '60%', alignSelf: 'center', textAlign: 'left'}}>1. Text message all photo participants.<br></br><br></br>2. Display the details for each photo.</h2>
-=======
-        <h2 className="weddingDate" style={{width: '60%', alignSelf: 'center', textAlign: 'left'}}>1. Notify all photo participants of their photo numbers and shoot location.<br></br><br></br>2. Display each photo's details individually as you shoot.</h2>
->>>>>>> a4d23bc3... Add basic form functionality
       </article>
       <form className="weddingFormWrapper">
         <label htmlFor="when">When should guests meet? (ex: "after the ceremony")</label>
