@@ -79,9 +79,12 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 						changeView={determineCurrentState}
 					/>
 				)
-		} else if (photoListView) {
+		} else if (editPhotoListView) {
 			return(
-				<>Hello</>
+				<PhotoListForm 
+					guests={familyPhotoList}
+					changeView={determineCurrentState}
+				/>
 			)
 		} else {
 				return (
@@ -120,9 +123,6 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 						photoList={individualWedding.photoList} /> }
 				</div>
 			}
-			<PhotoListForm 
-				guests={familyPhotoList}
-			/>
 			<section className="detailFormWrap">
 				{displayCurrentView()}
 			</section>

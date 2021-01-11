@@ -12,7 +12,8 @@ type NewPhoto = {
 }
 
 type WeddingData = {
-	guests: any;
+  guests: any;
+  changeView: any;
 }
 
 const PhotoListForm: React.FC<WeddingData> = ({guests}) => {
