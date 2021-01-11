@@ -69,16 +69,17 @@ const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
       <form className="formWrapper">
         <article className="instructionWrap">
           <h1 className="weddingTitle"style={{fontSize: '3vw'}}>Let's start with your photo list</h1>
-          <h2 className="weddingDate" style={{fontSize: '1.5vw', padding: '2% 10%', textAlign: 'left'}}>To add a photo: <br></br><br></br>1. Add a description (optional) <br></br>2. Pick guests to include in the photo<br></br>3. Click Submit button <br></br>Tip: Don't forget to include yourselves!</h2>
+          <h2 className="weddingDate" style={{fontSize: '1.5vw', padding: '2% 10%', textAlign: 'left'}}>To add a photo: <br></br><br></br>1. Add a description <br></br>2. Pick guests to include in the photo<br></br>3. Click Submit button <br></br>Tip: Don't forget to include yourselves!</h2>
         </article>
         <section className="guestFormWrap">
           <input
             type='text'
-            placeholder='Description'
+            placeholder='Description (optional)'
             name='description'
             value={description}
             onChange={event => setDescription(event.target.value)}
           />
+          <h2>Guests:</h2>
           {guestsOptions.map((guest: any, i: number) => {
             return (
               <Checkbox
