@@ -44,14 +44,24 @@ const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
   const submitPhoto = (event: React.FormEvent) => {
     event.preventDefault()
     const guestList = guestsOptions.filter((guest: any) => guest.isChecked)
-    const newPhotoData = {
-      id: photoData.length + 1,
-      photoNumber: photoData.length + 1,
-      guests: guestList,
-      description: description
+    if (guestList.length >= 1) {
+      setIsError(false)
+      setErrorMessage('')
+      const newPhotoData = {
+        id: photoData.length + 1,
+        photoNumber: photoData.length + 1,
+        guests: guestList,
+        description: description
+      }
+      setPhotoData([...photoData, newPhotoData])
+      setDescription('')
+    } else {
+      console.log('err')
+      setIsError(true)
+      setErrorMessage('Please select at least one guest for the photo')
     }
-    setPhotoData([...photoData, newPhotoData])
-    setDescription('')
+
+    // conditional rendering - make sure guestlist,length is at least 1?
   }
 
   return (
@@ -79,6 +89,7 @@ const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
             )
             })
           }
+          {isError && errorMessage}
           <StyledButton onClick={event => submitPhoto(event)}>
             <div id="translate"></div>
             <a className="link" id="addListButton">Submit Photo</a>
