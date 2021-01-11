@@ -28,6 +28,8 @@ describe('WeddingDetails', () => {
     expect(screen.getByText('Johanessburg Wedding')).toBeInTheDocument();
     expect(screen.getByText('01/29/2021')).toBeInTheDocument()
     expect(screen.getByText('Email: ghost@yahoo.com')).toBeInTheDocument()
+    expect(screen.getByText('Status: Received')).toBeInTheDocument()
+    expect(screen.getByText("Edit Photo Details")).toBeInTheDocument()
   });
 
 });
