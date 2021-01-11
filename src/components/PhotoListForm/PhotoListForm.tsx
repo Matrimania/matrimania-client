@@ -18,7 +18,7 @@ type WeddingData = {
 
 const PhotoListForm: React.FC<WeddingData> = ({guests}) => {
   const [description, setDescription] = useState('');
-  const [guestsInPhoto, setGuestsInPhoto] = useState([]);
+  const [guestsInPhoto, setGuestsInPhoto] = useState<any[]>([]);
 
   useEffect(() => {
     const allGuests = guests.map((guest: any) => {
@@ -28,11 +28,18 @@ const PhotoListForm: React.FC<WeddingData> = ({guests}) => {
   }, [guests])
 
   const toggleCheckMark = (guestName: string) => {
-    let target = guestsInPhoto.find(guest => {
-      console.log(guest)
-      // return guest.name === guestName
+    let toggledList = guestsInPhoto.map(guest => {
+      if (guest.name === guestName) {
+        guest.isChecked = !guest.isChecked;
+      }
+      return guest
     })
-    // console.log(target)
+    setGuestsInPhoto(toggledList)
+
+    // if (target) {
+    //   setGuestsInPhoto([...guestsInPhoto, ])
+    // }
+    // guest.isChecked = !guest.isChecked
     // if clicked - changed checked
     
   }
