@@ -92,7 +92,7 @@ const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
         <section className="guestListWrap">
           <StyledCard contents={photoData.length === 0 ? "empty" : "list"}>
             { photoData.length === 0 &&
-              <img className="emptyList" src={empty} alt="your guest list is empty"/> }
+              <img className="emptyList" src={empty} alt="your photo list is empty"/> }
             {photoData.length > 0 && photoData.map(item => (
               <Photo
                 id={item.id}
