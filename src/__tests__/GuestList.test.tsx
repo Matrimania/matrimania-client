@@ -27,6 +27,7 @@ describe("GuestList",() => {
 		expect(screen.getByText('Add To Guest List')).toBeInTheDocument();
 		expect(screen.getByText('< Back')).toBeInTheDocument();
 		expect(screen.getByText('DONE >')).toBeInTheDocument();
+		expect(screen.getByAltText('your guest list is empty')).toBeInTheDocument();
 	});
 })
 
