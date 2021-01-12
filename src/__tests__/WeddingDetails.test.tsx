@@ -30,6 +30,7 @@ describe('WeddingDetails', () => {
     expect(screen.getByText('Email: ghost@yahoo.com')).toBeInTheDocument()
     expect(screen.getByText('Status: Received')).toBeInTheDocument()
     expect(screen.getByText("Edit Photo Details")).toBeInTheDocument()
+    expect(screen.getByAltText("detailImage")).toBeInTheDocument()
   });
 
 });

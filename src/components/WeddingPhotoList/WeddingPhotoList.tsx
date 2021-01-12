@@ -26,11 +26,7 @@ const WeddingPhotoList: React.FC<PhotoListData> = ({
 	return (
 		<section className="weddingPhotoListWrapper">
 			<StyledCard contents="list" className="photoListWrapper">
-<<<<<<< HEAD
-			<div className="photoListHeader">Your Photo List</div>
-=======
 			<div className="photoListHeader">WeddingPhotoList</div>
->>>>>>> d879c012... Pass weddingList title test in WeddingDetails.test
 				{/* <h1>{name} Wedding</h1> */}
 				<div className="photoListWrapper">
 					{displayPhotoList}
