@@ -1,4 +1,5 @@
 import React from 'react';
+import './Photo.css';
 
 type Props = {
   id: number;
@@ -14,8 +15,7 @@ const Photo: React.FC<Props> = ({
 }) => {
   return (
     < article className="photoCard">
-      <h1 className="photoInfo">Photo {photoNumber}</h1>
-      <h2 className="photoInfo">Guests:</h2>
+      <h4 className="photoHeader">PHOTO {photoNumber}</h4>
       <p>
         {guests.length > 0 && guests.reduce(    (names:string, guest: any) => {
         names += ` ${guest.name} •`
@@ -23,9 +23,8 @@ const Photo: React.FC<Props> = ({
         }, '•')
       }
       </p>
-      
-      
-      <p className="photoInfo">Description: {description}</p>
+
+      <p className="photoDescription">Description: {description}</p>
     </article>
   )
 }

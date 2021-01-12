@@ -80,7 +80,7 @@ const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
             onChange={event => setDescription(event.target.value)}
           />
           <section className="checkboxSection">
-            <h3 className="checkboxHeader">Guests:</h3>
+            <h3 className="sectionHeader">Guests:</h3>
             {guestsOptions.map((guest: any, i: number) => {
               return (
                 <Checkbox
@@ -91,8 +91,8 @@ const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
               )
               })
             }
-            {isError && errorMessage}
           </section>
+            {isError && errorMessage}
           
           <StyledButton onClick={event => submitPhoto(event)}>
             <div id="translate"></div>
@@ -112,7 +112,7 @@ const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
       </form>  
       <section className="guestListWrap">
         <StyledCard contents={photoData.length === 0 ? "empty" : "list"}>
-          { photoData.length === 0 &&
+          {photoData.length === 0 &&
             <img className="emptyList" src={empty} alt="your photo list is empty"/> }
           {photoData.length > 0 && photoData.map(item => (
             <Photo
