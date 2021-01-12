@@ -40,7 +40,7 @@ const App = () => {
       }
     }
     allWeddings()
-  }, [])
+  }, [weddings])
 
   return (
     <div className="appWrap">
