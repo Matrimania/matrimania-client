@@ -5,6 +5,14 @@
   align-items: center;
   justify-content: center;
 }
+.carouselWrap {
+  width: 75%;
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 .instructions {
   color: #221e22;
   opacity: 80%;
@@ -18,4 +26,11 @@
   font-family: 'Roboto', sans-serif;
   text-align: left;
   font-size: .9em;
+}
+.photoShootCard {
+  color: #221e22;
+  opacity: 80%;
+  font-family: 'Roboto', sans-serif;
+  text-align: left;
+  font-size: 2em;
 }
