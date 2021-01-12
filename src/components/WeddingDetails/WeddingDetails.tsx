@@ -134,7 +134,7 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 					}
 				</StyledButton>
 				{weddingDate === dayjs().format("MM/DD/YYYY") &&
-					<StyledButton onClick={() => determineCurrentState("photoView")}>
+					<StyledButton onClick={() => determineCurrentState("photoShootView")}>
 						<div id="translate"></div>
 						<a className="link">Start Photo Session</a>
 					</StyledButton>
