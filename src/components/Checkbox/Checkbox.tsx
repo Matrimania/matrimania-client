@@ -1,5 +1,6 @@
 import React from 'react';
 import './Checkbox.css';
+import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles'
 
 type Props = {
   name: string;
