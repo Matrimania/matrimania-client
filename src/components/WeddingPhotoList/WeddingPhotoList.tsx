@@ -5,7 +5,7 @@ import { StyledCard } from '../App/styledComponents.styles'
 type PhotoListData = {
 	name: string;
 	weddingId: number;
-	photoList: {photoId: number, guests: string[], description: string}[]
+	photoList: {id: number, number: number, description: string, guest: number[] }[]
 }
 
 const WeddingPhotoList: React.FC<PhotoListData> = ({
@@ -13,11 +13,11 @@ const WeddingPhotoList: React.FC<PhotoListData> = ({
 	weddingId,
 	photoList
 }) => {
-
+	console.log(typeof photoList)
 	const displayPhotoList = photoList.map(photo => {
-		return <div className="photoListDetails" key={photo.photoId}>
-					<p className="photoNumber">Photo: {photo.photoId}</p>
-					<p className="photoGuest">Guests: {photo.guests}</p>
+		return <div className="photoListDetails" key={photo.id}>
+					<p className="photoNumber">Photo: {photo.number}</p>
+					<p className="photoGuest">Guests: {photo.guest}</p>
 					<p className="photoDescription">Description: {photo.description}</p>
 			</div>
 	})
