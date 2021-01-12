@@ -1,34 +1,45 @@
 import React, { useState } from 'react';
 import './PhotoShootView.css'
-import { StyledButton } from '../App/styledComponents.styles'
+import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles'
+import Photo from '../Photo/Photo';
+
 
 type PhotoShootData = {
 	name: string;
 	weddingId: number;
-	photoList: {photoId: number, guests: string[], description: string}[];
+	photoList: {
+		id: number;
+		photoNumber: number;
+		guests: any;
+		description: string;}[];
   guests: any;
   changeView: any;
 }
 
-
-
 const PhotoShootView: React.FC<PhotoShootData> = ({
-  name,
-  weddingId,
-  photoList,
-  guests,
-  changeView
+  name, // last name of couple
+  weddingId, // weddingId
+  photoList, // list of photos for specific wedding
+  guests, // list of guests for specific wedding
+  changeView // function that changes view in WeddingDetails
 }) => {
 
   const [location, setLocation] = useState('')
   const [time, setTime] = useState('')
   const [textBody, setTextBody] = useState('')
 	const [view, setView] = useState('notify')
+	const [carousel, setCarousel] = useState(0)
 
   const sendNotifications = (event: React.FormEvent) => {
     event.preventDefault();
-    // should be a POST request + call to Twilio
-		// should change the view to show cards
+		guests.forEach((guest: any) => {
+			const photos = guest.photos.toString().split(",").join(", ")
+			const message = `Hello ${guest.name}, Thank you for attending the ${name} wedding.
+			The lovely couple would like you to meet them for photos ${time} ${location}
+			You will be participating in photo numbers ${photos}`
+			const phoneNumber = `+1${guest.phone}`
+			// POST request to Twilio to send message
+		})
     clearInputs();
 		setView('shoot')
   }
@@ -37,6 +48,28 @@ const PhotoShootView: React.FC<PhotoShootData> = ({
     setTime('')
     setLocation('')
   }
+
+// Will change the photo with the carousel (need more info from the api to get it to work)
+	const displayCarousel = () => {
+		const currentPhoto = photoList.find((photo: any) => photo.photoNumber === carousel + 1)
+		const participants = currentPhoto.guests.reduce((guest:any, acc:any) => {
+			const match = guests.find((person: any) => person.id === guest)
+			acc.push(match.name)
+			return acc
+		}, [])
+		return (
+			<StyledCard contents="photoShoot">
+				<article className="photoShootCard">
+					<Photo
+						id={currentPhoto.id}
+						photoNumber={currentPhoto.photoNumber}
+						guests={participants}
+						description={currentPhoto.description}
+					/>
+				</article>
+			</StyledCard>
+		)
+	}
 
 
   return (
@@ -81,8 +114,28 @@ const PhotoShootView: React.FC<PhotoShootData> = ({
 			</>}
 			{view === "shoot" &&
 				<>
-				<article className="instructionWrap">
+				<article className="carouselWrap">
 					<h1 className="weddingTitle" style={{fontSize: '3vw', paddingBottom: '0%'}}>Ready, Set, Click.</h1>
+					<StyledCard contents="photoShoot">
+						<article className="photoShootCard">
+							<Photo
+								id={1}
+								photoNumber={1}
+								guests={["jim", "pam", "michael"]}
+								description={"the whole crew"}
+							/>
+						</article>
+					</StyledCard>
+					<section className="buttonWrapper">
+						<BackButton onClick={() => setCarousel(carousel-1)}>
+							<div id="arrow">{"<<"}</div>
+							<a className="link">{"< Prev"}</a>
+						</BackButton>
+						<BackButton onClick={() => setCarousel(carousel+1)}>
+							<div id="arrow">{">>"}</div>
+							<a className="link">{"Next >"}</a>
+						</BackButton>
+					</section>
 				</article>
 				</>}
     </section>
