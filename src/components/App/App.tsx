@@ -55,19 +55,11 @@ const App = () => {
             weddings={weddings}
           />
         </Route>
-        <Route exact path='/:weddingId/photo-list'
-          render={({ match }) => {
-            const { weddingId } = match.params
-            return <WeddingPhotoList
-              name={individualWedding.name}
-              weddingId={individualWedding.weddingId}
-              photoList={individualWedding.photoList} />
-          }} />
         <Route exact path='/wedding/:weddingId'
           render={({ match }) => {
             const { weddingId } = match.params
             return <WeddingDetails
-              weddingData={weddings.find((wedding:any) => wedding.id === weddingId)}
+              weddingId={+weddingId}
               />
           }} />
         <Route path='/add-wedding'>
