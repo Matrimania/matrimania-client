@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Photo from '../Photo/Photo';
 import Checkbox from '../Checkbox/Checkbox';
 import empty from '../../assets/emptyGuestList.png';
-import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles'
+import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles';
 import '../GuestList/GuestList.css';
+import './PhotoListForm.css';
 
 // type NewPhoto = {
 //   id: number;
@@ -78,18 +79,21 @@ const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
             value={description}
             onChange={event => setDescription(event.target.value)}
           />
-          <h2>Guests:</h2>
-          {guestsOptions.map((guest: any, i: number) => {
-            return (
-              <Checkbox
-                key={i +1}
-                toggleCheckMark={toggleCheckMark}
-                {...guest}
-              />
-            )
-            })
-          }
-          {isError && errorMessage}
+          <section className="checkboxSection">
+            <h3 className="checkboxHeader">Guests:</h3>
+            {guestsOptions.map((guest: any, i: number) => {
+              return (
+                <Checkbox
+                  key={i +1}
+                  toggleCheckMark={toggleCheckMark}
+                  {...guest}
+                />
+              )
+              })
+            }
+            {isError && errorMessage}
+          </section>
+          
           <StyledButton onClick={event => submitPhoto(event)}>
             <div id="translate"></div>
             <a className="link" id="addListButton">Submit Photo</a>
