@@ -1,7 +1,7 @@
 import './WeddingDetails.css';
 import React, { useState, useEffect } from 'react';
 import { individualWedding } from '../../weddingData';
-import { getWeddingGuests } from '../../apiCalls';
+import { getSingleWeddingGuests, getSingleWeddingPhotos, getWeddings } from '../../apiCalls';
 import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList';
 import PhotoShootView from '../PhotoShootView/PhotoShootView';
 import { Link } from 'react-router-dom'
@@ -111,37 +111,37 @@ const WeddingDetails: React.FC<Props> = ({
 		}
 	}
 
-	const weddingDate = dayjs(date).format("MM/DD/YYYY")
+	const weddingDate = dayjs(weddingData.date).format("MM/DD/YYYY")
 
 	const displayCurrentView = () => {
 		if (editGuestListView) {
 				return (
 					<GuestList
+					//need to pass in guest list here
 						changeView={determineCurrentState}
 					/>
 				)
 		} else if(photoShootView) {
 				return (
 					<PhotoShootView
-						name={name}
-						weddingId={weddingId}
-						photoList={photoList}
-						guests={familyPhotoList}
+						name={weddingData.name}
+						weddingId={weddingData.id}
+						photoList={currentWeddingPhotos}
+						guests={currentWeddingGuests}
 						changeView={determineCurrentState}
-
 					/>
 				)
 		} else if (editPhotoListView) {
 			return(
 				<PhotoListForm
-					guests={familyPhotoList}
+					guests={currentWeddingGuests}
 					changeView={determineCurrentState}
 				/>
 			)
 		} else {
 						return (
 						<section className="detailImageWrap">
-								<img className="detailImage" alt="detailImage" src={image} />
+								<img className="detailImage" alt="detailImage" src={weddingData.image} />
 						</section>
 				)
 		}
@@ -151,19 +151,19 @@ const WeddingDetails: React.FC<Props> = ({
 		<section className="detailsWrapper">
 			{detailsView &&
 				<div className="detailsHeader">
-				<h1 className="weddingTitle">{name} Wedding</h1>
-				<h2 className="weddingDate">{date}</h2>
-				<p className="weddingDetails">Email: {email}</p>
-				<p className="weddingDetails">Status: {familyPhotoList.length === 0 ? "Pending" : "Received"}</p>
-				{photoList.length === 0 &&
+				<h1 className="weddingTitle">{weddingData.name} Wedding</h1>
+				<h2 className="weddingDate">{weddingDate}</h2>
+				<p className="weddingDetails">Email: {weddingData.email}</p>
+				<p className="weddingDetails">Status: {currentWeddingGuests.length === 0 ? "Pending" : "Received"}</p>
+				{currentWeddingPhotos.length === 0 &&
 					<StyledButton>
 						<div id="translate"></div>
-						<a className="link" id="requestListButton" href={`mailto:${email}?subject=Family Photo List&body=${emailBody}`}>Request Photo List</a>
+						<a className="link" id="requestListButton" href={`mailto:${weddingData.email}?subject=Family Photo List&body=${emailBody}`}>Request Photo List</a>
 					</StyledButton>
 				}
 				<StyledButton onClick={() => determineCurrentState("editGuestListView")}>
 					<div id="translate"></div>
-					{photoList.length > 0 ?
+					{currentWeddingPhotos.length > 0 ?
 						<a className="link" id="editListButton">Edit Photo Details</a> :
 						<a className="link" id="addListButton">Add Photo List</a>
 					}
@@ -174,11 +174,11 @@ const WeddingDetails: React.FC<Props> = ({
 						<a className="link">Start Photo Session</a>
 					</StyledButton>
 				}
-				{photoList.length > 0 &&
+				{currentWeddingPhotos.length > 0 &&
 					<WeddingPhotoList
-						name={individualWedding.name}
-						weddingId={individualWedding.weddingId}
-						photoList={individualWedding.photoList} /> }
+						name={weddingData.name}
+						weddingId={weddingData.id}
+						photoList={currentWeddingPhotos} /> }
 				</div>
 			}
 			<section className="detailFormWrap">
