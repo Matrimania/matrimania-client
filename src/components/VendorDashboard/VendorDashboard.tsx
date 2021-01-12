@@ -13,29 +13,14 @@ type Wedding = {
   date: any;
   image: string;
 }
+type Props = {
+  weddings: any;
+}
 
-function VendorDashboard() {
-  const [weddings, setWeddings] = useState<Wedding[]>([])
+const VendorDashboard: React.FC<Props> = ({weddings}) => {
   const [weddingFilter, setWeddingFilter] = useState<Wedding[]>([])
   const [errorMessage, setErrorMessage] = useState('')
   const [hasError, setError] = useState(false)
-
-  useEffect(() => {
-    const allWeddings = async () => {
-      const result = await getWeddings()
-      if(result.length > 0) {
-        result.forEach((wed: any) => {
-          wed.date = new Date(wed.date)
-        })
-        let sortedResult = result.sort((a: any, b: any) => a.date - b.date)
-        setWeddings(sortedResult)
-      } else {
-        setError(true)
-        setErrorMessage(result)
-      }
-    }
-    allWeddings()
-  }, [])
 
   const filterWeddings = (e: any) => {
     setError(false)
@@ -53,7 +38,7 @@ function VendorDashboard() {
         }
         break;
       case 2:
-        const pastWeddings = weddings.filter((a: any) => a.date < Date.now())
+        const pastWeddings = weddings.filter((a: any) => dayjs(a.date).format("MM/DD/YYYY") < dayjs().format("MM/DD/YYYY"))
         if(pastWeddings.length) {
           sortedFilter = pastWeddings.sort((a: any, b: any) => a.date - b.date)
           setWeddingFilter(sortedFilter)
@@ -78,8 +63,12 @@ function VendorDashboard() {
         }
         break;
       default:
-        setWeddings(weddings)
-        setWeddingFilter([])
+        if(weddings.length > 0) {
+          setWeddingFilter(weddings)
+        } else {
+          setError(true)
+          setErrorMessage('No Weddings In Your Schedule')
+        }
         break;
     }
   }
@@ -89,7 +78,7 @@ function VendorDashboard() {
       return <div>{errorMessage}</div>
     }
     if(weddingFilter.length > 0) {
-      return weddingFilter.map((singleWedding, index) => {
+      return weddingFilter.map((singleWedding:any) => {
         return (
           <WeddingCard
             key={singleWedding.id}
@@ -101,14 +90,14 @@ function VendorDashboard() {
         )
       })
     } else {
-      return weddings.map((singleWedding, index) => {
+      return weddings.map((singleWedding:any) => {
         return (
           <WeddingCard
-          key={singleWedding.id}
-          id={singleWedding.id}
-          name={singleWedding.name}
-          image={singleWedding.image}
-          date={singleWedding.date}
+            key={singleWedding.id}
+            id={singleWedding.id}
+            name={singleWedding.name}
+            image={singleWedding.image}
+            date={singleWedding.date}
           />
         )
       })

@@ -1,7 +1,7 @@
 import './WeddingDetails.css';
 import React, { useState, useEffect } from 'react';
 import { individualWedding } from '../../weddingData';
-import { getWeddingGuests } from '../../apiCalls';
+import { getSingleWeddingGuests, getSingleWeddingPhotos, getWeddings } from '../../apiCalls';
 import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList';
 import PhotoShootView from '../PhotoShootView/PhotoShootView';
 import { Link } from 'react-router-dom'
@@ -12,45 +12,80 @@ import dayjs from 'dayjs';
 import PhotoListForm from '../PhotoListForm/PhotoListForm';
 
 
-type IndividualWedding = {
-	weddingId: number;
-  name: string;
-  image: string;
-  date: string;
-  email: string;
-  familyPhotoList: {name: string, photos: number[], phone: number}[]
-  photoList: {photoId: number, guests: string[], description: string}[]
+type Props = {
+  weddingId: number;
+}
+type Guest = {
+	id: number;
+	name: string;
+	phoneNumber: string;
+	wedding: number;
+}
+type Photo = {
+	id: number;
+	number: number;
+	description: string;
+	guest: number[];
 }
 
-const WeddingDetails: React.FC<IndividualWedding> = ({
-	weddingId,
-	name,
-	image,
-	date,
-	email,
-	familyPhotoList,
-	photoList
-}) => {
+type Wedding = {
+  id: number;
+  name: string;
+  email: string;
+  date: string;
+  image: string;
+}
 
+const WeddingDetails: React.FC<Props> = ({
+	weddingId
+}) => {
+	const [errorMessage, setErrorMessage] = useState({photoError: '', guestError: '', weddingError: ''})
+	const [hasError, setHasError] = useState(false)
 	const [detailsView, setDetailsView] = useState(true)
 	const [photoShootView, setPhotoShootView] = useState(false)
 	const [editGuestListView, setGuestListView] = useState(false)
 	const [editPhotoListView, setEditPhotoListView] = useState(false)
-	const [guestsTEMP, setGuestsTEMP] = useState([])
+	const [currentWeddingGuests, setCurrentWeddingGuests] = useState<Guest[]>([])
+	const [currentWeddingPhotos, setCurrentWeddingPhotos] = useState<Photo[]>([])
+	const [weddingData, setWeddingData] = useState({id: 0, name: "", email: "", date: "", image: ""});
 
-	// probably should be GET for individualWedding and not just guests when BE is ready with that?
-	// useEffect(() => {
-	// 	const individualWeddingGuests = async () => {
-	// 		const result = await getWeddingGuests()
-	// 		console.log(result)
-	// 		// sort for only this specific wedding by ID
-	// 		setGuestsTEMP(result)
-	// 	}
-	// 	individualWeddingGuests()
-	// }, [])
-	const emailBody = `Dear ${name},
-		it is time to fill out your family photo list! Please follow the link provided to complete the missing photo information. Feel free to reach out if you have any questions.
-		LINK: https://matrimania-client.herokuapp.com/wedding/${weddingId}`
+
+	useEffect(() => {
+		const allWeddings = async () => {
+			const weddingResult = await getWeddings()
+			if(weddingResult === "No weddings found") {
+				setHasError(true)
+				setErrorMessage({...errorMessage, weddingError: weddingResult})
+			} else {
+				const currentWedding = weddingResult.find((wedding:any) => wedding.id === weddingId)
+				setWeddingData(currentWedding)
+			}
+		}
+		allWeddings()
+		const individualWeddingGuests = async () => {
+			const guestResult = await getSingleWeddingGuests(weddingId)
+			if(guestResult === "No guests found") {
+				setHasError(true)
+				setErrorMessage({...errorMessage, guestError: guestResult})
+			} else {
+				setCurrentWeddingGuests(guestResult)
+			}
+		}
+		individualWeddingGuests()
+		const individualWeddingPhotos = async () => {
+			const photoResult = await getSingleWeddingPhotos(weddingId)
+			if(photoResult === "No photos found") {
+				setHasError(true)
+				setErrorMessage({...errorMessage, weddingError: photoResult})
+			} else {
+				setCurrentWeddingPhotos(photoResult)
+			}
+		}
+		individualWeddingPhotos()
+	}, [])
+
+	const emailBody = `It is time to fill out your family photo list! Please follow the link provided to complete the missing photo information. Feel free to reach out if you have any questions.
+		LINK: https://matrimania-client.herokuapp.com/wedding/${weddingData.id}`
 
 	const determineCurrentState = (view: string) => {
 		if (view === "photoShootView") {
@@ -76,37 +111,37 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 		}
 	}
 
-	const weddingDate = dayjs(date).format("MM/DD/YYYY")
+	const weddingDate = dayjs(weddingData.date).format("MM/DD/YYYY")
 
 	const displayCurrentView = () => {
 		if (editGuestListView) {
 				return (
 					<GuestList
+					//need to pass in guest list here
 						changeView={determineCurrentState}
 					/>
 				)
 		} else if(photoShootView) {
 				return (
 					<PhotoShootView
-						name={name}
-						weddingId={weddingId}
-						photoList={photoList}
-						guests={familyPhotoList}
+						name={weddingData.name}
+						weddingId={weddingData.id}
+						photoList={currentWeddingPhotos}
+						guests={currentWeddingGuests}
 						changeView={determineCurrentState}
-
 					/>
 				)
 		} else if (editPhotoListView) {
 			return(
 				<PhotoListForm
-					guests={familyPhotoList}
+					guests={currentWeddingGuests}
 					changeView={determineCurrentState}
 				/>
 			)
 		} else {
 						return (
 						<section className="detailImageWrap">
-								<img className="detailImage" alt="detailImage" src={image} />
+								<img className="detailImage" alt="detailImage" src={weddingData.image} />
 						</section>
 				)
 		}
@@ -116,19 +151,19 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 		<section className="detailsWrapper">
 			{detailsView &&
 				<div className="detailsHeader">
-				<h1 className="weddingTitle">{name} Wedding</h1>
-				<h2 className="weddingDate">{date}</h2>
-				<p className="weddingDetails">Email: {email}</p>
-				<p className="weddingDetails">Status: {familyPhotoList.length === 0 ? "Pending" : "Received"}</p>
-				{photoList.length === 0 &&
+				<h1 className="weddingTitle">{weddingData.name} Wedding</h1>
+				<h2 className="weddingDate">{weddingDate}</h2>
+				<p className="weddingDetails">Email: {weddingData.email}</p>
+				<p className="weddingDetails">Status: {currentWeddingGuests.length === 0 ? "Pending" : "Received"}</p>
+				{currentWeddingPhotos.length === 0 &&
 					<StyledButton>
 						<div id="translate"></div>
-						<a className="link" id="requestListButton" href={`mailto:${email}?subject=Family Photo List&body=${emailBody}`}>Request Photo List</a>
+						<a className="link" id="requestListButton" href={`mailto:${weddingData.email}?subject=Family Photo List&body=${emailBody}`}>Request Photo List</a>
 					</StyledButton>
 				}
 				<StyledButton onClick={() => determineCurrentState("editGuestListView")}>
 					<div id="translate"></div>
-					{photoList.length > 0 ?
+					{currentWeddingPhotos.length > 0 ?
 						<a className="link" id="editListButton">Edit Photo Details</a> :
 						<a className="link" id="addListButton">Add Photo List</a>
 					}
@@ -139,11 +174,11 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 						<a className="link">Start Photo Session</a>
 					</StyledButton>
 				}
-				{photoList.length > 0 &&
+				{currentWeddingPhotos.length > 0 &&
 					<WeddingPhotoList
-						name={individualWedding.name}
-						weddingId={individualWedding.weddingId}
-						photoList={individualWedding.photoList} /> }
+						name={weddingData.name}
+						weddingId={weddingData.id}
+						photoList={currentWeddingPhotos} /> }
 				</div>
 			}
 			<section className="detailFormWrap">

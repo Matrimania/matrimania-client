@@ -10,9 +10,38 @@ import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList'
 import LandingPage from '../LandingPage/LandingPage'
 import GuestListForm from '../GuestList/GuestList'
 import AddWeddingForm from '../AddWeddingForm/AddWeddingForm'
+import { getWeddings } from '../../apiCalls'
 
+type Wedding = {
+  id: number;
+  name: string;
+  email: string;
+  date: string;
+  image: string;
+}
 
 const App = () => {
+  const [weddings, setWeddings] = useState<Wedding[]>([])
+  const [errorMessage, setErrorMessage] = useState('')
+  const [hasError, setError] = useState(false)
+
+  useEffect(() => {
+    const allWeddings = async () => {
+      const result = await getWeddings()
+      if(result.length > 0) {
+        result.forEach((wed: any) => {
+          wed.date = new Date(wed.date)
+        })
+        let sortedResult = result.sort((a: any, b: any) => a.date - b.date)
+        setWeddings(sortedResult)
+      } else {
+        setError(true)
+        setErrorMessage(result)
+      }
+    }
+    allWeddings()
+  }, [])
+
   return (
     <div className="appWrap">
       <header className="headerWrap">
@@ -22,27 +51,16 @@ const App = () => {
       </header>
       <Switch>
         <Route path='/vendor-dashboard'>
-          <VendorDashboard />
+          <VendorDashboard
+            weddings={weddings}
+          />
         </Route>
-        <Route exact path='/:weddingId/photo-list'
-          render={({ match }) => {
-            const { weddingId } = match.params
-            return <WeddingPhotoList
-              name={individualWedding.name}
-              weddingId={individualWedding.weddingId}
-              photoList={individualWedding.photoList} />
-          }} />
         <Route exact path='/wedding/:weddingId'
           render={({ match }) => {
             const { weddingId } = match.params
             return <WeddingDetails
-              weddingId={individualWedding.weddingId}
-              name={individualWedding.name}
-              image={individualWedding.image}
-              date={individualWedding.date}
-              email={individualWedding.email}
-              familyPhotoList={individualWedding.familyPhotoList}
-              photoList={individualWedding.photoList} />
+              weddingId={+weddingId}
+              />
           }} />
         <Route path='/add-wedding'>
           <AddWeddingForm />
