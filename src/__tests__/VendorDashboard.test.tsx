@@ -48,4 +48,5 @@ describe('VendorDashboard', () => {
 		expect(filterToday).toBeInTheDocument();
 	});
 
+	// test data is present in order to display wedding cards or is that integration?
 })
