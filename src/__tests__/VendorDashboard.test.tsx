@@ -49,4 +49,7 @@ describe('VendorDashboard', () => {
 	});
 
 	// test data is present in order to display wedding cards or is that integration?
+	// test if filter functionality works? 
+		// do weddings show up? are they in the correct order
+		// perhaps test length of weddingCards to check if correct 
 })
