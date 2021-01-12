@@ -86,4 +86,6 @@ describe('PhotoListForm', () => {
 		expect(checkbox[1]).not.toBeChecked()
 		expect(checkbox[2]).not.toBeChecked()
 	});
+	//user submits form? integration? 
+	// api call mockimplementation or toHaveReturned(data)
 });
