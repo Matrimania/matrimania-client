@@ -23,10 +23,9 @@ describe('PhotoListForm', () => {
     );
 	
 		expect(screen.getByRole('heading', {  name: /let's start with your photo list/i})).toBeInTheDocument();
-		expect(screen.getByRole('heading', { name: "To add a photo: 1. Add a description (optional) 2. Pick guests to include in the photo 3. Click Submit button Tip: Don't forget to include yourselves!"})).toBeInTheDocument();
-		expect(screen.getByPlaceholderText('Description')).toBeInTheDocument();
-		expect(screen.getByRole('button', {name: 'Submit'})).toBeInTheDocument();
-		expect(screen.getByText('Your Photos')).toBeInTheDocument()
+		expect(screen.getByRole('heading', {name: `To add a photo: 1. Add a description 2. Pick guests to include in the photo 3. Click Submit button Tip: Don't forget to include yourselves!`})).toBeInTheDocument();
+		expect(screen.getByPlaceholderText('Description (optional)')).toBeInTheDocument();
+		expect(screen.getByText('Submit Photo')).toBeInTheDocument();
 		expect(screen.getByText("Bacob")).toBeInTheDocument();
 		expect(screen.getByText("Bohn")).toBeInTheDocument();
 		expect(screen.getByText("Bamy")).toBeInTheDocument();
@@ -46,10 +45,9 @@ describe('PhotoListForm', () => {
     );
 	
 		expect(screen.getByRole('heading', {  name: /let's start with your photo list/i})).toBeInTheDocument();
-		expect(screen.getByRole('heading', { name: "To add a photo: 1. Add a description (optional) 2. Pick guests to include in the photo 3. Click Submit button Tip: Don't forget to include yourselves!"})).toBeInTheDocument();
-		expect(screen.getByPlaceholderText('Description')).toBeInTheDocument();
-		expect(screen.getByRole('button', {name: 'Submit'})).toBeInTheDocument();
-		expect(screen.getByText('Your Photos')).toBeInTheDocument()
+		expect(screen.getByRole('heading', {name: `To add a photo: 1. Add a description 2. Pick guests to include in the photo 3. Click Submit button Tip: Don't forget to include yourselves!`})).toBeInTheDocument();
+		expect(screen.getByPlaceholderText('Description (optional)')).toBeInTheDocument();
+		expect(screen.getByText('Submit Photo')).toBeInTheDocument();
 	});
 
 	it('should allow the user to check guests', () => {
@@ -71,10 +69,9 @@ describe('PhotoListForm', () => {
 		const checkbox = screen.getAllByRole('checkbox')
 
 		expect(screen.getByRole('heading', {  name: /let's start with your photo list/i})).toBeInTheDocument();
-		expect(screen.getByRole('heading', { name: "To add a photo: 1. Add a description (optional) 2. Pick guests to include in the photo 3. Click Submit button Tip: Don't forget to include yourselves!"})).toBeInTheDocument();
-		expect(screen.getByPlaceholderText('Description')).toBeInTheDocument();
-		expect(screen.getByRole('button', {name: 'Submit'})).toBeInTheDocument();
-		expect(screen.getByText('Your Photos')).toBeInTheDocument()
+		expect(screen.getByRole('heading', {name: `To add a photo: 1. Add a description 2. Pick guests to include in the photo 3. Click Submit button Tip: Don't forget to include yourselves!`})).toBeInTheDocument();
+		expect(screen.getByPlaceholderText('Description (optional)')).toBeInTheDocument();
+		expect(screen.getByText('Submit Photo')).toBeInTheDocument();
 		expect(screen.getByText("Bacob")).toBeInTheDocument();
 		expect(screen.getByText("Bohn")).toBeInTheDocument();
 		expect(screen.getByText("Bamy")).toBeInTheDocument();
