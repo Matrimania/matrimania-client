@@ -74,26 +74,26 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 
 	const displayCurrentView = () => {
 		if (editGuestListView) {
-			return (
-				<GuestList
-					changeView={determineCurrentState}
-				/>
-			)
+						return (
+								<GuestList
+										changeView={determineCurrentState}
+								/>
+						)
 		} else if (editPhotoListView) {
-			return(
-				<PhotoListForm 
-					guests={familyPhotoList}
-					changeView={determineCurrentState}
-				/>
-			)
+				return(
+						<PhotoListForm 
+								guests={familyPhotoList}
+								changeView={determineCurrentState}
+						/>
+				)
 		} else {
-			return (
-				<section className="detailImageWrap">
-					<img className="detailImage" src={image} />
-				</section>
-			)
+						return (
+						<section className="detailImageWrap">
+								<img className="detailImage" alt="detailImage" src={image} />
+						</section>
+				)
 		}
-	}
+}
 
 	return (
 		<section className="detailsWrapper">

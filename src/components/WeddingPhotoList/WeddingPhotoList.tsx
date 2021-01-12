@@ -15,20 +15,18 @@ const WeddingPhotoList: React.FC<PhotoListData> = ({
 }) => {
 
 	const displayPhotoList = photoList.map(photo => {
-		return (
-			<div className="photoListDetails">
-				<p className="photoNumber">Photo: {photo.photoId}</p>
-				<p className="photoGuest">Guests: {photo.guests}</p>
-				<p className="photoDescription">Description: {photo.description}</p>
-		</div>
-		)
+		return <div className="photoListDetails" key={photo.photoId}>
+					<p className="photoNumber">Photo: {photo.photoId}</p>
+					<p className="photoGuest">Guests: {photo.guests}</p>
+					<p className="photoDescription">Description: {photo.description}</p>
+			</div>
 	})
 
 
 	return (
 		<section className="weddingPhotoListWrapper">
 			<StyledCard contents="list" className="photoListWrapper">
-			<div className="photoListHeader">Your Photo List</div>
+			<div className="photoListHeader">WeddingPhotoList</div>
 				{/* <h1>{name} Wedding</h1> */}
 				<div className="photoListWrapper">
 					{displayPhotoList}

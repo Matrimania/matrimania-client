@@ -9,7 +9,7 @@ describe('WeddingCard', () => {
     render(
       <MemoryRouter>
         <WeddingCard
-        weddingId={1}
+        id={1}
         name={"Jim & Pam"}
         image={"fotopail.com/weddingphoto"}
         date={"10/08/2009"}
