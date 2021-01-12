@@ -3,10 +3,14 @@ import React, { useState, useEffect } from 'react';
 import { individualWedding } from '../../weddingData';
 import { getWeddingGuests } from '../../apiCalls';
 import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList';
+import PhotoShootView from '../PhotoShootView/PhotoShootView';
 import { Link } from 'react-router-dom'
 import { StyledButton } from '../App/styledComponents.styles'
 import GuestList from '../GuestList/GuestList'
+import Guest from '../Guest/Guest';
+import dayjs from 'dayjs';
 import PhotoListForm from '../PhotoListForm/PhotoListForm';
+
 
 type IndividualWedding = {
 	weddingId: number;
@@ -72,8 +76,11 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 		}
 	}
 
+	const weddingDate = dayjs(date).format("MM/DD/YYYY")
+
 	const displayCurrentView = () => {
 		if (editGuestListView) {
+<<<<<<< HEAD
 						return (
 								<GuestList
 										changeView={determineCurrentState}
@@ -86,6 +93,24 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 								changeView={determineCurrentState}
 						/>
 				)
+=======
+				return (
+					<GuestList
+						changeView={determineCurrentState}
+					/>
+				)
+		} else if(photoShootView) {
+				return (
+					<PhotoShootView />
+				)
+		} else if (editPhotoListView) {
+			return(
+				<PhotoListForm
+					guests={familyPhotoList}
+					changeView={determineCurrentState}
+				/>
+			)
+>>>>>>> a4327cfd... Resolve merge conflicts
 		} else {
 						return (
 						<section className="detailImageWrap">
@@ -116,6 +141,19 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 						<a className="link" id="addListButton">Add Photo List</a>
 					}
 				</StyledButton>
+<<<<<<< HEAD
+=======
+				<PhotoListForm
+					guests={familyPhotoList}
+					changeView={determineCurrentState}
+				/>
+				{weddingDate === dayjs().format("MM/DD/YYYY") &&
+					<StyledButton onClick={() => determineCurrentState("photoView")}>
+						<div id="translate"></div>
+						<a className="link">Start Photo Session</a>
+					</StyledButton>
+				}
+>>>>>>> a4327cfd... Resolve merge conflicts
 				{photoList.length > 0 &&
 					<WeddingPhotoList
 						name={individualWedding.name}
