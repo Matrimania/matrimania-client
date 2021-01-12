@@ -34,6 +34,7 @@ export const StyledCard = styled.section<StyledCardProps>`
   border-radius: 30px;
   box-shadow: 1px 1px 20px #A8826F;
   font-size: 12px;
+  align-self: center;
   overflow: ${props => {
     if(props.contents === 'list') {
       return 'scroll;'
