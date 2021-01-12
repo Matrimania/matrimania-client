@@ -11,7 +11,7 @@ describe("GuestList",() => {
 	it('should render a guestlist page', () => {
 		render(
 			<MemoryRouter>
-				<GuestList 
+				<GuestList
 					changeView
 					/>
 			</MemoryRouter>
@@ -27,19 +27,19 @@ describe("GuestList",() => {
 		expect(screen.getByText('Clear')).toBeInTheDocument();
 		expect(screen.getByText('Add To Guest List')).toBeInTheDocument();
 		expect(screen.getByText('< Back')).toBeInTheDocument();
-		expect(screen.getByText('DONE >')).toBeInTheDocument();
+		expect(screen.getByText('Photos >')).toBeInTheDocument();
 		expect(screen.getByAltText('your guest list is empty')).toBeInTheDocument();
 	});
 
 	it('should allow the user to add a guest to the guest list', () => {
 		render(
 			<MemoryRouter>
-				<GuestList 
+				<GuestList
 					changeView
 					/>
 			</MemoryRouter>
 		);
-		
+
 		const guest = 'Melvin Lamprust'
 		const number = '123-456-7890'
 		const guestNameInput = screen.getByPlaceholderText('Guest Name');
@@ -57,7 +57,7 @@ describe("GuestList",() => {
 	it('should render an error message if a user does not fill out the form completely', () => {
 		render(
 			<MemoryRouter>
-				<GuestList 
+				<GuestList
 					changeView
 					/>
 			</MemoryRouter>
@@ -81,7 +81,7 @@ describe("GuestList",() => {
 	it('should render a phone number error message if a user does not fill out the phone number input on the form', () => {
 		render(
 			<MemoryRouter>
-				<GuestList 
+				<GuestList
 					changeView
 					/>
 			</MemoryRouter>
