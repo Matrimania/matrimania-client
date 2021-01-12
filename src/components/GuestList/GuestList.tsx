@@ -92,41 +92,6 @@ const GuestList: React.FC<WeddingData> = ({
           <h2 className="weddingDate" style={{fontSize: '1.5vw', padding: '2% 10%', textAlign: 'left'}}>For each person included in your family photos, please include: <br></br><br></br>1. Their first and last name<br></br>2. A mobile phone number that accepts text messages<br></br> <br></br>Don't forget yourselves!</h2>
         </article>
         <section className="guestFormWrap">
-<<<<<<< HEAD
-          <input
-            type='text'
-            placeholder='Guest Name'
-            name='guestName'
-            value={guestName}
-            onChange={event => setGuestName(event.target.value)}
-          />
-          <input
-            type='text'
-            placeholder='Phone (XXX-XXX-XXXX)'
-            name='phoneNumber'
-            maxLength={12}
-            value={phoneNumber}
-            onChange={event => checkNumber(event.target.value)}
-          />
-          <div className="inputWrap">
-            <a className="clearButton" onClick={event => clearInputs()}>Clear</a>
-          </div>
-          {isError && errorMessage}
-          <StyledButton onClick={event => submitGuest(event)}>
-            <div id="translate"></div>
-            <a className="link" id="addListButton">Add To Guest List</a>
-          </StyledButton>
-          <section className="buttonWrapper">
-            <BackButton onClick={() => changeView('detailsView')}>
-            <div id="arrow">{"<<"}</div>
-            <a className="link">{"< Back"}</a>
-            </BackButton>
-            <BackButton onClick={() => changeView('editPhotoListView')}>
-            <div id="arrow">{">>"}</div>
-            <a className="link">{"Photos >"}</a>
-            </BackButton>
-          </section>
-=======
         <input
           type='text'
           placeholder='Guest Name'
@@ -160,7 +125,6 @@ const GuestList: React.FC<WeddingData> = ({
           <a className="link">{"DONE >"}</a>
           </BackButton>
         </section>
->>>>>>> c8c1329f... Test user name input on GuestList form
         </section>
       </form>
       <section className="guestListWrap">
