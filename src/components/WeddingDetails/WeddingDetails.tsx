@@ -12,45 +12,80 @@ import dayjs from 'dayjs';
 import PhotoListForm from '../PhotoListForm/PhotoListForm';
 
 
-type IndividualWedding = {
-	weddingId: number;
-  name: string;
-  image: string;
-  date: string;
-  email: string;
-  familyPhotoList: {name: string, photos: number[], phone: number}[]
-  photoList: {photoId: number, guests: string[], description: string}[]
+type Props = {
+  weddingId: number;
+}
+type Guest = {
+	id: number;
+	name: string;
+	phoneNumber: string;
+	wedding: number;
+}
+type Photo = {
+	id: number;
+	number: number;
+	description: string;
+	guest: number[];
 }
 
-const WeddingDetails: React.FC<IndividualWedding> = ({
-	weddingId,
-	name,
-	image,
-	date,
-	email,
-	familyPhotoList,
-	photoList
-}) => {
+type Wedding = {
+  id: number;
+  name: string;
+  email: string;
+  date: string;
+  image: string;
+}
 
+const WeddingDetails: React.FC<Props> = ({
+	weddingId
+}) => {
+	const [errorMessage, setErrorMessage] = useState({photoError: '', guestError: '', weddingError: ''})
+	const [hasError, setHasError] = useState(false)
 	const [detailsView, setDetailsView] = useState(true)
 	const [photoShootView, setPhotoShootView] = useState(false)
 	const [editGuestListView, setGuestListView] = useState(false)
 	const [editPhotoListView, setEditPhotoListView] = useState(false)
-	const [guestsTEMP, setGuestsTEMP] = useState([])
+	const [currentWeddingGuests, setCurrentWeddingGuests] = useState<Guest[]>([])
+	const [currentWeddingPhotos, setCurrentWeddingPhotos] = useState<Photo[]>([])
+	const [weddingData, setWeddingData] = useState({id: 0, name: "", email: "", date: "", image: ""});
 
-	// probably should be GET for individualWedding and not just guests when BE is ready with that?
-	// useEffect(() => {
-	// 	const individualWeddingGuests = async () => {
-	// 		const result = await getWeddingGuests()
-	// 		console.log(result)
-	// 		// sort for only this specific wedding by ID
-	// 		setGuestsTEMP(result)
-	// 	}
-	// 	individualWeddingGuests()
-	// }, [])
-	const emailBody = `Dear ${name},
-		it is time to fill out your family photo list! Please follow the link provided to complete the missing photo information. Feel free to reach out if you have any questions.
-		LINK: https://matrimania-client.herokuapp.com/wedding/${weddingId}`
+
+	useEffect(() => {
+		const allWeddings = async () => {
+			const weddingResult = await getWeddings()
+			if(weddingResult === "No weddings found") {
+				setHasError(true)
+				setErrorMessage({...errorMessage, weddingError: weddingResult})
+			} else {
+				const currentWedding = weddingResult.find((wedding:any) => wedding.id === weddingId)
+				setWeddingData(currentWedding)
+			}
+		}
+		allWeddings()
+		const individualWeddingGuests = async () => {
+			const guestResult = await getSingleWeddingGuests(weddingId)
+			if(guestResult === "No guests found") {
+				setHasError(true)
+				setErrorMessage({...errorMessage, guestError: guestResult})
+			} else {
+				setCurrentWeddingGuests(guestResult)
+			}
+		}
+		individualWeddingGuests()
+		const individualWeddingPhotos = async () => {
+			const photoResult = await getSingleWeddingPhotos(weddingId)
+			if(photoResult === "No photos found") {
+				setHasError(true)
+				setErrorMessage({...errorMessage, weddingError: photoResult})
+			} else {
+				setCurrentWeddingPhotos(photoResult)
+			}
+		}
+		individualWeddingPhotos()
+	}, [])
+
+	const emailBody = `It is time to fill out your family photo list! Please follow the link provided to complete the missing photo information. Feel free to reach out if you have any questions.
+		LINK: https://matrimania-client.herokuapp.com/wedding/${weddingData.id}`
 
 	const determineCurrentState = (view: string) => {
 		if (view === "photoShootView") {
