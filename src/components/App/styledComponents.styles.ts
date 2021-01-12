@@ -127,7 +127,7 @@ export const BackButton = styled.div`
   font-family: 'Roboto', sans-serif;
   display: inline-flex;
   height: 25px;
-  width: 60px;
+  width: 70px;
   margin: 10px;
   border: 2px solid #6f896d;
   color: #f5f5f5;

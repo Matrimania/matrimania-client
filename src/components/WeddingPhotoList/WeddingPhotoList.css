@@ -3,7 +3,8 @@
   height: 60%;
   flex-direction: column;
   align-items: center;
+  font-family: Roboto, sans-serif;
 }
 .photoListHeader {
-  
+  font-size: 1.5em;
 }
