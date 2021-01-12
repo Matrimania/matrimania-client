@@ -7,12 +7,8 @@ import Photo from '../Photo/Photo';
 type PhotoShootData = {
 	name: string;
 	weddingId: number;
-	photoList: {
-		id: number;
-		photoNumber: number;
-		guests: any;
-		description: string;}[];
-  guests: any;
+	photoList: any;
+	guests: any;
   changeView: any;
 }
 
@@ -50,26 +46,26 @@ const PhotoShootView: React.FC<PhotoShootData> = ({
   }
 
 // Will change the photo with the carousel (need more info from the api to get it to work)
-	const displayCarousel = () => {
-		const currentPhoto = photoList.find((photo: any) => photo.photoNumber === carousel + 1)
-		const participants = currentPhoto.guests.reduce((guest:any, acc:any) => {
-			const match = guests.find((person: any) => person.id === guest)
-			acc.push(match.name)
-			return acc
-		}, [])
-		return (
-			<StyledCard contents="photoShoot">
-				<article className="photoShootCard">
-					<Photo
-						id={currentPhoto.id}
-						photoNumber={currentPhoto.photoNumber}
-						guests={participants}
-						description={currentPhoto.description}
-					/>
-				</article>
-			</StyledCard>
-		)
-	}
+	// const displayCarousel = () => {
+	// 	const currentPhoto = photoList.find((photo: any) => photo.photoNumber === carousel + 1)
+	// 	const participants = currentPhoto.guests.reduce((guest:any, acc:any) => {
+	// 		const match = guests.find((person: any) => person.id === guest)
+	// 		acc.push(match.name)
+	// 		return acc
+	// 	}, [])
+	// 	return (
+	// 		<StyledCard contents="photoShoot">
+	// 			<article className="photoShootCard">
+	// 				<Photo
+	// 					id={currentPhoto.id}
+	// 					photoNumber={currentPhoto.photoNumber}
+	// 					guests={participants}
+	// 					description={currentPhoto.description}
+	// 				/>
+	// 			</article>
+	// 		</StyledCard>
+	// 	)
+	// }
 
 
   return (

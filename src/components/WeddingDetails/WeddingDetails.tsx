@@ -80,43 +80,29 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 
 	const displayCurrentView = () => {
 		if (editGuestListView) {
-<<<<<<< HEAD
-						return (
-								<GuestList
-										changeView={determineCurrentState}
-								/>
-						)
-		} else if (editPhotoListView) {
-				return(
-						<PhotoListForm 
-								guests={familyPhotoList}
-								changeView={determineCurrentState}
-						/>
-				)
-=======
 				return (
 					<GuestList
 						changeView={determineCurrentState}
 					/>
 				)
-		} else if (photoShootView) {
+		} else if(photoShootView) {
 				return (
 					<PhotoShootView
-						name={individualWedding.name}
-						weddingId={individualWedding.weddingId}
-						photoList={individualWedding.photoList}
+						name={name}
+						weddingId={weddingId}
+						photoList={photoList}
 						guests={familyPhotoList}
 						changeView={determineCurrentState}
+
 					/>
 				)
 		} else if (editPhotoListView) {
-			return (
+			return(
 				<PhotoListForm
 					guests={familyPhotoList}
 					changeView={determineCurrentState}
 				/>
 			)
->>>>>>> a4327cfd... Resolve merge conflicts
 		} else {
 						return (
 						<section className="detailImageWrap">
@@ -147,19 +133,12 @@ const WeddingDetails: React.FC<IndividualWedding> = ({
 						<a className="link" id="addListButton">Add Photo List</a>
 					}
 				</StyledButton>
-<<<<<<< HEAD
-=======
-				<PhotoListForm
-					guests={familyPhotoList}
-					changeView={determineCurrentState}
-				/>
 				{weddingDate === dayjs().format("MM/DD/YYYY") &&
-					<StyledButton onClick={() => determineCurrentState("photoShootView")}>
+					<StyledButton onClick={() => determineCurrentState("photoView")}>
 						<div id="translate"></div>
 						<a className="link">Start Photo Session</a>
 					</StyledButton>
 				}
->>>>>>> a4327cfd... Resolve merge conflicts
 				{photoList.length > 0 &&
 					<WeddingPhotoList
 						name={individualWedding.name}
