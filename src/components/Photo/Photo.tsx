@@ -17,7 +17,7 @@ const Photo: React.FC<Props> = ({
     < article className="photoCard">
       <h4 className="photoHeader">PHOTO {photoNumber}</h4>
       <p>
-        {guests.length > 0 && guests.reduce(    (names:string, guest: any) => {
+        {guests.length > 0 && guests.reduce((names:string, guest: any) => {
         names += ` ${guest.name} •`
         return names
         }, '•')
