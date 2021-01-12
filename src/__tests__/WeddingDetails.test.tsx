@@ -6,6 +6,10 @@ import WeddingDetails from '../components/WeddingDetails/WeddingDetails';
 
 describe('WeddingDetails', () => {
   it('renders default WeddingDetails elements', () => {
+    const detailsView = true;
+    const photoListView = false;
+    const editListView = false;
+
     render(
       <MemoryRouter>
         <WeddingDetails
@@ -20,8 +24,8 @@ describe('WeddingDetails', () => {
     </MemoryRouter>
     );
     
-    const expectedTitle = [<h1 className="weddingTitle">Johanessburg Wedding</h1>, <h1>Johanessburg Wedding</h1>]
-    expect(screen.getAllByText('Johanessburg Wedding')).toEqual(expectedTitle);
+    expect(detailsView).toEqual(true)
+    expect(screen.getByText('Johanessburg Wedding')).toBeInTheDocument();
     
   });
 
