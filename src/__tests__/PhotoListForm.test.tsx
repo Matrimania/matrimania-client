@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router-dom';
 import PhotoListForm from '../components/PhotoListForm/PhotoListForm';
 
 describe('PhotoListForm', () => {
-  it('renders PhotoList Form', () => {
+  it('renders PhotoList Form with guests', () => {
 		const mockChangeView = jest.fn()
 	
     render(
@@ -22,7 +22,12 @@ describe('PhotoListForm', () => {
     );
 	
 		expect(screen.getByRole('heading', {  name: /let's start with your photo list/i})).toBeInTheDocument();
-    
+		expect(screen.getByRole('heading', { name: "To add a photo: 1. Add a description (optional) 2. Pick guests to include in the photo 3. Click Submit button Tip: Don't forget to include yourselves!"})).toBeInTheDocument();
+		expect(screen.getByPlaceholderText('Description')).toBeInTheDocument();
+		expect(screen.getByText("Bacob")).toBeInTheDocument();
+		expect(screen.getByText("Bohn")).toBeInTheDocument();
+		expect(screen.getByText("Bamy")).toBeInTheDocument();
+		expect(screen.getAllByRole('checkbox')).toHaveLength(3);
   });
 
 });
