@@ -41,10 +41,10 @@ const GuestList: React.FC<WeddingData> = ({
     var reg = /^\d+$/;
     if (reg.test(value)) {
       formatPhoneText(value)
-      setIsError(false)
+      setHasError(false)
       setErrorMessage('')
     } else {
-      setIsError(true)
+      setHasError(true)
       setErrorMessage('Phone Number only accepts numerical values')
     }
   }
@@ -56,33 +56,44 @@ const GuestList: React.FC<WeddingData> = ({
       value = value.slice(0,3) + "-" + value.slice(3,6) + "-" + value.slice(6);
     }
     setPhoneNumber(value)
-    setIsError(false)
+    setHasError(false)
     setErrorMessage('')
   }
 
   const submitGuest = (event: React.FormEvent) => {
     event.preventDefault();
+    setIsLoading(true)
+    const guestPost = {
+      name: guestName,
+      phoneNumber,
+      wedding: weddingId
+    }
     const newGuest: NewGuest = {
       id: Date.now(),
-      guestName,
+      name: guestName,
       phoneNumber
     }
-    if (guestName !== "" && phoneNumber.length === 12) {
-      setGuests([...guests, newGuest])
-      clearInputs();
-      setIsError(false)
+    if(guestName !== "" && phoneNumber.length === 12) {
+      clearInputs()
+      setHasError(false)
       setErrorMessage('')
-    } else if(guestName === "" && phoneNumber.length !== 12){
-      setIsError(true)
+      const postGuest = async () => {
+        const response = await postAGuest(guestPost)
+        .then(updateGuests())
+      }
+      postGuest()
+      setGuests([...guests, newGuest])
+    } else if (guestName === "" && phoneNumber.length !== 12) {
+      setHasError(true)
       setErrorMessage('Name and Phone Number Required')
-    } else if(guestName === "" ) {
-      setIsError(true)
+    } else if (guestName === "") {
+      setHasError(true)
       setErrorMessage('Name Required')
-    } else if(phoneNumber.length !== 12) {
-      setIsError(true)
+    } else if (phoneNumber.length !== 12) {
+      setHasError(true)
       setErrorMessage('Phone Number Required')
     }
-    // should be a POST request + adding card to UI
+    setIsLoading(false)
   }
 
   const clearInputs = () => {
