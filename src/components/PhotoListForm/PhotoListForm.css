@@ -1,7 +1,16 @@
 .checkboxSection {
   padding: 1.5em;
+  width: 75%;
+  display: flex;
+  flex-wrap: wrap;
 }
 .sectionHeader {
   font-family: Roboto, sans-serif;
   font-size: 1.5em;
+  width: 100%;
+  margin-bottom: 1%;
+}
+.checkbox {
+  width: auto;
+  margin: 1%;
 }

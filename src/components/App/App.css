@@ -26,6 +26,8 @@ footer, header, hgroup, menu, nav, section {
 }
 #root{
 	font-size: 12px;
+	height: 100vh;
+  background-color: #f5f5f5;
 }
 
 .appWrap {
