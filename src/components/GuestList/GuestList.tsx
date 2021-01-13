@@ -102,8 +102,9 @@ const GuestList: React.FC<WeddingData> = ({
   }
 
   const deleteGuest = (id: number) => {
+    deleteAGuest(id)
     const filteredGuestList = guests.filter(guest => guest.id !== id)
-    setGuests (filteredGuestList)
+    setGuests(filteredGuestList)
   }
 
 	return (

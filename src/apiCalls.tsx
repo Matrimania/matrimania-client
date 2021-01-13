@@ -105,3 +105,14 @@ export const getSingleWeddingPhotos = (weddingId:number) => {
     return "No photos found"
   })
 }
+export const deleteAGuest = (guestId:number) => {
+  return fetch(`http://localhost:8000/api/v1/weddings/remove_guest/?guest=${guestId}`, {
+    method: 'DELETE',
+  })
+  .then(response => {
+    if(!response.ok) {
+      throw Error
+    }
+  })
+  .catch(err => alert('could not delete guest.'))
+}
