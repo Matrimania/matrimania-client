@@ -16,8 +16,14 @@
 ## About The Project
 
 ### Built With
-* Stuff
-* Things
+* TypeScript
+* React Hooks
+* React Router
+* CSS/Styled Components
+* Day.js
+* Jest & React Testing Library
+* Fetch API
+* Git/GitHub
 
 ### Installation
 To install the application
