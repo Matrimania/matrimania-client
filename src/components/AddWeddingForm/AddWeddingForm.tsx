@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './AddWeddingForm.css'
-import empty from '../../assets/emptyGuestList.png'
 import { postAWedding } from '../../apiCalls'
 import { StyledButton } from '../App/styledComponents.styles'
 
@@ -87,7 +86,7 @@ const AddWeddingForm: React.FC = () => {
         />
         <StyledButton onClick={event => submitWedding(event)}>
           <div id="translate"></div>
-            <a className="link" id="addListButton">Submit Wedding</a>
+            <h2 className="link" id="addListButton">Submit Wedding</h2>
         </StyledButton>
       </form>
     </>

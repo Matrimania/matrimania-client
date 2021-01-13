@@ -1,16 +1,14 @@
+// Assets
 import './App.css';
 import React, {useState, useEffect} from 'react'
 import logo from '../../assets/FinalMatrimaniaLogo.png'
-import {Route, Switch, NavLink, Link} from 'react-router-dom'
-import { weddings, individualWedding } from '../../weddingData'
+import {Route, Switch, Link} from 'react-router-dom'
+import { getWeddings } from '../../apiCalls'
 // Components
 import VendorDashboard from '../VendorDashboard/VendorDashboard'
 import WeddingDetails from '../WeddingDetails/WeddingDetails'
-import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList'
 import LandingPage from '../LandingPage/LandingPage'
-import GuestListForm from '../GuestList/GuestList'
 import AddWeddingForm from '../AddWeddingForm/AddWeddingForm'
-import { getWeddings } from '../../apiCalls'
 
 type Wedding = {
   id: number;

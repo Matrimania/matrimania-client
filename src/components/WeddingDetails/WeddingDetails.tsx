@@ -1,13 +1,10 @@
 import './WeddingDetails.css';
 import React, { useState, useEffect } from 'react';
-import { individualWedding } from '../../weddingData';
-import { postAGuest, getSingleWeddingGuests, getSingleWeddingPhotos, getWeddings, getWeddingInfo } from '../../apiCalls';
+import { getSingleWeddingGuests, getSingleWeddingPhotos, getWeddings } from '../../apiCalls';
 import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList';
 import PhotoShootView from '../PhotoShootView/PhotoShootView';
-import { Link } from 'react-router-dom'
 import { StyledButton } from '../App/styledComponents.styles'
 import GuestList from '../GuestList/GuestList'
-import Guest from '../Guest/Guest';
 import dayjs from 'dayjs';
 import PhotoListForm from '../PhotoListForm/PhotoListForm';
 
@@ -26,14 +23,6 @@ type Photo = {
 	number: number;
 	description: string;
 	guest: number[];
-}
-
-type Wedding = {
-  id: number;
-  name: string;
-  email: string;
-  date: string;
-  image: string;
 }
 
 const WeddingDetails: React.FC<Props> = ({
@@ -182,14 +171,14 @@ const WeddingDetails: React.FC<Props> = ({
 				<StyledButton onClick={() => determineCurrentState("editGuestListView")}>
 					<div id="translate"></div>
 					{currentWeddingPhotos.length > 0 ?
-						<a className="link" id="editListButton">Edit Photo Details</a> :
-						<a className="link" id="addListButton">Add Photo List</a>
+						<h3 className="link" id="editListButton">Edit Photo Details</h3> :
+						<h3 className="link" id="addListButton">Add Photo List</h3>
 					}
 				</StyledButton>
 				{weddingDate === dayjs().format("MM/DD/YYYY") &&
 					<StyledButton onClick={() => determineCurrentState("photoShootView")}>
 						<div id="translate"></div>
-						<a className="link">Start Photo Session</a>
+						<h3 className="link">Start Photo Session</h3>
 					</StyledButton>
 				}
 				{currentWeddingPhotos.length > 0 &&
