@@ -22,7 +22,7 @@ const WeddingCard: React.FC<Wedding> = ({
       <StyledCard contents="wedding">
         <Link to={`/wedding/${id}`}>
             <h1 className="weddingTitle">{name} Wedding</h1>
-            <h2 className="weddingDate">{dayjs(date).format("MM/DD/YYYY")}</h2>
+            <h2 className="weddingDate" data-testid="weddingDate">{dayjs(date).format("MM/DD/YYYY")}</h2>
             <section className="couplePhotoWrap">
               <img className="couplePhoto" src={image} alt={`The happy ${name} couple`}/>
             </section>

@@ -12,12 +12,17 @@ describe('PhotoListForm', () => {
     render(
       <MemoryRouter>
         <PhotoListForm
-        guests={[
-            {isChecked: true, name: 'Bacob', phone: 5555551234, photos: [1, 2, 3, 4, 6]},
-            {isChecked: true, name: 'Bohn', phone: 1111151234, photos: [1, 2, 3, 4, 6]},
-            {isChecked: true, name: 'Bamy', phone: 2222221234, photos: [1, 2, 3, 4, 6]}
-        ]}
-        changeView={mockChangeView}
+					loading={false}
+					weddingId={1}
+					guests={[
+							{isChecked: true, name: 'Bacob', phone: 5555551234, photos: [1, 2, 3, 4, 6]},
+							{isChecked: true, name: 'Bohn', phone: 1111151234, photos: [1, 2, 3, 4, 6]},
+							{isChecked: true, name: 'Bamy', phone: 2222221234, photos: [1, 2, 3, 4, 6]}
+					]}
+					updateGuests
+					updatePhotos
+					changeView={mockChangeView}
+					photoList
       />
       </MemoryRouter> 
     );
@@ -38,8 +43,13 @@ describe('PhotoListForm', () => {
     render(
       <MemoryRouter>
         <PhotoListForm
-        guests={[]}
-        changeView={mockChangeView}
+        loading={false}
+				weddingId={1}
+				guests={[]}
+				updateGuests
+				updatePhotos
+				changeView={mockChangeView}
+				photoList
       />
       </MemoryRouter> 
     );
