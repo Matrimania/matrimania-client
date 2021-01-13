@@ -45,7 +45,7 @@ npm test
 ```
 
 ## Where it began
-<img src="" alt="early wireframe design of portfolio site" width="600">
+<img src="./src/assets/matrimania-wireframe.png" alt="wireframe of application demonstrating user story flow" width="600">
 
 ## Usage
 #### LANDING PAGE
