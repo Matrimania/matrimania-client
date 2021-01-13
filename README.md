@@ -50,6 +50,7 @@ npm test
 ```
 
 ## Where it began
+### WIREFRAME
 <img src="./src/assets/matrimania-wireframe.png" alt="wireframe of application demonstrating user story flow" width="600">
 
 ## Matrimania in Action
@@ -57,7 +58,11 @@ npm test
 
 <img src="" alt="Portfolio app landing page view" width="600">
 
-## Roadmap
+
+## Next Steps
+- Our first task would be to resolve architectural issues preventing proper renders after a user fills out various forms on the application.
+- The next feature we'd want is for vendors to be able to contact guests on the day of the wedding to inform them when and where their photos will be taken. We planned on incorporating the Twilio API for text messaging. Before this feature is implemented, we want to be able to handle security issues so we don't expose users' private data such as guests' phone numbers.
+- Additional features would be to allow a user to edit and delete guest and photo lists.
 
 ## Contact
 - 👤 [Kristi Miller - FE Developer](https://github.com/Kristiannmiller)
@@ -71,4 +76,3 @@ npm test
 - [Server Repo](https://github.com/Matrimania/back-end)
 - [Project Board](https://github.com/orgs/Matrimania/projects/1)
 
-## Acknowledgements
