@@ -1,7 +1,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/Matrimania/matrimania-client">
-    <img src="ReadmeAssets/Intro.gif" alt="moving image of application in use" width="600">
+    <img src="./src/assets/WalkThrough.gif" alt="Main features of Matrimania application" width="600">
   </a>
   <h1 align="center">Matrimania</h1>
   <p align="left">
@@ -21,8 +21,9 @@
 * CSS/Styled Components
 * Day.js
 * Jest & React Testing Library
-* Fetch API
+* Fetch API 
 * Git/GitHub
+* Eslint
 
 ### Skills
 * OOP using functional components
@@ -50,13 +51,25 @@ npm test
 ```
 
 ## Where it began
-### WIREFRAME
+#### WIREFRAME
 <img src="./src/assets/matrimania-wireframe.png" alt="wireframe of application demonstrating user story flow" width="600">
 
 ## Matrimania in Action
-### LANDING PAGE
+#### LANDING PAGE
 
-<img src="" alt="Portfolio app landing page view" width="600">
+<img src="./src/assets/matrimania-dashboard.png" alt="Vendor dashboard displaying 6 weddings a photographer has in their calendar" width="600">
+
+#### INDIVIDUAL WEDDING PAGE
+<img src="./src/assets/matrimania-details.png" alt="Specific details for the Jacobs wedding with date, a list of photos planned, and user interaction options" width="600">
+
+#### CREATE A GUESTLIST
+<img src="./src/assets/matrimania-empty-guestlist.png" alt="View for user to start their guest list including a form to fill out for individual guest details" width="600">
+
+#### FILLED GUESTLIST
+<img src="./src/assets/matrimania-guestlist-filled.png" alt="View of filled out guest list with 5 names and phone numbers added" width="600">
+
+#### PHOTOSHOOT VIEW
+<img src="./src/assets/PhotoShoot.gif" alt="Carousel view of wedding photos - available to vendor day-of wedding" width="600">
 
 ## Wins & Challenges
 - This was a greenfield project for both the front-end and back-end teams incorporating technologies we hadn't used before. It was a challenge to build out a client-side application and server in tandem - we did not have all our endpoints available immediately and had to incorporate async fetch calls later in our process.
