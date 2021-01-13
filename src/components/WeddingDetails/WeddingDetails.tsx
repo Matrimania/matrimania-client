@@ -138,6 +138,7 @@ const WeddingDetails: React.FC<Props> = ({
 					guests={currentWeddingGuests}
 					changeView={determineCurrentState}
 					photoList={currentWeddingPhotos}
+					weddingId={weddingData.id}
 				/>
 			)
 		} else {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Photo from '../Photo/Photo';
 import Checkbox from '../Checkbox/Checkbox';
+import { postAPhoto } from '../../apiCalls';
 import empty from '../../assets/emptyGuestList.png';
 import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles';
 import '../GuestList/GuestList.css';
@@ -17,9 +18,10 @@ type WeddingData = {
   guests: any;
   changeView: any;
   photoList: any;
+  weddingId: number;
 }
 
-const PhotoListForm: React.FC<WeddingData> = ({guests, changeView, photoList}) => {
+const PhotoListForm: React.FC<WeddingData> = ({guests, changeView, photoList, weddingId}) => {
   const [description, setDescription] = useState('');
   const [guestsOptions, setGuestsOptions] = useState<any[]>([]);
   const [photoData, setPhotoData] = useState<any[]>([]);
@@ -55,8 +57,16 @@ const PhotoListForm: React.FC<WeddingData> = ({guests, changeView, photoList}) =
         guests: guestList,
         description: description
       }
+      const guestIds = guestList.map(guest => guest.id)
+      const postPhoto = {
+        guest: guestIds,
+        description: description,
+        number: photoData.length + 1,
+        weddingId: weddingId
+      }
       setPhotoData([...photoData, newPhotoData])
       setDescription('')
+      postAPhoto(postPhoto)
     } else {
       setIsError(true)
       setErrorMessage('Please select at least one guest for the photo')

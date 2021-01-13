@@ -31,7 +31,7 @@ export const postAWedding = (wedding: any) => {
     alert('Could not add wedding')
   })
 }
-// number: number, description: string, guest:string[], weddingId:number
+// number: number, description: string, guest:number[], weddingId:number
 export const postAPhoto = (photo:any) => {
   return fetch(`http://localhost:8000/api/v1/weddings/photos/?weddingId=${photo.weddingId}`, {
     method:'POST',
