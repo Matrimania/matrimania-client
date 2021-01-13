@@ -43,11 +43,16 @@ const App = () => {
   return (
     <div className="appWrap">
       <header className="headerWrap">
-        <Link to={`/`}>
+        <Link to={`/vendor-dashboard`}>
           <img src={logo} className="logo" alt="Matrimania Logo"/>
         </Link>
       </header>
       <Switch>
+        <Route path='/vendor-dashboard'>
+          <VendorDashboard
+            weddings={weddings}
+          />
+        </Route>
         <Route exact path='/wedding/:weddingId'
           render={({ match }) => {
             const { weddingId } = match.params
@@ -59,9 +64,7 @@ const App = () => {
           <AddWeddingForm />
         </Route>
         <Route exact path='/'>
-        <VendorDashboard
-            weddings={weddings}
-          />
+          <LandingPage />
         </Route>
       </Switch>
     </div>
