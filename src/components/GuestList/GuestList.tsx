@@ -1,27 +1,32 @@
 import React, { useState } from 'react';
 import Guest from '../Guest/Guest';
-import './GuestList.css'
-import empty from '../../assets/emptyGuestList.png'
-import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles'
+import { postAGuest } from '../../apiCalls';
+import './GuestList.css';
+import empty from '../../assets/emptyGuestList.png';
+import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles';
 
 
 type NewGuest = {
   id: number,
-  guestName: string,
+  name: string,
   phoneNumber: string;
 }
 
 type WeddingData = {
-	changeView: any;
+  changeView: any;
+  guestList: any;
+  weddingId: number;
 }
 
 const GuestList: React.FC<WeddingData> = ({
-	changeView
+  changeView, 
+  guestList,
+  weddingId
 }) => {
 
   const [guestName, setGuestName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [guests, setGuests] = useState<NewGuest[]>([]);
+  const [guests, setGuests] = useState<NewGuest[]>([guestList]);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -137,7 +142,8 @@ const GuestList: React.FC<WeddingData> = ({
             phoneNumber={guest.phoneNumber}
             key={guest.id}
             deleteGuest={deleteGuest}>
-            </Guest>)) }
+            </Guest>)) 
+          }
         </StyledCard>
       </section>
     </>

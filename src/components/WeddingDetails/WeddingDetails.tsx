@@ -20,7 +20,7 @@ type Guest = {
 	name: string;
 	phoneNumber: string;
 	wedding: number;
-}
+}    
 type Photo = {
 	id: number;
 	number: number;
@@ -68,6 +68,8 @@ const WeddingDetails: React.FC<Props> = ({
 				setHasError(true)
 				setErrorMessage({...errorMessage, guestError: guestResult})
 			} else {
+				console.log('GUESTS', guestResult)
+				//map and change guest.name to guest.guestName
 				setCurrentWeddingGuests(guestResult)
 			}
 		}
@@ -119,6 +121,7 @@ const WeddingDetails: React.FC<Props> = ({
 					<GuestList
 					//need to pass in guest list here
 						changeView={determineCurrentState}
+						guestList={currentWeddingGuests}
 					/>
 				)
 		} else if(photoShootView) {
