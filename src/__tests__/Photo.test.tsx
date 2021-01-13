@@ -9,16 +9,16 @@ describe('Photo', () => {
     render(
       <MemoryRouter>
         <Photo
-        id={1}
-        photoNumber={1}
-        guests={[
-            {isChecked: true, name: 'Bacob', phone: 5555551234, photos: [1, 2, 3, 4, 6]},
-            {isChecked: true, name: 'Bohn', phone: 1111151234, photos: [1, 2, 3, 4, 6]},
-            {isChecked: true, name: 'Bamy', phone: 2222221234, photos: [1, 2, 3, 4, 6]}
-        ]}
-        description={"Rebellious Bunch"}
+          id={1}
+          photoNumber={1}
+          guests={[
+            'Bacob',
+            'Bohn',
+            'Bamy'
+          ]}
+          description={"Rebellious Bunch"}
       />
-      </MemoryRouter> 
+      </MemoryRouter>
     );
     
     expect(screen.getByText('PHOTO 1')).toBeInTheDocument();
