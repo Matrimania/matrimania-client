@@ -1,25 +1,43 @@
 import './WeddingPhotoList.css';
 import { StyledCard } from '../App/styledComponents.styles'
+import Photo from '../Photo/Photo';
 
 
 type PhotoListData = {
 	name: string;
 	weddingId: number;
+	guestList: any;
 	photoList: {id: number, number: number, description: string, guest: number[] }[]
 }
 
 const WeddingPhotoList: React.FC<PhotoListData> = ({
 	name,
 	weddingId,
+	guestList,
 	photoList
 }) => {
+
+	const getGuestNames = (guestIds:any) => {
+		return guestIds.map((guest:any) => {
+			const match = guestList.find((person:any) => person.id === guest)
+			if(match){
+				return match.name
+			}
+		})
+	}
+
 	console.log(typeof photoList)
 	const displayPhotoList = photoList.map(photo => {
-		return <div className="photoListDetails" key={photo.id}>
-					<p className="photoNumber">Photo: {photo.number}</p>
-					<p className="photoGuest">Guests: {photo.guest}</p>
-					<p className="photoDescription">Description: {photo.description}</p>
-			</div>
+		const guests = getGuestNames(photo.guest)
+		return (
+			<Photo
+				key={photo.id}
+				id={photo.id}
+				photoNumber={photo.number}
+				guests={guests}
+				description={photo.description}
+			/>
+		)
 	})
 
 
@@ -27,7 +45,6 @@ const WeddingPhotoList: React.FC<PhotoListData> = ({
 		<section className="weddingPhotoListWrapper">
 			<StyledCard contents="list" className="photoListWrapper">
 			<div className="photoListHeader">WeddingPhotoList</div>
-				{/* <h1>{name} Wedding</h1> */}
 				<div className="photoListWrapper">
 					{displayPhotoList}
 				</div>
