@@ -41,6 +41,7 @@ const WeddingDetails: React.FC<Props> = ({
 }) => {
 	const [errorMessage, setErrorMessage] = useState({photoError: '', guestError: '', weddingError: ''})
 	const [hasError, setHasError] = useState(false)
+	const [isLoading, setIsLoading] = useState(false)
 	const [detailsView, setDetailsView] = useState(true)
 	const [photoShootView, setPhotoShootView] = useState(false)
 	const [editGuestListView, setGuestListView] = useState(false)
@@ -126,15 +127,18 @@ const WeddingDetails: React.FC<Props> = ({
 		if (editGuestListView) {
 				return (
 					<GuestList
-					//need to pass in guest list here
+						loading={isLoading}
+						guestList={currentWeddingGuests}
 						changeView={determineCurrentState}
+						weddingId={weddingData.id}
+						updateGuests={getWeddingGuests}
 					/>
 				)
 		} else if(photoShootView) {
 				return (
 					<PhotoShootView
 						name={weddingData.name}
-						weddingId={weddingData.id}
+						weddingId={weddingId}
 						photoList={currentWeddingPhotos}
 						guests={currentWeddingGuests}
 						changeView={determineCurrentState}
@@ -143,7 +147,12 @@ const WeddingDetails: React.FC<Props> = ({
 		} else if (editPhotoListView) {
 			return(
 				<PhotoListForm
+					loading={isLoading}
+					weddingId={weddingData.id}
 					guests={currentWeddingGuests}
+					updateGuests={getWeddingGuests}
+					updatePhotos={getWeddingPhotos}
+					photoList={currentWeddingPhotos}
 					changeView={determineCurrentState}
 				/>
 			)
@@ -187,7 +196,8 @@ const WeddingDetails: React.FC<Props> = ({
 					<WeddingPhotoList
 						name={weddingData.name}
 						weddingId={weddingData.id}
-						photoList={currentWeddingPhotos} /> }
+						photoList={currentWeddingPhotos}
+						guestList={currentWeddingGuests} /> }
 				</div>
 			}
 			<section className="detailFormWrap">
