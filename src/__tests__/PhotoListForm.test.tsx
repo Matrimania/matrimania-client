@@ -15,19 +15,23 @@ describe('PhotoListForm', () => {
 					loading={false}
 					weddingId={1}
 					guests={[
-							{isChecked: true, name: 'Bacob', phone: 5555551234, photos: [1, 2, 3, 4, 6]},
-							{isChecked: true, name: 'Bohn', phone: 1111151234, photos: [1, 2, 3, 4, 6]},
-							{isChecked: true, name: 'Bamy', phone: 2222221234, photos: [1, 2, 3, 4, 6]}
+							{id: 1, name: 'Bacob', phone: 5555551234, wedding: 1 },
+							{id: 2, name: 'Bohn', phone: 1111151234, wedding: 1},
+							{id: 3, name: 'Bamy', phone: 2222221234, wedding: 1}
 					]}
 					updateGuests
 					updatePhotos
 					changeView={mockChangeView}
-					photoList
+					photoList={[
+							{id: 1, photoNumber: 1, guest: ['Bacob, Bohn, Bamy'], desciption: 'Rowdy'},
+							{id: 2, photoNumber: 2, guest: ['Bacob, Bohn, Bamy'], desciption: 'Old'},
+							{id: 3, photoNumber: 3, guest: ['Bacob, Bohn, Bamy'], desciption: 'Fun'}
+					]}
       />
       </MemoryRouter> 
     );
 	
-		expect(screen.getByRole('heading', {  name: /let's start with your photo list/i})).toBeInTheDocument();
+		expect(screen.getByRole('heading', {name: /let's build your photo list/i})).toBeInTheDocument();
 		expect(screen.getByRole('heading', {name: `To add a photo: 1. Add a description 2. Pick guests to include in the photo 3. Click Submit button Tip: Don't forget to include yourselves!`})).toBeInTheDocument();
 		expect(screen.getByPlaceholderText('Description (optional)')).toBeInTheDocument();
 		expect(screen.getByText('Submit Photo')).toBeInTheDocument();
@@ -49,12 +53,12 @@ describe('PhotoListForm', () => {
 				updateGuests
 				updatePhotos
 				changeView={mockChangeView}
-				photoList
+				photoList={[]}
       />
       </MemoryRouter> 
     );
 	
-		expect(screen.getByRole('heading', {  name: /let's start with your photo list/i})).toBeInTheDocument();
+		expect(screen.getByRole('heading', {name: /let's build your photo list/i})).toBeInTheDocument();
 		expect(screen.getByRole('heading', {name: `To add a photo: 1. Add a description 2. Pick guests to include in the photo 3. Click Submit button Tip: Don't forget to include yourselves!`})).toBeInTheDocument();
 		expect(screen.getByPlaceholderText('Description (optional)')).toBeInTheDocument();
 		expect(screen.getByText('Submit Photo')).toBeInTheDocument();
@@ -62,23 +66,32 @@ describe('PhotoListForm', () => {
 
 	it('should allow the user to check guests', () => {
 		const mockChangeView = jest.fn()
-	
+		const mockGetGuestNames = jest.fn().mockImplementation
     render(
       <MemoryRouter>
         <PhotoListForm
-        guests={[
-            {isChecked: false, name: 'Bacob', phone: 5555551234, photos: [1, 2, 3, 4, 6]},
-            {isChecked: false, name: 'Bohn', phone: 1111151234, photos: [1, 2, 3, 4, 6]},
-            {isChecked: false, name: 'Bamy', phone: 2222221234, photos: [1, 2, 3, 4, 6]}
-        ]}
-        changeView={mockChangeView}
+					loading={false}
+					weddingId={1}
+					guests={[
+						{id: 1, name: 'Bacob', phone: 5555551234, wedding: 1 },
+						{id: 2, name: 'Bohn', phone: 1111151234, wedding: 1},
+						{id: 3, name: 'Bamy', phone: 2222221234, wedding: 1}
+					]}
+					updateGuests
+					updatePhotos
+					changeView={mockChangeView}
+					photoList={[
+						{id: 1, photoNumber: 1, guest: ['Bacob, Bohn, Bamy'], desciption: 'Rowdy'},
+						{id: 2, photoNumber: 2, guest: ['Bacob, Bohn, Bamy'], desciption: 'Old'},
+						{id: 3, photoNumber: 3, guest: ['Bacob, Bohn, Bamy'], desciption: 'Fun'}
+				]}
       />
       </MemoryRouter> 
     );
 				
 		const checkbox = screen.getAllByRole('checkbox')
 
-		expect(screen.getByRole('heading', {  name: /let's start with your photo list/i})).toBeInTheDocument();
+		expect(screen.getByRole('heading', {name: /let's build your photo list/i})).toBeInTheDocument();
 		expect(screen.getByRole('heading', {name: `To add a photo: 1. Add a description 2. Pick guests to include in the photo 3. Click Submit button Tip: Don't forget to include yourselves!`})).toBeInTheDocument();
 		expect(screen.getByPlaceholderText('Description (optional)')).toBeInTheDocument();
 		expect(screen.getByText('Submit Photo')).toBeInTheDocument();
