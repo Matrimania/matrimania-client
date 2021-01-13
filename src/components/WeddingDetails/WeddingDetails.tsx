@@ -68,8 +68,6 @@ const WeddingDetails: React.FC<Props> = ({
 				setHasError(true)
 				setErrorMessage({...errorMessage, guestError: guestResult})
 			} else {
-				console.log('GUESTS', guestResult)
-				//map and change guest.name to guest.guestName
 				setCurrentWeddingGuests(guestResult)
 			}
 		}
@@ -139,14 +137,15 @@ const WeddingDetails: React.FC<Props> = ({
 				<PhotoListForm
 					guests={currentWeddingGuests}
 					changeView={determineCurrentState}
+					photoList={currentWeddingPhotos}
 				/>
 			)
 		} else {
-						return (
-						<section className="detailImageWrap">
-								<img className="detailImage" alt="detailImage" src={weddingData.image} />
-						</section>
-				)
+			return (
+				<section className="detailImageWrap">
+						<img className="detailImage" alt="detailImage" src={weddingData.image} />
+				</section>
+			)
 		}
 }
 

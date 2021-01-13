@@ -16,9 +16,10 @@ import './PhotoListForm.css';
 type WeddingData = {
   guests: any;
   changeView: any;
+  photoList: any;
 }
 
-const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
+const PhotoListForm: React.FC<WeddingData> = ({guests, changeView, photoList}) => {
   const [description, setDescription] = useState('');
   const [guestsOptions, setGuestsOptions] = useState<any[]>([]);
   const [photoData, setPhotoData] = useState<any[]>([]);
