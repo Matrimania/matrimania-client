@@ -20,11 +20,23 @@
 * Things
 
 ### Installation
-In your terminal:
-1. Clone the repo-
-`git@github.com:Matrimania/matrimania-client.git`
-2. Install NPM packages- `npm install`
-3. Start application- `npm start`
+To install the application
+1. Clone the repo
+2. Install NPM packages
+3. Start application
+4. Open `localhost:3000` in your browser
+
+```
+git clone git@github.com:Matrimania/matrimania-client.git
+npm install
+npm start
+```
+
+### Testing
+To see test suites:
+```
+npm test
+```
 
 ## Where it began
 <img src="" alt="early wireframe design of portfolio site" width="600">
