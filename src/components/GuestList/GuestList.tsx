@@ -1,28 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Guest from '../Guest/Guest';
 import './GuestList.css'
 import empty from '../../assets/emptyGuestList.png'
+import { postAGuest, deleteAGuest } from '../../apiCalls';
 import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles'
 
 
+
+type WeddingData = {
+  loading: boolean;
+  guestList: any;
+	changeView: any;
+  weddingId: number;
+  updateGuests: any;
+}
+
 type NewGuest = {
   id: number,
-  guestName: string,
+  name: string,
   phoneNumber: string;
 }
 
-type WeddingData = {
-	changeView: any;
-}
-
 const GuestList: React.FC<WeddingData> = ({
-	changeView
+  loading,
+  guestList,
+  changeView,
+  weddingId,
+  updateGuests
 }) => {
 
   const [guestName, setGuestName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [guests, setGuests] = useState<NewGuest[]>([]);
-  const [isError, setIsError] = useState(false);
+  const [guests, setGuests] = useState<NewGuest[]>([...guestList]);
+  const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState(loading);
   const [errorMessage, setErrorMessage] = useState('');
 
   const checkNumber = (event: any) => {
