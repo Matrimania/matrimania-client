@@ -58,10 +58,13 @@ npm test
 
 <img src="" alt="Portfolio app landing page view" width="600">
 
+## Wins & Challenges
+- This was a greenfield project for both the front-end and back-end teams incorporating technologies we hadn't used before. It was a challenge to build out a client-side application and server in tandem - we did not have all our endpoints available immediately and had to incorporate async fetch calls later in our process.
+- A bug we would love to resolve next stems from architectural issues preventing proper renders each time a user fills one of the various forms on the application.
 
 ## Next Steps
-- Our first task would be to resolve architectural issues preventing proper renders after a user fills out various forms on the application.
-- The next feature we'd want is for vendors to be able to contact guests on the day of the wedding to inform them when and where their photos will be taken. We planned on incorporating the Twilio API for text messaging. Before this feature is implemented, we want to be able to handle security issues so we don't expose users' private data such as guests' phone numbers.
+
+- The next feature we'd want is for vendors to be able to contact guests on the day of the wedding to inform them when and where their photos will be taken. We planned on incorporating the Twilio API to send text reminders. We decided before this feature is implemented, we want to be able to handle security issues so we don't expose users' private data.
 - Additional features would be to allow a user to edit and delete guest and photo lists.
 
 ## Contact
