@@ -56,11 +56,12 @@ npm test
 
 ## Contact
 [Kristi Miller - FE Developer](https://github.com/Kristiannmiller)
-[Eric Berglund - FE Developer]()
-[Hanna Kim - FE Developer]()
-[Norma - BE Developer]()
-[Travis - BE Developer]()
+[Eric Berglund - FE Developer](https://github.com/ericberglund117)
+[Hanna Kim - FE Developer](https://github.com/hannakim91)
+[Norma - BE Developer](https://github.com/IamNorma)
+[Travis - BE Developer](https://github.com/fieldstyler)
 
-Project Link: [Matrimania Site](https://github.com/Matrimania/matrimania-client)
+## Additional Links
+[Project Organization](https://github.com/Matrimania)
 
 ## Acknowledgements
