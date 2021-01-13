@@ -7,7 +7,7 @@
   <p align="center">
     Something about wedding photos
     <br />
-    <a href="https://github.com/Matrimania/matrimania-client"><strong>Repo Link</strong></a>
+    <a href="https://matrimania-client.herokuapp.com/"><strong>Deployed App</strong></a>
     <br />
     <br />
   </p>

@@ -160,8 +160,9 @@ const WeddingDetails: React.FC<Props> = ({
 				<div className="detailsHeader">
 				<h1 className="weddingTitle">{weddingData.name} Wedding</h1>
 				<h2 className="weddingDate">{weddingDate}</h2>
-				<p className="weddingDetails">Email: {weddingData.email}</p>
-				<p className="weddingDetails">Status: {currentWeddingGuests.length === 0 ? "Pending" : "Received"}</p>
+				<p className="weddingDetails" data-testid="emailSection" >Email: {weddingData.email}</p>
+				<p className="weddingDetails"
+				data-testid="status">Status: {currentWeddingGuests.length === 0 ? "Pending" : "Received"}</p>
 				{currentWeddingPhotos.length === 0 &&
 					<StyledButton>
 						<div id="translate"></div>
