@@ -1,7 +1,6 @@
 import './VendorDashboard.css';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import WeddingCard from '../WeddingCard/WeddingCard'
-import { getWeddings } from '../../apiCalls'
 import { Link } from 'react-router-dom';
 import { StyledButton } from '../App/styledComponents.styles'
 import dayjs from 'dayjs';

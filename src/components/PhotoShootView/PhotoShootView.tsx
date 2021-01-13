@@ -12,12 +12,6 @@ type PhotoShootData = {
   changeView: any;
 }
 
-type Photo = {
-	id: number;
-	number: number;
-	description: string;
-	guest: number[];
-}
 
 const PhotoShootView: React.FC<PhotoShootData> = ({
   name, // last name of couple
@@ -32,7 +26,6 @@ const PhotoShootView: React.FC<PhotoShootData> = ({
   const [textBody, setTextBody] = useState('')
 	const [view, setView] = useState('notify')
 	const [carousel, setCarousel] = useState(0)
-	const [currentCarouselPhoto, setCurrentCarouselPhoto] = useState<Photo>({id: 0, number: 0, description:"", guest:[0]})
 
 	const createGuestPhotoList = (guestId:number) => {
 		const filtered = photoList.filter((photo:any) => photo.guest.includes(guestId))
@@ -129,7 +122,7 @@ const PhotoShootView: React.FC<PhotoShootData> = ({
 				/>
 				<StyledButton onClick={event => sendNotifications(event)}>
 					<div id="translate"></div>
-					<a className="link">Notify Guests</a>
+					<h3 className="link">Notify Guests</h3>
 				</StyledButton>
 			</form>
 			</>}
@@ -142,13 +135,13 @@ const PhotoShootView: React.FC<PhotoShootData> = ({
 					{(carousel > 0 && carousel <= photoList.length) &&
 						<BackButton onClick={() => setCarousel(carousel-1)}>
 							<div id="arrow">{"<<"}</div>
-							<a className="link">{"< Prev"}</a>
+							<h3 className="link">{"< Prev"}</h3>
 						</BackButton>
 					}
 					{(carousel >= 0 && carousel < photoList.length - 1) &&
 						<BackButton onClick={() => setCarousel(carousel+1)}>
 							<div id="arrow">{">>"}</div>
-							<a className="link">{"Next >"}</a>
+							<h3 className="link">{"Next >"}</h3>
 						</BackButton>
 					}
 					</section>

@@ -1,6 +1,5 @@
 import React from 'react';
 import './Checkbox.css';
-import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles'
 
 type Props = {
   name: string;
@@ -14,9 +13,9 @@ const Checkbox: React.FC<Props> = (props) => {
       <label
         className="checkboxLabel"
       >{props.name}</label>
-      <input 
+      <input
         className="checkbox"
-        type="checkbox" 
+        type="checkbox"
         name={props.name}
         checked={props.isChecked}
         onChange={() => props.toggleCheckMark(props.name)}

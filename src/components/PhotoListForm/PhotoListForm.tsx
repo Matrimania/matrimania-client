@@ -72,6 +72,7 @@ const PhotoListForm: React.FC<Props> = ({
         return {...guest, isChecked: false}
       })
       setGuestsOptions(allGuests)
+      return allGuests
   }
 
   const toggleCheckMark = (guestName: string) => {
@@ -114,12 +115,14 @@ const PhotoListForm: React.FC<Props> = ({
     setIsLoading(false)
     // conditional rendering - make sure guestlist,length is at least 1?
   }
-  console.log(photoData, "photodata")
+
   const getGuestNames = (guestIds:any) => {
     return guestIds.map((guest:any) => {
       const match = guestList.find((person:any) => person.id === guest)
       if(match){
         return match.name
+      } else {
+        return "error"
       }
     })
   }
@@ -160,16 +163,16 @@ const PhotoListForm: React.FC<Props> = ({
           {isError && errorMessage}
           <StyledButton onClick={event => submitPhoto(event)}>
             <div id="translate"></div>
-            <a className="link" id="addListButton">Submit Photo</a>
+            <h3 className="link" id="addListButton">Submit Photo</h3>
           </StyledButton>
           <section className="buttonWrapper">
             <BackButton onClick={() => changeView('editGuestListView')}>
             <div id="arrow">{"<<"}</div>
-            <a className="link">{"< Back"}</a>
+            <h3 className="link">{"< Back"}</h3>
             </BackButton>
             <BackButton onClick={() => changeView('detailsView')}>
             <div id="arrow">{">>"}</div>
-            <a className="link">{"Done >"}</a>
+            <h3 className="link">{"Done >"}</h3>
             </BackButton>
           </section>
         </section>
@@ -178,7 +181,7 @@ const PhotoListForm: React.FC<Props> = ({
       {isLoading ? "loading" :
         <StyledCard contents={photoData.length === 0 ? "empty" : "list"}>
           {photoData.length === 0 &&
-            <img className="emptyList" src={empty} alt="your photo list is empty"/> }
+            <img className="emptyList" src={empty} alt="your list is empty"/> }
           {photoData.length > 0 && photoData.map(item => (
             <Photo
               key={item.id}

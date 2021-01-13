@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Guest from '../Guest/Guest';
 import './GuestList.css'
 import empty from '../../assets/emptyGuestList.png'
@@ -78,11 +78,11 @@ const GuestList: React.FC<WeddingData> = ({
       setHasError(false)
       setErrorMessage('')
       const postGuest = async () => {
-        const response = await postAGuest(guestPost)
-        .then(updateGuests())
+        await postAGuest(guestPost)
       }
       postGuest()
       setGuests([...guests, newGuest])
+      updateGuests()
     } else if (guestName === "" && phoneNumber.length !== 12) {
       setHasError(true)
       setErrorMessage('Name and Phone Number Required')
@@ -135,21 +135,21 @@ const GuestList: React.FC<WeddingData> = ({
             onChange={event => checkNumber(event.target.value)}
           />
           <div className="inputWrap">
-            <a className="clearButton" onClick={event => clearInputs()}>Clear</a>
+            <h3 className="clearButton" onClick={event => clearInputs()}>Clear</h3>
           </div>
           {hasError && errorMessage}
           <StyledButton onClick={event => submitGuest(event)}>
             <div id="translate"></div>
-            <a className="link" id="addListButton">Add To Guest List</a>
+            <h3 className="link" id="addListButton">Add To Guest List</h3>
           </StyledButton>
           <section className="buttonWrapper">
             <BackButton onClick={() => changeView('detailsView')}>
               <div id="arrow">{"<<"}</div>
-              <a className="link">{"< Back"}</a>
+              <h3 className="link">{"< Back"}</h3>
             </BackButton>
             <BackButton onClick={() => changeView('editPhotoListView')}>
               <div id="arrow">{">>"}</div>
-              <a className="link">{"Photos >"}</a>
+              <h3 className="link">{"Photos >"}</h3>
             </BackButton>
           </section>
         </section>
