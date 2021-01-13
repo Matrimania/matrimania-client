@@ -3,11 +3,11 @@
   <a href="https://github.com/Matrimania/matrimania-client">
     <img src="ReadmeAssets/Intro.gif" alt="moving image of application in use" width="600">
   </a>
-  <h3 align="center">Matrimania</h3>
-  <p align="center">
-    Something about wedding photos
+  <h1 align="center">Matrimania</h1>
+  <p align="left">
+    Matrimania is a multi-page React application designed to remove the <i>mania</i> of capturing memories of wedding celebrations. <br>A vendor (wedding photographer) can organize their upcoming photoshoots, request necessary information from their clients, and access an easy-to-read carousel view of photos they must take during the special day.
     <br />
-    <a href="https://matrimania-client.herokuapp.com/"><strong>Deployed App</strong></a>
+    See our <a href="https://matrimania-client.herokuapp.com/"> <strong>Deployed App</strong></a> here!
     <br />
     <br />
   </p>
@@ -47,8 +47,8 @@ npm test
 ## Where it began
 <img src="./src/assets/matrimania-wireframe.png" alt="wireframe of application demonstrating user story flow" width="600">
 
-## Usage
-#### LANDING PAGE
+## Matrimania in Action
+### LANDING PAGE
 
 <img src="" alt="Portfolio app landing page view" width="600">
 
