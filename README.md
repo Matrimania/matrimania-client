@@ -55,13 +55,15 @@ npm test
 ## Roadmap
 
 ## Contact
-[Kristi Miller - FE Developer](https://github.com/Kristiannmiller)
-[Eric Berglund - FE Developer](https://github.com/ericberglund117)
-[Hanna Kim - FE Developer](https://github.com/hannakim91)
-[Norma - BE Developer](https://github.com/IamNorma)
-[Travis - BE Developer](https://github.com/fieldstyler)
+- 👤 [Kristi Miller - FE Developer](https://github.com/Kristiannmiller)
+- 👤 [Eric Berglund - FE Developer](https://github.com/ericberglund117)
+- 👤 [Hanna Kim - FE Developer](https://github.com/hannakim91)
+- 👤 [Norma - BE Developer](https://github.com/IamNorma)
+- 👤 [Travis - BE Developer](https://github.com/fieldstyler)
 
 ## Additional Links
-[Project Organization](https://github.com/Matrimania)
+- [Project Organization](https://github.com/Matrimania)
+- [Server Repo](https://github.com/Matrimania/back-end)
+- [Project Board](https://github.com/orgs/Matrimania/projects/1)
 
 ## Acknowledgements
