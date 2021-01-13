@@ -119,9 +119,9 @@ const WeddingDetails: React.FC<Props> = ({
 		if (editGuestListView) {
 				return (
 					<GuestList
-					//need to pass in guest list here
 						changeView={determineCurrentState}
 						guestList={currentWeddingGuests}
+						weddingId={weddingData.id}
 					/>
 				)
 		} else if(photoShootView) {

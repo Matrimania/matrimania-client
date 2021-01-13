@@ -26,7 +26,7 @@ const GuestList: React.FC<WeddingData> = ({
 
   const [guestName, setGuestName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [guests, setGuests] = useState<NewGuest[]>([guestList]);
+  const [guests, setGuests] = useState<NewGuest[]>([...guestList]);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -58,8 +58,13 @@ const GuestList: React.FC<WeddingData> = ({
     event.preventDefault();
     const newGuest: NewGuest = {
       id: Date.now(),
-      guestName,
+      name: guestName,
       phoneNumber
+    }
+    const guestPost = {
+      name: guestName,
+      phoneNumber,
+      wedding: weddingId
     }
     if (guestName !== "" && phoneNumber.length === 12) {
       setGuests([...guests, newGuest])
@@ -76,7 +81,7 @@ const GuestList: React.FC<WeddingData> = ({
       setIsError(true)
       setErrorMessage('Phone Number Required')
     }
-    // should be a POST request + adding card to UI
+    postAGuest(guestPost)  
   }
 
   const clearInputs = () => {
@@ -137,7 +142,7 @@ const GuestList: React.FC<WeddingData> = ({
           { guests.length === 0 &&
             <img className="emptyList" src={empty} alt="your guest list is empty"/> }
           { guests.length > 0 && guests.map(guest => (<Guest
-            guestName={guest.guestName}
+            guestName={guest.name}
             id={guest.id}
             phoneNumber={guest.phoneNumber}
             key={guest.id}
