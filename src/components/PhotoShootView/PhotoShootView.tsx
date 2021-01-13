@@ -7,9 +7,16 @@ import Photo from '../Photo/Photo';
 type PhotoShootData = {
 	name: string;
 	weddingId: number;
-	photoList: any;
-	guests: any;
+	photoList: {id: number, number: number, description: string, guest: number[]}[];
+	guests: {id: number, name: string, phoneNumber: string, wedding: number}[];
   changeView: any;
+}
+
+type Photo = {
+	id: number;
+	number: number;
+	description: string;
+	guest: number[];
 }
 
 const PhotoShootView: React.FC<PhotoShootData> = ({
@@ -25,11 +32,22 @@ const PhotoShootView: React.FC<PhotoShootData> = ({
   const [textBody, setTextBody] = useState('')
 	const [view, setView] = useState('notify')
 	const [carousel, setCarousel] = useState(0)
+	const [currentCarouselPhoto, setCurrentCarouselPhoto] = useState<Photo>({id: 0, number: 0, description:"", guest:[0]})
+
+	const createGuestPhotoList = (guestId:number) => {
+		const filtered = photoList.filter((photo:any) => photo.guest.includes(guestId))
+		if(filtered.length > 0) {
+			return filtered.map((pic:any) => pic.number)
+		} else {
+			return [0]
+		}
+	}
 
   const sendNotifications = (event: React.FormEvent) => {
     event.preventDefault();
 		guests.forEach((guest: any) => {
-			const photos = guest.photos.toString().split(",").join(", ")
+			const guestPhotos = createGuestPhotoList(guest.id)
+			const photos = guestPhotos.toString().split(",").join(", ")
 			const message = `Hello ${guest.name}, Thank you for attending the ${name} wedding.
 			The lovely couple would like you to meet them for photos ${time} ${location}
 			You will be participating in photo numbers ${photos}`
@@ -45,27 +63,34 @@ const PhotoShootView: React.FC<PhotoShootData> = ({
     setLocation('')
   }
 
-// Will change the photo with the carousel (need more info from the api to get it to work)
-	// const displayCarousel = () => {
-	// 	const currentPhoto = photoList.find((photo: any) => photo.photoNumber === carousel + 1)
-	// 	const participants = currentPhoto.guests.reduce((guest:any, acc:any) => {
-	// 		const match = guests.find((person: any) => person.id === guest)
-	// 		acc.push(match.name)
-	// 		return acc
-	// 	}, [])
-	// 	return (
-	// 		<StyledCard contents="photoShoot">
-	// 			<article className="photoShootCard">
-	// 				<Photo
-	// 					id={currentPhoto.id}
-	// 					photoNumber={currentPhoto.photoNumber}
-	// 					guests={participants}
-	// 					description={currentPhoto.description}
-	// 				/>
-	// 			</article>
-	// 		</StyledCard>
-	// 	)
-	// }
+	const displayCarousel = () => {
+		const currentPhoto = photoList.find((photo: any) => photo.number === carousel + 1)
+		if(currentPhoto) {
+			const participants:string[] = []
+			const filtered = currentPhoto.guest.forEach((num:any) => {
+				const match = guests.find((person: any) => person.id === num)
+				if (match) {
+					participants.push(match.name)
+				}
+			})
+			if(participants.length > 0) {
+				return (
+					<StyledCard contents="photoShoot">
+					<article className="photoShootCard">
+					<Photo
+					id={currentPhoto.id}
+					photoNumber={currentPhoto.number}
+					guests={participants}
+					description={currentPhoto.description}
+					/>
+					</article>
+					</StyledCard>
+				)
+			}
+		} else {
+			return "Great job! You're done!"
+		}
+	}
 
 
   return (
@@ -112,25 +137,20 @@ const PhotoShootView: React.FC<PhotoShootData> = ({
 				<>
 				<article className="carouselWrap">
 					<h1 className="weddingTitle" style={{fontSize: '3vw', paddingBottom: '0%'}}>Ready, Set, Click.</h1>
-					<StyledCard contents="photoShoot">
-						<article className="photoShootCard">
-							<Photo
-								id={1}
-								photoNumber={1}
-								guests={["jim", "pam", "michael"]}
-								description={"the whole crew"}
-							/>
-						</article>
-					</StyledCard>
+						{displayCarousel()}
 					<section className="buttonWrapper">
+					{(carousel > 0 && carousel <= photoList.length) &&
 						<BackButton onClick={() => setCarousel(carousel-1)}>
 							<div id="arrow">{"<<"}</div>
 							<a className="link">{"< Prev"}</a>
 						</BackButton>
+					}
+					{(carousel >= 0 && carousel < photoList.length - 1) &&
 						<BackButton onClick={() => setCarousel(carousel+1)}>
 							<div id="arrow">{">>"}</div>
 							<a className="link">{"Next >"}</a>
 						</BackButton>
+					}
 					</section>
 				</article>
 				</>}
