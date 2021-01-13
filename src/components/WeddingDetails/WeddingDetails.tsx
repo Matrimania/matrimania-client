@@ -1,7 +1,7 @@
 import './WeddingDetails.css';
 import React, { useState, useEffect } from 'react';
 import { individualWedding } from '../../weddingData';
-import { getSingleWeddingGuests, getSingleWeddingPhotos, getWeddings } from '../../apiCalls';
+import { postAGuest, getSingleWeddingGuests, getSingleWeddingPhotos, getWeddings, getWeddingInfo } from '../../apiCalls';
 import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList';
 import PhotoShootView from '../PhotoShootView/PhotoShootView';
 import { Link } from 'react-router-dom'
@@ -51,38 +51,47 @@ const WeddingDetails: React.FC<Props> = ({
 
 
 	useEffect(() => {
+		setIsLoading(true)
+		getWeddingGuests()
+		getWeddingPhotos()
+		getAllWeddings()
+	}, [detailsView, photoShootView, editGuestListView, editPhotoListView])
+
+	const getWeddingPhotos = async () => {
+		const photoResult = await getSingleWeddingPhotos(weddingId)
+		if(photoResult === "No photos found") {
+			setHasError(true)
+			setErrorMessage({...errorMessage, weddingError: photoResult})
+		} else {
+			setCurrentWeddingPhotos(photoResult)
+		}
+	}
+	const getWeddingGuests = async () => {
+		const guestResult = await getSingleWeddingGuests(weddingId)
+		if(guestResult === "No guests found") {
+			setHasError(true)
+			setErrorMessage({...errorMessage, guestError: guestResult})
+		} else {
+			setCurrentWeddingGuests(guestResult)
+		}
+		return guestResult
+	}
+
+	const getAllWeddings = () => {
 		const allWeddings = async () => {
 			const weddingResult = await getWeddings()
 			if(weddingResult === "No weddings found") {
 				setHasError(true)
 				setErrorMessage({...errorMessage, weddingError: weddingResult})
 			} else {
-				const currentWedding = weddingResult.find((wedding:any) => wedding.id === weddingId)
+				const currentWedding = weddingResult.find((wed:any) => wed.id === weddingId)
 				setWeddingData(currentWedding)
 			}
 		}
 		allWeddings()
-		const individualWeddingGuests = async () => {
-			const guestResult = await getSingleWeddingGuests(weddingId)
-			if(guestResult === "No guests found") {
-				setHasError(true)
-				setErrorMessage({...errorMessage, guestError: guestResult})
-			} else {
-				setCurrentWeddingGuests(guestResult)
-			}
-		}
-		individualWeddingGuests()
-		const individualWeddingPhotos = async () => {
-			const photoResult = await getSingleWeddingPhotos(weddingId)
-			if(photoResult === "No photos found") {
-				setHasError(true)
-				setErrorMessage({...errorMessage, weddingError: photoResult})
-			} else {
-				setCurrentWeddingPhotos(photoResult)
-			}
-		}
-		individualWeddingPhotos()
-	}, [])
+		setIsLoading(false)
+	}
+
 
 	const emailBody = `It is time to fill out your family photo list! Please follow the link provided to complete the missing photo information. Feel free to reach out if you have any questions.
 		LINK: https://matrimania-client.herokuapp.com/wedding/${weddingData.id}`
