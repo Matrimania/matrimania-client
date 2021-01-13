@@ -13,24 +13,65 @@ import './PhotoListForm.css';
 //   description: string;
 // }
 
-type WeddingData = {
+
+type Props = {
+  loading: boolean;
+  weddingId: number;
   guests: any;
+  updateGuests: any;
+  updatePhotos: any;
   changeView: any;
+  photoList: any;
+}
+type Guest = {
+	id: number;
+	name: string;
+	phoneNumber: string;
+	wedding: number;
 }
 
-const PhotoListForm: React.FC<WeddingData> = ({guests, changeView}) => {
-  const [description, setDescription] = useState('');
-  const [guestsOptions, setGuestsOptions] = useState<any[]>([]);
-  const [photoData, setPhotoData] = useState<any[]>([]);
+
+const PhotoListForm: React.FC<Props> = ({
+  loading,
+  weddingId,
+  guests,
+  updateGuests,
+  updatePhotos,
+  changeView,
+  photoList
+ }) => {
+
+  const [description, setDescription] = useState(''); // Description from form
+  const [guestsOptions, setGuestsOptions] = useState<any[]>([]); // array of guests with isChecked
+  const [photoData, setPhotoData] = useState<any[]>([...photoList]);
+  const [guestList, setGuestList] = useState<Guest[]>([...guests])
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(loading);
 
   useEffect(() => {
-    const allGuests = guests.map((guest: any) => {
+    setIsLoading(true)
+    const individualWeddingGuests = async () => {
+      const guestResult = await getSingleWeddingGuests(weddingId)
+      if(guestResult === "No guests found") {
+        setIsError(true)
+        setErrorMessage(guestResult)
+      } else {
+        setGuestList(guestResult)
+      }
+      setIsLoading(false)
+    }
+    individualWeddingGuests()
+    buildCheckList()
+    setIsLoading(false)
+  }, [])
+
+  const buildCheckList = () => {
+    const allGuests = guestList.map((guest: any) => {
         return {...guest, isChecked: false}
       })
       setGuestsOptions(allGuests)
-  }, [guests, photoData])
+  }
 
   const toggleCheckMark = (guestName: string) => {
     let toggledList = guestsOptions.map(guest => {
