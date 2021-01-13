@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Photo from '../Photo/Photo';
 import Checkbox from '../Checkbox/Checkbox';
 import empty from '../../assets/emptyGuestList.png';
+import { postAPhoto, getSingleWeddingGuests } from '../../apiCalls';
 import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles';
 import '../GuestList/GuestList.css';
 import './PhotoListForm.css';
@@ -84,32 +85,63 @@ const PhotoListForm: React.FC<Props> = ({
   }
 
   const submitPhoto = (event: React.FormEvent) => {
+    setIsLoading(true)
     event.preventDefault()
-    const guestList = guestsOptions.filter((guest: any) => guest.isChecked)
-    if (guestList.length >= 1) {
+    const checkedGuests = guestsOptions.filter((guest: any) => guest.isChecked)
+    if(checkedGuests.length >= 1) {
       setIsError(false)
       setErrorMessage('')
       const newPhotoData = {
         id: photoData.length + 1,
         photoNumber: photoData.length + 1,
-        guests: guestList,
+        guests: checkedGuests,
         description: description
       }
-      setPhotoData([...photoData, newPhotoData])
+      const guestIds = newPhotoData.guests.map((guest:any) => guest.id)
+      const postPhoto = {
+        number: newPhotoData.photoNumber,
+        description: newPhotoData.description,
+        guest: guestIds,
+        weddingId: weddingId
+      }
+      setPhotoData([...photoData, postPhoto])
       setDescription('')
+      postAPhoto(postPhoto)
     } else {
       setIsError(true)
       setErrorMessage('Please select at least one guest for the photo')
     }
-
+    setIsLoading(false)
     // conditional rendering - make sure guestlist,length is at least 1?
+  }
+  console.log(photoData, "photodata")
+  const getGuestNames = (guestIds:any) => {
+    return guestIds.map((guest:any) => {
+      const match = guestList.find((person:any) => person.id === guest)
+      if(match){
+        return match.name
+      }
+    })
+  }
+
+  const displayGuests = () => {
+    const checks = guestsOptions.map((guest: any, i: number) => {
+      return (
+        <Checkbox
+          key={i +1}
+          toggleCheckMark={toggleCheckMark}
+          {...guest}
+        />
+      )
+    })
+    return checks
   }
 
   return (
     <>
       <form className="formWrapper">
         <article className="instructionWrap">
-          <h1 className="weddingTitle"style={{fontSize: '3vw'}}>Let's start with your photo list</h1>
+          <h1 className="weddingTitle"style={{fontSize: '3vw'}}>Let's build your photo list</h1>
           <h2 className="weddingDate" style={{fontSize: '1.5vw', padding: '2% 10%', textAlign: 'left'}}>To add a photo: <br></br><br></br>1. Add a description <br></br>2. Pick guests to include in the photo<br></br>3. Click Submit button <br></br>Tip: Don't forget to include yourselves!</h2>
         </article>
         <section className="guestFormWrap">
@@ -120,21 +152,12 @@ const PhotoListForm: React.FC<Props> = ({
             value={description}
             onChange={event => setDescription(event.target.value)}
           />
+          { isLoading ? "loading" :
           <section className="checkboxSection">
             <h3 className="sectionHeader">Guests:</h3>
-            {guestsOptions.map((guest: any, i: number) => {
-              return (
-                <Checkbox
-                  key={i +1}
-                  toggleCheckMark={toggleCheckMark}
-                  {...guest}
-                />
-              )
-              })
-            }
-          </section>
-            {isError && errorMessage}
-          
+            {displayGuests()}
+          </section> }
+          {isError && errorMessage}
           <StyledButton onClick={event => submitPhoto(event)}>
             <div id="translate"></div>
             <a className="link" id="addListButton">Submit Photo</a>
@@ -150,8 +173,9 @@ const PhotoListForm: React.FC<Props> = ({
             </BackButton>
           </section>
         </section>
-      </form>  
+      </form>
       <section className="guestListWrap">
+      {isLoading ? "loading" :
         <StyledCard contents={photoData.length === 0 ? "empty" : "list"}>
           {photoData.length === 0 &&
             <img className="emptyList" src={empty} alt="your photo list is empty"/> }
@@ -159,12 +183,12 @@ const PhotoListForm: React.FC<Props> = ({
             <Photo
               key={item.id}
               id={item.id}
-              photoNumber={item.photoNumber}
-              guests={item.guests}
+              photoNumber={item.number}
+              guests={getGuestNames(item.guest)}
               description={item.description}
             />
           ))}
-        </StyledCard>  
+        </StyledCard> }
       </section>
     </>
 	)
