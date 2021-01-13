@@ -1,3 +1,9 @@
+export const getWeddingInfo = (weddingId:number) => {
+  return Promise.all([getWeddings(), getSingleWeddingGuests(weddingId), getSingleWeddingPhotos(weddingId)])
+  .then(data => data)
+  .catch(error => error)
+}
+
 export const getWeddings = () => {
   return fetch('http://localhost:8000/api/v1/weddings/weddings/')
   .then(response => {
@@ -87,7 +93,7 @@ export const getSingleWeddingGuests = (weddingId:number) => {
 }
 
 export const getSingleWeddingPhotos = (weddingId:number) => {
-  return fetch(`http://localhost:8000/api/v1/weddings/photos/?wedding=${weddingId}`)
+  return fetch(`http://localhost:8000/api/v1/weddings/photos/?weddingId=${weddingId}`)
   .then(response => {
     if(response.ok) {
       return response.json()
