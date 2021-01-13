@@ -1,15 +1,16 @@
 .checkboxContainer {
   font-family: 'Roboto', sans-serif;
   font-size: 1.2em;
-  width: 100%;
+  width: 30%;
   display: flex;
+  flex-flow: wrap;
   flex-direction: row-reverse;
   align-items: baseline;
   justify-content: flex-end;
 }
 
 /* .checkboxLabel {
-  
+
 } */
 
 /* .checkbox {
