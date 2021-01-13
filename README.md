@@ -5,10 +5,9 @@
   </a>
   <h1 align="center">Matrimania</h1>
   <p align="left">
-    Matrimania is a multi-page React application designed to remove the <i>mania</i> of capturing memories of wedding celebrations. <br>A vendor (wedding photographer) can organize their upcoming photoshoots, request necessary information from their clients, and access an easy-to-read carousel view of photos they must take during the special day.
-    <br />
+    Matrimania is a multi-page React application designed to remove the <i>mania</i> of capturing memories of wedding celebrations. <br></br>A vendor (wedding photographer) can organize their upcoming photoshoots, request necessary information from their clients, and access an easy-to-read carousel view of photos they must take during the special day.
+    <br /><br>
     See our <a href="https://matrimania-client.herokuapp.com/"> <strong>Deployed App</strong></a> here!
-    <br />
     <br />
   </p>
 </p>
@@ -24,6 +23,12 @@
 * Jest & React Testing Library
 * Fetch API
 * Git/GitHub
+
+### Skills
+* OOP using functional components
+* Test Driven Development (TDD)
+* Git workflow 
+* AGILE project management
 
 ### Installation
 To install the application
