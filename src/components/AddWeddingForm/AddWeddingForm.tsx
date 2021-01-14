@@ -50,10 +50,11 @@ const AddWeddingForm: React.FC = () => {
     <>
       <form className="weddingFormWrapper">
         <article className="instructionWrap">
-          <h1 className="weddingTitle"style={{fontSize: '3vw'}}>Enter The Wedding Details</h1>
+          <h1 className="weddingTitle" id="weddingFormTitle">Enter The Wedding Details</h1>
         </article>
         <label htmlFor="lastName"></label>
           <input
+            id="weddingFormInput"
             type='text'
             placeholder='Last Name'
             name='lastName'
@@ -62,6 +63,7 @@ const AddWeddingForm: React.FC = () => {
           />
         <label htmlFor="emailAddress"></label>
         <input
+          id="weddingFormInput"
           type='text'
           placeholder='Email Address'
           name='emailAddress'
@@ -70,6 +72,7 @@ const AddWeddingForm: React.FC = () => {
         />
         <label htmlFor="weddingDate"></label>
         <input
+          id="weddingFormInput"
           type='date'
           placeholder='Wedding Date'
           name='weddingDate'
@@ -78,6 +81,7 @@ const AddWeddingForm: React.FC = () => {
         />
         <label htmlFor="image"></label>
         <input
+          id="weddingFormInput"
           type='text'
           placeholder='Image Link'
           name='image'
