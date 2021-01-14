@@ -26,7 +26,6 @@ const WeddingPhotoList: React.FC<PhotoListData> = ({
 		})
 	}
 
-	console.log(typeof photoList)
 	const displayPhotoList = photoList.map(photo => {
 		const guests = getGuestNames(photo.guest)
 		return (

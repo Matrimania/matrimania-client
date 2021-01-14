@@ -13,7 +13,6 @@ const Photo: React.FC<Props> = ({
   guests,
   description,
 }) => {
-  console.log("");
 
   return (
     < article className="photoCard">
