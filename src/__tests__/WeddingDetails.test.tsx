@@ -22,7 +22,6 @@ describe('WeddingDetails', () => {
     expect(screen.getByTestId('emailSection')).toBeInTheDocument()
     expect(screen.getByTestId('status')).toBeInTheDocument()
     expect(screen.getByAltText("detailImage")).toBeInTheDocument()
-test2 Expects:
   });
 
   it('should render requestPhotoList view if no photos exist for this wedding', () => {
