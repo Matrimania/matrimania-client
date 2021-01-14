@@ -9,7 +9,11 @@ describe('VendorDashboard', () => {
 	it('should render the vendor dashboard', () => {
 		render(
 			<MemoryRouter>
-				<VendorDashboard />
+				<VendorDashboard
+					weddings={[
+						{id: 1, name: "Henderson", email: "email@aol.com", date: "01/02/2022", image: "image.coolurl.com"}
+					]}
+				/>
 			</MemoryRouter>
 		)
 		const addWeddingButton = screen.getByRole('link', { name: /add a wedding/i })
@@ -22,7 +26,11 @@ describe('VendorDashboard', () => {
 	it('should allow the user to select a filter by option', () => {
 		render(
 			<MemoryRouter>
-				<VendorDashboard />
+				<VendorDashboard
+					weddings={[
+						{id: 1, name: "Henderson", email: "email@aol.com", date: "01/02/2022", image: "image.coolurl.com"}
+					]}
+				/>
 			</MemoryRouter>
 		)
 		const addWeddingButton = screen.getByRole('link', { name: /add a wedding/i })

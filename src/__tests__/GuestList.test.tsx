@@ -9,10 +9,16 @@ import GuestList from '../components/GuestList/GuestList';
 
 describe("GuestList",() => {
 	it('should render a guestlist page', () => {
+		const mockChangeView = jest.fn()
+		const mockUpdateGuests = jest.fn()
 		render(
 			<MemoryRouter>
 				<GuestList
-					changeView
+					loading={false}
+					guestList={[]}
+					changeView={mockChangeView}
+					weddingId={1}
+					updateGuests={mockUpdateGuests}
 					/>
 			</MemoryRouter>
 		);
@@ -32,10 +38,16 @@ describe("GuestList",() => {
 	});
 
 	it('should allow the user to add a guest to the guest list', () => {
+		const mockChangeView = jest.fn()
+		const mockUpdateGuests = jest.fn()
 		render(
 			<MemoryRouter>
 				<GuestList
-					changeView
+					loading={false}
+					guestList={[]}
+					changeView={mockChangeView}
+					weddingId={1}
+					updateGuests={mockUpdateGuests}
 					/>
 			</MemoryRouter>
 		);
@@ -52,13 +64,20 @@ describe("GuestList",() => {
 		expect(guestPhoneInput).toHaveValue('')
 		// expect(mockCheckNumber).toHaveBeenCalled()
 		// expect(guestPhoneInput).toHaveFormValues('34')
+		// issue has to do with formating phone number. Can't expect it to have the full value because function checks each value independently
 	});
 
 	it('should render an error message if a user does not fill out the form completely', () => {
+		const mockChangeView = jest.fn()
+		const mockUpdateGuests = jest.fn()
 		render(
 			<MemoryRouter>
 				<GuestList
-					changeView
+					loading={false}
+					guestList={[]}
+					changeView={mockChangeView}
+					weddingId={1}
+					updateGuests={mockUpdateGuests}
 					/>
 			</MemoryRouter>
 		);
@@ -79,10 +98,16 @@ describe("GuestList",() => {
 	});
 
 	it('should render a phone number error message if a user does not fill out the phone number input on the form', () => {
+		const mockChangeView = jest.fn()
+		const mockUpdateGuests = jest.fn()
 		render(
 			<MemoryRouter>
 				<GuestList
-					changeView
+					loading={false}
+					guestList={[]}
+					changeView={mockChangeView}
+					weddingId={1}
+					updateGuests={mockUpdateGuests}
 					/>
 			</MemoryRouter>
 		);

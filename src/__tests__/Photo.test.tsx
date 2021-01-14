@@ -18,7 +18,7 @@ describe('Photo', () => {
           ]}
           description={"Rebellious Bunch"}
       />
-      </MemoryRouter> 
+      </MemoryRouter>
     );
     
     expect(screen.getByText('PHOTO 1')).toBeInTheDocument();

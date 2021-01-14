@@ -10,8 +10,8 @@ describe('WeddingDetails', () => {
 
     render(
       <MemoryRouter>
-      <WeddingDetails
-        weddingId={1}
+        <WeddingDetails
+          weddingId={1}
         />
     </MemoryRouter>
     );
@@ -31,8 +31,8 @@ test2 Expects:
 
     render(
       <MemoryRouter>
-      <WeddingDetails
-        weddingId={1}
+        <WeddingDetails
+          weddingId={1}
         />
     </MemoryRouter>
     );
