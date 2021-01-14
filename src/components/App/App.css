@@ -46,10 +46,22 @@ footer, header, hgroup, menu, nav, section {
   background-color: #f5f5f5;
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 500;
   border-bottom: 1px solid #221e22;
 }
 .logo {
+	transition: all .5s ease-Out;
   width: 30rem;
 	padding-bottom: 1%;
+}
+@media screen and (max-width: 1000px) {
+	.logo {
+		width: 20rem;
+	}
+}
+@media screen and (max-width: 750px) {
+	.logo {
+		width: 15rem;
+		margin-left: 20px;
+	}
 }

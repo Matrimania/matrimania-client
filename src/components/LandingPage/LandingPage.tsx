@@ -4,7 +4,7 @@ import './LandingPage.css';
 function LandingPage() {
     return (
         <section className="landingWrapper">
-            <div>Capstone DONE :: Mic Drop</div>
+            <div>Matrimania landing page</div>
         </section>
     )
 }
