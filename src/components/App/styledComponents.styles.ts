@@ -6,7 +6,7 @@ type StyledCardProps = {
 
 
 export const StyledCard = styled.section<StyledCardProps>`
-  transition: all .3s ease-Out;
+  transition: all .5s ease-Out;
   background-color: #ffffff;
   display: ${props => {
     if(props.contents === 'empty'){
@@ -78,6 +78,18 @@ export const StyledCard = styled.section<StyledCardProps>`
         return '1px 1px 20px #A8826F;'
       }
     }};
+  }
+  @media (max-width: 1000px) {
+    width: ${props => {
+      if(props.contents === 'list') {
+        return '75%;'
+      } else {
+        return '45%;'
+      }
+    }
+  }
+  @media (max-width: 750px) {
+    width: 90%;
   }
 `
 
