@@ -158,10 +158,13 @@ const WeddingDetails: React.FC<Props> = ({
 		<section className="detailsWrapper">
 			{detailsView &&
 				<div className="detailsHeader">
-				<h1 className="weddingTitle">{weddingData.name} Wedding</h1>
-				<h2 className="weddingDate">{weddingDate}</h2>
-				<p className="weddingDetails" data-testid="emailSection">Email: {weddingData.email}</p>
-				<p className="weddingDetails" data-testid="status">Status: {currentWeddingGuests.length === 0 ? "Pending" : "Received"}</p>
+          <article className="weddingInfo">
+    				<h1 className="weddingTitle">{weddingData.name} Wedding</h1>
+    				<h2 className="weddingDate">{weddingDate}</h2>
+    				<p className="weddingDetails" data-testid="emailSection">Email: {weddingData.email}</p>
+    				<p className="weddingDetails" data-testid="status">Status: {currentWeddingGuests.length === 0 ? "Pending" : "Received"}</p>
+          </article>
+          <section className="buttonWrap">
 				{currentWeddingPhotos.length === 0 &&
 					<StyledButton>
 						<div id="translate"></div>
@@ -181,6 +184,7 @@ const WeddingDetails: React.FC<Props> = ({
 						<h3 className="link">Start Photo Session</h3>
 					</StyledButton>
 				}
+        </section>
 				{currentWeddingPhotos.length > 0 &&
 					<WeddingPhotoList
 						name={weddingData.name}

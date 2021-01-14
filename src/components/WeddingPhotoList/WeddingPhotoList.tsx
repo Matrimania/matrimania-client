@@ -43,7 +43,7 @@ const WeddingPhotoList: React.FC<PhotoListData> = ({
 	return (
 		<section className="weddingPhotoListWrapper">
 			<StyledCard contents="list" className="photoListWrapper">
-			<div className="photoListHeader">WeddingPhotoList</div>
+			<div className="photoListHeader">Wedding Photos</div>
 				<div className="photoListWrapper">
 					{displayPhotoList}
 				</div>
