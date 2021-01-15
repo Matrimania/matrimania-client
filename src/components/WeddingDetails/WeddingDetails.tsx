@@ -110,7 +110,10 @@ const WeddingDetails: React.FC<Props> = ({
 		}
 	}
 
-	const weddingDate = dayjs(weddingData.date).format("MM/DD/YYYY")
+	const weddingDate = dayjs(weddingData.date).subtract(1, 'day').format("MM/DD/YYYY")
+  const isToday = () => {
+    return dayjs(weddingDate).format("MM/DD/YYYY") === dayjs().format("MM/DD/YYYY") ? true : false
+  }
 
   const determineContents = () => {
     if(detailsView){
@@ -187,7 +190,7 @@ const WeddingDetails: React.FC<Props> = ({
 						<h3 className="link" id="addListButton">Add Photo List</h3>
 					}
 				</StyledButton>
-				{weddingDate === dayjs().format("MM/DD/YYYY") &&
+				{isToday() &&
 					<StyledButton onClick={() => determineCurrentState("photoShootView")}>
 						<div id="translate"></div>
 						<h3 className="link">Start Photo Session</h3>
