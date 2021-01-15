@@ -1,10 +1,3 @@
-.detailsWrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 100%;
-  height: 90%;
-}
 .detailsHeader {
   transition: all .5s ease-Out;
   text-align: center;
@@ -29,18 +22,10 @@
   height: auto;
   overflow: hidden;
 }
-.detailFormWrap {
-  transition: all .5s ease-Out;
-  display: flex;
-  width: 100%;
-  height: 100%;
-  overflow: scroll;
-}
 .photoListWrapper {
   transition: all .5s ease-Out;
 }
 .detailImage {
-  width: 80vw;
   height: auto;
   object-fit: cover;
   opacity: 70%;
@@ -49,31 +34,23 @@
   width: 100%;
 }
 @media screen and (max-width: 1000px) {
-  .detailFormWrap {
-    width: 50%;
+  .detailsHeader {
+    height: 92vh;
   }
   .photoListWrapper {
     width: 75%;
   }
   .detailImage {
     width: auto;
-    height: 90vh;
+    height: 92vh;
   }
   .detailImageWrap {
     width: auto;
-    height: 90vh;
+    height: 92vh;
   }
 }
 
 @media screen and (max-width: 750px) {
-  .detailFormWrap {
-    transition: all .3s ease-Out;
-    width: 100%;
-    position: absolute;
-    z-index: -1;
-    opacity: 40%;
-    border: none;
-  }
   .detailImage {
     width: 100%;
     height: 100vh;
@@ -83,10 +60,7 @@
     width: 100%;
     height: auto;
     border-left: none;
-  }
-  .detailsWrapper {
-    z-index: 250;
-    width: 100%;
+    z-index: -1;
   }
   .detailsHeader {
     width: 100%;
@@ -94,6 +68,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 10;
   }
   .weddingInfo {
     background-color: rgba(245, 245, 245, .4);

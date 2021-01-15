@@ -3,7 +3,83 @@ import styled from 'styled-components';
 type StyledCardProps = {
   contents: string
 }
+type DetailsProps = {
+  contents: string
+}
 
+
+export const DetailsWrapper = styled.section<DetailsProps>`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 92%;
+  @media (max-width: 750px) {
+    z-index: ${props => {
+      if(props.contents === 'details') {
+        return '10;'
+        }
+      }
+    }
+    width: ${props => {
+      if(props.contents === 'details') {
+        return '100%;'
+      }
+    }
+  }
+}
+`
+export const DetailsFormWrapper = styled.section<DetailsProps>`
+  transition: all .5s ease-Out;
+  display: flex;
+  width: 100%;
+  overflow: scroll;
+  height: ${props => {
+    if(props.contents === 'other') {
+      return '92vh;'
+    } else {
+      return '92vh;'
+    }
+  }};
+  @media (max-width: 750px) {
+    flex-direction: ${props => {
+      if(props.contents === 'other') {
+        return 'column;'
+        }
+      }
+    }
+    z-index: ${props => {
+      if(props.contents === 'details') {
+        return '10;'
+        }
+      }
+    }
+    transition: ${props => {
+      if(props.contents === 'details') {
+        return 'all .3s ease-Out;'
+        }
+      }
+    }
+    position: ${props => {
+      if(props.contents === 'details') {
+        return 'absolute;'
+        }
+      }
+    }
+    opacity: ${props => {
+      if(props.contents === 'details') {
+        return '40%;'
+        }
+      }
+    }
+    border: ${props => {
+      if(props.contents === 'details') {
+        return 'none;'
+        }
+      }
+    }
+  }
+`
 
 export const StyledCard = styled.section<StyledCardProps>`
   transition: all .5s ease-Out;
@@ -26,11 +102,19 @@ export const StyledCard = styled.section<StyledCardProps>`
   height: ${props => {
     if(props.contents === 'wedding') {
       return '40em;'
+    } else if(props.contents === 'empty' || 'list') {
+      return '43em;'
     } else {
       return '75%;'
     }
   }};
-  margin: 1%;
+  margin: ${props => {
+    if(props.contents === 'wedding') {
+      return '1%;'
+    } else {
+      return '8%;'
+    }
+  }};
   border-radius: 30px;
   box-shadow: 1px 1px 20px #A8826F;
   font-size: 12px;
@@ -84,9 +168,16 @@ export const StyledCard = styled.section<StyledCardProps>`
       if(props.contents === 'list') {
         return '75%;'
       } else {
-        return '45%;'
+        return '90%;'
       }
-    }
+    }}
+    height: ${props => {
+      if(props.contents === 'list') {
+        return '75%;'
+      } else {
+        return '80%;'
+      }
+    }}
   }
   @media (max-width: 750px) {
     width: 90%;
@@ -140,7 +231,7 @@ export const BackButton = styled.div`
   font-family: 'Roboto', sans-serif;
   display: inline-flex;
   height: 25px;
-  width: 70px;
+  width: 100px;
   margin: 10px;
   border: 2px solid #6f896d;
   color: #f5f5f5;

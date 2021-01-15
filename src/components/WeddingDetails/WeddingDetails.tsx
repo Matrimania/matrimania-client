@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { getSingleWeddingGuests, getSingleWeddingPhotos, getWeddings } from '../../apiCalls';
 import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList';
 import PhotoShootView from '../PhotoShootView/PhotoShootView';
-import { StyledButton } from '../App/styledComponents.styles'
+import { StyledButton, DetailsWrapper, DetailsFormWrapper } from '../App/styledComponents.styles'
 import GuestList from '../GuestList/GuestList'
 import dayjs from 'dayjs';
 import PhotoListForm from '../PhotoListForm/PhotoListForm';
@@ -155,7 +155,7 @@ const WeddingDetails: React.FC<Props> = ({
 }
 
 	return (
-		<section className="detailsWrapper">
+		<DetailsWrapper contents={detailsView ? 'details' : 'other'}>
 			{detailsView &&
 				<div className="detailsHeader">
           <article className="weddingInfo">
@@ -193,10 +193,10 @@ const WeddingDetails: React.FC<Props> = ({
 						guestList={currentWeddingGuests} /> }
 				</div>
 			}
-			<section className="detailFormWrap">
+			<DetailsFormWrapper contents={detailsView ? 'details' : 'other'}>
 				{displayCurrentView()}
-			</section>
-		</section>
+			</DetailsFormWrapper>
+		</DetailsWrapper>
 	)
 }
 export default WeddingDetails;
