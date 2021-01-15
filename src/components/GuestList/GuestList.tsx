@@ -111,8 +111,8 @@ const GuestList: React.FC<WeddingData> = ({
     <>
       <form className="formWrapper">
         <article className="instructionWrap">
-          <h1 className="weddingTitle"style={{fontSize: '3vw'}}>Let's start with your guest list</h1>
-          <h2 className="weddingDate" style={{fontSize: '1.5vw', padding: '2% 10%', textAlign: 'left'}}>
+          <h1 id="GLTitle" className="weddingTitle">Let's start with your guest list</h1>
+          <h2 id="GLInfo" className="weddingDate">
             For each person included in your family photos, please include: <br></br><br></br>
             1. Their first and last name<br></br>
             2. A mobile phone number that accepts text messages<br></br> <br></br>
@@ -120,6 +120,7 @@ const GuestList: React.FC<WeddingData> = ({
         </article>
         <section className="guestFormWrap">
           <input
+            id="GLInput"
             type='text'
             placeholder='Guest Name'
             name='guestName'
@@ -127,6 +128,7 @@ const GuestList: React.FC<WeddingData> = ({
             onChange={event => setGuestName(event.target.value)}
           />
           <input
+            id="GLInput"
             type='text'
             placeholder='Phone (XXX-XXX-XXXX)'
             name='phoneNumber'
