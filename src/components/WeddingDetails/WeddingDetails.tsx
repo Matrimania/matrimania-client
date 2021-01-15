@@ -112,6 +112,15 @@ const WeddingDetails: React.FC<Props> = ({
 
 	const weddingDate = dayjs(weddingData.date).format("MM/DD/YYYY")
 
+  const determineContents = () => {
+    if(detailsView){
+      return 'details'
+    } else if(photoShootView){
+      return 'shoot'
+    } else {
+      return 'other'
+    }
+  }
 	const displayCurrentView = () => {
 		if (editGuestListView) {
 				return (
@@ -155,7 +164,7 @@ const WeddingDetails: React.FC<Props> = ({
 }
 
 	return (
-		<DetailsWrapper contents={detailsView ? 'details' : 'other'}>
+		<DetailsWrapper contents={determineContents()}>
 			{detailsView &&
 				<div className="detailsHeader">
           <article className="weddingInfo">
@@ -193,7 +202,8 @@ const WeddingDetails: React.FC<Props> = ({
 						guestList={currentWeddingGuests} /> }
 				</div>
 			}
-			<DetailsFormWrapper contents={detailsView ? 'details' : 'other'}>
+			<DetailsFormWrapper
+        contents={determineContents()}>
 				{displayCurrentView()}
 			</DetailsFormWrapper>
 		</DetailsWrapper>
