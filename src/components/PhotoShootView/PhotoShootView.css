@@ -1,13 +1,39 @@
 .photoShootWrapper {
   width: 100%;
+  height: 87vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
+#shootTitle {
+  font-size: 85px;
+  padding-bottom: 0%;
+}
+#shootTitle2 {
+  font-size: 50px;
+  padding-bottom: 1%;
+}
+#shootBlurb {
+  font-size: 30px;
+  padding: 2% 10%;
+}
+#shootDirections{
+  font-size: 22px;
+}
+.shootFormWrapper {
+  transition: all .5s ease-Out;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2%;
+}
 .carouselWrap {
   width: 75%;
-  height: 75%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,15 +43,23 @@
   color: #221e22;
   opacity: 80%;
   font-family: 'Roboto', sans-serif;
-  text-align: left;
-  font-size: 16px;
+  text-align: center;
+  font-size: 18px;
+  width: 75%;
 }
 .textBody {
   color: #221e22;
   opacity: 80%;
   font-family: 'Roboto', sans-serif;
-  text-align: left;
+  text-align: center;
   font-size: .9em;
+  width: 100%;
+}
+#shootInput {
+  transition: all .5s ease-Out;
+  width: 40%;
+  height: 1em;
+  margin: 0% 0% 2% 0%;
 }
 .photoShootCard {
   color: #221e22;
@@ -35,4 +69,61 @@
   font-size: 2em;
   width: 100%;
   display: contents;
+}
+@media screen and (max-width: 1000px) {
+  #shootInput {
+    transition: all .5s ease-Out;
+    width: 50%;
+    height: 1.25em;
+    margin: 0% 0% 4% 0%;
+  }
+}
+@media screen and (max-width: 750px) {
+  .shootFormWrapper {
+    padding-top: 5%;
+  }
+  #shootTitle {
+    font-size: 65px;
+  }
+  #shootBlurb {
+    font-size: 26px;
+    padding: 2% 10%;
+  }
+  #shootDirections{
+    font-size: 16px;
+    margin: 1% 0% 5% 0%;
+  }
+  #shootInput{
+    transition: all .5s ease-Out;
+    width: 75%;
+    height: 1.5em;
+    margin: 0% 0% 5% 0%;
+  }
+  .instructions {
+    width: 85%;
+  }
+  .textBody {
+    color: #221e22;
+    opacity: 80%;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    font-size: 13px;
+    width: 100%;
+  }
+  .photoShootWrapper {
+    height: 100%;
+  }
+  .carouselWrap {
+    width: 95%;
+  }
+  #shootTitle2 {
+    font-size: 40px;
+    padding-bottom: 3%;
+  }
+  .guestData {
+    font-size: 25px;
+  }
+  .photoDescription {
+    font-size: 25px;
+  }
 }
