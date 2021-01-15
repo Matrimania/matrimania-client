@@ -37,7 +37,7 @@ const VendorDashboard: React.FC<Props> = ({weddings}) => {
         }
         break;
       case 2:
-        const pastWeddings = weddings.filter((a: any) => dayjs(a.date).format("MM/DD/YYYY") < dayjs().format("MM/DD/YYYY"))
+        const pastWeddings = weddings.filter((a: any) => a.date < Date.now())
         if(pastWeddings.length) {
           sortedFilter = pastWeddings.sort((a: any, b: any) => a.date - b.date)
           setWeddingFilter(sortedFilter)
