@@ -18,16 +18,24 @@ export const DetailsWrapper = styled.section<DetailsProps>`
     z-index: ${props => {
       if(props.contents === 'details') {
         return '10;'
-        }
       }
-    }
+    }};
     width: ${props => {
       if(props.contents === 'details') {
         return '100%;'
       }
-    }
+    }};
+    height: ${props => {
+      if(props.contents === 'shoot') {
+        return '80vh;'
+      }
+    }};
+    margin-top: ${props => {
+      if(props.contents === 'shoot') {
+        return '10%;'
+      }
+    }};
   }
-}
 `
 export const DetailsFormWrapper = styled.section<DetailsProps>`
   transition: all .5s ease-Out;
@@ -37,48 +45,49 @@ export const DetailsFormWrapper = styled.section<DetailsProps>`
   height: ${props => {
     if(props.contents === 'other') {
       return '92vh;'
+    } else if (props.contents === 'shoot') {
+      return '87vh;'
     } else {
-      return '92vh;'
+      return '92%'
     }
   }};
   @media (max-width: 750px) {
     flex-direction: ${props => {
       if(props.contents === 'other') {
         return 'column;'
-        }
       }
-    }
-    z-index: ${props => {
-      if(props.contents === 'details') {
-        return '10;'
-        }
+    }};
+    height: ${props => {
+      if(props.contents === 'shoot') {
+        return '100%;'
       }
-    }
+    }};
     transition: ${props => {
       if(props.contents === 'details') {
         return 'all .3s ease-Out;'
-        }
       }
-    }
+    }};
     position: ${props => {
       if(props.contents === 'details') {
         return 'absolute;'
-        }
       }
-    }
+    }};
     opacity: ${props => {
       if(props.contents === 'details') {
         return '40%;'
-        }
       }
-    }
+    }};
     border: ${props => {
       if(props.contents === 'details') {
         return 'none;'
-        }
       }
-    }
-  }
+    }};
+    justify-content: ${props => {
+      if(props.contents ==='shoot') {
+        return 'center;'
+      }
+    }}
+  };
 `
 
 export const StyledCard = styled.section<StyledCardProps>`
@@ -89,6 +98,11 @@ export const StyledCard = styled.section<StyledCardProps>`
       return 'grid;'
     } else {
       return 'flex;'
+    }
+  }};
+  justify-content: ${props => {
+    if(props.contents === 'shoot') {
+      return 'center;'
     }
   }};
   flex-direction: column;
@@ -102,15 +116,21 @@ export const StyledCard = styled.section<StyledCardProps>`
   height: ${props => {
     if(props.contents === 'wedding') {
       return '40em;'
-    } else if(props.contents === 'empty' || 'list') {
+    } else if(props.contents === 'empty') {
       return '43em;'
-    } else {
-      return '75%;'
+    } else if(props.contents === 'list') {
+      return '50em;'
+    } else if(props.contents === 'other'){
+      return '65%;'
     }
   }};
   margin: ${props => {
     if(props.contents === 'wedding') {
       return '1%;'
+    } else if(props.contents === 'list') {
+      return '3%;'
+    } else if (props.contents === 'other') {
+      return '2%;'
     } else {
       return '8%;'
     }
@@ -167,10 +187,12 @@ export const StyledCard = styled.section<StyledCardProps>`
     width: ${props => {
       if(props.contents === 'list') {
         return '75%;'
+      } else if(props.contents === 'wedding') {
+        return '45%;'
       } else {
         return '90%;'
       }
-    }}
+    }};
     height: ${props => {
       if(props.contents === 'list') {
         return '75%;'
@@ -183,7 +205,79 @@ export const StyledCard = styled.section<StyledCardProps>`
     width: 90%;
   }
 `
-
+export const PhotoCard = styled.article<DetailsProps>`
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 75%;
+  margin-bottom: 1%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  border-bottom: 1px solid #A8826F;
+  overflow: ${props => {
+    if(props.contents === 'shoot') {
+      return 'scroll;'
+    }
+  }};
+  justify-content: ${props => {
+    if(props.contents === 'shoot') {
+      return 'center;'
+    } else {
+      return 'space-between;'
+    }
+  }};
+  height: ${props => {
+    if(props.contents === 'shoot') {
+      return '75%;'
+    }
+  }};
+  .photoHeader {
+    font-weight: 800;
+    font-size: ${props => {
+      if(props.contents === 'shoot') {
+        return '50px;'
+      }
+    }};
+    margin: ${props => {
+      if(props.contents === 'shoot') {
+        return '5%;'
+      }
+    }};
+  }
+  .photoDescription {
+    font-style: italic;
+    font-size: ${props => {
+      if(props.contents === 'shoot') {
+        return '35px;'
+      }
+    }};
+  }
+  .guestData {
+    font-size: ${props => {
+      if(props.contents === 'shoot') {
+        return '30px;'
+      }
+    }};
+    margin-bottom: ${props => {
+      if(props.contents === 'shoot') {
+        return '5%;'
+      }
+    }};
+  }
+  @media (max-width: 750px) {
+    justify-content: ${props => {
+      if(props.contents === 'shoot') {
+        return 'space-between;'
+      }
+    }};
+    height: ${props => {
+      if(props.contents === 'shoot') {
+        return '90%;'
+      }
+    }};
+}
+`
 export const StyledButton = styled.div`
   font-family: 'Roboto', sans-serif;
   display: inline-flex;
