@@ -27,12 +27,12 @@ export const DetailsWrapper = styled.section<DetailsProps>`
     }};
     height: ${props => {
       if(props.contents === 'shoot') {
-        return '80vh;'
+        return '90vh;'
       }
     }};
     margin-top: ${props => {
       if(props.contents === 'shoot') {
-        return '10%;'
+        return '1%;'
       }
     }};
   }
@@ -48,7 +48,7 @@ export const DetailsFormWrapper = styled.section<DetailsProps>`
     } else if (props.contents === 'shoot') {
       return '87vh;'
     } else {
-      return '92%'
+      return '92%;'
     }
   }};
   @media (max-width: 750px) {
@@ -199,7 +199,7 @@ export const StyledCard = styled.section<StyledCardProps>`
       } else {
         return '80%;'
       }
-    }}
+    }};
   }
   @media (max-width: 750px) {
     width: 90%;
@@ -276,7 +276,7 @@ export const PhotoCard = styled.article<DetailsProps>`
         return '90%;'
       }
     }};
-}
+  }
 `
 export const StyledButton = styled.div`
   font-family: 'Roboto', sans-serif;
