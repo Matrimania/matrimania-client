@@ -35,6 +35,7 @@ const WeddingPhotoList: React.FC<PhotoListData> = ({
 				photoNumber={photo.number}
 				guests={guests}
 				description={photo.description}
+				location={'details'}
 			/>
 		)
 	})

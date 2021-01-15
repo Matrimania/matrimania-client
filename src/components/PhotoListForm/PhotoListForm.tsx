@@ -190,6 +190,7 @@ const PhotoListForm: React.FC<Props> = ({
               photoNumber={item.number}
               guests={getGuestNames(item.guest)}
               description={item.description}
+              location={'list'}
             />
           ))}
         </StyledCard> }
