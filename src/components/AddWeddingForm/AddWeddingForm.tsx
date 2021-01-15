@@ -48,7 +48,7 @@ const AddWeddingForm: React.FC = () => {
 
 	return (
     <>
-      <form className="weddingFormWrapper">
+      <form autoComplete="off" className="weddingFormWrapper">
         <article className="instructionWrap">
           <h1 className="weddingTitle" id="weddingFormTitle">Enter The Wedding Details</h1>
         </article>
