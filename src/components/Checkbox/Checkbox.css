@@ -1,14 +1,18 @@
 .checkboxContainer {
   font-family: 'Roboto', sans-serif;
-  font-size: 1.2em;
+  font-size: 1.25em;
   width: 30%;
   display: flex;
-  flex-flow: wrap;
+  padding: 1%;
   flex-direction: row-reverse;
-  align-items: baseline;
+  align-items: center;
   justify-content: flex-end;
+  border-bottom: 1px solid #a8826f;
 }
 
+.checkboxLabel {
+  margin-left: 5%;
+}
 /* .checkboxLabel {
 
 } */

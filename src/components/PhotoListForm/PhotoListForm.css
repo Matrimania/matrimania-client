@@ -1,8 +1,11 @@
 .checkboxSection {
-  padding: 1.5em;
+  margin: 2em;
   width: 75%;
+  flex-direction: row;
   display: flex;
   flex-wrap: wrap;
+  height: 45%;
+  overflow: scroll;
 }
 .sectionHeader {
   font-family: Roboto, sans-serif;
