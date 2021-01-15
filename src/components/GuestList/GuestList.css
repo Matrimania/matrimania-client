@@ -22,6 +22,7 @@ input:focus {
   align-items: center;
 }
 .formWrapper {
+  transition: all .5s ease-Out;
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -30,8 +31,10 @@ input:focus {
   border-right: 3px solid #A8826F;
 }
 .guestListWrap {
+  transition: all .5s ease-Out;
   background-color: rgba(168, 130, 111, .2);
   width: 50%;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -67,11 +70,11 @@ input:focus {
   border: 2px solid #A8826F;
 }
 .buttonWrapper {
-  width: 25%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  justify-content: space-between;
+  justify-content: center;
 }
 .clearButton:hover {
   background-color: #f5f5f5;
@@ -82,6 +85,50 @@ input:focus {
   justify-content: flex-end;
   display: flex;
   flex-direction: row;
-  width: 42.5%;
+  width: 53%;
   text-align-last: center;
+}
+#GLTitle {
+  transition: all .5s ease-Out;
+  font-size: 3vw;
+}
+#GLInfo {
+  transition: all .5s ease-Out;
+  font-size: 1.5vw;
+  padding: 2% 10%;
+  text-align: left;
+}
+#GLInput {
+  transition: all .5s ease-Out;
+  width: 50%;
+}
+@media screen and (max-width: 1000px) {
+  .guestListWrap {
+    height: 91vh;
+  }
+  #GLTitle {
+    font-size: 5vw;
+  }
+  #GLInfo {
+    font-size: 2vw;
+  }
+}
+@media screen and (max-width: 750px) {
+  .guestListWrap {
+    height: auto;
+    width: 100%;
+  }
+  .formWrapper {
+    width: 100%;
+    border-right: none;
+    height: 75%;
+  }
+  #GLTitle {
+    font-size: 8vw;
+    padding: 1% 10%;
+  }
+  #GLInfo {
+    font-size: 3vw;
+  }
+
 }
