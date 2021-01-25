@@ -5,21 +5,26 @@ import { StyledButton } from '../App/styledComponents.styles'
 
 
 type NewWedding = {
-  id: number,
+  id?: number,
   name: string,
   email: string,
   date: string,
   image: string
 }
+type Props = {
+  addNewWedding: any,
+}
 
-const AddWeddingForm: React.FC = () => {
+const AddWeddingForm: React.FC<Props> = ({
+  addNewWedding
+}) => {
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [date, setDate] = useState('')
   const [image, setImage] = useState('')
 
-  const submitWedding = (event: React.FormEvent) => {
+  const submitWedding = async (event: React.FormEvent) => {
     event.preventDefault();
     const newWedding: NewWedding = {
       id: Date.now(),
@@ -28,7 +33,8 @@ const AddWeddingForm: React.FC = () => {
       date,
       image
     }
-    postAWedding(newWedding);
+    const response = await postAWedding(newWedding);
+    addNewWedding(response);
     // should be a POST request + adding card to UI
     clearInputs();
   }

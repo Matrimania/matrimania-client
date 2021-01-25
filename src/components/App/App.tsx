@@ -23,6 +23,10 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState('')
   const [hasError, setError] = useState(false)
 
+  const addNewWedding = (newWedding: any) => {
+    setWeddings([...weddings, newWedding])
+  }
+
   useEffect(() => {
     const allWeddings = async () => {
       const result = await getWeddings()
@@ -61,7 +65,9 @@ const App = () => {
               />
           }} />
         <Route path='/add-wedding'>
-          <AddWeddingForm />
+          <AddWeddingForm
+            addNewWedding={addNewWedding}
+          />
         </Route>
         <Route exact path='/'>
           <LandingPage />

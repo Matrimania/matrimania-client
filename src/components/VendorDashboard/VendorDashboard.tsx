@@ -16,6 +16,7 @@ type Props = {
   weddings: any;
 }
 
+
 const VendorDashboard: React.FC<Props> = ({weddings}) => {
   const [weddingFilter, setWeddingFilter] = useState<Wedding[]>([])
   const [errorMessage, setErrorMessage] = useState('')

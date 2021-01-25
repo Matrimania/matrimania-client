@@ -28,7 +28,7 @@ export const postAWedding = (wedding: any) => {
   })
   .then(response => {
     if(response.ok) {
-      return response
+      return response.json()
     } else {
       throw Error
     }
