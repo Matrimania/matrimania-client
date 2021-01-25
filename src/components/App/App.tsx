@@ -4,6 +4,8 @@ import React, {useState, useEffect} from 'react'
 import logo from '../../assets/FinalMatrimaniaLogo.png'
 import {Route, Switch, Link} from 'react-router-dom'
 import { getWeddings } from '../../apiCalls'
+import dayjs from 'dayjs'
+
 // Components
 import VendorDashboard from '../VendorDashboard/VendorDashboard'
 import WeddingDetails from '../WeddingDetails/WeddingDetails'
@@ -32,9 +34,13 @@ const App = () => {
       const result = await getWeddings()
       if(result.length > 0) {
         result.forEach((wed: any) => {
-          wed.date = new Date(wed.date)
+          wed.date = dayjs(wed.date)
         })
-        let sortedResult = result.sort((a: any, b: any) => a.date - b.date)
+        console.log(result)
+        let sortedResult = result.sort((a: any, b: any) => b.date - a.date)
+        let sortedWeddings = sortedResult.forEach((wedding: any) => {
+          wedding.date = dayjs(wedding.date).format('MM/DD/YYYY')
+        })
         setWeddings(sortedResult)
       } else {
         setError(true)

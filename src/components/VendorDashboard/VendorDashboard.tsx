@@ -4,6 +4,7 @@ import WeddingCard from '../WeddingCard/WeddingCard'
 import { Link } from 'react-router-dom';
 import { StyledButton } from '../App/styledComponents.styles'
 import dayjs from 'dayjs';
+import dayjs from 'dayjs'
 
 type Wedding = {
   id: number;
@@ -26,11 +27,16 @@ const VendorDashboard: React.FC<Props> = ({weddings}) => {
     setError(false)
     setErrorMessage('')
     let sortedFilter
+    const today = dayjs().format('MM/DD/YYYY')
     switch(e.target.options.selectedIndex) {
       case 1:
-        const futureWeddings = weddings.filter((a: any) => a.date > Date.now())
+        const futureWeddings = weddings.filter((a: any) => {
+          const compDate = dayjs(a.date)
+          return compDate.isAfter(dayjs(today))})
         if(futureWeddings.length) {
+          futureWeddings.forEach((wedding:any) => wedding.date = dayjs(wedding.date))
           sortedFilter = futureWeddings.sort((a: any, b: any) => a.date - b.date)
+          sortedFilter.forEach((wed:any) => wed.date = dayjs(wed.date).format('MM/DD/YYYY'))
           setWeddingFilter(sortedFilter)
         } else {
           setError(true)
@@ -38,9 +44,13 @@ const VendorDashboard: React.FC<Props> = ({weddings}) => {
         }
         break;
       case 2:
-        const pastWeddings = weddings.filter((a: any) => a.date < Date.now())
+        const pastWeddings = weddings.filter((a: any) => {
+          const compDate = dayjs(a.date)
+          return compDate.isBefore(dayjs(today))})
         if(pastWeddings.length) {
+          pastWeddings.forEach((wedding:any) => wedding.date = dayjs(wedding.date))
           sortedFilter = pastWeddings.sort((a: any, b: any) => a.date - b.date)
+          sortedFilter.forEach((wed:any) => wed.date = dayjs(wed.date).format('MM/DD/YYYY'))
           setWeddingFilter(sortedFilter)
         } else {
           setError(true)
@@ -49,14 +59,10 @@ const VendorDashboard: React.FC<Props> = ({weddings}) => {
         break;
       case 3:
         const currentWeddings = weddings.filter((a: any) => {
-          const wedDate = dayjs(a.date).format("MM/DD/YYYY")
-          if(wedDate === dayjs().format("MM/DD/YYYY")) {
-            return a
-          }
+          return a.date === today
         })
         if(currentWeddings.length > 0) {
-          sortedFilter = currentWeddings.sort((a: any, b: any) => a.date - b.date)
-          setWeddingFilter(sortedFilter)
+          setWeddingFilter(currentWeddings)
         } else {
           setError(true)
           setErrorMessage('No Weddings Taking Place Today')
