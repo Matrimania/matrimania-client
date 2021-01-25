@@ -41,6 +41,7 @@ const WeddingDetails: React.FC<Props> = ({
 
 
 	useEffect(() => {
+    window.scrollTo(0, 0)
 		setIsLoading(true)
 		getWeddingGuests()
 		getWeddingPhotos()
@@ -98,21 +99,25 @@ const WeddingDetails: React.FC<Props> = ({
 			setPhotoShootView(true)
 			setGuestListView(false)
 			setEditPhotoListView(false)
+      window.scrollTo(0, 0)
 		} else if (view === "editGuestListView") {
 			setDetailsView(false)
 			setPhotoShootView(false)
 			setGuestListView(true)
 			setEditPhotoListView(false)
+      window.scrollTo(0, 0)
 		} else if (view === "editPhotoListView") {
 			setDetailsView(false)
 			setPhotoShootView(false)
 			setGuestListView(false)
 			setEditPhotoListView(true)
+      window.scrollTo(0, 0)
 		} else {
 			setDetailsView(true)
 			setPhotoShootView(false)
 			setGuestListView(false)
 			setEditPhotoListView(false)
+      window.scrollTo(0, 0)
 		}
 	}
 
