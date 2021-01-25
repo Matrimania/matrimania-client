@@ -53,16 +53,11 @@ const App = () => {
   return (
     <div className="appWrap">
       <header className="headerWrap">
-        <Link to={`/vendor-dashboard`}>
+        <Link to={`/`}>
           <img src={logo} className="logo" alt="Matrimania Logo"/>
         </Link>
       </header>
       <Switch>
-        <Route path='/vendor-dashboard'>
-          <VendorDashboard
-            weddings={weddings}
-          />
-        </Route>
         <Route exact path='/wedding/:weddingId'
           render={({ match }) => {
             const { weddingId } = match.params
@@ -76,7 +71,9 @@ const App = () => {
           />
         </Route>
         <Route exact path='/'>
-          <LandingPage />
+          <VendorDashboard
+            weddings={weddings}
+          />
         </Route>
       </Switch>
     </div>
