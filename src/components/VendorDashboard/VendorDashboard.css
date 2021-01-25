@@ -86,8 +86,8 @@ select {
     flex-direction:column;
   }
   .noWeddingsError {
-    height: auto;
     width: 95%;
+    height: auto;
   }
 }
 @media screen and (max-width: 750px) {
