@@ -85,7 +85,7 @@ npm test
 - 👤 [Eric Berglund - FE Developer](https://github.com/ericberglund117)
 - 👤 [Hanna Kim - FE Developer](https://github.com/hannakim91)
 - 👤 [Norma - BE Developer](https://github.com/IamNorma)
-- 👤 [Travis - BE Developer](https://github.com/fieldstyler)
+- 👤 [Tyler - BE Developer](https://github.com/fieldstyler)
 
 ## Additional Links
 - [Project Organization](https://github.com/Matrimania)
