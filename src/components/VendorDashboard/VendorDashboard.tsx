@@ -2,9 +2,10 @@ import './VendorDashboard.css';
 import React, { useState } from 'react';
 import WeddingCard from '../WeddingCard/WeddingCard'
 import { Link } from 'react-router-dom';
-import { StyledButton } from '../App/styledComponents.styles'
-import dayjs from 'dayjs';
+import { StyledButton, StyledCard } from '../App/styledComponents.styles'
 import dayjs from 'dayjs'
+import noWeddings from '../../assets/NoWeddings.png'
+
 
 type Wedding = {
   id: number;
@@ -128,7 +129,11 @@ const VendorDashboard: React.FC<Props> = ({weddings}) => {
           </section>
         </section>
         <section className="weddingCardWrap">
-          {weddingCards()}
+          {weddings.length ? weddingCards() :
+            <StyledCard contents="fullPage">
+              <img className="noWeddingsError" src={noWeddings} alt="your wedding list is empty"/>
+            </StyledCard>
+          }
         </section>
       </section>
   )

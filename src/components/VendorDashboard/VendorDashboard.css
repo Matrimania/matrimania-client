@@ -66,6 +66,10 @@ select {
   flex-wrap: wrap;
   justify-content: center;
 }
+.noWeddingsError {
+  transition: all .5s ease-Out;
+  height: 90%;
+}
 @media screen and (max-width: 1000px) {
   .optionsWrap {
     padding: 0%;
@@ -80,6 +84,10 @@ select {
   .filterWrap {
     display: flex;
     flex-direction:column;
+  }
+  .noWeddingsError {
+    height: auto;
+    width: 95%;
   }
 }
 @media screen and (max-width: 750px) {

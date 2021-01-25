@@ -118,6 +118,8 @@ export const StyledCard = styled.section<StyledCardProps>`
       return '40em;'
     } else if(props.contents === 'empty') {
       return '43em;'
+    } else if(props.contents === 'fullPage') {
+      return '43em;'
     } else if(props.contents === 'list') {
       return '50em;'
     } else if(props.contents === 'other'){
@@ -129,6 +131,8 @@ export const StyledCard = styled.section<StyledCardProps>`
       return '1%;'
     } else if(props.contents === 'list') {
       return '3%;'
+    } else if(props.contents === 'fullPage') {
+      return '2%;'
     } else if (props.contents === 'other') {
       return '2%;'
     } else {
@@ -196,6 +200,8 @@ export const StyledCard = styled.section<StyledCardProps>`
     height: ${props => {
       if(props.contents === 'list') {
         return '75%;'
+      } else if(props.contents === 'fullPage') {
+        return '25%;'
       } else {
         return '80%;'
       }
