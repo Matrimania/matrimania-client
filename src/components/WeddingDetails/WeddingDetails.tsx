@@ -1,6 +1,6 @@
 import './WeddingDetails.css';
 import React, { useState, useEffect } from 'react';
-import { getSingleWeddingGuests, getSingleWeddingPhotos, getWeddings, postAGuest } from '../../apiCalls';
+import { getSingleWeddingGuests, getSingleWeddingPhotos, getWeddings, postAGuest, deleteWedding } from '../../apiCalls';
 import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList';
 import PhotoShootView from '../PhotoShootView/PhotoShootView';
 import { StyledButton, DetailsWrapper, DetailsFormWrapper } from '../App/styledComponents.styles'
@@ -81,6 +81,16 @@ const WeddingDetails: React.FC<Props> = ({
 		}
 		allWeddings()
 		setIsLoading(false)
+	}
+
+	const deleteSingleWedding = async () => {
+		let deletedWedding = await deleteWedding();
+		console.log(deletedWedding)
+		if (deletedWedding !== 'Not Deleted') {
+			alert('Wedding Successfully Deleted')
+		} else {
+			alert('Wedding Not Deleted')
+		}
 	}
 
   const updateGuests = async (newGuest: any) => {
@@ -187,6 +197,10 @@ const WeddingDetails: React.FC<Props> = ({
     				<p className="weddingDetails" data-testid="status">Status: {currentWeddingGuests.length === 0 ? "Pending" : "Received"}</p>
           </article>
           <section className="buttonWrap">
+		  			<StyledButton onClick={deleteSingleWedding}>
+						<div id="translate"></div>
+						<h3 className="link">Delete Wedding</h3>
+					</StyledButton>
 				{currentWeddingPhotos.length === 0 &&
 					<StyledButton>
 						<div id="translate"></div>
