@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Guest from '../Guest/Guest';
 import './GuestList.css'
 import empty from '../../assets/emptyGuestList.png'
@@ -62,7 +62,6 @@ const GuestList: React.FC<WeddingData> = ({
 
   const submitGuest = (event: React.FormEvent) => {
     event.preventDefault();
-    setIsLoading(true)
     const guestPost = {
       name: guestName,
       phoneNumber,
@@ -77,12 +76,7 @@ const GuestList: React.FC<WeddingData> = ({
       clearInputs()
       setHasError(false)
       setErrorMessage('')
-      const postGuest = async () => {
-        await postAGuest(guestPost)
-      }
-      postGuest()
-      setGuests([...guests, newGuest])
-      updateGuests()
+      updateGuests(guestPost)
     } else if (guestName === "" && phoneNumber.length !== 12) {
       setHasError(true)
       setErrorMessage('Name and Phone Number Required')
@@ -93,7 +87,6 @@ const GuestList: React.FC<WeddingData> = ({
       setHasError(true)
       setErrorMessage('Phone Number Required')
     }
-    setIsLoading(false)
   }
 
   const clearInputs = () => {
@@ -106,6 +99,8 @@ const GuestList: React.FC<WeddingData> = ({
     const filteredGuestList = guests.filter(guest => guest.id !== id)
     setGuests(filteredGuestList)
   }
+
+  useMemo(() => setGuests(guestList), [guestList])
 
 	return (
     <>

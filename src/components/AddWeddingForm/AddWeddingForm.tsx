@@ -2,33 +2,40 @@ import React, { useState } from 'react';
 import './AddWeddingForm.css'
 import { postAWedding } from '../../apiCalls'
 import { StyledButton } from '../App/styledComponents.styles'
+import dayjs from 'dayjs'
 
 
 type NewWedding = {
-  id: number,
+  id?: number,
   name: string,
   email: string,
   date: string,
   image: string
 }
+type Props = {
+  addNewWedding: any,
+}
 
-const AddWeddingForm: React.FC = () => {
+const AddWeddingForm: React.FC<Props> = ({
+  addNewWedding
+}) => {
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [date, setDate] = useState('')
   const [image, setImage] = useState('')
 
-  const submitWedding = (event: React.FormEvent) => {
+  const submitWedding = async (event: React.FormEvent) => {
     event.preventDefault();
+    const weddingDate = dayjs(date).format('MM/DD/YYYY')
     const newWedding: NewWedding = {
-      id: Date.now(),
       name,
       email,
-      date,
+      date: weddingDate,
       image
     }
-    postAWedding(newWedding);
+    const response = await postAWedding(newWedding);
+    addNewWedding(response);
     // should be a POST request + adding card to UI
     clearInputs();
   }

@@ -24,6 +24,7 @@ type Props = {
   changeView: any;
   photoList: any;
 }
+
 type Guest = {
 	id: number;
 	name: string;

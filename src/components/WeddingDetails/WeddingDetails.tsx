@@ -1,6 +1,6 @@
 import './WeddingDetails.css';
 import React, { useState, useEffect } from 'react';
-import { getSingleWeddingGuests, getSingleWeddingPhotos, getWeddings } from '../../apiCalls';
+import { getSingleWeddingGuests, getSingleWeddingPhotos, getWeddings, postAGuest } from '../../apiCalls';
 import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList';
 import PhotoShootView from '../PhotoShootView/PhotoShootView';
 import { StyledButton, DetailsWrapper, DetailsFormWrapper } from '../App/styledComponents.styles'
@@ -41,6 +41,7 @@ const WeddingDetails: React.FC<Props> = ({
 
 
 	useEffect(() => {
+    window.scrollTo(0, 0)
 		setIsLoading(true)
 		getWeddingGuests()
 		getWeddingPhotos()
@@ -82,6 +83,12 @@ const WeddingDetails: React.FC<Props> = ({
 		setIsLoading(false)
 	}
 
+  const updateGuests = async (newGuest: any) => {
+    await postAGuest(newGuest)
+    setCurrentWeddingGuests([...currentWeddingGuests, newGuest])
+    getWeddingGuests()
+  }
+
 
 	const emailBody = `It is time to fill out your family photo list! Please follow the link provided to complete the missing photo information. Feel free to reach out if you have any questions.
 		LINK: https://matrimania-client.herokuapp.com/wedding/${weddingData.id}`
@@ -92,27 +99,30 @@ const WeddingDetails: React.FC<Props> = ({
 			setPhotoShootView(true)
 			setGuestListView(false)
 			setEditPhotoListView(false)
+      window.scrollTo(0, 0)
 		} else if (view === "editGuestListView") {
 			setDetailsView(false)
 			setPhotoShootView(false)
 			setGuestListView(true)
 			setEditPhotoListView(false)
+      window.scrollTo(0, 0)
 		} else if (view === "editPhotoListView") {
 			setDetailsView(false)
 			setPhotoShootView(false)
 			setGuestListView(false)
 			setEditPhotoListView(true)
+      window.scrollTo(0, 0)
 		} else {
 			setDetailsView(true)
 			setPhotoShootView(false)
 			setGuestListView(false)
 			setEditPhotoListView(false)
+      window.scrollTo(0, 0)
 		}
 	}
 
-	const weddingDate = dayjs(weddingData.date).subtract(1, 'day').format("MM/DD/YYYY")
   const isToday = () => {
-    return dayjs(weddingDate).format("MM/DD/YYYY") === dayjs().format("MM/DD/YYYY") ? true : false
+    return dayjs(weddingData.date).format("MM/DD/YYYY") === dayjs().format("MM/DD/YYYY") ? true : false
   }
 
   const determineContents = () => {
@@ -132,7 +142,7 @@ const WeddingDetails: React.FC<Props> = ({
 						guestList={currentWeddingGuests}
 						changeView={determineCurrentState}
 						weddingId={weddingData.id}
-						updateGuests={getWeddingGuests}
+						updateGuests={updateGuests}
 					/>
 				)
 		} else if(photoShootView) {
@@ -172,7 +182,7 @@ const WeddingDetails: React.FC<Props> = ({
 				<div className="detailsHeader">
           <article className="weddingInfo">
     				<h1 className="weddingTitle">{weddingData.name} Wedding</h1>
-    				<h2 className="weddingDate">{weddingDate}</h2>
+    				<h2 className="weddingDate">{dayjs(weddingData.date).format("MM/DD/YYYY")}</h2>
     				<p className="weddingDetails" data-testid="emailSection">Email: {weddingData.email}</p>
     				<p className="weddingDetails" data-testid="status">Status: {currentWeddingGuests.length === 0 ? "Pending" : "Received"}</p>
           </article>

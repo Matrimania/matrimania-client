@@ -4,6 +4,8 @@ import React, {useState, useEffect} from 'react'
 import logo from '../../assets/FinalMatrimaniaLogo.png'
 import {Route, Switch, Link} from 'react-router-dom'
 import { getWeddings } from '../../apiCalls'
+import dayjs from 'dayjs'
+
 // Components
 import VendorDashboard from '../VendorDashboard/VendorDashboard'
 import WeddingDetails from '../WeddingDetails/WeddingDetails'
@@ -23,14 +25,22 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState('')
   const [hasError, setError] = useState(false)
 
+  const addNewWedding = (newWedding: any) => {
+    setWeddings([...weddings, newWedding])
+  }
+
   useEffect(() => {
     const allWeddings = async () => {
       const result = await getWeddings()
       if(result.length > 0) {
         result.forEach((wed: any) => {
-          wed.date = new Date(wed.date)
+          wed.date = dayjs(wed.date)
         })
-        let sortedResult = result.sort((a: any, b: any) => a.date - b.date)
+        console.log(result)
+        let sortedResult = result.sort((a: any, b: any) => b.date - a.date)
+        let sortedWeddings = sortedResult.forEach((wedding: any) => {
+          wedding.date = dayjs(wedding.date).format('MM/DD/YYYY')
+        })
         setWeddings(sortedResult)
       } else {
         setError(true)
@@ -43,16 +53,11 @@ const App = () => {
   return (
     <div className="appWrap">
       <header className="headerWrap">
-        <Link to={`/vendor-dashboard`}>
+        <Link to={`/`}>
           <img src={logo} className="logo" alt="Matrimania Logo"/>
         </Link>
       </header>
       <Switch>
-        <Route path='/vendor-dashboard'>
-          <VendorDashboard
-            weddings={weddings}
-          />
-        </Route>
         <Route exact path='/wedding/:weddingId'
           render={({ match }) => {
             const { weddingId } = match.params
@@ -61,10 +66,14 @@ const App = () => {
               />
           }} />
         <Route path='/add-wedding'>
-          <AddWeddingForm />
+          <AddWeddingForm
+            addNewWedding={addNewWedding}
+          />
         </Route>
         <Route exact path='/'>
-          <LandingPage />
+          <VendorDashboard
+            weddings={weddings}
+          />
         </Route>
       </Switch>
     </div>
