@@ -32,13 +32,14 @@ const App = () => {
   useEffect(() => {
     const allWeddings = async () => {
       const result = await getWeddings()
-      if(result.length > 0) {
+      console.log(result)
+      if(typeof result !== 'string' && result.length > 0) {
         result.forEach((wed: any) => {
           wed.date = dayjs(wed.date)
         })
         console.log(result)
         let sortedResult = result.sort((a: any, b: any) => b.date - a.date)
-        let sortedWeddings = sortedResult.forEach((wedding: any) => {
+        sortedResult.forEach((wedding: any) => {
           wedding.date = dayjs(wedding.date).format('MM/DD/YYYY')
         })
         setWeddings(sortedResult)
