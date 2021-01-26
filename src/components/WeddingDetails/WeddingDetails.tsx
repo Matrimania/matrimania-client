@@ -84,9 +84,9 @@ const WeddingDetails: React.FC<Props> = ({
 	}
 
   const updateGuests = async (newGuest: any) => {
-    await postAGuest(newGuest)
-    setCurrentWeddingGuests([...currentWeddingGuests, newGuest])
-    getWeddingGuests()
+	let postedGuest = await postAGuest(newGuest)
+	setCurrentWeddingGuests([...currentWeddingGuests, postedGuest])
+	getWeddingGuests()
   }
 
 

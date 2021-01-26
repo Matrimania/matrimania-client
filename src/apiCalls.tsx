@@ -68,7 +68,7 @@ export const postAGuest = (guest:any) => {
   })
   .then(response => {
     if(response.ok) {
-      return response
+      return response.json()
     } else {
       throw Error
     }

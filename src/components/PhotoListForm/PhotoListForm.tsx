@@ -70,7 +70,7 @@ const PhotoListForm: React.FC<Props> = ({
 
   const buildCheckList = () => {
     const allGuests = guestList.map((guest: any) => {
-        return {...guest, isChecked: false}
+        return {...guest, isChecked: false, key: guest.id}
       })
       setGuestsOptions(allGuests)
       return allGuests
