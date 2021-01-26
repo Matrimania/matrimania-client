@@ -48,7 +48,7 @@ export const postAPhoto = (photo:any) => {
   })
   .then(response => {
     if(response.ok) {
-      return response
+      return response.json()
     } else {
       throw Error
     }
