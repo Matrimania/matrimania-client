@@ -120,7 +120,7 @@ export const deleteAGuest = (guestId:number) => {
 }
 
 export const deleteWedding = (weddingId:number) => {
-  return fetch(`http://matrimania-backend.herokuapp.com/api/v1/weddings/remove/?weddingId=${weddingId}`)
+  return fetch(`http://matrimania-backend.herokuapp.com/api/v1/weddings/remove/?wedding=${weddingId}`)
   .then(response => {
     if(response.ok) {
       return response.json()

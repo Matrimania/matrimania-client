@@ -1,5 +1,5 @@
 import './WeddingDetails.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { getSingleWeddingGuests, getSingleWeddingPhotos, getWeddings, postAGuest, deleteWedding } from '../../apiCalls';
 import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList';
 import PhotoShootView from '../PhotoShootView/PhotoShootView';
@@ -83,15 +83,17 @@ const WeddingDetails: React.FC<Props> = ({
 		setIsLoading(false)
 	}
 
-	const deleteSingleWedding = async () => {
-		let deletedWedding = await deleteWedding();
+	const deleteSingleWedding = async (weddingId: number) => {
+		let deletedWedding = await deleteWedding(weddingId);
 		console.log(deletedWedding)
 		if (deletedWedding !== 'Not Deleted') {
 			alert('Wedding Successfully Deleted')
 		} else {
 			alert('Wedding Not Deleted')
 		}
-	}
+	};
+
+	useMemo(() => setWeddingData(weddingData), [weddingData])
 
   const updateGuests = async (newGuest: any) => {
 	let postedGuest = await postAGuest(newGuest)
@@ -197,7 +199,7 @@ const WeddingDetails: React.FC<Props> = ({
     				<p className="weddingDetails" data-testid="status">Status: {currentWeddingGuests.length === 0 ? "Pending" : "Received"}</p>
           </article>
           <section className="buttonWrap">
-		  			<StyledButton onClick={deleteSingleWedding}>
+		  			<StyledButton onClick={() => deleteSingleWedding(weddingData.id)}>
 						<div id="translate"></div>
 						<h3 className="link">Delete Wedding</h3>
 					</StyledButton>
