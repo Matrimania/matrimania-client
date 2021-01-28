@@ -71,7 +71,7 @@
   display: contents;
 }
 .carouselImg {
-  width: 75%;
+  height: 95%;
 }
 @media screen and (max-width: 1000px) {
   #shootInput {
@@ -79,6 +79,10 @@
     width: 50%;
     height: 1.25em;
     margin: 0% 0% 4% 0%;
+  }
+  .carouselImg {
+    width: 95%;
+    height: auto;
   }
 }
 @media screen and (max-width: 750px) {
