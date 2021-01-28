@@ -8,7 +8,8 @@ import noWeddings from '../../assets/NoWeddings.png'
 import noCurrent from '../../assets/NoCurrent.png'
 import noPast from '../../assets/NoPast.png'
 import noUpcoming from '../../assets/NoUpcoming.png'
-import loadingImg from '../../assets/loading.png'
+import arrow from '../../assets/arrow.png'
+import loadingText from '../../assets/loadingText.png'
 
 
 type Wedding = {
@@ -143,7 +144,9 @@ const VendorDashboard: React.FC<Props> = ({weddings, loading}) => {
 
   const displayLoading = () => {
     return (
-      <img className="loading" src={loadingImg} alt="finding weddings"/>
+      <div className="loadingWrap" style={{ backgroundImage: `url(${loadingText})`}}>
+        <img className="arrow" src={arrow} alt="page is loading"/>
+      </div>
     )
   }
 
