@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 
 type Props = {
   weddingId: number;
+  deleteSingleWedding: any
 }
 type Guest = {
 	id: number;
@@ -27,7 +28,8 @@ type Photo = {
 }
 
 const WeddingDetails: React.FC<Props> = ({
-	weddingId
+	weddingId,
+	deleteSingleWedding
 }) => {
 	const [errorMessage, setErrorMessage] = useState({photoError: '', guestError: '', weddingError: ''})
 	const [hasError, setHasError] = useState(false)
@@ -83,18 +85,6 @@ const WeddingDetails: React.FC<Props> = ({
 		allWeddings()
 		setIsLoading(false)
 	}
-
-	const deleteSingleWedding = async (weddingId: number) => {
-		let deletedWedding = await deleteWedding(weddingId);
-		console.log('delete', deletedWedding)
-		if (deletedWedding !== 'Not Deleted') {
-			alert('Wedding Successfully Deleted')
-		} else {
-			alert('Wedding Not Deleted')
-		}
-	};
-
-	useMemo(() => setWeddingData(weddingData), [weddingData])
 
   const updateGuests = async (newGuest: any) => {
 	let postedGuest = await postAGuest(newGuest)

@@ -3,7 +3,7 @@ import './App.css';
 import React, {useState, useEffect} from 'react'
 import logo from '../../assets/FinalMatrimaniaLogo.png'
 import {Route, Switch, Link} from 'react-router-dom'
-import { getWeddings } from '../../apiCalls'
+import { getWeddings,  deleteWedding  } from '../../apiCalls'
 import dayjs from 'dayjs'
 
 // Components
@@ -51,6 +51,16 @@ const App = () => {
     allWeddings()
   }, [])
 
+  const deleteSingleWedding = async (weddingId: number) => {
+		let deletedWedding = await deleteWedding(weddingId);
+		if (deletedWedding !== 'Not Deleted') {
+      const remainingWeddings = weddings.filter(wedding => wedding.id !== weddingId)
+      setWeddings(remainingWeddings)
+		} else {
+			alert('Wedding Not Deleted')
+		}
+	};
+
   return (
     <div className="appWrap">
       <header className="headerWrap">
@@ -64,6 +74,7 @@ const App = () => {
             const { weddingId } = match.params
             return <WeddingDetails
               weddingId={+weddingId}
+              deleteSingleWedding={deleteSingleWedding}
               />
           }} />
         <Route path='/add-wedding'>
