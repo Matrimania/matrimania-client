@@ -27,7 +27,6 @@ const AddWeddingForm: React.FC<Props> = ({
   const [image, setImage] = useState('')
 
   const submitWedding = async (event: React.FormEvent) => {
-    //event.preventDefault();
     const weddingDate = dayjs(date).format('MM/DD/YYYY')
     const newWedding: NewWedding = {
       name,
@@ -37,7 +36,6 @@ const AddWeddingForm: React.FC<Props> = ({
     }
     const response = await postAWedding(newWedding);
     addNewWedding(response);
-    // should be a POST request + adding card to UI
     clearInputs();
   }
 
