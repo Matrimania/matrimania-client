@@ -3,10 +3,11 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { getSingleWeddingGuests, getSingleWeddingPhotos, getWeddings, postAGuest, deleteWedding } from '../../apiCalls';
 import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList';
 import PhotoShootView from '../PhotoShootView/PhotoShootView';
-import { StyledButton, DetailsWrapper, DetailsFormWrapper } from '../App/styledComponents.styles'
-import GuestList from '../GuestList/GuestList'
+import { StyledButton, DetailsWrapper, DetailsFormWrapper } from '../App/styledComponents.styles';
+import GuestList from '../GuestList/GuestList';
 import dayjs from 'dayjs';
 import PhotoListForm from '../PhotoListForm/PhotoListForm';
+import { Link } from 'react-router-dom';
 
 
 type Props = {
@@ -85,7 +86,7 @@ const WeddingDetails: React.FC<Props> = ({
 
 	const deleteSingleWedding = async (weddingId: number) => {
 		let deletedWedding = await deleteWedding(weddingId);
-		console.log(deletedWedding)
+		console.log('delete', deletedWedding)
 		if (deletedWedding !== 'Not Deleted') {
 			alert('Wedding Successfully Deleted')
 		} else {
@@ -199,10 +200,12 @@ const WeddingDetails: React.FC<Props> = ({
     				<p className="weddingDetails" data-testid="status">Status: {currentWeddingGuests.length === 0 ? "Pending" : "Received"}</p>
           </article>
           <section className="buttonWrap">
-		  			<StyledButton onClick={() => deleteSingleWedding(weddingData.id)}>
-						<div id="translate"></div>
-						<h3 className="link">Delete Wedding</h3>
-					</StyledButton>
+					<Link to={`/`}>
+						<StyledButton onClick={() => deleteSingleWedding(weddingData.id)}>
+							<div id="translate"></div>
+							<h3 className="link">Delete Wedding</h3>
+						</StyledButton>
+					</Link>
 				{currentWeddingPhotos.length === 0 &&
 					<StyledButton>
 						<div id="translate"></div>
