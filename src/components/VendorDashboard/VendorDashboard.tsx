@@ -1,5 +1,5 @@
 import './VendorDashboard.css';
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import WeddingCard from '../WeddingCard/WeddingCard'
 import { Link } from 'react-router-dom';
 import { StyledButton, StyledCard } from '../App/styledComponents.styles'
@@ -8,6 +8,7 @@ import noWeddings from '../../assets/NoWeddings.png'
 import noCurrent from '../../assets/NoCurrent.png'
 import noPast from '../../assets/NoPast.png'
 import noUpcoming from '../../assets/NoUpcoming.png'
+import loadingImg from '../../assets/loading.png'
 
 
 type Wedding = {
@@ -19,15 +20,20 @@ type Wedding = {
 }
 type Props = {
   weddings: any;
+  loading: any;
 }
 
 
-const VendorDashboard: React.FC<Props> = ({weddings}) => {
+const VendorDashboard: React.FC<Props> = ({weddings, loading}) => {
   const [weddingFilter, setWeddingFilter] = useState<Wedding[]>([])
   const [errorMessage, setErrorMessage] = useState('')
   const [hasError, setError] = useState(false)
+  const [isLoading, setIsLoading] = useState(loading)
+
+  useMemo(() => setIsLoading(loading), [loading])
 
   const filterWeddings = (e: any) => {
+    setIsLoading(true)
     setError(false)
     setErrorMessage('')
     let sortedFilter
@@ -42,9 +48,11 @@ const VendorDashboard: React.FC<Props> = ({weddings}) => {
           sortedFilter = futureWeddings.sort((a: any, b: any) => a.date - b.date)
           sortedFilter.forEach((wed:any) => wed.date = dayjs(wed.date).format('MM/DD/YYYY'))
           setWeddingFilter(sortedFilter)
+          setIsLoading(false)
         } else {
           setError(true)
           setErrorMessage('No Upcoming Weddings To Show')
+          setIsLoading(false)
         }
         break;
       case 2:
@@ -56,9 +64,11 @@ const VendorDashboard: React.FC<Props> = ({weddings}) => {
           sortedFilter = pastWeddings.sort((a: any, b: any) => a.date - b.date)
           sortedFilter.forEach((wed:any) => wed.date = dayjs(wed.date).format('MM/DD/YYYY'))
           setWeddingFilter(sortedFilter)
+          setIsLoading(false)
         } else {
           setError(true)
           setErrorMessage('No Past Weddings To Show')
+          setIsLoading(false)
         }
         break;
       case 3:
@@ -67,17 +77,21 @@ const VendorDashboard: React.FC<Props> = ({weddings}) => {
         })
         if(currentWeddings.length > 0) {
           setWeddingFilter(currentWeddings)
+          setIsLoading(false)
         } else {
           setError(true)
           setErrorMessage('No Weddings Taking Place Today')
+          setIsLoading(false)
         }
         break;
       default:
         if(weddings.length > 0) {
           setWeddingFilter(weddings)
+          setIsLoading(false)
         } else {
           setError(true)
           setErrorMessage('No Weddings In Your Schedule')
+          setIsLoading(false)
         }
         break;
     }
@@ -127,6 +141,12 @@ const VendorDashboard: React.FC<Props> = ({weddings}) => {
     }
   };
 
+  const displayLoading = () => {
+    return (
+      <img className="loading" src={loadingImg} alt="finding weddings"/>
+    )
+  }
+
   return (
       <section className="dashboardWrapper">
         <section className="optionsWrap">
@@ -145,11 +165,9 @@ const VendorDashboard: React.FC<Props> = ({weddings}) => {
           </section>
         </section>
         <section className="weddingCardWrap">
-          {weddings.length ? weddingCards() :
-            <StyledCard contents="fullPage">
-              <img className="noWeddingsError" src={noWeddings} alt="your wedding list is empty"/>
-            </StyledCard>
-          }
+          {isLoading && displayLoading()}
+          {weddings.length === 0 && !isLoading && <img className="noWeddingsError" src={noWeddings} alt={'No weddings in storage'}/>}
+          {weddings.length > 0 && !isLoading && weddingCards()}
         </section>
       </section>
   )
