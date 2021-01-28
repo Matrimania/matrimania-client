@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Photo from '../Photo/Photo';
 import Checkbox from '../Checkbox/Checkbox';
-import empty from '../../assets/emptyGuestList.png';
+import empty from '../../assets/EmptyPhoto.png';
 import { postAPhoto, getSingleWeddingGuests } from '../../apiCalls';
 import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles';
 import '../GuestList/GuestList.css';
