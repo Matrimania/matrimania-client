@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './PhotoShootView.css'
 import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles'
 import Photo from '../Photo/Photo';
+import done from '../../assets/goodWork.png';
+import start from '../../assets/startShoot.png';
 
 
 type PhotoShootData = {
@@ -57,7 +59,21 @@ const PhotoShootView: React.FC<PhotoShootData> = ({
   }
 
 	const displayCarousel = () => {
-		const currentPhoto = photoList.find((photo: any) => photo.number === carousel + 1)
+		if(carousel === 0) {
+			return (
+				<StyledCard contents="shoot">
+					<img src={start} className="carouselImg" alt="click the next button to get started"/>
+				</StyledCard>
+			)
+		}
+		if(carousel > photoList.length) {
+			return (
+				<StyledCard contents="shoot">
+					<img src={done} className="carouselImg" alt="Good work! You're all done!"/>
+				</StyledCard>
+			)
+		}
+		const currentPhoto = photoList.find((photo: any) => photo.number === carousel)
 		if(currentPhoto) {
 			const participants:string[] = []
 			const filtered = currentPhoto.guest.forEach((num:any) => {
@@ -68,7 +84,7 @@ const PhotoShootView: React.FC<PhotoShootData> = ({
 			})
 			if(participants.length > 0) {
 				return (
-					<StyledCard contents="other">
+					<StyledCard contents="shoot">
 					<article className="photoShootCard">
 					<Photo
 					id={currentPhoto.id}
@@ -77,6 +93,7 @@ const PhotoShootView: React.FC<PhotoShootData> = ({
 					description={currentPhoto.description}
 					location={'shoot'}
 					/>
+					<div>{`${photoList.length - currentPhoto.number} Photos left`}</div>
 					</article>
 					</StyledCard>
 				)
@@ -131,13 +148,13 @@ const PhotoShootView: React.FC<PhotoShootData> = ({
 					<h1 id="shootTitle2" className="weddingTitle">Ready, Set, Click.</h1>
 						{displayCarousel()}
 					<section className="buttonWrapper">
-					{(carousel > 0 && carousel <= photoList.length) &&
+					{(carousel > 0 && carousel <= photoList.length + 1) &&
 						<BackButton onClick={() => setCarousel(carousel-1)}>
 							<div id="arrow">{"<<"}</div>
 							<h3 className="link">{"< Prev"}</h3>
 						</BackButton>
 					}
-					{(carousel >= 0 && carousel < photoList.length - 1) &&
+					{(carousel >= 0 && carousel < photoList.length + 1) &&
 						<BackButton onClick={() => setCarousel(carousel+1)}>
 							<div id="arrow">{">>"}</div>
 							<h3 className="link">{"Next >"}</h3>
