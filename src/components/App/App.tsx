@@ -26,11 +26,7 @@ const App = () => {
   const [hasError, setError] = useState(false)
 
   const addNewWedding = (newWedding: any) => {
-    let mounted = true;
-    if (mounted) {
       setWeddings([...weddings, newWedding])
-    }
-    return () => mounted = false;
   }
 
   useEffect(() => {
@@ -46,13 +42,13 @@ const App = () => {
         sortedResult.forEach((wedding: any) => {
           wedding.date = dayjs(wedding.date).format('MM/DD/YYYY')
         })
-        setWeddings(sortedResult)
+          setWeddings(sortedResult)
       } else {
         setError(true)
         setErrorMessage(result)
       }
     }
-    allWeddings()
+    allWeddings() 
   }, [])
 
   const deleteSingleWedding = async (weddingId: number) => {

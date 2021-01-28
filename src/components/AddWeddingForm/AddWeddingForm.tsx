@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './AddWeddingForm.css'
 import { postAWedding } from '../../apiCalls'
 import { StyledButton } from '../App/styledComponents.styles'
 import dayjs from 'dayjs'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 
 type NewWedding = {
@@ -25,8 +25,10 @@ const AddWeddingForm: React.FC<Props> = ({
   const [email, setEmail] = useState('')
   const [date, setDate] = useState('')
   const [image, setImage] = useState('')
+  let history = useHistory()
 
   const submitWedding = async (event: React.FormEvent) => {
+    event.preventDefault();
     const weddingDate = dayjs(date).format('MM/DD/YYYY')
     const newWedding: NewWedding = {
       name,
@@ -37,6 +39,7 @@ const AddWeddingForm: React.FC<Props> = ({
     const response = await postAWedding(newWedding);
     addNewWedding(response);
     clearInputs();
+    history.push('/')
   }
 
   const capitalize = (s: string) => {
@@ -94,12 +97,10 @@ const AddWeddingForm: React.FC<Props> = ({
           value={image}
           onChange={event => setImage(event.target.value)}
         />
-        <Link to={`/`}>
           <StyledButton onClick={event => submitWedding(event)}>
             <div id="translate"></div>
               <h2 className="link" id="addListButton">Submit Wedding</h2>
           </StyledButton>
-        </Link>
       </form>
     </>
 	)
