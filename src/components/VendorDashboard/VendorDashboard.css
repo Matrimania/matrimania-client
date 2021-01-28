@@ -66,9 +66,17 @@ select {
   flex-wrap: wrap;
   justify-content: center;
 }
+.loading {
+  transition: all .5s ease-Out;
+  width: 40%;
+  margin-top: 1%;
+  opacity: 70%;
+}
 .noWeddingsError {
   transition: all .5s ease-Out;
-  height: 90%;
+  width: 50%;
+  margin-top: 1%;
+  opacity: 70%;
 }
 @media screen and (max-width: 1000px) {
   .optionsWrap {
@@ -86,8 +94,8 @@ select {
     flex-direction:column;
   }
   .noWeddingsError {
-    width: 95%;
-    height: auto;
+    width: 70%;
+    margin-top: 3%;
   }
 }
 @media screen and (max-width: 750px) {
@@ -110,5 +118,13 @@ select {
   .filterWrap {
     display: flex;
     flex-direction:column;
+  }
+  .noWeddingsError {
+    width: 90%;
+    margin-top: 6%;
+  }
+  .loading {
+    width: 80%;
+    margin-top: 6%;
   }
 }
