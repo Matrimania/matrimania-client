@@ -70,7 +70,7 @@ const PhotoListForm: React.FC<Props> = ({
 
   const buildCheckList = () => {
     const allGuests = guestList.map((guest: any) => {
-        return {...guest, isChecked: false}
+        return {...guest, isChecked: false, key: guest.id}
       })
       setGuestsOptions(allGuests)
       return allGuests
@@ -86,7 +86,7 @@ const PhotoListForm: React.FC<Props> = ({
     setGuestsOptions(toggledList)
   }
 
-  const submitPhoto = (event: React.FormEvent) => {
+  const submitPhoto = async (event: React.FormEvent) => {
     setIsLoading(true)
     event.preventDefault()
     const checkedGuests = guestsOptions.filter((guest: any) => guest.isChecked)
@@ -106,9 +106,9 @@ const PhotoListForm: React.FC<Props> = ({
         guest: guestIds,
         weddingId: weddingId
       }
-      setPhotoData([...photoData, postPhoto])
       setDescription('')
-      postAPhoto(postPhoto)
+      let postedPhoto = await postAPhoto(postPhoto)
+      setPhotoData([...photoData, postedPhoto])
     } else {
       setIsError(true)
       setErrorMessage('Please select at least one guest for the photo')

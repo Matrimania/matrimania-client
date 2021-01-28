@@ -109,7 +109,7 @@ const VendorDashboard: React.FC<Props> = ({weddings}) => {
         )
       })
     }
-  }
+  };
 
   return (
       <section className="dashboardWrapper">

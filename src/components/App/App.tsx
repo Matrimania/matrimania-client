@@ -3,7 +3,7 @@ import './App.css';
 import React, {useState, useEffect} from 'react'
 import logo from '../../assets/FinalMatrimaniaLogo.png'
 import {Route, Switch, Link} from 'react-router-dom'
-import { getWeddings } from '../../apiCalls'
+import { getWeddings,  deleteWedding  } from '../../apiCalls'
 import dayjs from 'dayjs'
 
 // Components
@@ -32,13 +32,14 @@ const App = () => {
   useEffect(() => {
     const allWeddings = async () => {
       const result = await getWeddings()
-      if(result.length > 0) {
+      console.log(result)
+      if(typeof result !== 'string' && result.length > 0) {
         result.forEach((wed: any) => {
           wed.date = dayjs(wed.date)
         })
         console.log(result)
         let sortedResult = result.sort((a: any, b: any) => b.date - a.date)
-        let sortedWeddings = sortedResult.forEach((wedding: any) => {
+        sortedResult.forEach((wedding: any) => {
           wedding.date = dayjs(wedding.date).format('MM/DD/YYYY')
         })
         setWeddings(sortedResult)
@@ -49,6 +50,16 @@ const App = () => {
     }
     allWeddings()
   }, [])
+
+  const deleteSingleWedding = async (weddingId: number) => {
+		let deletedWedding = await deleteWedding(weddingId);
+		if (deletedWedding !== 'Not Deleted') {
+      const remainingWeddings = weddings.filter(wedding => wedding.id !== weddingId)
+      setWeddings(remainingWeddings)
+		} else {
+			alert('Wedding Not Deleted')
+		}
+	};
 
   return (
     <div className="appWrap">
@@ -63,6 +74,7 @@ const App = () => {
             const { weddingId } = match.params
             return <WeddingDetails
               weddingId={+weddingId}
+              deleteSingleWedding={deleteSingleWedding}
               />
           }} />
         <Route path='/add-wedding'>
