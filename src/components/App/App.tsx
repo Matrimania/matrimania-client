@@ -42,7 +42,7 @@ const App = () => {
           wed.date = dayjs(wed.date)
         })
         console.log(result)
-        let sortedResult = result.sort((a: any, b: any) => b.date - a.date)
+        let sortedResult = result.sort((a: any, b: any) => a.date - b.date)
         sortedResult.forEach((wedding: any) => {
           wedding.date = dayjs(wedding.date).format('MM/DD/YYYY')
         })
