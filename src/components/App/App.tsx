@@ -24,12 +24,14 @@ const App = () => {
   const [weddings, setWeddings] = useState<Wedding[]>([])
   const [errorMessage, setErrorMessage] = useState('')
   const [hasError, setError] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const addNewWedding = (newWedding: any) => {
       setWeddings([...weddings, newWedding])
   }
 
   useEffect(() => {
+    setIsLoading(true)
     const allWeddings = async () => {
       const result = await getWeddings()
       console.log(result)
@@ -42,13 +44,15 @@ const App = () => {
         sortedResult.forEach((wedding: any) => {
           wedding.date = dayjs(wedding.date).format('MM/DD/YYYY')
         })
-          setWeddings(sortedResult)
+        setWeddings(sortedResult)
+        setIsLoading(false)
       } else {
         setError(true)
         setErrorMessage(result)
+        setIsLoading(false)
       }
     }
-    allWeddings() 
+    allWeddings()
   }, [])
 
   const deleteSingleWedding = async (weddingId: number) => {
@@ -85,6 +89,7 @@ const App = () => {
         <Route exact path='/'>
           <VendorDashboard
             weddings={weddings}
+            loading={isLoading}
           />
         </Route>
       </Switch>

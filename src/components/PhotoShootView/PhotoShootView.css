@@ -70,12 +70,20 @@
   width: 100%;
   display: contents;
 }
+.carouselImg {
+  transition: all .5s ease-Out;
+  height: 95%;
+}
 @media screen and (max-width: 1000px) {
   #shootInput {
     transition: all .5s ease-Out;
     width: 50%;
     height: 1.25em;
     margin: 0% 0% 4% 0%;
+  }
+  .carouselImg {
+    width: 95%;
+    height: auto;
   }
 }
 @media screen and (max-width: 750px) {

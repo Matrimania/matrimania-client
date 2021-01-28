@@ -100,6 +100,14 @@ const GuestList: React.FC<WeddingData> = ({
     setGuests(filteredGuestList)
   }
 
+  const changeToPhotoList = () => {
+    if (guests.length === 0){
+      alert("Please add at least one guest before moving on to photos")
+    } else {
+      changeView('editPhotoListView')
+    }
+  }
+
   useMemo(() => setGuests(guestList), [guestList])
 
 	return (
@@ -144,7 +152,7 @@ const GuestList: React.FC<WeddingData> = ({
               <div id="arrow">{"<<"}</div>
               <h3 className="link">{"< Back"}</h3>
             </BackButton>
-            <BackButton onClick={() => changeView('editPhotoListView')}>
+            <BackButton onClick={() => changeToPhotoList()}>
               <div id="arrow">{">>"}</div>
               <h3 className="link">{"Photos >"}</h3>
             </BackButton>

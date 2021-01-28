@@ -124,6 +124,8 @@ export const StyledCard = styled.section<StyledCardProps>`
       return '50em;'
     } else if(props.contents === 'other'){
       return '65%;'
+    } else if(props.contents === 'shoot') {
+      return '50%;'
     }
   }};
   margin: ${props => {
@@ -135,8 +137,8 @@ export const StyledCard = styled.section<StyledCardProps>`
       return '2%;'
     } else if (props.contents === 'other') {
       return '2%;'
-    } else {
-      return '8%;'
+    } else if(props.contents === 'shoot') {
+      return '2%;'
     }
   }};
   border-radius: 30px;

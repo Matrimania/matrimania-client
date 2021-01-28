@@ -29,12 +29,22 @@ const AddWeddingForm: React.FC<Props> = ({
 
   const submitWedding = async (event: React.FormEvent) => {
     event.preventDefault();
+    let newWedding
     const weddingDate = dayjs(date).format('MM/DD/YYYY')
-    const newWedding: NewWedding = {
-      name,
-      email,
-      date: weddingDate,
-      image
+    if(image === '') {
+      newWedding = {
+        name,
+        email,
+        date: weddingDate,
+        image: 'https://user-images.githubusercontent.com/65047537/106202246-dc00b080-6176-11eb-8067-5c7798af9a1b.jpg'
+      }
+    } else {
+      newWedding = {
+        name,
+        email,
+        date: weddingDate,
+        image
+      }
     }
     const response = await postAWedding(newWedding);
     addNewWedding(response);

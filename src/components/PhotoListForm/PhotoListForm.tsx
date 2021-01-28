@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Photo from '../Photo/Photo';
 import Checkbox from '../Checkbox/Checkbox';
-import empty from '../../assets/emptyGuestList.png';
+import empty from '../../assets/EmptyPhoto.png';
 import { postAPhoto, getSingleWeddingGuests } from '../../apiCalls';
 import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles';
 import '../GuestList/GuestList.css';
 import './PhotoListForm.css';
+import arrow from '../../assets/arrow.png'
+import loadingText from '../../assets/loadingText.png'
+
 
 // type NewPhoto = {
 //   id: number;
@@ -180,7 +183,12 @@ const PhotoListForm: React.FC<Props> = ({
         </section>
       </form>
       <section className="guestListWrap">
-      {isLoading ? "loading" :
+      {isLoading ?
+        <StyledCard contents="list">
+        <div className="loadingWrap" style={{ backgroundImage: `url(${loadingText})`}}>
+          <img className="arrow" src={arrow} alt="page is loading"/>
+        </div>
+        </StyledCard> :
         <StyledCard contents={photoData.length === 0 ? "empty" : "list"}>
           {photoData.length === 0 &&
             <img className="emptyList" src={empty} alt="your list is empty"/> }

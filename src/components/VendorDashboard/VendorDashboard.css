@@ -66,9 +66,33 @@ select {
   flex-wrap: wrap;
   justify-content: center;
 }
+.loadingWrap {
+  width: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.loadText {
+  width: 100%;
+}
+.arrow {
+  transition: all .1s ease-Out;
+  animation: shoot 0.2s forwards;
+  width: 100%;
+  left: -300px;
+}
+@keyframes shoot {
+  25% {
+    transform: translateX(-200px);
+  }
+  100% {
+    left:0;
+  }
+}
 .noWeddingsError {
   transition: all .5s ease-Out;
-  height: 90%;
+  width: 50%;
+  margin-top: 1%;
+  opacity: 70%;
 }
 @media screen and (max-width: 1000px) {
   .optionsWrap {
@@ -86,8 +110,8 @@ select {
     flex-direction:column;
   }
   .noWeddingsError {
-    width: 95%;
-    height: auto;
+    width: 70%;
+    margin-top: 3%;
   }
 }
 @media screen and (max-width: 750px) {
@@ -110,5 +134,13 @@ select {
   .filterWrap {
     display: flex;
     flex-direction:column;
+  }
+  .noWeddingsError {
+    width: 90%;
+    margin-top: 6%;
+  }
+  .loading {
+    width: 80%;
+    margin-top: 6%;
   }
 }
