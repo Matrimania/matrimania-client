@@ -71,6 +71,7 @@
   display: contents;
 }
 .carouselImg {
+  transition: all .5s ease-Out;
   height: 95%;
 }
 @media screen and (max-width: 1000px) {
