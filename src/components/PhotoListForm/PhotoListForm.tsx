@@ -6,6 +6,8 @@ import { postAPhoto, getSingleWeddingGuests } from '../../apiCalls';
 import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles';
 import '../GuestList/GuestList.css';
 import './PhotoListForm.css';
+import loadingImg from '../../assets/loading.png'
+
 
 // type NewPhoto = {
 //   id: number;
@@ -180,7 +182,10 @@ const PhotoListForm: React.FC<Props> = ({
         </section>
       </form>
       <section className="guestListWrap">
-      {isLoading ? "loading" :
+      {isLoading ?
+        <StyledCard contents="list">
+            <img style={{ marginTop: '30%', width: '50%', opacity: '70%'}} className="emptyList" src={loadingImg} alt="loading"/>
+        </StyledCard> :
         <StyledCard contents={photoData.length === 0 ? "empty" : "list"}>
           {photoData.length === 0 &&
             <img className="emptyList" src={empty} alt="your list is empty"/> }
