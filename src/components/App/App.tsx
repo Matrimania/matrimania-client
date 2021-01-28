@@ -26,7 +26,11 @@ const App = () => {
   const [hasError, setError] = useState(false)
 
   const addNewWedding = (newWedding: any) => {
-    setWeddings([...weddings, newWedding])
+    let mounted = true;
+    if (mounted) {
+      setWeddings([...weddings, newWedding])
+    }
+    return () => mounted = false;
   }
 
   useEffect(() => {

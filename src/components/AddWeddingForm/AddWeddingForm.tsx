@@ -3,6 +3,7 @@ import './AddWeddingForm.css'
 import { postAWedding } from '../../apiCalls'
 import { StyledButton } from '../App/styledComponents.styles'
 import dayjs from 'dayjs'
+import { Link } from 'react-router-dom'
 
 
 type NewWedding = {
@@ -26,7 +27,7 @@ const AddWeddingForm: React.FC<Props> = ({
   const [image, setImage] = useState('')
 
   const submitWedding = async (event: React.FormEvent) => {
-    event.preventDefault();
+    //event.preventDefault();
     const weddingDate = dayjs(date).format('MM/DD/YYYY')
     const newWedding: NewWedding = {
       name,
@@ -95,10 +96,12 @@ const AddWeddingForm: React.FC<Props> = ({
           value={image}
           onChange={event => setImage(event.target.value)}
         />
-        <StyledButton onClick={event => submitWedding(event)}>
-          <div id="translate"></div>
-            <h2 className="link" id="addListButton">Submit Wedding</h2>
-        </StyledButton>
+        <Link to={`/`}>
+          <StyledButton onClick={event => submitWedding(event)}>
+            <div id="translate"></div>
+              <h2 className="link" id="addListButton">Submit Wedding</h2>
+          </StyledButton>
+        </Link>
       </form>
     </>
 	)
