@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import { StyledButton, StyledCard } from '../App/styledComponents.styles'
 import dayjs from 'dayjs'
 import noWeddings from '../../assets/NoWeddings.png'
+import noCurrent from '../../assets/NoCurrent.png'
+import noPast from '../../assets/NoPast.png'
+import noUpcoming from '../../assets/NoUpcoming.png'
 
 
 type Wedding = {
@@ -79,10 +82,23 @@ const VendorDashboard: React.FC<Props> = ({weddings}) => {
         break;
     }
   }
+  const displayErrorImage = () => {
+    if (errorMessage === 'No Weddings In Your Schedule') {
+      return noWeddings
+    } else if (errorMessage === 'No Weddings Taking Place Today') {
+      return noCurrent
+    } else if (errorMessage === 'No Past Weddings To Show') {
+      return noPast
+    } else if (errorMessage === 'No Upcoming Weddings To Show') {
+      return noUpcoming
+    }
+  }
 
   const weddingCards = () => {
     if(hasError) {
-      return <div>{errorMessage}</div>
+      return (
+        <img className="noWeddingsError" src={displayErrorImage()} alt={errorMessage}/>
+      )
     }
     if(weddingFilter.length > 0) {
       return weddingFilter.map((singleWedding:any) => {
