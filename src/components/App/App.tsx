@@ -79,18 +79,19 @@ const App = () => {
             return <WeddingDetails
               weddingId={+weddingId}
               deleteSingleWedding={deleteSingleWedding}
-              />
-          }} />
+            />
+          }} 
+        />
         <Route path='/add-wedding'>
           <AddWeddingForm
             addNewWedding={addNewWedding}
-          />
+        />
         </Route>
         <Route exact path='/'>
           <VendorDashboard
             weddings={weddings}
             loading={isLoading}
-          />
+        />
         </Route>
       </Switch>
     </div>
