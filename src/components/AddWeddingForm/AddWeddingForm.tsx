@@ -1,18 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './AddWeddingForm.css'
 import { postAWedding } from '../../apiCalls'
 import { StyledButton } from '../App/styledComponents.styles'
 import dayjs from 'dayjs'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
-
-type NewWedding = {
-  id?: number,
-  name: string,
-  email: string,
-  date: string,
-  image: string
-}
 type Props = {
   addNewWedding: any,
 }
