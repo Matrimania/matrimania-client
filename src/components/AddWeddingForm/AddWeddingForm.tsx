@@ -31,7 +31,7 @@ const AddWeddingForm: React.FC<Props> = ({
   const submitWedding = async (event: React.FormEvent) => {
     event.preventDefault();
     if (name === '' || email === '' || date === '') {
-      setMessage('Please fill out all mandatory fields')
+      setMessage('Please makes sure to include your name, email, and wedding date')
     } else {
       const weddingDate = dayjs(date).format('MM/DD/YYYY')
       const newWedding = {
@@ -102,7 +102,7 @@ const AddWeddingForm: React.FC<Props> = ({
         <input
           id="weddingFormInput"
           type='text'
-          placeholder='Image Link'
+          placeholder='Image Link (optional)'
           name='image'
           value={image}
           onChange={event => setImage(event.target.value)}
