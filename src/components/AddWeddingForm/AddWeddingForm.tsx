@@ -47,6 +47,7 @@ const AddWeddingForm: React.FC<Props> = ({
       }
     }
     const response = await postAWedding(newWedding);
+    console.log(response)
     addNewWedding(response);
     clearInputs();
     history.push('/')
