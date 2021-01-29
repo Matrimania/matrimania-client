@@ -1,8 +1,12 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 
 import App from '../components/App/App';
+import { getWeddings } from '../apiCalls';
+
+jest.mock('../apiCalls.tsx');
 
 describe('App', () => {
   it('renders App elements', () => {
