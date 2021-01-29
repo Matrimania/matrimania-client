@@ -34,14 +34,14 @@ const AddWeddingForm: React.FC<Props> = ({
       setMessage('Please fill out all mandatory fields')
     } else {
       const weddingDate = dayjs(date).format('MM/DD/YYYY')
-      if(image === '') {
-        setImage('https://user-images.githubusercontent.com/65047537/106202246-dc00b080-6176-11eb-8067-5c7798af9a1b.jpg')
-      }
       const newWedding = {
         name,
         email,
         date: weddingDate,
         image
+      }
+      if(newWedding.image === '') {
+        newWedding.image = 'https://user-images.githubusercontent.com/65047537/106202246-dc00b080-6176-11eb-8067-5c7798af9a1b.jpg'
       }
       const response = await postAWedding(newWedding);
       console.log(response)
