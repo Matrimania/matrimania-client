@@ -47,7 +47,6 @@ describe('App', () => {
   });
 
   it('can add a wedding', async () => {
-
     postAWedding.mockResolvedValue({
       "id": 33,
       "name": "Matthews",
@@ -89,4 +88,6 @@ describe('App', () => {
     expect(weddingDate1).toBeInTheDocument();
     expect(weddingImage1).toBeInTheDocument();
   });
+
+  it()
 });

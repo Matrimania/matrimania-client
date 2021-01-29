@@ -25,32 +25,31 @@ const AddWeddingForm: React.FC<Props> = ({
   const [email, setEmail] = useState('')
   const [date, setDate] = useState('')
   const [image, setImage] = useState('')
+  const [message, setMessage] = useState('')
   let history = useHistory()
 
   const submitWedding = async (event: React.FormEvent) => {
     event.preventDefault();
-    let newWedding
-    const weddingDate = dayjs(date).format('MM/DD/YYYY')
-    if(image === '') {
-      newWedding = {
-        name,
-        email,
-        date: weddingDate,
-        image: 'https://user-images.githubusercontent.com/65047537/106202246-dc00b080-6176-11eb-8067-5c7798af9a1b.jpg'
-      }
+    if (name === '' || email === '' || date === '') {
+      setMessage('Please fill out all mandatory fields')
     } else {
-      newWedding = {
+      const weddingDate = dayjs(date).format('MM/DD/YYYY')
+      if(image === '') {
+        setImage('https://user-images.githubusercontent.com/65047537/106202246-dc00b080-6176-11eb-8067-5c7798af9a1b.jpg')
+      }
+      const newWedding = {
         name,
         email,
         date: weddingDate,
         image
       }
+      const response = await postAWedding(newWedding);
+      console.log(response)
+      addNewWedding(response);
+      clearInputs();
+      setMessage('')
+      history.push('/')
     }
-    const response = await postAWedding(newWedding);
-    console.log(response)
-    addNewWedding(response);
-    clearInputs();
-    history.push('/')
   }
 
   const capitalize = (s: string) => {
