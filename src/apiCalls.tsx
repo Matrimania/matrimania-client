@@ -6,14 +6,8 @@ export const getWeddingInfo = (weddingId:number) => {
 
 export const getWeddings = () => {
   return fetch("http://matrimania-backend.herokuapp.com/api/v1/weddings/weddings/")
-  .then(response => {
-    if(response.ok) {
-      return response.json()
-    } else {
-      throw Error
-    }
-  })
-  .catch(error => {
+  .then(response => response.json())
+  .catch(() => {
     return "No weddings found"
   })
 }
@@ -26,14 +20,8 @@ export const postAWedding = (wedding: any) => {
     },
     body: JSON.stringify(wedding)
   })
-  .then(response => {
-    if(response.ok) {
-      return response.json()
-    } else {
-      throw Error
-    }
-  })
-  .catch(error => {
+  .then(response => response.json())
+  .catch(() => {
     alert('Could not add wedding')
   })
 };
@@ -46,14 +34,8 @@ export const postAPhoto = (photo:any) => {
     },
     body: JSON.stringify(photo)
   })
-  .then(response => {
-    if(response.ok) {
-      return response.json()
-    } else {
-      throw Error
-    }
-  })
-  .catch(error => {
+  .then(response => response.json())
+  .catch(() => {
     alert('Could not add photo')
   })
 }
@@ -66,69 +48,41 @@ export const postAGuest = (guest:any) => {
     },
     body: JSON.stringify(guest)
   })
-  .then(response => {
-    if(response.ok) {
-      return response.json()
-    } else {
-      throw Error
-    }
-  })
-  .catch(error => {
+  .then(response => response.json())
+  .catch(() => {
     alert('Could not add guest')
   })
 }
 
 export const getSingleWeddingGuests = (weddingId:number) => {
   return fetch(`http://matrimania-backend.herokuapp.com/api/v1/weddings/guests/?wedding=${weddingId}`)
-  .then(response => {
-    if(response.ok) {
-      return response.json()
-    } else {
-      throw Error
-    }
-  })
-  .catch(error => {
+  .then(response => response.json())
+  .catch(() => {
     return "No guests found"
   })
 }
 
 export const getSingleWeddingPhotos = (weddingId:number) => {
   return fetch(`http://matrimania-backend.herokuapp.com/api/v1/weddings/photos/?weddingId=${weddingId}`)
-  .then(response => {
-    if(response.ok) {
-      return response.json()
-    } else {
-      throw Error
-    }
-  })
-  .catch(error => {
+  .then(response => response.json())
+  .catch(() => {
     return "No photos found"
+    // this error message isn't showing anywhere yet
   })
 }
 export const deleteAGuest = (guestId:number) => {
   return fetch(`http://matrimania-backend.herokuapp.com/api/v1/weddings/remove_guest/?guest=${guestId}`)
-  .then(response => {
-    if(response.ok) {
-      return response.json()
-    } else {
-      throw Error
-    }
-  })
-  .catch(error => {
+  .then(response => response.json())
+  .catch(() => {
     return "Deleted"
+    //this error handling needs adjusting
   })
 }
 
 export const deleteWedding = (weddingId:number) => {
   return fetch(`http://matrimania-backend.herokuapp.com/api/v1/weddings/remove/?wedding=${weddingId}`)
-  .then(response => {
-    if(response.ok) {
-      return response.json()
-    } else {
-      throw Error
-    }
-  })
-  .catch(error => {
+  .then(response => response.json())
+  .catch(() => {
     return "Not Deleted"
   })
 }
