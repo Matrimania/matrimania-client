@@ -64,15 +64,12 @@ describe('App', () => {
     const addWeddingLink = screen.getByText("Add A Wedding");
     userEvent.click(addWeddingLink);
 
-    const formHeader = screen.getByText("Enter The Wedding Details");
     const nameInput = screen.getByPlaceholderText("Last Name");
     const emailInput = screen.getByPlaceholderText("Email Address");
     const dateInput = screen.getByPlaceholderText("Wedding Date");
     const imageInput = screen.getByPlaceholderText("Image Link (optional)");
     const submitButton = screen.getByText("Submit Wedding");
     
-    expect(formHeader).toBeInTheDocument();
-    expect(dateInput).toBeInTheDocument()
     userEvent.type(nameInput, 'Banks')
     userEvent.type(emailInput, 'philNviv@belair.com')
     userEvent.type(dateInput, '2022-02-22')
