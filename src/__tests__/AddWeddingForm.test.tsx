@@ -6,9 +6,9 @@ import { MemoryRouter } from 'react-router-dom';
 import AddWeddingForm from '../components/AddWeddingForm/AddWeddingForm';
 
 describe('Add Wedding Form', () => {
-  it('renders all Add Wedding Form elements', async () => {
+  it('renders all Add Wedding Form elements', () => {
     const mockAddNewWedding = jest.fn()
-    
+
     render(
       <MemoryRouter>
         <AddWeddingForm
@@ -29,6 +29,23 @@ describe('Add Wedding Form', () => {
     expect(dateInput).toBeInTheDocument();
     expect(imageInput).toBeInTheDocument();
     expect(submitButton).toBeInTheDocument();
-    screen.debug()
+  });
+
+  it('prevents form submission without required fields filled', () => {
+    const mockAddNewWedding = jest.fn()
+
+    render(
+      <MemoryRouter>
+        <AddWeddingForm
+          addNewWedding={mockAddNewWedding} />
+      </MemoryRouter>
+    );
+
+    const submitButton = screen.getByText("Submit Wedding");
+
+    userEvent.click(submitButton)
+
+    const errorMessage = screen.getByText("Please makes sure to include your name, email, and wedding date");
+    expect(errorMessage).toBeInTheDocument();
   });
 });
