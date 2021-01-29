@@ -99,7 +99,7 @@ const AddWeddingForm: React.FC<Props> = ({
           value={image}
           onChange={event => setImage(event.target.value)}
         />
-        {message && message}
+        {message}
         <StyledButton onClick={event => submitWedding(event)}>
           <div id="translate"></div>
             <h2 className="link" id="addListButton">Submit Wedding</h2>
