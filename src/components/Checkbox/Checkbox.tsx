@@ -16,6 +16,7 @@ const Checkbox: React.FC<Props> = (props) => {
       <input
         className="checkbox"
         type="checkbox"
+        data-testid={`${props.name}-checkbox`}
         name={props.name}
         checked={props.isChecked}
         onChange={() => props.toggleCheckMark(props.name)}
