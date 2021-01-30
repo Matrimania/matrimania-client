@@ -191,7 +191,7 @@ const PhotoListForm: React.FC<Props> = ({
         </StyledCard> :
         <StyledCard contents={photoData.length === 0 ? "empty" : "list"}>
           {photoData.length === 0 &&
-            <img className="emptyList" src={empty} alt="your list is empty"/> }
+            <img className="emptyList" src={empty} alt="your photo list is empty"/> }
           {photoData.length > 0 && photoData.map(item => (
             <Photo
               key={item.id}
