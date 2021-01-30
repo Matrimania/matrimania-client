@@ -108,7 +108,6 @@ describe('App', () => {
     userEvent.click(wedding2Link);
 
     await waitFor(() => {})
-    screen.debug()
     const weddingName = screen.getByText("Bueller Wedding");
     const weddingDate = screen.getByText("01/28/2021");
     const weddingEmail = screen.getByText("Email: saveferris@netscape.com");
@@ -125,6 +124,26 @@ describe('App', () => {
     expect(requestPhotoListButton).toBeInTheDocument();
     expect(addPhotoListButton).toBeInTheDocument();
   });
+
+  it('can delete a wedding', async () => {
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    ); 
+    await waitFor(() => {});
+    const wedding2Link = screen.getByTestId("Bueller-link")
+    expect(wedding2Link).toBeInTheDocument();
+    userEvent.click(wedding2Link);
+
+    await waitFor(() => {});
+    const deleteButton = screen.getByText("Delete Wedding");
+    userEvent.click(deleteButton);
+
+    await waitFor(() => {});
+    const noWeddingsImage = screen.getByAltText("No weddings in storage");
+    expect (noWeddingsImage).toBeInTheDocument();
+  })
 
 
 });
