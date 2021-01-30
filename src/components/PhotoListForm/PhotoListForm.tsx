@@ -9,15 +9,6 @@ import './PhotoListForm.css';
 import arrow from '../../assets/arrow.png'
 import loadingText from '../../assets/loadingText.png'
 
-
-// type NewPhoto = {
-//   id: number;
-//   photoNumber: number;
-//   guests: any;
-//   description: string;
-// }
-
-
 type Props = {
   loading: boolean;
   weddingId: number;
@@ -35,7 +26,6 @@ type Guest = {
 	phoneNumber: string;
 	wedding: number;
 }
-
 
 const PhotoListForm: React.FC<Props> = ({
   loading,

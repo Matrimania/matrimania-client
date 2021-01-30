@@ -54,7 +54,6 @@ const WeddingDetails: React.FC<Props> = ({
 
 	const getWeddingPhotos = async () => {
 		const photoResult = await getSingleWeddingPhotos(weddingId)
-		console.log('XXXXX', photoResult)
 		if(photoResult === "No photos found") {
 			setHasError(true)
 			setErrorMessage({...errorMessage, weddingError: photoResult})
@@ -95,9 +94,7 @@ const WeddingDetails: React.FC<Props> = ({
 	}
 	
 	const updatePhotoList = async (newPhoto: any) => {
-		console.log('hey')
 		let postedPhoto = await postAPhoto(newPhoto);
-		console.log(postedPhoto)
 		setCurrentWeddingPhotos([...currentWeddingPhotos, postedPhoto]);
 		getWeddingPhotos();
 	}

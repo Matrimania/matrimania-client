@@ -11,7 +11,7 @@ export const getWeddings = () => {
     return "No weddings found"
   })
 }
-// name: string, email: string, date: string, image: string
+
 export const postAWedding = (wedding: any) => {
   return fetch("http://matrimania-backend.herokuapp.com/api/v1/weddings/create/", {
     method:'POST',
@@ -25,7 +25,7 @@ export const postAWedding = (wedding: any) => {
     alert('Could not add wedding')
   })
 };
-// number: number, description: string, guest:string[], weddingId:number
+
 export const postAPhoto = (photo:any) => {
   return fetch(`http://matrimania-backend.herokuapp.com/api/v1/weddings/photos/?weddingId=${photo.weddingId}`, {
     method:'POST',
@@ -39,7 +39,7 @@ export const postAPhoto = (photo:any) => {
     alert('Could not add photo')
   })
 }
-// name: string, phoneNumber: string, wedding: number
+
 export const postAGuest = (guest:any) => {
   return fetch(`http://matrimania-backend.herokuapp.com/api/v1/weddings/guests/?wedding=${guest.weddingId}`, {
     method:'POST',
