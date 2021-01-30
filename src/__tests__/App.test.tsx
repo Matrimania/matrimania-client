@@ -111,11 +111,19 @@ describe('App', () => {
     screen.debug()
     const weddingName = screen.getByText("Bueller Wedding");
     const weddingDate = screen.getByText("01/28/2021");
-    const weddingEmail = screen.getByAltText("saveferris@netscape.com");
+    const weddingEmail = screen.getByText("Email: saveferris@netscape.com");
     const status = screen.getByText("Status: Pending");
     const deleteButton = screen.getByText("Delete Wedding");
     const requestPhotoListButton = screen.getByText("Request Photo List");
     const addPhotoListButton = screen.getByText("Add Photo List");
+
+    expect(weddingName).toBeInTheDocument();
+    expect(weddingDate).toBeInTheDocument();
+    expect(weddingEmail).toBeInTheDocument();
+    expect(status).toBeInTheDocument();
+    expect(deleteButton).toBeInTheDocument();
+    expect(requestPhotoListButton).toBeInTheDocument();
+    expect(addPhotoListButton).toBeInTheDocument();
   });
 
 
