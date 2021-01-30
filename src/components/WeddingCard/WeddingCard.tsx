@@ -20,7 +20,10 @@ const WeddingCard: React.FC<Wedding> = ({
   date}) => {
     return (
       <StyledCard contents="wedding">
-        <Link to={`/wedding/${id}`}>
+        <Link 
+          to={`/wedding/${id}`}
+          data-testid={`${name}-link`}
+        >
             <h1 className="weddingTitle">{name} Wedding</h1>
             <h2 className="weddingDate" data-testid="weddingDate">{dayjs(date).format("MM/DD/YYYY")}</h2>
             <section className="couplePhotoWrap">

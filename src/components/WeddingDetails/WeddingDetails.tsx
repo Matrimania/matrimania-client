@@ -1,6 +1,6 @@
 import './WeddingDetails.css';
-import React, { useState, useEffect, useMemo } from 'react';
-import { getSingleWeddingGuests, getSingleWeddingPhotos, getWeddings, postAGuest, deleteWedding } from '../../apiCalls';
+import React, { useState, useEffect } from 'react';
+import { getSingleWeddingGuests, getSingleWeddingPhotos, getWeddings, postAGuest } from '../../apiCalls';
 import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList';
 import PhotoShootView from '../PhotoShootView/PhotoShootView';
 import { StyledButton, DetailsWrapper, DetailsFormWrapper } from '../App/styledComponents.styles';

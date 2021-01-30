@@ -56,7 +56,7 @@ const App = () => {
   }, [])
 
   const deleteSingleWedding = async (weddingId: number) => {
-		let deletedWedding = await deleteWedding(weddingId);
+    let deletedWedding = await deleteWedding(weddingId);
 		if (deletedWedding !== 'Not Deleted') {
       const remainingWeddings = weddings.filter(wedding => wedding.id !== weddingId)
       setWeddings(remainingWeddings)

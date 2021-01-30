@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 
 import App from '../components/App/App';
-import { getWeddings, postAWedding, deleteWedding } from '../apiCalls';
+import { getWeddings, postAWedding, getSingleWeddingPhotos, getSingleWeddingGuests, deleteWedding } from '../apiCalls';
 
 jest.mock('../apiCalls.tsx');
 
@@ -19,6 +19,15 @@ describe('App', () => {
         "image": "https://imagelink.com"
       }
     ])
+    getSingleWeddingGuests.mockResolvedValue([])
+    getSingleWeddingPhotos.mockResolvedValue([])
+    deleteWedding.mockResolvedValue({
+      "id": 64, 
+      "name": "Bibb", 
+      "email": "lettuce@eat.com", 
+      "date": "03/23/2435", 
+      "image": "www.img.com/weddingpic.jpg"
+    })
   })
 
   it('renders all App elements', async () => {
@@ -47,6 +56,7 @@ describe('App', () => {
   });
 
   it('can add a wedding', async () => {
+
     postAWedding.mockResolvedValue({
       "id": 33,
       "name": "Banks",
@@ -77,13 +87,35 @@ describe('App', () => {
     userEvent.click(submitButton)
 
     await waitFor(() => {})
-    screen.debug()
     const weddingName1 = screen.getByText("Banks Wedding");
     const weddingDate1 = screen.getByText("02/22/2022");
     const weddingImage1 = screen.getByAltText("The happy Banks couple");
     expect(weddingName1).toBeInTheDocument();
     expect(weddingDate1).toBeInTheDocument();
     expect(weddingImage1).toBeInTheDocument();
+  });
+
+  it('can route a user to a wedding details page', async () => {
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    ); 
+
+    await waitFor(() => {})
+    const wedding2Link = screen.getByTestId("Bueller-link")
+    expect(wedding2Link).toBeInTheDocument();
+    userEvent.click(wedding2Link);
+
+    await waitFor(() => {})
+    screen.debug()
+    const weddingName = screen.getByText("Bueller Wedding");
+    const weddingDate = screen.getByText("01/28/2021");
+    const weddingEmail = screen.getByAltText("saveferris@netscape.com");
+    const status = screen.getByText("Status: Pending");
+    const deleteButton = screen.getByText("Delete Wedding");
+    const requestPhotoListButton = screen.getByText("Request Photo List");
+    const addPhotoListButton = screen.getByText("Add Photo List");
   });
 
 

@@ -42,7 +42,6 @@ describe('Add Wedding Form', () => {
     );
 
     const submitButton = screen.getByText("Submit Wedding");
-
     userEvent.click(submitButton)
 
     const errorMessage = screen.getByText("Please makes sure to include your name, email, and wedding date");
