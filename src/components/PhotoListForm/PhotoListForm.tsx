@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Photo from '../Photo/Photo';
 import Checkbox from '../Checkbox/Checkbox';
 import empty from '../../assets/EmptyPhoto.png';
@@ -26,6 +26,7 @@ type Props = {
   updatePhotos: any;
   changeView: any;
   photoList: any;
+  updatePhotoList: any;
 }
 
 type Guest = {
@@ -43,7 +44,8 @@ const PhotoListForm: React.FC<Props> = ({
   updateGuests,
   updatePhotos,
   changeView,
-  photoList
+  photoList,
+  updatePhotoList
  }) => {
 
   const [description, setDescription] = useState(''); // Description from form
@@ -53,7 +55,9 @@ const PhotoListForm: React.FC<Props> = ({
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(loading);
-
+  
+  useMemo(() => setPhotoData(photoList), [photoList])
+  
   useEffect(() => {
     setIsLoading(true)
     const individualWeddingGuests = async () => {
@@ -89,7 +93,7 @@ const PhotoListForm: React.FC<Props> = ({
     setGuestsOptions(toggledList)
   }
 
-  const submitPhoto = async (event: React.FormEvent) => {
+  const submitPhoto =  (event: React.FormEvent) => {
     setIsLoading(true)
     event.preventDefault()
     const checkedGuests = guestsOptions.filter((guest: any) => guest.isChecked)
@@ -110,8 +114,7 @@ const PhotoListForm: React.FC<Props> = ({
         weddingId: weddingId
       }
       setDescription('')
-      let postedPhoto = await postAPhoto(postPhoto)
-      setPhotoData([...photoData, postedPhoto])
+      updatePhotoList(postPhoto)
     } else {
       setIsError(true)
       setErrorMessage('Please select at least one guest for the photo')
@@ -176,7 +179,7 @@ const PhotoListForm: React.FC<Props> = ({
             <h3 className="link">{"< Back"}</h3>
             </BackButton>
             <BackButton onClick={() => changeView('detailsView')}>
-            <div id="arrow">{">>"}</div>
+            <div id="arrow" data-testid="done-button">{">>"}</div>
             <h3 className="link">{"Done >"}</h3>
             </BackButton>
           </section>

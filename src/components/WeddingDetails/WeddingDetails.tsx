@@ -1,6 +1,6 @@
 import './WeddingDetails.css';
 import React, { useState, useEffect } from 'react';
-import { getSingleWeddingGuests, getSingleWeddingPhotos, getWeddings, postAGuest } from '../../apiCalls';
+import { getSingleWeddingGuests, getSingleWeddingPhotos, getWeddings, postAGuest, postAPhoto } from '../../apiCalls';
 import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList';
 import PhotoShootView from '../PhotoShootView/PhotoShootView';
 import { StyledButton, DetailsWrapper, DetailsFormWrapper } from '../App/styledComponents.styles';
@@ -25,6 +25,7 @@ type Photo = {
 	number: number;
 	description: string;
 	guest: number[];
+	weddingId: number;
 }
 
 const WeddingDetails: React.FC<Props> = ({
@@ -53,6 +54,7 @@ const WeddingDetails: React.FC<Props> = ({
 
 	const getWeddingPhotos = async () => {
 		const photoResult = await getSingleWeddingPhotos(weddingId)
+		console.log('XXXXX', photoResult)
 		if(photoResult === "No photos found") {
 			setHasError(true)
 			setErrorMessage({...errorMessage, weddingError: photoResult})
@@ -90,7 +92,15 @@ const WeddingDetails: React.FC<Props> = ({
 	let postedGuest = await postAGuest(newGuest)
 	setCurrentWeddingGuests([...currentWeddingGuests, postedGuest])
 	getWeddingGuests()
-  }
+	}
+	
+	const updatePhotoList = async (newPhoto: any) => {
+		console.log('hey')
+		let postedPhoto = await postAPhoto(newPhoto);
+		console.log(postedPhoto)
+		setCurrentWeddingPhotos([...currentWeddingPhotos, postedPhoto]);
+		getWeddingPhotos();
+	}
 
 
 	const emailBody = `It is time to fill out your family photo list! Please follow the link provided to complete the missing photo information. Feel free to reach out if you have any questions.
@@ -168,6 +178,8 @@ const WeddingDetails: React.FC<Props> = ({
 					updatePhotos={getWeddingPhotos}
 					photoList={currentWeddingPhotos}
 					changeView={determineCurrentState}
+					updatePhotoList={updatePhotoList}
+
 				/>
 			)
 		} else {
