@@ -34,12 +34,10 @@ const App = () => {
     setIsLoading(true)
     const allWeddings = async () => {
       const result = await getWeddings()
-      console.log(result)
       if(typeof result !== 'string' && result.length > 0) {
         result.forEach((wed: any) => {
           wed.date = dayjs(wed.date)
         })
-        console.log(result)
         let sortedResult = result.sort((a: any, b: any) => a.date - b.date)
         sortedResult.forEach((wedding: any) => {
           wedding.date = dayjs(wedding.date).format('MM/DD/YYYY')
@@ -56,7 +54,7 @@ const App = () => {
   }, [])
 
   const deleteSingleWedding = async (weddingId: number) => {
-		let deletedWedding = await deleteWedding(weddingId);
+    let deletedWedding = await deleteWedding(weddingId);
 		if (deletedWedding !== 'Not Deleted') {
       const remainingWeddings = weddings.filter(wedding => wedding.id !== weddingId)
       setWeddings(remainingWeddings)
@@ -79,18 +77,19 @@ const App = () => {
             return <WeddingDetails
               weddingId={+weddingId}
               deleteSingleWedding={deleteSingleWedding}
-              />
-          }} />
+            />
+          }} 
+        />
         <Route path='/add-wedding'>
           <AddWeddingForm
             addNewWedding={addNewWedding}
-          />
+        />
         </Route>
         <Route exact path='/'>
           <VendorDashboard
             weddings={weddings}
             loading={isLoading}
-          />
+        />
         </Route>
       </Switch>
     </div>

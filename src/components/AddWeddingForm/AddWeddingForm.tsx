@@ -1,18 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './AddWeddingForm.css'
 import { postAWedding } from '../../apiCalls'
 import { StyledButton } from '../App/styledComponents.styles'
 import dayjs from 'dayjs'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
-
-type NewWedding = {
-  id?: number,
-  name: string,
-  email: string,
-  date: string,
-  image: string
-}
 type Props = {
   addNewWedding: any,
 }
@@ -25,31 +17,30 @@ const AddWeddingForm: React.FC<Props> = ({
   const [email, setEmail] = useState('')
   const [date, setDate] = useState('')
   const [image, setImage] = useState('')
+  const [message, setMessage] = useState('')
   let history = useHistory()
 
   const submitWedding = async (event: React.FormEvent) => {
     event.preventDefault();
-    let newWedding
-    const weddingDate = dayjs(date).format('MM/DD/YYYY')
-    if(image === '') {
-      newWedding = {
-        name,
-        email,
-        date: weddingDate,
-        image: 'https://user-images.githubusercontent.com/65047537/106202246-dc00b080-6176-11eb-8067-5c7798af9a1b.jpg'
-      }
+    if (name === '' || email === '' || date === '') {
+      setMessage('Please makes sure to include your name, email, and wedding date')
     } else {
-      newWedding = {
+      const weddingDate = dayjs(date).format('MM/DD/YYYY')
+      const newWedding = {
         name,
         email,
         date: weddingDate,
         image
       }
+      if(newWedding.image === '') {
+        newWedding.image = 'https://user-images.githubusercontent.com/65047537/106202246-dc00b080-6176-11eb-8067-5c7798af9a1b.jpg'
+      }
+      const response = await postAWedding(newWedding);
+      addNewWedding(response);
+      clearInputs();
+      setMessage('')
+      history.push('/')
     }
-    const response = await postAWedding(newWedding);
-    addNewWedding(response);
-    clearInputs();
-    history.push('/')
   }
 
   const capitalize = (s: string) => {
@@ -102,15 +93,16 @@ const AddWeddingForm: React.FC<Props> = ({
         <input
           id="weddingFormInput"
           type='text'
-          placeholder='Image Link'
+          placeholder='Image Link (optional)'
           name='image'
           value={image}
           onChange={event => setImage(event.target.value)}
         />
-          <StyledButton onClick={event => submitWedding(event)}>
-            <div id="translate"></div>
-              <h2 className="link" id="addListButton">Submit Wedding</h2>
-          </StyledButton>
+        {message}
+        <StyledButton onClick={event => submitWedding(event)}>
+          <div id="translate"></div>
+            <h2 className="link" id="addListButton">Submit Wedding</h2>
+        </StyledButton>
       </form>
     </>
 	)

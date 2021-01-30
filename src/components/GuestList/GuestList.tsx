@@ -153,7 +153,7 @@ const GuestList: React.FC<WeddingData> = ({
               <h3 className="link">{"< Back"}</h3>
             </BackButton>
             <BackButton onClick={() => changeToPhotoList()}>
-              <div id="arrow">{">>"}</div>
+              <div id="arrow" data-testid="photo-list-button">{">>"}</div>
               <h3 className="link">{"Photos >"}</h3>
             </BackButton>
           </section>
