@@ -34,12 +34,10 @@ const App = () => {
     setIsLoading(true)
     const allWeddings = async () => {
       const result = await getWeddings()
-      console.log(result)
       if(typeof result !== 'string' && result.length > 0) {
         result.forEach((wed: any) => {
           wed.date = dayjs(wed.date)
         })
-        console.log(result)
         let sortedResult = result.sort((a: any, b: any) => a.date - b.date)
         sortedResult.forEach((wedding: any) => {
           wedding.date = dayjs(wedding.date).format('MM/DD/YYYY')
