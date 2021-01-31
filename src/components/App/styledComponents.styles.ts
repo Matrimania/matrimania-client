@@ -217,6 +217,20 @@ export const StyledCard = styled.section<StyledCardProps>`
     }};
   }
   @media (max-width: 750px) {
+    margin: ${props => {
+      if(props.contents === 'list') {
+        return '8%;'
+      } else if(props.contents === 'empty') {
+        return '8%;'
+      } else if(props.contents === 'shoot') {
+        return '8% 2%;'
+      }
+    }};
+    height: ${props => {
+      if(props.contents === 'shoot') {
+        return '55%;'
+      }
+    }};
     width: 90%;
   }
 `
@@ -283,14 +297,43 @@ export const PhotoCard = styled.article<DetailsProps>`
   @media (max-width: 750px) {
     justify-content: ${props => {
       if(props.contents === 'shoot') {
-        return 'space-between;'
+        return 'center;'
       }
     }};
-    height: ${props => {
+    width: ${props => {
       if(props.contents === 'shoot') {
-        return '90%;'
+        return '95%;'
       }
     }};
+    .photoDescription {
+      font-style: italic;
+      font-size: ${props => {
+        if(props.contents === 'shoot') {
+          return '20px;'
+        }
+      }};
+    }
+    .photoHeader {
+      font-weight: 600;
+      font-size: ${props => {
+        if(props.contents === 'shoot') {
+          return '35px;'
+        }
+      }};
+    }
+    .guestData {
+      font-size: ${props => {
+        if(props.contents === 'shoot') {
+          return '20px;'
+        }
+      }};
+      margin-bottom: ${props => {
+        if(props.contents === 'shoot') {
+          return '10%;'
+        }
+      }};
+    }
+
   }
 `
 export const StyledButton = styled.div`
