@@ -189,6 +189,13 @@ export const StyledCard = styled.section<StyledCardProps>`
       }
     }};
   }
+  @media (min-width: 1500px) {
+    width: ${props => {
+      if(props.contents === 'wedding') {
+        return '23%;'
+      }
+    }};
+  }
   @media (max-width: 1000px) {
     width: ${props => {
       if(props.contents === 'list') {
