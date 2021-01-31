@@ -75,8 +75,8 @@ select {
   width: 100%;
 }
 .arrow {
-  transition: all .1s ease-Out;
-  animation: shoot 0.2s forwards;
+  transition: all .2s ease-Out;
+  animation: shoot 0.5s forwards;
   width: 100%;
   left: -300px;
 }
