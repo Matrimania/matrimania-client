@@ -21,14 +21,14 @@
 * CSS/Styled Components
 * Day.js
 * Jest & React Testing Library
-* Fetch API 
+* Fetch API
 * Git/GitHub
 * Eslint
 
 ### Skills
 * OOP using functional components
 * Test Driven Development (TDD)
-* Git workflow 
+* Git workflow
 * AGILE project management
 
 ### Installation
@@ -55,7 +55,10 @@ npm test
 <img src="./src/assets/matrimania-wireframe.png" alt="wireframe of application demonstrating user story flow" width="600">
 
 ## Matrimania in Action
-#### LANDING PAGE
+
+Watch our [Virtual Tour](https://www.youtube.com/watch?v=u7SW7DxhqG8)
+
+#### DASHBOARD
 
 <img src="./src/assets/matrimania-dashboard.png" alt="Vendor dashboard displaying 6 weddings a photographer has in their calendar" width="600">
 
@@ -90,5 +93,5 @@ npm test
 ## Additional Links
 - [Project Organization](https://github.com/Matrimania)
 - [Server Repo](https://github.com/Matrimania/back-end)
+- [Client Repo](https://github.com/Matrimania/matrimania-client)
 - [Project Board](https://github.com/orgs/Matrimania/projects/1)
-
