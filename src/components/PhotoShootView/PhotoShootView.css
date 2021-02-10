@@ -91,14 +91,14 @@
     padding-top: 5%;
   }
   #shootTitle {
-    font-size: 65px;
+    font-size: 50px;
   }
   #shootBlurb {
-    font-size: 26px;
+    font-size: 18px;
     padding: 2% 10%;
   }
   #shootDirections{
-    font-size: 16px;
+    font-size: 14px;
     margin: 1% 0% 5% 0%;
   }
   #shootInput{
@@ -125,7 +125,7 @@
     width: 95%;
   }
   #shootTitle2 {
-    font-size: 40px;
+    font-size: 25px;
     padding-bottom: 3%;
   }
   .guestData {
@@ -133,5 +133,11 @@
   }
   .photoDescription {
     font-size: 25px;
+  }
+}
+@media screen and (max-width: 500px) {
+  #shootTitle {
+    font-size: 40px;
+    margin-bottom: 3%;
   }
 }
