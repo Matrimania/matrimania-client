@@ -92,7 +92,7 @@ const WeddingDetails: React.FC<Props> = ({
 	setCurrentWeddingGuests([...currentWeddingGuests, postedGuest])
 	getWeddingGuests()
 	}
-	
+
 	const updatePhotoList = async (newPhoto: any) => {
 		let postedPhoto = await postAPhoto(newPhoto);
 		setCurrentWeddingPhotos([...currentWeddingPhotos, postedPhoto]);
@@ -171,12 +171,9 @@ const WeddingDetails: React.FC<Props> = ({
 					loading={isLoading}
 					weddingId={weddingData.id}
 					guests={currentWeddingGuests}
-					updateGuests={getWeddingGuests}
-					updatePhotos={getWeddingPhotos}
 					photoList={currentWeddingPhotos}
 					changeView={determineCurrentState}
 					updatePhotoList={updatePhotoList}
-
 				/>
 			)
 		} else {
