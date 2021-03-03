@@ -3,7 +3,7 @@ import './App.css';
 import React, {useState, useEffect} from 'react'
 import logo from '../../assets/FinalMatrimaniaLogo.png'
 import {Route, Switch, Link} from 'react-router-dom'
-import { getWeddings,  deleteWedding  } from '../../apiCalls'
+import { postAGuest, postAPhoto, getWeddings, deleteWedding, getSingleWeddingGuests, getSingleWeddingPhotos } from '../../apiCalls'
 import dayjs from 'dayjs'
 
 // Components
@@ -19,16 +19,31 @@ type Wedding = {
   date: string;
   image: string;
 }
+type Guest = {
+	id: number;
+	name: string;
+	phoneNumber: string;
+	wedding: number;
+}
+type Photo = {
+	id: number;
+	number: number;
+	description: string;
+	guest: number[];
+	weddingId: number;
+}
 
 const App = () => {
   const [weddings, setWeddings] = useState<Wedding[]>([])
-  const [errorMessage, setErrorMessage] = useState('')
-  const [hasError, setError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState({photoError: '', guestError: '', weddingError: ''})
+	const [hasError, setHasError] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
-  const addNewWedding = (newWedding: any) => {
-      setWeddings([...weddings, newWedding])
-  }
+  const [currentWeddingGuests, setCurrentWeddingGuests] = useState<Guest[]>([])
+  const [currentWeddingPhotos, setCurrentWeddingPhotos] = useState<Photo[]>([])
+  const [currentWeddingData, setCurrentWeddingData] = useState({id: 0, name: "", email: "", date: "", image: ""});
+
+
 
   useEffect(() => {
     setIsLoading(true)
@@ -45,13 +60,17 @@ const App = () => {
         setWeddings(sortedResult)
         setIsLoading(false)
       } else {
-        setError(true)
+        setHasError(true)
         setErrorMessage(result)
         setIsLoading(false)
       }
     }
     allWeddings()
   }, [])
+
+  const addNewWedding = (newWedding: any) => {
+    setWeddings([...weddings, newWedding])
+  };
 
   const deleteSingleWedding = async (weddingId: number) => {
     let deletedWedding = await deleteWedding(weddingId);
@@ -62,6 +81,49 @@ const App = () => {
 			alert('Wedding Not Deleted')
 		}
 	};
+
+  const loadSingleWedding = (weddingId: number) => {
+    const weddingResult = weddings.find((wedding: Wedding) => wedding.id === weddingId)
+    if(!weddingResult) {
+      setHasError(true)
+      setErrorMessage({...errorMessage, weddingError: "No weddings found"})
+    } else {
+      setCurrentWeddingData(weddingResult)
+    }
+    getGuests(weddingId)
+    getPhotos(weddingId)
+  }
+
+  const getGuests = async (weddingId: number) => {
+    const guestResult = await getSingleWeddingGuests(weddingId)
+    if(guestResult === "No guests found") {
+      setHasError(true)
+      setErrorMessage({...errorMessage, guestError: guestResult})
+    } else {
+      setCurrentWeddingGuests(guestResult)
+    }
+  }
+
+  const getPhotos = async (weddingId: number) => {
+    const photoResult = await getSingleWeddingPhotos(weddingId)
+		if(photoResult === "No photos found") {
+			setHasError(true)
+			setErrorMessage({...errorMessage, weddingError: photoResult})
+		} else {
+			setCurrentWeddingPhotos(photoResult)
+		}
+  }
+
+  const updateGuests = async (newGuest: any) => {
+    let postedGuest = await postAGuest(newGuest)
+    setCurrentWeddingGuests([...currentWeddingGuests, postedGuest])
+  }
+
+  const updatePhotoList = async (newPhoto: any) => {
+    let postedPhoto = await postAPhoto(newPhoto);
+    setCurrentWeddingPhotos([...currentWeddingPhotos, postedPhoto]);
+  }
+
 
   return (
     <div className="appWrap">
@@ -76,9 +138,16 @@ const App = () => {
             const { weddingId } = match.params
             return <WeddingDetails
               weddingId={+weddingId}
+              currentWeddingData={currentWeddingData}
+              guests={currentWeddingGuests}
+              photos={currentWeddingPhotos}
               deleteSingleWedding={deleteSingleWedding}
+              loadWeddingData={loadSingleWedding}
+              error={errorMessage}
+              updateGuests={updateGuests}
+              updatePhotoList={updatePhotoList}
             />
-          }} 
+          }}
         />
         <Route path='/add-wedding'>
           <AddWeddingForm
