@@ -217,4 +217,66 @@ describe('VendorDashboard', () => {
 		expect(wedding2).toBeInTheDocument();
 		expect(wedding3).toBeInTheDocument();
 	});
+	it('should display an error image if no weddings are found', () => {
+		let currentDate = dayjs().format("MM/DD/YYYY")
+		let upcomingDate = dayjs().add(7, 'day').format("MM/DD/YYYY")
+		let pastDate = dayjs().subtract(7, 'day').format("MM/DD/YYYY")
+		render(
+			<MemoryRouter>
+				<VendorDashboard
+					weddings={[]}
+				/>
+			</MemoryRouter>
+		)
+		const addWeddingButton = screen.getByRole('link', { name: /add a wedding/i })
+		expect(addWeddingButton).toBeInTheDocument();
+		expect(screen.getByText('Filter By :')).toBeInTheDocument();
+		expect(screen.getByRole('combobox')).toBeInTheDocument();
+
+		const dropdown = screen.getByTestId('dropdown');
+		const filterAll = dropdown.children[0];
+		const filterUpcoming = dropdown.children[1];
+		const filterPast = dropdown.children[2];
+		const filterToday = dropdown.children[3];
+
+		const noWeddingsImg = screen.getByAltText('No weddings in storage')
+
+		expect(noWeddingsImg).toBeInTheDocument();
+	});
+	it('should display an error image if no weddings match a filter', () => {
+		let currentDate = dayjs().format("MM/DD/YYYY")
+		render(
+			<MemoryRouter>
+				<VendorDashboard
+					weddings={[
+						{id: 1, name: "Anderson", email: "email@aol.com", date: currentDate, image: "image.coolurl.com"},
+					]}
+				/>
+			</MemoryRouter>
+		)
+		const addWeddingButton = screen.getByRole('link', { name: /add a wedding/i })
+		expect(addWeddingButton).toBeInTheDocument();
+		expect(screen.getByText('Filter By :')).toBeInTheDocument();
+		expect(screen.getByRole('combobox')).toBeInTheDocument();
+
+		const dropdown = screen.getByTestId('dropdown');
+		const filterAll = dropdown.children[0];
+		const filterUpcoming = dropdown.children[1];
+		const filterPast = dropdown.children[2];
+		const filterToday = dropdown.children[3];
+
+		const wedding1 = screen.queryByText('Anderson Wedding')
+		const noPastImg = screen.queryByAltText('Anderson Wedding')
+
+		expect(filterAll).toBeInTheDocument();
+		expect(filterUpcoming).toBeInTheDocument();
+		expect(filterPast).toBeInTheDocument();
+		expect(filterToday).toBeInTheDocument();
+
+		userEvent.selectOptions(dropdown, "1")
+		expect(screen.getByAltText('No Upcoming Weddings To Show')).toBeInTheDocument();
+
+		userEvent.selectOptions(dropdown, "2")
+		expect(screen.getByAltText('No Past Weddings To Show')).toBeInTheDocument();
+	});
 })
