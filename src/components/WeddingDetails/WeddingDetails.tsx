@@ -92,7 +92,7 @@ const WeddingDetails: React.FC<Props> = ({
 
 
 	const emailBody = `It is time to fill out your family photo list! Please follow the link provided to complete the missing photo information. Feel free to reach out if you have any questions.
-		LINK: https://matrimania-client.herokuapp.com/wedding/${weddingData.id}`
+		LINK: https://matrimania-client.herokuapp.com/wedding/${weddingId}`
 
 	const determineCurrentState = (view: string) => {
 		if (view === "photoShootView") {
@@ -180,12 +180,14 @@ const WeddingDetails: React.FC<Props> = ({
 		<DetailsWrapper contents={determineContents()}>
 			{detailsView &&
 				<div className="detailsHeader">
-          <article className="weddingInfo">
-    				<h1 className="weddingTitle">{weddingData.name} Wedding</h1>
-    				<h2 className="weddingDate">{dayjs(weddingData.date).format("MM/DD/YYYY")}</h2>
-    				<p className="weddingDetails" data-testid="emailSection">Email: {weddingData.email}</p>
-    				<p className="weddingDetails" data-testid="status">Status: {currentWeddingGuests.length === 0 ? "Pending" : "Received"}</p>
-          </article>
+          {weddingData &&
+            <article className="weddingInfo">
+              <h1 className="weddingTitle">{weddingData.name} Wedding</h1>
+              <h2 className="weddingDate">{dayjs(weddingData.date).format("MM/DD/YYYY")}</h2>
+              <p className="weddingDetails" data-testid="emailSection">Email: {weddingData.email}</p>
+              <p className="weddingDetails" data-testid="status">Status: {currentWeddingGuests.length === 0 ? "Pending" : "Received"}</p>
+            </article>
+          }
           <section className="buttonWrap">
 					<Link to={`/`}>
 						<StyledButton onClick={() => deleteSingleWedding(weddingData.id)}>
