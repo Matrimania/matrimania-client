@@ -83,7 +83,10 @@ const App = () => {
 	};
 
   const loadSingleWedding = (weddingId: number) => {
-    const weddingResult = weddings.find((wedding: Wedding) => wedding.id === weddingId)
+    let weddingResult
+    if(weddings) {
+      weddingResult = weddings.find((wedding: Wedding) => wedding.id === weddingId)
+    }
     if(!weddingResult) {
       setHasError(true)
       setErrorMessage({...errorMessage, weddingError: "No weddings found"})
