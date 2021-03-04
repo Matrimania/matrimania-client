@@ -3,7 +3,7 @@ import './App.css';
 import React, {useState, useEffect} from 'react'
 import logo from '../../assets/FinalMatrimaniaLogo.png'
 import {Route, Switch, Link} from 'react-router-dom'
-import { postAGuest, postAPhoto, getWeddings, deleteWedding, getSingleWeddingGuests, getSingleWeddingPhotos } from '../../apiCalls'
+import { deleteAGuest, postAGuest, postAPhoto, getWeddings, deleteWedding, getSingleWeddingGuests, getSingleWeddingPhotos } from '../../apiCalls'
 import dayjs from 'dayjs'
 
 // Components
@@ -137,6 +137,11 @@ const App = () => {
     getGuests(weddingId)
   }
 
+  const deleteGuest = async (guestId: number, weddingId: number) => {
+    let deleteedGuest = await deleteAGuest(guestId)
+    getGuests(weddingId)
+  }
+
   const updatePhotoList = async (newPhoto: any) => {
     let postedPhoto = await postAPhoto(newPhoto);
     setCurrentWeddingPhotos([...currentWeddingPhotos, postedPhoto]);
@@ -164,6 +169,7 @@ const App = () => {
               error={errorMessage}
               updateGuests={updateGuests}
               updatePhotoList={updatePhotoList}
+              deleteGuest={deleteGuest}
             />
           }}
         />

@@ -2,7 +2,6 @@ import React, { useMemo, useState } from 'react';
 import Guest from '../Guest/Guest';
 import './GuestList.css'
 import empty from '../../assets/emptyGuestList.png'
-import { deleteAGuest } from '../../apiCalls';
 import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles'
 
 
@@ -13,6 +12,7 @@ type WeddingData = {
 	changeView: any;
   weddingId: number;
   updateGuests: any;
+  deleteGuest: any;
 }
 
 type NewGuest = {
@@ -26,7 +26,8 @@ const GuestList: React.FC<WeddingData> = ({
   guestList,
   changeView,
   weddingId,
-  updateGuests
+  updateGuests,
+  deleteGuest
 }) => {
 
   const [guestName, setGuestName] = useState('');
@@ -89,12 +90,6 @@ const GuestList: React.FC<WeddingData> = ({
   const clearInputs = () => {
     setGuestName('')
     setPhoneNumber('')
-  }
-
-  const deleteGuest = (id: number) => {
-    deleteAGuest(id)
-    const filteredGuestList = guests.filter(guest => guest.id !== id)
-    setGuests(filteredGuestList)
   }
 
   const changeToPhotoList = () => {
@@ -166,7 +161,8 @@ const GuestList: React.FC<WeddingData> = ({
             id={guest.id}
             phoneNumber={guest.phoneNumber}
             key={guest.id}
-            deleteGuest={deleteGuest}>
+            deleteGuest={deleteGuest}
+            weddingId={weddingId}>
             </Guest>)) }
         </StyledCard>
       }

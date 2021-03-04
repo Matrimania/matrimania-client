@@ -19,6 +19,7 @@ type Props = {
   error: Error
   updateGuests: any
   updatePhotoList: any
+  deleteGuest: any
 }
 type Error = {
   photoError: string;
@@ -56,7 +57,8 @@ const WeddingDetails: React.FC<Props> = ({
   loadWeddingData,
   error,
   updateGuests,
-  updatePhotoList
+  updatePhotoList,
+  deleteGuest
 }) => {
 	const [errorMessage, setErrorMessage] = useState(error)
 	const [hasError, setHasError] = useState(false)
@@ -144,6 +146,7 @@ const WeddingDetails: React.FC<Props> = ({
 						changeView={determineCurrentState}
 						weddingId={weddingData.id}
 						updateGuests={updateGuests}
+            deleteGuest={deleteGuest}
 					/>
 				)
 		} else if(photoShootView) {
