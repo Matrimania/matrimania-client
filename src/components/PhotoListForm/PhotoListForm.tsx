@@ -13,8 +13,6 @@ type Props = {
   loading: boolean;
   weddingId: number;
   guests: any;
-  updateGuests: any;
-  updatePhotos: any;
   changeView: any;
   photoList: any;
   updatePhotoList: any;
@@ -31,8 +29,6 @@ const PhotoListForm: React.FC<Props> = ({
   loading,
   weddingId,
   guests,
-  updateGuests,
-  updatePhotos,
   changeView,
   photoList,
   updatePhotoList
@@ -45,9 +41,9 @@ const PhotoListForm: React.FC<Props> = ({
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(loading);
-  
+
   useMemo(() => setPhotoData(photoList), [photoList])
-  
+
   useEffect(() => {
     setIsLoading(true)
     const individualWeddingGuests = async () => {
@@ -115,8 +111,11 @@ const PhotoListForm: React.FC<Props> = ({
 
   const getGuestNames = (guestIds:any) => {
     return guestIds.map((guest:any) => {
-      const match = guestList.find((person:any) => person.id === guest)
-      if(match){
+      let match
+      if(guestList) {
+        match = guestList.find((person:any) => person.id === guest)
+      }
+      if(match) {
         return match.name
       } else {
         return "error"

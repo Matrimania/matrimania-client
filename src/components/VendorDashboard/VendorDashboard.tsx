@@ -159,7 +159,7 @@ const VendorDashboard: React.FC<Props> = ({weddings, loading}) => {
         </StyledButton>
           <section className="filterWrap">
           <label className="label">Filter By :</label>
-          <select className="dropdown" onChange={(e) => filterWeddings(e)}>
+          <select data-testid="dropdown" className="dropdown" onChange={(e) => filterWeddings(e)}>
               <option value="0">All</option>
               <option value="1">Upcoming</option>
               <option value="2">Past</option>
