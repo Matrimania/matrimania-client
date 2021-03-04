@@ -56,10 +56,11 @@ input:focus {
   flex-direction: column;
 }
 .clearButton {
-  margin-top: -2%;
+  margin-top: -5px;
+  margin-right: 1px;
   font-family: 'Roboto', sans-serif;
   height: 23px;
-  width: 43px;
+  width: 35px;
   display: flex;
   flex-direction: column;
   justify-content: center;
