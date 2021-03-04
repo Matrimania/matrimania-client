@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, act } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { individualWedding } from '../weddingData'
 import WeddingDetails from '../components/WeddingDetails/WeddingDetails';
@@ -249,6 +249,7 @@ describe('WeddingDetails', () => {
       "date": "01/28/2021",
       "image": "https://imagelink.com"
     });
+    await act(getWeddings)
 
     render(
       <MemoryRouter>
@@ -346,7 +347,7 @@ describe('WeddingDetails', () => {
     expect(guestListInstructions).toBeInTheDocument();
   });
 
-  it('should render the PhotoListForm', () => {
+  it('should render the PhotoListForm', async () => {
     const mockDeleteWedding = jest.fn();
     const mockLoadWedding = jest.fn();
     const mockUpdateGuests = jest.fn();
@@ -379,7 +380,7 @@ describe('WeddingDetails', () => {
     expect(screen.getByText('Email: email@aol.com')).toBeInTheDocument();
     expect(screen.getByText('Edit Photo Details')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Edit Photo Details'));
+    act(() => userEvent.click(screen.getByText('Edit Photo Details')));
 
     const guestListTitle = screen.getByText(`Let's start with your guest list`);
     const guestListInstructions = screen.getByRole('heading', {  name: `For each person included in your family photos, please include: 1. Their first and last name 2. A mobile phone number that accepts text messages Don't forget yourselves!`});
@@ -390,8 +391,7 @@ describe('WeddingDetails', () => {
 
     userEvent.click(screen.getByText('Photos >'));
 
-    expect(screen.getByRole('heading', {name: /let's build your photo list/i})).toBeInTheDocument();
-    expect(screen.getByRole('heading', {name: `To add a photo: 1. Add a description 2. Pick guests to include in the photo 3. Click Submit button Tip: Don't forget to include yourselves!`})).toBeInTheDocument();
-    expect(screen.getByPlaceholderText('Description (optional)')).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText(`Let's build your photo list`)).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText('Guests:')).toBeInTheDocument());
   });
 });

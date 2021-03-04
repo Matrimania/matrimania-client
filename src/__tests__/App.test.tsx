@@ -46,9 +46,12 @@ describe('App', () => {
     expect(weddingName2).toBeInTheDocument();
     expect(weddingDate2).toBeInTheDocument();
     expect(weddingImage2).toBeInTheDocument();
+    await act(getWeddings)
+    await act(getSingleWeddingPhotos)
+    await act(getSingleWeddingGuests)
   });
 
-  it('can render an AddWeddingForm', () => {
+  it('can render an AddWeddingForm', async () => {
 
     render(
       <MemoryRouter>
@@ -70,6 +73,9 @@ describe('App', () => {
     expect(dateInput).toBeInTheDocument();
     expect(imageInput).toBeInTheDocument();
     expect(submitButton).toBeInTheDocument();
+    await act(getWeddings)
+    await act(getSingleWeddingPhotos)
+    await act(getSingleWeddingGuests)
   });
 
   it('can route a user to a WeddingDetails page', async () => {
@@ -99,6 +105,9 @@ describe('App', () => {
     expect(deleteButton).toBeInTheDocument();
     expect(requestPhotoListButton).toBeInTheDocument();
     expect(addPhotoListButton).toBeInTheDocument();
+    await act(getWeddings)
+    await act(getSingleWeddingPhotos)
+    await act(getSingleWeddingGuests)
   });
 
   // it('can display an updated photo list for a wedding after guests and photos are added', async () => {
