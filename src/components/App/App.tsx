@@ -47,29 +47,33 @@ const App = () => {
 
   useEffect(() => {
     setIsLoading(true)
-    const allWeddings = async () => {
-      const result = await getWeddings()
-      if(typeof result !== 'string' && result.length > 0) {
-        result.forEach((wed: any) => {
-          wed.date = dayjs(wed.date)
-        })
-        let sortedResult = result.sort((a: any, b: any) => a.date - b.date)
-        sortedResult.forEach((wedding: any) => {
-          wedding.date = dayjs(wedding.date).format('MM/DD/YYYY')
-        })
-        setWeddings(sortedResult)
-        setIsLoading(false)
-      } else {
-        setHasError(true)
-        setErrorMessage(result)
-        setIsLoading(false)
-      }
-    }
     allWeddings()
-  }, [])
+  }, []);
 
-  const addNewWedding = (newWedding: any) => {
-    setWeddings([...weddings, newWedding])
+  // Wedding Functions //
+  const allWeddings = async () => {
+    const result = await getWeddings()
+    if(typeof result !== 'string' && result.length > 0) {
+      result.forEach((wed: any) => {
+        wed.date = dayjs(wed.date)
+      })
+      let sortedResult = result.sort((a: any, b: any) => a.date - b.date)
+      sortedResult.forEach((wedding: any) => {
+        wedding.date = dayjs(wedding.date).format('MM/DD/YYYY')
+      })
+      setWeddings(sortedResult)
+      setIsLoading(false)
+    } else {
+      setHasError(true)
+      setErrorMessage(result)
+      setIsLoading(false)
+    }
+  }
+
+  const addNewWedding = async (newWedding: any) => {
+    const response = await postAWedding(newWedding);
+    setWeddings([...weddings, response])
+    allWeddings()
   };
 
   const deleteSingleWedding = async (weddingId: number) => {

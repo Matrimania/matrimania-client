@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './AddWeddingForm.css'
-import { postAWedding } from '../../apiCalls'
 import { StyledButton } from '../App/styledComponents.styles'
 import dayjs from 'dayjs'
 import { useHistory } from 'react-router-dom'
@@ -35,8 +34,7 @@ const AddWeddingForm: React.FC<Props> = ({
       if(newWedding.image === '') {
         newWedding.image = 'https://user-images.githubusercontent.com/65047537/106202246-dc00b080-6176-11eb-8067-5c7798af9a1b.jpg'
       }
-      const response = await postAWedding(newWedding);
-      addNewWedding(response);
+      addNewWedding(newWedding);
       clearInputs();
       setMessage('')
       history.push('/')
