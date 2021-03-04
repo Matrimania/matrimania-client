@@ -82,3 +82,38 @@ describe('Add Wedding Form', () => {
     expect(postAWedding).toHaveBeenCalled()
 
   });
+
+
+  it('should add a new wedding', async () => {
+    const mockAddNewWedding = jest.fn()
+    postAWedding.mockResolvedValue({
+      "id": 33,
+      "name": "Banks",
+      "email": "philNviv@belair.com",
+      "date": "02/22/2022",
+      "image": "https://image2.org"
+    })
+
+    render(
+      <MemoryRouter>
+        <AddWeddingForm
+          addNewWedding={mockAddNewWedding} />
+      </MemoryRouter>
+    );
+
+    const nameInput = screen.getByPlaceholderText("Last Name");
+    const emailInput = screen.getByPlaceholderText("Email Address");
+    const dateInput = screen.getByPlaceholderText("Wedding Date");
+    const imageInput = screen.getByPlaceholderText("Image Link (optional)");
+    const submitButton = screen.getByText("Submit Wedding");
+
+    userEvent.type(nameInput, 'Banks')
+    userEvent.type(emailInput, 'philNviv@belair.com')
+    userEvent.type(dateInput, '2022-02-22')
+    userEvent.type(imageInput, 'www.image.com/image.jpg')
+    userEvent.click(submitButton)
+
+    await waitFor(() => expect(mockAddNewWedding).toHaveBeenCalled())
+    expect(postAWedding).toHaveBeenCalled()
+  });
+});
