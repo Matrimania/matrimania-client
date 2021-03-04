@@ -63,16 +63,16 @@ const GuestList: React.FC<WeddingData> = ({
   const submitGuest = (event: React.FormEvent) => {
     setIsLoading(true)
     event.preventDefault();
-    const guestPost = {
-      name: guestName,
-      phoneNumber,
-      wedding: weddingId
-    }
     if(guestName !== "" && phoneNumber.length === 12) {
+      const guestPost = {
+        name: guestName.charAt(0).toUpperCase() + guestName.slice(1),
+        phoneNumber,
+        wedding: weddingId
+      }
       clearInputs()
       setHasError(false)
       setErrorMessage('')
-      updateGuests(guestPost)
+      updateGuests(guestPost, weddingId)
     } else if (guestName === "" && phoneNumber.length !== 12) {
       setHasError(true)
       setErrorMessage('Name and Phone Number Required')
