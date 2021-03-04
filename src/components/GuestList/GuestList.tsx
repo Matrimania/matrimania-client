@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import Guest from '../Guest/Guest';
 import './GuestList.css'
 import empty from '../../assets/emptyGuestList.png'
-import { postAGuest, deleteAGuest } from '../../apiCalls';
+import { deleteAGuest } from '../../apiCalls';
 import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles'
 
 
@@ -61,16 +61,12 @@ const GuestList: React.FC<WeddingData> = ({
   }
 
   const submitGuest = (event: React.FormEvent) => {
+    setIsLoading(true)
     event.preventDefault();
     const guestPost = {
       name: guestName,
       phoneNumber,
       wedding: weddingId
-    }
-    const newGuest: NewGuest = {
-      id: Date.now(),
-      name: guestName,
-      phoneNumber
     }
     if(guestName !== "" && phoneNumber.length === 12) {
       clearInputs()
@@ -87,6 +83,7 @@ const GuestList: React.FC<WeddingData> = ({
       setHasError(true)
       setErrorMessage('Phone Number Required')
     }
+    setIsLoading(false)
   }
 
   const clearInputs = () => {
