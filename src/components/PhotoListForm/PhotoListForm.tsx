@@ -111,8 +111,11 @@ const PhotoListForm: React.FC<Props> = ({
 
   const getGuestNames = (guestIds:any) => {
     return guestIds.map((guest:any) => {
-      const match = guestList.find((person:any) => person.id === guest)
-      if(match){
+      let match
+      if(guestList) {
+        match = guestList.find((person:any) => person.id === guest)
+      }
+      if(match) {
         return match.name
       } else {
         return "error"
