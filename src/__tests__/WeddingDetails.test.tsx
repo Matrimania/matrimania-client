@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
 import userEvent from '@testing-library/user-event';
 import { getWeddings, postAWedding, getSingleWeddingPhotos, getSingleWeddingGuests, deleteWedding, postAGuest, postAPhoto } from '../apiCalls';
 
-
+window.scrollTo = jest.fn();
 jest.mock('../apiCalls.tsx');
 
 
