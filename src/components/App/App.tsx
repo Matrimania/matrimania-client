@@ -118,8 +118,6 @@ const App = () => {
         person.name = person.name.charAt(0).toUpperCase() + person.name.slice(1)
         return person
       })
-      console.log(sortedResult);
-
       setCurrentWeddingGuests(finalResult)
     }
   }
@@ -134,9 +132,9 @@ const App = () => {
 		}
   }
 
-  const updateGuests = async (newGuest: any) => {
+  const updateGuests = async (newGuest: any, weddingId: number) => {
     let postedGuest = await postAGuest(newGuest)
-    setCurrentWeddingGuests([...currentWeddingGuests, postedGuest])
+    getGuests(weddingId)
   }
 
   const updatePhotoList = async (newPhoto: any) => {
