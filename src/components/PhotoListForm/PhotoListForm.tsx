@@ -9,21 +9,35 @@ import './PhotoListForm.css';
 import arrow from '../../assets/arrow.png'
 import loadingText from '../../assets/loadingText.png'
 
+// Types //
 type Props = {
   loading: boolean;
   weddingId: number;
-  guests: any;
-  changeView: any;
-  photoList: any;
-  updatePhotoList: any;
-}
-
+  guests: Guest[];
+  changeView(view: string): void;
+  photoList: Photo[];
+  updatePhotoList(newPhoto: NewPhoto): void;
+};
 type Guest = {
 	id: number;
 	name: string;
 	phoneNumber: string;
 	wedding: number;
-}
+};
+type Photo = {
+	id: number;
+	number: number;
+	description: string;
+	guest: number[];
+	weddingId: number;
+};
+type NewPhoto = {
+	number: number;
+	description: string;
+	guest: number[];
+	weddingId: number;
+};
+
 
 const PhotoListForm: React.FC<Props> = ({
   loading,

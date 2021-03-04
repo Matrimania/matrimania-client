@@ -5,12 +5,12 @@ import { StyledCard } from '../App/styledComponents.styles'
 import dayjs from 'dayjs';
 
 
-
+// Types //
 type Wedding = {
   id: number;
   name: string;
   image: string;
-  date: any;
+  date: string;
 }
 
 const WeddingCard: React.FC<Wedding> = ({

@@ -9,44 +9,55 @@ import PhotoListForm from '../PhotoListForm/PhotoListForm';
 import { Link } from 'react-router-dom';
 
 
+// Types //
 type Props = {
   weddingId: number;
   currentWeddingData: Wedding;
   guests: Guest[];
   photos: Photo[];
-  deleteSingleWedding: any
-  loadWeddingData: any
+  deleteSingleWedding(weddingId: number): void;
+  loadWeddingData(weddingId: number): void;
   error: Error
-  updateGuests: any
-  updatePhotoList: any
-  deleteGuest: any
-}
+  updateGuests(newGuest: NewGuest, weddingId: number): void;
+  updatePhotoList(newPhoto: NewPhoto): void;
+  deleteGuest(guestId: number, weddingId: number): void;
+};
 type Error = {
   photoError: string;
   guestError: string;
-  weddingError: string
-}
+  weddingError: string;
+};
 type Wedding = {
   id: number;
   name: string;
   email: string;
   date: string;
   image: string;
-}
-
+};
 type Guest = {
 	id: number;
 	name: string;
 	phoneNumber: string;
 	wedding: number;
-}
+};
+type NewGuest = {
+	name: string;
+	phoneNumber: string;
+	wedding: number;
+};
 type Photo = {
 	id: number;
 	number: number;
 	description: string;
 	guest: number[];
 	weddingId: number;
-}
+};
+type NewPhoto = {
+	number: number;
+	description: string;
+	guest: number[];
+	weddingId: number;
+};
 
 const WeddingDetails: React.FC<Props> = ({
 	weddingId,

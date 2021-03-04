@@ -6,20 +6,26 @@ import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.st
 
 
 
+// Types //
 type WeddingData = {
   loading: boolean;
-  guestList: any;
-	changeView: any;
+  guestList: Guest[];
+	changeView(view: string): void;
   weddingId: number;
-  updateGuests: any;
-  deleteGuest: any;
-}
-
+  updateGuests(newGuest: NewGuest, weddingId: number): void;
+  deleteGuest(guestId: number, weddingId: number): void;
+};
+type Guest = {
+	id: number;
+	name: string;
+	phoneNumber: string;
+	wedding: number;
+};
 type NewGuest = {
-  id: number,
   name: string,
   phoneNumber: string;
-}
+  wedding: number;
+};
 
 const GuestList: React.FC<WeddingData> = ({
   loading,

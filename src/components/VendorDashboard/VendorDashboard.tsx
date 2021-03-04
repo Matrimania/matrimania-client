@@ -12,18 +12,18 @@ import arrow from '../../assets/arrow.png'
 import loadingText from '../../assets/loadingText.png'
 
 
+// Types //
 type Wedding = {
   id: number;
   name: string;
   email: string;
-  date: any;
+  date: string;
   image: string;
-}
+};
 type Props = {
-  weddings: any;
-  loading: any;
-}
-
+  weddings: Wedding[];
+  loading: boolean;
+};
 
 const VendorDashboard: React.FC<Props> = ({weddings, loading}) => {
   const [weddingFilter, setWeddingFilter] = useState<Wedding[]>([])

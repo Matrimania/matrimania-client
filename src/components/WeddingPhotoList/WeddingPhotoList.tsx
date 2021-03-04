@@ -2,13 +2,26 @@ import './WeddingPhotoList.css';
 import { StyledCard } from '../App/styledComponents.styles'
 import Photo from '../Photo/Photo';
 
-
+// Types //
 type PhotoListData = {
 	name: string;
 	weddingId: number;
-	guestList: any;
-	photoList: {id: number, number: number, description: string, guest: number[] }[]
-}
+	guestList: Guest[];
+	photoList: Photo[];
+};
+type Guest = {
+	id: number;
+	name: string;
+	phoneNumber: string;
+	wedding: number;
+};
+type Photo = {
+	id: number;
+	number: number;
+	description: string;
+	guest: number[];
+	weddingId: number;
+};
 
 const WeddingPhotoList: React.FC<PhotoListData> = ({
 	name,

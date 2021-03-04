@@ -4,9 +4,16 @@ import { StyledButton } from '../App/styledComponents.styles'
 import dayjs from 'dayjs'
 import { useHistory } from 'react-router-dom'
 
+// Types //
 type Props = {
-  addNewWedding: any,
-}
+  addNewWedding(wedding: NewWedding): void;
+};
+type NewWedding = {
+  name: string;
+  email: string;
+  date: string;
+  image: string;
+};
 
 const AddWeddingForm: React.FC<Props> = ({
   addNewWedding
