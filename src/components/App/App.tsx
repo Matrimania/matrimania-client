@@ -103,7 +103,24 @@ const App = () => {
       setHasError(true)
       setErrorMessage({...errorMessage, guestError: guestResult})
     } else {
-      setCurrentWeddingGuests(guestResult)
+      let sortedResult = guestResult.sort((a: Guest, b: Guest) => {
+        let aName = a.name.toLowerCase()
+        let bName = b.name.toLowerCase()
+        if(aName < bName) {
+          return -1
+        }
+        if(aName > bName) {
+          return 1
+        }
+        return 0
+      })
+      let finalResult = sortedResult.map((person: Guest) => {
+        person.name = person.name.charAt(0).toUpperCase() + person.name.slice(1)
+        return person
+      })
+      console.log(sortedResult);
+
+      setCurrentWeddingGuests(finalResult)
     }
   }
 
