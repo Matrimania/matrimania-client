@@ -4,6 +4,8 @@ import { MemoryRouter } from 'react-router-dom';
 import { individualWedding } from '../weddingData'
 import WeddingDetails from '../components/WeddingDetails/WeddingDetails';
 import dayjs from 'dayjs';
+import userEvent from '@testing-library/user-event';
+
 
 
 describe('WeddingDetails', () => {
@@ -213,8 +215,42 @@ describe('WeddingDetails', () => {
     expect(screen.getByText('Email: email@aol.com')).toBeInTheDocument();
     expect(screen.queryByText('Wedding Photos')).not.toBeInTheDocument();
   });
+  it('should fire a function to delete the current wedding', () => {
+    const mockDeleteWedding = jest.fn()
+    const mockLoadWedding = jest.fn()
+    const mockUpdateGuests = jest.fn()
+    const mockUpdatePhotos = jest.fn()
 
-  // should fire a function to delete the current wedding
+    render(
+      <MemoryRouter>
+        <WeddingDetails
+          weddingId={1}
+          currentWeddingData={
+            {id: 1, name: "Henderson", email: "email@aol.com", date: "01/02/2022", image: "image.coolurl.com"}
+          }
+          guests={[
+            {id: 1, name: "Bob", phoneNumber: "303-222-8888", wedding: 1}
+          ]}
+          photos={[
+            {id: 1, number: 1, description: "just bob", guest: [1], weddingId: 1}
+          ]}
+          deleteSingleWedding={mockDeleteWedding}
+          loadWeddingData={mockLoadWedding}
+          error={{photoError: '', guestError: '', weddingError: ''}}
+          updateGuests={mockUpdateGuests}
+          updatePhotoList={mockUpdatePhotos}
+        />
+    </MemoryRouter>
+    );
+    expect(screen.getByText('Henderson Wedding')).toBeInTheDocument();
+    expect(screen.getByText('01/02/2022')).toBeInTheDocument();
+    expect(screen.getByText('Email: email@aol.com')).toBeInTheDocument();
+    expect(screen.getByText('Delete Wedding')).toBeInTheDocument()
+
+    userEvent.click(screen.getByText('Delete Wedding'))
+    expect(mockDeleteWedding).toHaveBeenCalled()
+  });
+
   // should render the GuestListForm
   // should render the PhotoListForm
 });
