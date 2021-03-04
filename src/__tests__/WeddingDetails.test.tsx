@@ -3,6 +3,8 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { individualWedding } from '../weddingData'
 import WeddingDetails from '../components/WeddingDetails/WeddingDetails';
+import dayjs from 'dayjs';
+
 
 describe('WeddingDetails', () => {
   it('renders default WeddingDetails elements', () => {
@@ -35,6 +37,7 @@ describe('WeddingDetails', () => {
     expect(screen.getByText('Henderson Wedding')).toBeInTheDocument();
     expect(screen.getByText('01/02/2022')).toBeInTheDocument()
     expect(screen.getByText('Email: email@aol.com')).toBeInTheDocument()
+    expect(screen.getByText('Delete Wedding')).toBeInTheDocument()
     expect(screen.getByTestId('status')).toBeInTheDocument()
     expect(screen.getByAltText('detailImage')).toBeInTheDocument()
   });
@@ -108,6 +111,41 @@ describe('WeddingDetails', () => {
     expect(screen.getByAltText('detailImage')).toBeInTheDocument()
     expect(screen.queryByText('Request Photo List')).not.toBeInTheDocument()
     expect(screen.getByText('Edit Photo Details')).toBeInTheDocument()
+  });
+  it('should display an "Start Photo Session" button if the wedding takes place on the current day', () => {
+    const mockDeleteWedding = jest.fn()
+    const mockLoadWedding = jest.fn()
+    const mockUpdateGuests = jest.fn()
+    const mockUpdatePhotos = jest.fn()
+    const today = dayjs().format("MM/DD/YYYY")
+
+    render(
+      <MemoryRouter>
+        <WeddingDetails
+          weddingId={1}
+          currentWeddingData={
+            {id: 1, name: "Henderson", email: "email@aol.com", date: today, image: "image.coolurl.com"}
+          }
+          guests={[
+            {id: 1, name: "Bob", phoneNumber: "303-222-8888", wedding: 1}
+          ]}
+          photos={[
+            {id: 1, number: 1, description: "just bob", guest: [1], weddingId: 1}
+          ]}
+          deleteSingleWedding={mockDeleteWedding}
+          loadWeddingData={mockLoadWedding}
+          error={{photoError: '', guestError: '', weddingError: ''}}
+          updateGuests={mockUpdateGuests}
+          updatePhotoList={mockUpdatePhotos}
+        />
+    </MemoryRouter>
+    );
+    expect(screen.getByText('Henderson Wedding')).toBeInTheDocument();
+    expect(screen.getByText('Email: email@aol.com')).toBeInTheDocument()
+    expect(screen.getByTestId('status')).toBeInTheDocument()
+    expect(screen.getByAltText('detailImage')).toBeInTheDocument()
+    expect(screen.getByText('Edit Photo Details')).toBeInTheDocument()
+    expect(screen.getByText('Start Photo Session')).toBeInTheDocument()
   });
   it('should display a photo list if a photo list exists for the current wedding', () => {
     const mockDeleteWedding = jest.fn()
