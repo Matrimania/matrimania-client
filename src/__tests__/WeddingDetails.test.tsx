@@ -109,9 +109,73 @@ describe('WeddingDetails', () => {
     expect(screen.queryByText('Request Photo List')).not.toBeInTheDocument()
     expect(screen.getByText('Edit Photo Details')).toBeInTheDocument()
   });
+  it('should display a photo list if a photo list exists for the current wedding', () => {
+    const mockDeleteWedding = jest.fn()
+    const mockLoadWedding = jest.fn()
+    const mockUpdateGuests = jest.fn()
+    const mockUpdatePhotos = jest.fn()
 
-  // should display a photo list if a photo list exists for the current wedding
-  // should not display a photo list if there is no list for the current wedding
+    render(
+      <MemoryRouter>
+        <WeddingDetails
+          weddingId={1}
+          currentWeddingData={
+            {id: 1, name: "Henderson", email: "email@aol.com", date: "01/02/2022", image: "image.coolurl.com"}
+          }
+          guests={[
+            {id: 1, name: "Bob", phoneNumber: "303-222-8888", wedding: 1}
+          ]}
+          photos={[
+            {id: 1, number: 1, description: "just bob", guest: [1], weddingId: 1}
+          ]}
+          deleteSingleWedding={mockDeleteWedding}
+          loadWeddingData={mockLoadWedding}
+          error={{photoError: '', guestError: '', weddingError: ''}}
+          updateGuests={mockUpdateGuests}
+          updatePhotoList={mockUpdatePhotos}
+        />
+    </MemoryRouter>
+    );
+    expect(screen.getByText('Henderson Wedding')).toBeInTheDocument();
+    expect(screen.getByText('01/02/2022')).toBeInTheDocument();
+    expect(screen.getByText('Email: email@aol.com')).toBeInTheDocument();
+    expect(screen.getByText('Wedding Photos')).toBeInTheDocument();
+    expect(screen.getByText('PHOTO 1')).toBeInTheDocument();
+    expect(screen.getByText('• Bob •')).toBeInTheDocument();
+    expect(screen.getByText('Description: just bob')).toBeInTheDocument();
+  });
+  it('should NOT display a photo list if a photo list does not exist for the current wedding', () => {
+    const mockDeleteWedding = jest.fn()
+    const mockLoadWedding = jest.fn()
+    const mockUpdateGuests = jest.fn()
+    const mockUpdatePhotos = jest.fn()
+
+    render(
+      <MemoryRouter>
+        <WeddingDetails
+          weddingId={1}
+          currentWeddingData={
+            {id: 1, name: "Henderson", email: "email@aol.com", date: "01/02/2022", image: "image.coolurl.com"}
+          }
+          guests={[
+            {id: 1, name: "Bob", phoneNumber: "303-222-8888", wedding: 1}
+          ]}
+          photos={[
+          ]}
+          deleteSingleWedding={mockDeleteWedding}
+          loadWeddingData={mockLoadWedding}
+          error={{photoError: '', guestError: '', weddingError: ''}}
+          updateGuests={mockUpdateGuests}
+          updatePhotoList={mockUpdatePhotos}
+        />
+    </MemoryRouter>
+    );
+    expect(screen.getByText('Henderson Wedding')).toBeInTheDocument();
+    expect(screen.getByText('01/02/2022')).toBeInTheDocument();
+    expect(screen.getByText('Email: email@aol.com')).toBeInTheDocument();
+    expect(screen.queryByText('Wedding Photos')).not.toBeInTheDocument();
+  });
+
   // should fire a function to delete the current wedding
   // should render the GuestListForm
   // should render the PhotoListForm
