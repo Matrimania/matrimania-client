@@ -8,6 +8,7 @@ import userEvent from '@testing-library/user-event';
 
 
 describe('WeddingDetails', () => {
+  
   it('renders default WeddingDetails elements', () => {
     const mockDeleteWedding = jest.fn();
     const mockLoadWedding = jest.fn();
