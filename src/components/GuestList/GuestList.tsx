@@ -1,21 +1,22 @@
-import React, { useMemo, useState } from 'react';
-import Guest from '../Guest/Guest';
+// Assets //
 import './GuestList.css'
+import React, { useMemo, useState } from 'react';
 import empty from '../../assets/emptyGuestList.png'
+
+// Components //
+import Guest from '../Guest/Guest';
 import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles'
-
-
 
 // Types //
 type WeddingData = {
   loading: boolean;
-  guestList: Guest[];
+  guestList: WeddingGuest[];
 	changeView(view: string): void;
   weddingId: number;
   updateGuests(newGuest: NewGuest, weddingId: number): void;
   deleteGuest(guestId: number, weddingId: number): void;
 };
-type Guest = {
+type WeddingGuest = {
 	id: number;
 	name: string;
 	phoneNumber: string;
@@ -36,13 +37,16 @@ const GuestList: React.FC<WeddingData> = ({
   deleteGuest
 }) => {
 
+  // State //
   const [guestName, setGuestName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [guests, setGuests] = useState<NewGuest[]>([...guestList]);
+  const [guests, setGuests] = useState<WeddingGuest[]>([...guestList]);
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(loading);
   const [errorMessage, setErrorMessage] = useState('');
+  useMemo(() => setGuests(guestList), [guestList]);
 
+  // Phone Number Input Functions //
   const checkNumber = (event: any) => {
     let value = event.trim().replaceAll( "-", "")
     var reg = /^\d+$/;
@@ -54,7 +58,7 @@ const GuestList: React.FC<WeddingData> = ({
       setHasError(true)
       setErrorMessage('Phone Number only accepts numerical values')
     }
-  }
+  };
 
   const formatPhoneText = (value: string) => {
     if (value.length > 3 && value.length <= 6) {
@@ -65,8 +69,9 @@ const GuestList: React.FC<WeddingData> = ({
     setPhoneNumber(value)
     setHasError(false)
     setErrorMessage('')
-  }
+  };
 
+  // Submission Functions //
   const submitGuest = (event: React.FormEvent) => {
     setIsLoading(true)
     event.preventDefault();
@@ -91,12 +96,7 @@ const GuestList: React.FC<WeddingData> = ({
       setErrorMessage('Phone Number Required')
     }
     setIsLoading(false)
-  }
-
-  const clearInputs = () => {
-    setGuestName('')
-    setPhoneNumber('')
-  }
+  };
 
   const changeToPhotoList = () => {
     if (guests.length === 0){
@@ -104,10 +104,15 @@ const GuestList: React.FC<WeddingData> = ({
     } else {
       changeView('editPhotoListView')
     }
-  }
+  };
 
-  useMemo(() => setGuests(guestList), [guestList])
+  // Helper Functions //
+  const clearInputs = () => {
+    setGuestName('')
+    setPhoneNumber('')
+  };
 
+  // Render //
 	return (
     <>
       <form className="formWrapper">
@@ -175,6 +180,6 @@ const GuestList: React.FC<WeddingData> = ({
       </section>
     </>
 	)
-}
+};
 
 export default GuestList;

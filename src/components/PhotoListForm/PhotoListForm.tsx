@@ -1,13 +1,16 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import Photo from '../Photo/Photo';
-import Checkbox from '../Checkbox/Checkbox';
-import empty from '../../assets/EmptyPhoto.png';
-import { postAPhoto, getSingleWeddingGuests } from '../../apiCalls';
-import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles';
+// Assets //
 import '../GuestList/GuestList.css';
 import './PhotoListForm.css';
-import arrow from '../../assets/arrow.png'
-import loadingText from '../../assets/loadingText.png'
+import React, { useState, useEffect, useMemo } from 'react';
+import empty from '../../assets/EmptyPhoto.png';
+import { postAPhoto, getSingleWeddingGuests } from '../../apiCalls';
+import arrow from '../../assets/arrow.png';
+import loadingText from '../../assets/loadingText.png';
+
+// Components //
+import Photo from '../Photo/Photo';
+import Checkbox from '../Checkbox/Checkbox';
+import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles';
 
 // Types //
 type Props = {
@@ -38,7 +41,6 @@ type NewPhoto = {
 	weddingId: number;
 };
 
-
 const PhotoListForm: React.FC<Props> = ({
   loading,
   weddingId,
@@ -48,40 +50,41 @@ const PhotoListForm: React.FC<Props> = ({
   updatePhotoList
  }) => {
 
-  const [description, setDescription] = useState(''); // Description from form
-  const [guestsOptions, setGuestsOptions] = useState<any[]>([]); // array of guests with isChecked
+  // State //
+  const [description, setDescription] = useState('');
+  const [guestsOptions, setGuestsOptions] = useState<any[]>([]); // array of guests with isCheck
   const [photoData, setPhotoData] = useState<any[]>([...photoList]);
-  const [guestList, setGuestList] = useState<Guest[]>([...guests])
+  const [guestList, setGuestList] = useState<Guest[]>([...guests]);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(loading);
-
   useMemo(() => setPhotoData(photoList), [photoList])
 
   useEffect(() => {
     setIsLoading(true)
-    const individualWeddingGuests = async () => {
-      const guestResult = await getSingleWeddingGuests(weddingId)
-      if(guestResult === "No guests found") {
-        setIsError(true)
-        setErrorMessage(guestResult)
-      } else {
-        setGuestList(guestResult)
-      }
-      setIsLoading(false)
-    }
     individualWeddingGuests()
     buildCheckList()
     setIsLoading(false)
   }, [])
 
+  // Guest List Functions //
+  const individualWeddingGuests = async () => {
+    const guestResult = await getSingleWeddingGuests(weddingId)
+    if(guestResult === "No guests found") {
+      setIsError(true)
+      setErrorMessage(guestResult)
+    } else {
+      setGuestList(guestResult)
+    }
+  };
+
   const buildCheckList = () => {
     const allGuests = guestList.map((guest: any) => {
-        return {...guest, isChecked: false, key: guest.id}
-      })
-      setGuestsOptions(allGuests)
-      return allGuests
-  }
+      return {...guest, isChecked: false, key: guest.id}
+    })
+    setGuestsOptions(allGuests)
+    return allGuests
+  };
 
   const toggleCheckMark = (guestName: string) => {
     let toggledList = guestsOptions.map(guest => {
@@ -91,8 +94,36 @@ const PhotoListForm: React.FC<Props> = ({
       return guest
     })
     setGuestsOptions(toggledList)
-  }
+  };
 
+  const getGuestNames = (guestIds:any) => {
+    return guestIds.map((guest:any) => {
+      let match
+      if(guestList) {
+        match = guestList.find((person:any) => person.id === guest)
+      }
+      if(match) {
+        return match.name
+      } else {
+        return "error"
+      }
+    })
+  };
+
+  const displayGuests = () => {
+    const checks = guestsOptions.map((guest: any, i: number) => {
+      return (
+        <Checkbox
+        key={i +1}
+        toggleCheckMark={toggleCheckMark}
+        {...guest}
+        />
+      )
+    })
+    return checks
+  };
+
+  // Submission Functions //
   const submitPhoto =  (event: React.FormEvent) => {
     setIsLoading(true)
     event.preventDefault()
@@ -120,36 +151,9 @@ const PhotoListForm: React.FC<Props> = ({
       setErrorMessage('Please select at least one guest for the photo')
     }
     setIsLoading(false)
-    // conditional rendering - make sure guestlist,length is at least 1?
-  }
+  };
 
-  const getGuestNames = (guestIds:any) => {
-    return guestIds.map((guest:any) => {
-      let match
-      if(guestList) {
-        match = guestList.find((person:any) => person.id === guest)
-      }
-      if(match) {
-        return match.name
-      } else {
-        return "error"
-      }
-    })
-  }
-
-  const displayGuests = () => {
-    const checks = guestsOptions.map((guest: any, i: number) => {
-      return (
-        <Checkbox
-          key={i +1}
-          toggleCheckMark={toggleCheckMark}
-          {...guest}
-        />
-      )
-    })
-    return checks
-  }
-
+  // Render //
   return (
     <>
       <form className="formWrapper">
@@ -178,12 +182,12 @@ const PhotoListForm: React.FC<Props> = ({
           </StyledButton>
           <section className="buttonWrapper">
             <BackButton onClick={() => changeView('editGuestListView')}>
-            <div id="arrow">{"<<"}</div>
-            <h3 className="link">{"< Back"}</h3>
+              <div id="arrow">{"<<"}</div>
+              <h3 className="link">{"< Back"}</h3>
             </BackButton>
             <BackButton onClick={() => changeView('detailsView')}>
-            <div id="arrow" data-testid="done-button">{">>"}</div>
-            <h3 className="link">{"Done >"}</h3>
+              <div id="arrow" data-testid="done-button">{">>"}</div>
+              <h3 className="link">{"Done >"}</h3>
             </BackButton>
           </section>
         </section>
@@ -191,9 +195,9 @@ const PhotoListForm: React.FC<Props> = ({
       <section className="guestListWrap">
       {isLoading ?
         <StyledCard contents="list">
-        <div className="loadingWrap" style={{ backgroundImage: `url(${loadingText})`}}>
-          <img className="arrow" src={arrow} alt="page is loading"/>
-        </div>
+          <div className="loadingWrap" style={{ backgroundImage: `url(${loadingText})`}}>
+            <img className="arrow" src={arrow} alt="page is loading"/>
+          </div>
         </StyledCard> :
         <StyledCard contents={photoData.length === 0 ? "empty" : "list"}>
           {photoData.length === 0 &&
@@ -212,6 +216,6 @@ const PhotoListForm: React.FC<Props> = ({
       </section>
     </>
 	)
-}
+};
 
 export default PhotoListForm;

@@ -1,9 +1,11 @@
+// Assets //
 import './WeddingCard.css';
 import React from 'react';
-import { Link } from 'react-router-dom'
-import { StyledCard } from '../App/styledComponents.styles'
+import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 
+// Components //
+import { StyledCard } from '../App/styledComponents.styles';
 
 // Types //
 type Wedding = {
@@ -17,20 +19,24 @@ const WeddingCard: React.FC<Wedding> = ({
   id,
   name,
   image,
-  date}) => {
-    return (
-      <StyledCard contents="wedding">
-        <Link 
-          to={`/wedding/${id}`}
-          data-testid={`${name}-link`}
-        >
-            <h1 className="weddingTitle">{name} Wedding</h1>
-            <h2 className="weddingDate" data-testid="weddingDate">{dayjs(date).format("MM/DD/YYYY")}</h2>
-            <section className="couplePhotoWrap">
-              <img className="couplePhoto" src={image} alt={`The happy ${name} couple`}/>
-            </section>
-        </Link>
-      </StyledCard>
-    )
-}
+  date
+}) => {
+
+    // Render //
+  return (
+    <StyledCard contents="wedding">
+      <Link
+        to={`/wedding/${id}`}
+        data-testid={`${name}-link`}
+      >
+          <h1 className="weddingTitle">{name} Wedding</h1>
+          <h2 className="weddingDate" data-testid="weddingDate">{dayjs(date).format("MM/DD/YYYY")}</h2>
+          <section className="couplePhotoWrap">
+            <img className="couplePhoto" src={image} alt={`The happy ${name} couple`}/>
+          </section>
+      </Link>
+    </StyledCard>
+  )
+};
+
 export default WeddingCard;

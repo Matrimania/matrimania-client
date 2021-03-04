@@ -1,13 +1,16 @@
+// Assets //
 import React from 'react';
-import './Guest.css'
+import './Guest.css';
 
+// Types //
 type Props = {
   id: number;
   guestName: string;
   phoneNumber: string;
   deleteGuest(id: number, wedding: number): void;
-  weddingId: number
-}
+  weddingId: number;
+};
+
 const Guest: React.FC<Props> = ({
   guestName,
   id,
@@ -15,6 +18,8 @@ const Guest: React.FC<Props> = ({
   deleteGuest,
   weddingId
 }) => {
+
+  // Render //
   return (
     <article className="guestCard">
       <h1 className="guestInfo">{guestName}</h1>
@@ -26,6 +31,6 @@ const Guest: React.FC<Props> = ({
       </button>
     </article>
   )
-}
+};
 
 export default Guest;

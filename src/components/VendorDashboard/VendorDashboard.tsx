@@ -1,8 +1,7 @@
+// Assets //
 import './VendorDashboard.css';
 import React, { useState, useMemo } from 'react';
-import WeddingCard from '../WeddingCard/WeddingCard'
 import { Link } from 'react-router-dom';
-import { StyledButton, StyledCard } from '../App/styledComponents.styles'
 import dayjs from 'dayjs'
 import noWeddings from '../../assets/NoWeddings.png'
 import noCurrent from '../../assets/NoCurrent.png'
@@ -11,6 +10,9 @@ import noUpcoming from '../../assets/NoUpcoming.png'
 import arrow from '../../assets/arrow.png'
 import loadingText from '../../assets/loadingText.png'
 
+// Components //
+import WeddingCard from '../WeddingCard/WeddingCard'
+import { StyledButton, StyledCard } from '../App/styledComponents.styles'
 
 // Types //
 type Wedding = {
@@ -25,14 +27,19 @@ type Props = {
   loading: boolean;
 };
 
-const VendorDashboard: React.FC<Props> = ({weddings, loading}) => {
+const VendorDashboard: React.FC<Props> = ({
+  weddings,
+  loading
+}) => {
+
+  // State //
   const [weddingFilter, setWeddingFilter] = useState<Wedding[]>([])
   const [errorMessage, setErrorMessage] = useState('')
   const [hasError, setError] = useState(false)
   const [isLoading, setIsLoading] = useState(loading)
-
   useMemo(() => setIsLoading(loading), [loading])
 
+  // Display Functions //
   const filterWeddings = (e: any) => {
     setIsLoading(true)
     setError(false)
@@ -96,7 +103,8 @@ const VendorDashboard: React.FC<Props> = ({weddings, loading}) => {
         }
         break;
     }
-  }
+  };
+
   const displayErrorImage = () => {
     if (errorMessage === 'No Weddings In Your Schedule') {
       return noWeddings
@@ -107,7 +115,7 @@ const VendorDashboard: React.FC<Props> = ({weddings, loading}) => {
     } else if (errorMessage === 'No Upcoming Weddings To Show') {
       return noUpcoming
     }
-  }
+  };
 
   const weddingCards = () => {
     if(hasError) {
@@ -148,8 +156,9 @@ const VendorDashboard: React.FC<Props> = ({weddings, loading}) => {
         <img className="arrow" src={arrow} alt="page is loading"/>
       </div>
     )
-  }
+  };
 
+  // Render //
   return (
       <section className="dashboardWrapper">
         <section className="optionsWrap">
@@ -174,5 +183,6 @@ const VendorDashboard: React.FC<Props> = ({weddings, loading}) => {
         </section>
       </section>
   )
-}
+};
+
 export default VendorDashboard;

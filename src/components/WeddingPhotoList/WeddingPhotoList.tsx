@@ -1,4 +1,7 @@
+// Assets //
 import './WeddingPhotoList.css';
+
+// Components //
 import { StyledCard } from '../App/styledComponents.styles'
 import Photo from '../Photo/Photo';
 
@@ -30,6 +33,7 @@ const WeddingPhotoList: React.FC<PhotoListData> = ({
 	photoList
 }) => {
 
+	// Variables //
 	const getGuestNames = (guestIds:any) => {
 		return guestIds.map((guest:any) => {
 			const match = guestList.find((person:any) => person.id === guest)
@@ -37,7 +41,7 @@ const WeddingPhotoList: React.FC<PhotoListData> = ({
 				return match.name
 			}
 		})
-	}
+	};
 
 	const displayPhotoList = photoList.map(photo => {
 		const guests = getGuestNames(photo.guest)
@@ -51,9 +55,9 @@ const WeddingPhotoList: React.FC<PhotoListData> = ({
 				location={'details'}
 			/>
 		)
-	})
+	});
 
-
+	// Render //
 	return (
 		<section className="weddingPhotoListWrapper">
 			<StyledCard contents="list" className="photoListWrapper">
@@ -64,6 +68,6 @@ const WeddingPhotoList: React.FC<PhotoListData> = ({
 			</StyledCard>
 		</section>
 	)
-}
+};
 
 export default WeddingPhotoList;

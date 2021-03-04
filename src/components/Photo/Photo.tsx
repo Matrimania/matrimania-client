@@ -1,15 +1,19 @@
-import React from 'react';
+// Assets //
 import './Photo.css';
+import React from 'react';
+
+// Components //
 import { PhotoCard } from '../App/styledComponents.styles';
 
-
+// Types //
 type Props = {
   id: number;
   photoNumber: number;
   guests: string[];
   description: string;
   location: string;
-}
+};
+
 const Photo: React.FC<Props> = ({
   id,
   photoNumber,
@@ -18,6 +22,7 @@ const Photo: React.FC<Props> = ({
   location
 }) => {
 
+  // Render //
   return (
     <PhotoCard contents={location}>
       <h4 className="photoHeader">{`PHOTO ${photoNumber}`}</h4>
@@ -28,10 +33,9 @@ const Photo: React.FC<Props> = ({
         }, '•')
       }
       </p>
-
       <p className="photoDescription">Description: {description}</p>
     </PhotoCard>
   )
-}
+};
 
 export default Photo;

@@ -1,8 +1,11 @@
+// Assets //
+import './AddWeddingForm.css';
 import React, { useState } from 'react';
-import './AddWeddingForm.css'
-import { StyledButton } from '../App/styledComponents.styles'
-import dayjs from 'dayjs'
-import { useHistory } from 'react-router-dom'
+import dayjs from 'dayjs';
+import { useHistory } from 'react-router-dom';
+
+// Components //
+import { StyledButton } from '../App/styledComponents.styles';
 
 // Types //
 type Props = {
@@ -19,15 +22,19 @@ const AddWeddingForm: React.FC<Props> = ({
   addNewWedding
 }) => {
 
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [date, setDate] = useState('')
-  const [image, setImage] = useState('')
-  const [message, setMessage] = useState('')
-  let history = useHistory()
+  // State //
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [date, setDate] = useState('');
+  const [image, setImage] = useState('');
+  const [message, setMessage] = useState('');
 
-  const submitWedding = async (event: React.FormEvent) => {
-    event.preventDefault();
+  // Variables //
+  let history = useHistory();
+
+  // Submit Function //
+  const submitWedding = (event: React.FormEvent) => {
+    event.preventDefault()
     if (name === '' || email === '' || date === '') {
       setMessage('Please makes sure to include your name, email, and wedding date')
     } else {
@@ -46,21 +53,23 @@ const AddWeddingForm: React.FC<Props> = ({
       setMessage('')
       history.push('/')
     }
-  }
+  };
 
+  // Helper Functions //
   const capitalize = (s: string) => {
     if (typeof s !== 'string') return ''
     const capitalized = s.charAt(0).toUpperCase() + s.slice(1)
     setName(capitalized)
-    }
+  };
 
   const clearInputs = () => {
     setName('')
     setEmail('')
     setDate('')
     setImage('')
-  }
+  };
 
+  // Render //
 	return (
     <>
       <form autoComplete="off" className="weddingFormWrapper">
@@ -106,11 +115,11 @@ const AddWeddingForm: React.FC<Props> = ({
         {message}
         <StyledButton onClick={event => submitWedding(event)}>
           <div id="translate"></div>
-            <h2 className="link" id="addListButton">Submit Wedding</h2>
+          <h2 className="link" id="addListButton">Submit Wedding</h2>
         </StyledButton>
       </form>
     </>
 	)
-}
+};
 
 export default AddWeddingForm;
