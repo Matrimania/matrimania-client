@@ -53,14 +53,14 @@ const PhotoShootView: React.FC<PhotoShootData> = ({
 		if(carousel === 0) {
 			return (
 				<StyledCard contents="shoot">
-				<img src={start} className="carouselImg" alt="click the next button to get started"/>
+					<img src={start} className="carouselImg" alt="click the next button to get started"/>
 				</StyledCard>
 			)
 		}
 		if(carousel > photoList.length) {
 			return (
 				<StyledCard contents="shoot">
-				<img src={done} className="carouselImg" alt="Good work! You're all done!"/>
+					<img src={done} className="carouselImg" alt="Good work! You're all done!"/>
 				</StyledCard>
 			)
 		}
@@ -76,16 +76,16 @@ const PhotoShootView: React.FC<PhotoShootData> = ({
 			if(participants.length > 0) {
 				return (
 					<StyledCard contents="shoot">
-					<article className="photoShootCard">
-					<Photo
-					id={currentPhoto.id}
-					photoNumber={currentPhoto.number}
-					guests={participants}
-					description={currentPhoto.description}
-					location={'shoot'}
-					/>
-					<div>{`${photoList.length - currentPhoto.number} Photos left`}</div>
-					</article>
+						<article className="photoShootCard">
+							<Photo
+							id={currentPhoto.id}
+							photoNumber={currentPhoto.number}
+							guests={participants}
+							description={currentPhoto.description}
+							location={'shoot'}
+							/>
+							<div>{`${photoList.length - currentPhoto.number} Photos left`}</div>
+						</article>
 					</StyledCard>
 				)
 			}

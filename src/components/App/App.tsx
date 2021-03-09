@@ -45,7 +45,6 @@ const App = () => {
   const [currentWeddingPhotos, setCurrentWeddingPhotos] = useState<Photo[]>([]);
   const [currentWeddingData, setCurrentWeddingData] = useState({id: 0, name: "", email: "", date: "", image: ""});
 
-
   useEffect(() => {
     setIsLoading(true)
     allWeddings()

@@ -166,7 +166,7 @@ const WeddingDetails: React.FC<Props> = ({
     } else {
       return (
         <section className="detailImageWrap">
-        <img className="detailImage" alt="detailImage" src={weddingData.image} />
+          <img className="detailImage" alt="detailImage" src={weddingData.image} />
         </section>
       )
     }
