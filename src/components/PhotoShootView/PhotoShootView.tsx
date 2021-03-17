@@ -1,45 +1,40 @@
+// Assets //
+import './PhotoShootView.css';
 import React, { useState } from 'react';
-import './PhotoShootView.css'
-import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles'
-import Photo from '../Photo/Photo';
 import done from '../../assets/goodWork.png';
 import start from '../../assets/startShoot.png';
 
+// Components //
+import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles';
+import Photo from '../Photo/Photo';
 
+// Types //
 type PhotoShootData = {
 	name: string;
 	weddingId: number;
 	photoList: {id: number, number: number, description: string, guest: number[]}[];
 	guests: {id: number, name: string, phoneNumber: string, wedding: number}[];
-  changeView: any;
+  changeView(view: string): void;
 }
-
 
 const PhotoShootView: React.FC<PhotoShootData> = ({
   name, // last name of couple
-  weddingId, // weddingId
-  photoList, // list of photos for specific wedding
-  guests, // list of guests for specific wedding
-  changeView // function that changes view in WeddingDetails
+  weddingId,
+  photoList,
+  guests,
+  changeView
 }) => {
 
+	// State //
   const [location, setLocation] = useState('')
   const [time, setTime] = useState('')
   const [textBody, setTextBody] = useState('')
 	const [view, setView] = useState('notify')
 	const [carousel, setCarousel] = useState(0)
 
-	const createGuestPhotoList = (guestId:number) => {
-		const filtered = photoList.filter((photo:any) => photo.guest.includes(guestId))
-		if(filtered.length > 0) {
-			return filtered.map((pic:any) => pic.number)
-		} else {
-			return [0]
-		}
-	}
-
-  const sendNotifications = (event: React.FormEvent) => {
-    event.preventDefault();
+	// Submission Functions //
+	const sendNotifications = (event: React.FormEvent) => {
+		event.preventDefault();
 		guests.forEach((guest: any) => {
 			const guestPhotos = createGuestPhotoList(guest.id)
 			const photos = guestPhotos.toString().split(",").join(", ")
@@ -49,15 +44,11 @@ const PhotoShootView: React.FC<PhotoShootData> = ({
 			const phoneNumber = `+1${guest.phone}`
 			// POST request to Twilio to send message
 		})
-    clearInputs();
+		clearInputs();
 		setView('shoot')
-  }
+	};
 
-  const clearInputs = () => {
-    setTime('')
-    setLocation('')
-  }
-
+	// Display Functions //
 	const displayCarousel = () => {
 		if(carousel === 0) {
 			return (
@@ -85,25 +76,40 @@ const PhotoShootView: React.FC<PhotoShootData> = ({
 			if(participants.length > 0) {
 				return (
 					<StyledCard contents="shoot">
-					<article className="photoShootCard">
-					<Photo
-					id={currentPhoto.id}
-					photoNumber={currentPhoto.number}
-					guests={participants}
-					description={currentPhoto.description}
-					location={'shoot'}
-					/>
-					<div>{`${photoList.length - currentPhoto.number} Photos left`}</div>
-					</article>
+						<article className="photoShootCard">
+							<Photo
+							id={currentPhoto.id}
+							photoNumber={currentPhoto.number}
+							guests={participants}
+							description={currentPhoto.description}
+							location={'shoot'}
+							/>
+							<div>{`${photoList.length - currentPhoto.number} Photos left`}</div>
+						</article>
 					</StyledCard>
 				)
 			}
 		} else {
 			return "Great job! You're done!"
 		}
-	}
+	};
 
+	// Helper Functions //
+	const createGuestPhotoList = (guestId:number) => {
+		const filtered = photoList.filter((photo:any) => photo.guest.includes(guestId))
+		if(filtered.length > 0) {
+			return filtered.map((pic:any) => pic.number)
+		} else {
+			return [0]
+		}
+	};
 
+  const clearInputs = () => {
+    setTime('')
+    setLocation('')
+  };
+
+	// Render //
   return (
     <section className="photoShootWrapper">
 		{view === "notify" &&
@@ -165,6 +171,6 @@ const PhotoShootView: React.FC<PhotoShootData> = ({
 				</>}
     </section>
   )
-}
+};
 
 export default PhotoShootView;

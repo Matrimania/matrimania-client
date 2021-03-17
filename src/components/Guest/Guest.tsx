@@ -1,29 +1,36 @@
+// Assets //
 import React from 'react';
-import './Guest.css'
+import './Guest.css';
 
+// Types //
 type Props = {
   id: number;
   guestName: string;
   phoneNumber: string;
-  deleteGuest(id: number): void
-}
+  deleteGuest(id: number, wedding: number): void;
+  weddingId: number;
+};
+
 const Guest: React.FC<Props> = ({
   guestName,
   id,
   phoneNumber,
-  deleteGuest
+  deleteGuest,
+  weddingId
 }) => {
+
+  // Render //
   return (
     <article className="guestCard">
       <h1 className="guestInfo">{guestName}</h1>
       <h2 className="guestInfo">{phoneNumber}</h2>
       <button
         className="deleteButton"
-        onClick={() => deleteGuest(id)}>
+        onClick={() => deleteGuest(id, weddingId)}>
         X
       </button>
     </article>
   )
-}
+};
 
 export default Guest;

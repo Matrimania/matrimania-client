@@ -51,7 +51,7 @@ describe('Add Wedding Form', () => {
   });
 
   it('should add a new wedding', async () => {
-    const mockAddNewWedding = jest.fn();
+    const mockAddNewWedding = jest.fn(() => postAWedding());
     postAWedding.mockResolvedValue({
       "id": 33,
       "name": "Banks",
@@ -84,7 +84,7 @@ describe('Add Wedding Form', () => {
   });
 
   it('allows form submission without image field filled', async () => {
-    const mockAddNewWedding = jest.fn();
+    const mockAddNewWedding = jest.fn(() => postAWedding());
     postAWedding.mockResolvedValue({
       "id": 33,
       "name": "Banks",
@@ -95,8 +95,8 @@ describe('Add Wedding Form', () => {
 
     render(
       <MemoryRouter>
-      <AddWeddingForm
-      addNewWedding={mockAddNewWedding} />
+        <AddWeddingForm
+          addNewWedding={mockAddNewWedding} />
       </MemoryRouter>
     );
 

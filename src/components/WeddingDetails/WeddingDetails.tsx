@@ -1,51 +1,65 @@
+// Assets //
 import './WeddingDetails.css';
+import dayjs from 'dayjs';
 import React, { useState, useEffect, useMemo } from 'react';
+import { Link } from 'react-router-dom';
+
+// Components //
 import WeddingPhotoList from '../WeddingPhotoList/WeddingPhotoList';
 import PhotoShootView from '../PhotoShootView/PhotoShootView';
 import { StyledButton, DetailsWrapper, DetailsFormWrapper } from '../App/styledComponents.styles';
 import GuestList from '../GuestList/GuestList';
-import dayjs from 'dayjs';
 import PhotoListForm from '../PhotoListForm/PhotoListForm';
-import { Link } from 'react-router-dom';
 
-
+// Types //
 type Props = {
   weddingId: number;
   currentWeddingData: Wedding;
   guests: Guest[];
   photos: Photo[];
-  deleteSingleWedding: any
-  loadWeddingData: any
+  deleteSingleWedding(weddingId: number): void;
+  loadWeddingData(weddingId: number): void;
   error: Error
-  updateGuests: any
-  updatePhotoList: any
-}
+  updateGuests(newGuest: NewGuest, weddingId: number): void;
+  updatePhotoList(newPhoto: NewPhoto): void;
+  deleteGuest(guestId: number, weddingId: number): void;
+};
 type Error = {
   photoError: string;
   guestError: string;
-  weddingError: string
-}
+  weddingError: string;
+};
 type Wedding = {
   id: number;
   name: string;
   email: string;
   date: string;
   image: string;
-}
-
+};
 type Guest = {
 	id: number;
 	name: string;
 	phoneNumber: string;
 	wedding: number;
-}
+};
+type NewGuest = {
+	name: string;
+	phoneNumber: string;
+	wedding: number;
+};
 type Photo = {
 	id: number;
 	number: number;
 	description: string;
 	guest: number[];
 	weddingId: number;
-}
+};
+type NewPhoto = {
+	number: number;
+	description: string;
+	guest: number[];
+	weddingId: number;
+};
 
 const WeddingDetails: React.FC<Props> = ({
 	weddingId,
@@ -56,8 +70,11 @@ const WeddingDetails: React.FC<Props> = ({
   loadWeddingData,
   error,
   updateGuests,
-  updatePhotoList
+  updatePhotoList,
+  deleteGuest
 }) => {
+
+  // State //
 	const [errorMessage, setErrorMessage] = useState(error)
 	const [hasError, setHasError] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
@@ -68,7 +85,9 @@ const WeddingDetails: React.FC<Props> = ({
 	const [currentWeddingGuests, setCurrentWeddingGuests] = useState(guests)
 	const [currentWeddingPhotos, setCurrentWeddingPhotos] = useState(photos)
 	const [weddingData, setWeddingData] = useState(currentWeddingData);
-
+  useMemo(() => setWeddingData(currentWeddingData), [currentWeddingData])
+  useMemo(() => setCurrentWeddingGuests(guests), [guests])
+  useMemo(() => setCurrentWeddingPhotos(photos), [photos])
 
 	useEffect(() => {
     window.scrollTo(0, 0)
@@ -78,53 +97,93 @@ const WeddingDetails: React.FC<Props> = ({
     setIsLoading(false)
 	}, [detailsView, photoShootView, editGuestListView, editPhotoListView])
 
-  useMemo(() => setWeddingData(currentWeddingData), [currentWeddingData])
-  useMemo(() => setCurrentWeddingGuests(guests), [guests])
-  useMemo(() => setCurrentWeddingPhotos(photos), [photos])
+  // Variables //
+  const emailBody = `It is time to fill out your family photo list! Please follow the link provided to complete the missing photo information. Feel free to reach out if you have any questions.
+  LINK: https://matrimania-client.herokuapp.com/wedding/${weddingId}`
 
+  // Display Functions //
+  const determineCurrentState = (view: string) => {
+    if (view === "photoShootView") {
+      setDetailsView(false)
+      setPhotoShootView(true)
+      setGuestListView(false)
+      setEditPhotoListView(false)
+      window.scrollTo(0, 0)
+    } else if (view === "editGuestListView") {
+      setDetailsView(false)
+      setPhotoShootView(false)
+      setGuestListView(true)
+      setEditPhotoListView(false)
+      window.scrollTo(0, 0)
+    } else if (view === "editPhotoListView") {
+      setDetailsView(false)
+      setPhotoShootView(false)
+      setGuestListView(false)
+      setEditPhotoListView(true)
+      window.scrollTo(0, 0)
+    } else {
+      setDetailsView(true)
+      setPhotoShootView(false)
+      setGuestListView(false)
+      setEditPhotoListView(false)
+      window.scrollTo(0, 0)
+    }
+  };
+
+  const displayCurrentView = () => {
+    if (editGuestListView) {
+      return (
+        <GuestList
+        loading={isLoading}
+        guestList={currentWeddingGuests}
+        changeView={determineCurrentState}
+        weddingId={weddingData.id}
+        updateGuests={updateGuests}
+        deleteGuest={deleteGuest}
+        />
+      )
+    } else if(photoShootView) {
+      return (
+        <PhotoShootView
+        name={weddingData.name}
+        weddingId={weddingId}
+        photoList={currentWeddingPhotos}
+        guests={currentWeddingGuests}
+        changeView={determineCurrentState}
+        />
+      )
+    } else if (editPhotoListView) {
+      return(
+        <PhotoListForm
+        loading={isLoading}
+        weddingId={weddingData.id}
+        guests={currentWeddingGuests}
+        photoList={currentWeddingPhotos}
+        changeView={determineCurrentState}
+        updatePhotoList={updatePhotoList}
+        />
+      )
+    } else {
+      return (
+        <section className="detailImageWrap">
+          <img className="detailImage" alt="detailImage" src={weddingData.image} />
+        </section>
+      )
+    }
+  };
+
+  // Helper Functions //
   const determineError = () => {
     if(error.photoError || error.guestError || error.weddingError){
       setHasError(true)
     } else {
       setHasError(false)
     }
-  }
-
-
-	const emailBody = `It is time to fill out your family photo list! Please follow the link provided to complete the missing photo information. Feel free to reach out if you have any questions.
-		LINK: https://matrimania-client.herokuapp.com/wedding/${weddingId}`
-
-	const determineCurrentState = (view: string) => {
-		if (view === "photoShootView") {
-			setDetailsView(false)
-			setPhotoShootView(true)
-			setGuestListView(false)
-			setEditPhotoListView(false)
-      window.scrollTo(0, 0)
-		} else if (view === "editGuestListView") {
-			setDetailsView(false)
-			setPhotoShootView(false)
-			setGuestListView(true)
-			setEditPhotoListView(false)
-      window.scrollTo(0, 0)
-		} else if (view === "editPhotoListView") {
-			setDetailsView(false)
-			setPhotoShootView(false)
-			setGuestListView(false)
-			setEditPhotoListView(true)
-      window.scrollTo(0, 0)
-		} else {
-			setDetailsView(true)
-			setPhotoShootView(false)
-			setGuestListView(false)
-			setEditPhotoListView(false)
-      window.scrollTo(0, 0)
-		}
-	}
+  };
 
   const isToday = () => {
     return dayjs(weddingData.date).format("MM/DD/YYYY") === dayjs().format("MM/DD/YYYY") ? true : false
-  }
+  };
 
   const determineContents = () => {
     if(detailsView){
@@ -134,48 +193,9 @@ const WeddingDetails: React.FC<Props> = ({
     } else {
       return 'other'
     }
-  }
-	const displayCurrentView = () => {
-		if (editGuestListView) {
-				return (
-					<GuestList
-						loading={isLoading}
-						guestList={currentWeddingGuests}
-						changeView={determineCurrentState}
-						weddingId={weddingData.id}
-						updateGuests={updateGuests}
-					/>
-				)
-		} else if(photoShootView) {
-				return (
-					<PhotoShootView
-						name={weddingData.name}
-						weddingId={weddingId}
-						photoList={currentWeddingPhotos}
-						guests={currentWeddingGuests}
-						changeView={determineCurrentState}
-					/>
-				)
-		} else if (editPhotoListView) {
-			return(
-				<PhotoListForm
-					loading={isLoading}
-					weddingId={weddingData.id}
-					guests={currentWeddingGuests}
-					photoList={currentWeddingPhotos}
-					changeView={determineCurrentState}
-					updatePhotoList={updatePhotoList}
-				/>
-			)
-		} else {
-						return (
-						<section className="detailImageWrap">
-								<img className="detailImage" alt="detailImage" src={weddingData.image} />
-						</section>
-				)
-		}
-}
+  };
 
+  // Render //
 	return (
 		<DetailsWrapper contents={determineContents()}>
 			{detailsView &&
@@ -229,5 +249,6 @@ const WeddingDetails: React.FC<Props> = ({
 			</DetailsFormWrapper>
 		</DetailsWrapper>
 	)
-}
+};
+
 export default WeddingDetails;

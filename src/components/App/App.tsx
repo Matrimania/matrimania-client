@@ -1,75 +1,79 @@
-// Assets
+// Assets //
 import './App.css';
-import React, {useState, useEffect} from 'react'
-import logo from '../../assets/FinalMatrimaniaLogo.png'
-import {Route, Switch, Link} from 'react-router-dom'
-import { postAGuest, postAPhoto, getWeddings, deleteWedding, getSingleWeddingGuests, getSingleWeddingPhotos } from '../../apiCalls'
-import dayjs from 'dayjs'
+import React, {useState, useEffect} from 'react';
+import logo from '../../assets/FinalMatrimaniaLogo.png';
+import {Route, Switch, Link} from 'react-router-dom';
+import { postAWedding, deleteAGuest, postAGuest, postAPhoto, getWeddings, deleteWedding, getSingleWeddingGuests, getSingleWeddingPhotos } from '../../apiCalls';
+import dayjs from 'dayjs';
 
-// Components
-import VendorDashboard from '../VendorDashboard/VendorDashboard'
-import WeddingDetails from '../WeddingDetails/WeddingDetails'
-import LandingPage from '../LandingPage/LandingPage'
-import AddWeddingForm from '../AddWeddingForm/AddWeddingForm'
+// Components //
+import VendorDashboard from '../VendorDashboard/VendorDashboard';
+import WeddingDetails from '../WeddingDetails/WeddingDetails';
+import LandingPage from '../LandingPage/LandingPage';
+import AddWeddingForm from '../AddWeddingForm/AddWeddingForm';
 
+// Types //
 type Wedding = {
   id: number;
   name: string;
   email: string;
   date: string;
   image: string;
-}
+};
 type Guest = {
 	id: number;
 	name: string;
 	phoneNumber: string;
 	wedding: number;
-}
+};
 type Photo = {
 	id: number;
 	number: number;
 	description: string;
 	guest: number[];
 	weddingId: number;
-}
+};
 
 const App = () => {
-  const [weddings, setWeddings] = useState<Wedding[]>([])
-  const [errorMessage, setErrorMessage] = useState({photoError: '', guestError: '', weddingError: ''})
-	const [hasError, setHasError] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
 
-  const [currentWeddingGuests, setCurrentWeddingGuests] = useState<Guest[]>([])
-  const [currentWeddingPhotos, setCurrentWeddingPhotos] = useState<Photo[]>([])
+  // State //
+  const [weddings, setWeddings] = useState<Wedding[]>([]);
+  const [errorMessage, setErrorMessage] = useState({photoError: '', guestError: '', weddingError: ''});
+	const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentWeddingGuests, setCurrentWeddingGuests] = useState<Guest[]>([]);
+  const [currentWeddingPhotos, setCurrentWeddingPhotos] = useState<Photo[]>([]);
   const [currentWeddingData, setCurrentWeddingData] = useState({id: 0, name: "", email: "", date: "", image: ""});
-
-
 
   useEffect(() => {
     setIsLoading(true)
-    const allWeddings = async () => {
-      const result = await getWeddings()
-      if(typeof result !== 'string' && result.length > 0) {
-        result.forEach((wed: any) => {
-          wed.date = dayjs(wed.date)
-        })
-        let sortedResult = result.sort((a: any, b: any) => a.date - b.date)
-        sortedResult.forEach((wedding: any) => {
-          wedding.date = dayjs(wedding.date).format('MM/DD/YYYY')
-        })
-        setWeddings(sortedResult)
-        setIsLoading(false)
-      } else {
-        setHasError(true)
-        setErrorMessage(result)
-        setIsLoading(false)
-      }
-    }
     allWeddings()
-  }, [])
+  }, []);
 
-  const addNewWedding = (newWedding: any) => {
-    setWeddings([...weddings, newWedding])
+  // Wedding Functions //
+  const allWeddings = async () => {
+    const result = await getWeddings()
+    if(typeof result !== 'string' && result.length > 0) {
+      result.forEach((wed: any) => {
+        wed.date = dayjs(wed.date)
+      })
+      let sortedResult = result.sort((a: any, b: any) => a.date - b.date)
+      sortedResult.forEach((wedding: any) => {
+        wedding.date = dayjs(wedding.date).format('MM/DD/YYYY')
+      })
+      setWeddings(sortedResult)
+      setIsLoading(false)
+    } else {
+      setHasError(true)
+      setErrorMessage(result)
+      setIsLoading(false)
+    }
+  };
+
+  const addNewWedding = async (newWedding: any) => {
+    const response = await postAWedding(newWedding);
+    setWeddings([...weddings, response])
+    allWeddings()
   };
 
   const deleteSingleWedding = async (weddingId: number) => {
@@ -95,18 +99,45 @@ const App = () => {
     }
     getGuests(weddingId)
     getPhotos(weddingId)
-  }
+  };
 
+  // Guest Functions //
   const getGuests = async (weddingId: number) => {
     const guestResult = await getSingleWeddingGuests(weddingId)
     if(guestResult === "No guests found") {
       setHasError(true)
       setErrorMessage({...errorMessage, guestError: guestResult})
     } else {
-      setCurrentWeddingGuests(guestResult)
+      let sortedResult = guestResult.sort((a: Guest, b: Guest) => {
+        let aName = a.name.toLowerCase()
+        let bName = b.name.toLowerCase()
+        if(aName < bName) {
+          return -1
+        }
+        if(aName > bName) {
+          return 1
+        }
+        return 0
+      })
+      let finalResult = sortedResult.map((person: Guest) => {
+        person.name = person.name.charAt(0).toUpperCase() + person.name.slice(1)
+        return person
+      })
+      setCurrentWeddingGuests(finalResult)
     }
-  }
+  };
 
+  const updateGuests = async (newGuest: any, weddingId: number) => {
+    let postedGuest = await postAGuest(newGuest)
+    getGuests(weddingId)
+  };
+
+  const deleteGuest = async (guestId: number, weddingId: number) => {
+    let deleteedGuest = await deleteAGuest(guestId)
+    getGuests(weddingId)
+  };
+
+  // Photo List Functions //
   const getPhotos = async (weddingId: number) => {
     const photoResult = await getSingleWeddingPhotos(weddingId)
 		if(photoResult === "No photos found") {
@@ -115,19 +146,14 @@ const App = () => {
 		} else {
 			setCurrentWeddingPhotos(photoResult)
 		}
-  }
-
-  const updateGuests = async (newGuest: any) => {
-    let postedGuest = await postAGuest(newGuest)
-    setCurrentWeddingGuests([...currentWeddingGuests, postedGuest])
-  }
+  };
 
   const updatePhotoList = async (newPhoto: any) => {
     let postedPhoto = await postAPhoto(newPhoto);
     setCurrentWeddingPhotos([...currentWeddingPhotos, postedPhoto]);
-  }
+  };
 
-
+  // Render //
   return (
     <div className="appWrap">
       <header className="headerWrap">
@@ -149,6 +175,7 @@ const App = () => {
               error={errorMessage}
               updateGuests={updateGuests}
               updatePhotoList={updatePhotoList}
+              deleteGuest={deleteGuest}
             />
           }}
         />
@@ -166,5 +193,6 @@ const App = () => {
       </Switch>
     </div>
   );
-}
+};
+
 export default App;

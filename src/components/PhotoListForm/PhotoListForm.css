@@ -4,7 +4,7 @@
   flex-direction: row;
   display: flex;
   flex-wrap: wrap;
-  height: 45%;
+  height: 35%;
   overflow: scroll;
 }
 .sectionHeader {

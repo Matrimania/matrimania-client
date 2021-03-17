@@ -1,41 +1,52 @@
-import React, { useMemo, useState } from 'react';
-import Guest from '../Guest/Guest';
+// Assets //
 import './GuestList.css'
+import React, { useMemo, useState } from 'react';
 import empty from '../../assets/emptyGuestList.png'
-import { deleteAGuest } from '../../apiCalls';
+
+// Components //
+import Guest from '../Guest/Guest';
 import { BackButton, StyledButton, StyledCard } from '../App/styledComponents.styles'
 
-
-
+// Types //
 type WeddingData = {
   loading: boolean;
-  guestList: any;
-	changeView: any;
+  guestList: WeddingGuest[];
+	changeView(view: string): void;
   weddingId: number;
-  updateGuests: any;
-}
-
+  updateGuests(newGuest: NewGuest, weddingId: number): void;
+  deleteGuest(guestId: number, weddingId: number): void;
+};
+type WeddingGuest = {
+	id: number;
+	name: string;
+	phoneNumber: string;
+	wedding: number;
+};
 type NewGuest = {
-  id: number,
   name: string,
   phoneNumber: string;
-}
+  wedding: number;
+};
 
 const GuestList: React.FC<WeddingData> = ({
   loading,
   guestList,
   changeView,
   weddingId,
-  updateGuests
+  updateGuests,
+  deleteGuest
 }) => {
 
+  // State //
   const [guestName, setGuestName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [guests, setGuests] = useState<NewGuest[]>([...guestList]);
+  const [guests, setGuests] = useState<WeddingGuest[]>([...guestList]);
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(loading);
   const [errorMessage, setErrorMessage] = useState('');
+  useMemo(() => setGuests(guestList), [guestList]);
 
+  // Phone Number Input Functions //
   const checkNumber = (event: any) => {
     let value = event.trim().replaceAll( "-", "")
     var reg = /^\d+$/;
@@ -47,7 +58,7 @@ const GuestList: React.FC<WeddingData> = ({
       setHasError(true)
       setErrorMessage('Phone Number only accepts numerical values')
     }
-  }
+  };
 
   const formatPhoneText = (value: string) => {
     if (value.length > 3 && value.length <= 6) {
@@ -58,21 +69,22 @@ const GuestList: React.FC<WeddingData> = ({
     setPhoneNumber(value)
     setHasError(false)
     setErrorMessage('')
-  }
+  };
 
+  // Submission Functions //
   const submitGuest = (event: React.FormEvent) => {
     setIsLoading(true)
     event.preventDefault();
-    const guestPost = {
-      name: guestName,
-      phoneNumber,
-      wedding: weddingId
-    }
     if(guestName !== "" && phoneNumber.length === 12) {
+      const guestPost = {
+        name: guestName.charAt(0).toUpperCase() + guestName.slice(1),
+        phoneNumber,
+        wedding: weddingId
+      }
       clearInputs()
       setHasError(false)
       setErrorMessage('')
-      updateGuests(guestPost)
+      updateGuests(guestPost, weddingId)
     } else if (guestName === "" && phoneNumber.length !== 12) {
       setHasError(true)
       setErrorMessage('Name and Phone Number Required')
@@ -84,18 +96,7 @@ const GuestList: React.FC<WeddingData> = ({
       setErrorMessage('Phone Number Required')
     }
     setIsLoading(false)
-  }
-
-  const clearInputs = () => {
-    setGuestName('')
-    setPhoneNumber('')
-  }
-
-  const deleteGuest = (id: number) => {
-    deleteAGuest(id)
-    const filteredGuestList = guests.filter(guest => guest.id !== id)
-    setGuests(filteredGuestList)
-  }
+  };
 
   const changeToPhotoList = () => {
     if (guests.length === 0){
@@ -103,10 +104,15 @@ const GuestList: React.FC<WeddingData> = ({
     } else {
       changeView('editPhotoListView')
     }
-  }
+  };
 
-  useMemo(() => setGuests(guestList), [guestList])
+  // Helper Functions //
+  const clearInputs = () => {
+    setGuestName('')
+    setPhoneNumber('')
+  };
 
+  // Render //
 	return (
     <>
       <form className="formWrapper">
@@ -166,13 +172,14 @@ const GuestList: React.FC<WeddingData> = ({
             id={guest.id}
             phoneNumber={guest.phoneNumber}
             key={guest.id}
-            deleteGuest={deleteGuest}>
+            deleteGuest={deleteGuest}
+            weddingId={weddingId}>
             </Guest>)) }
         </StyledCard>
       }
       </section>
     </>
 	)
-}
+};
 
 export default GuestList;
