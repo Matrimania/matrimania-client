@@ -80,7 +80,7 @@ Watch our [Virtual Tour](https://www.youtube.com/watch?v=u7SW7DxhqG8)
 
 ## Next Steps
 
-- The next feature we'd want is for vendors to be able to contact guests on the day of the wedding to inform them when and where their photos will be taken. We planned on incorporating the Twilio API to send text reminders. We decided before this feature is implemented, we want to be able to handle security issues so we don't expose users' private data.
+- The next feature we'd want to implement would be the ability for vendors to be able to contact guests on the day of the wedding to inform them when and where their photos will be taken. We planned on incorporating the Twilio API to send text reminders. We decided before this feature is implemented, we want to be able to handle security issues so we don't expose users' private data.
 - Additional features would be to allow a user to edit and delete guest and photo lists.
 
 ## Contact
